@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using AForge.Video;
 using AForge.Video.DirectShow;
 using AForge;
+using System.Threading;
 
 namespace BoardApp
 {
@@ -21,7 +22,12 @@ namespace BoardApp
 
         public BoardAppMain()
         {
+            Thread t = new Thread(new ThreadStart(StartForm));
+            t.Start();
+            Thread.Sleep(1000);
+
             InitializeComponent();
+            t.Abort();
 
             #region  Get attached cameras
             VideoCaptureDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
@@ -45,17 +51,18 @@ namespace BoardApp
 
             #endregion
             FinalVideo.NewFrame += new NewFrameEventHandler(FinalVideo_NewFrame);
-
+            
         }
 
         private void FinalVideo_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            if(pictureBox1.Image != null)
+            if(liveCamera.Image != null)
             {
-                pictureBox1.Image.Dispose();
+                liveCamera.Image.Dispose();
             }
             Bitmap tempBitmap = (Bitmap)eventArgs.Frame.Clone();
-            pictureBox1.Image = tempBitmap;
+            liveCamera.Image = tempBitmap;
+            
         }
 
         private void BoardAppMain_Load(object sender, EventArgs e)
@@ -63,20 +70,28 @@ namespace BoardApp
 
         }
 
+        public void StartForm()
+        {
+            Application.Run(new SpashScreen());
+
+        }
+
         private void btnPlay_Click(object sender, EventArgs e)
         {
+            FinalVideo.Stop();
             FinalVideo.VideoResolution = FinalVideo.VideoCapabilities[cbSupportedModes.SelectedIndex];
 
-            this.Width = FinalVideo.VideoResolution.FrameSize.Height + 70;
+            this.Width = FinalVideo.VideoResolution.FrameSize.Width + 40;
             this.Height = FinalVideo.VideoResolution.FrameSize.Height + 70;
 
-            this.pictureBox1.Width = FinalVideo.VideoResolution.FrameSize.Width;
-            this.pictureBox1.Height = FinalVideo.VideoResolution.FrameSize.Height;
+            this.liveCamera.Width = FinalVideo.VideoResolution.FrameSize.Width;
+            this.liveCamera.Height = FinalVideo.VideoResolution.FrameSize.Height;
             FinalVideo.Start();
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
+            pictureBox.Image = liveCamera.Image ;
             FinalVideo.Stop();
         }
     }

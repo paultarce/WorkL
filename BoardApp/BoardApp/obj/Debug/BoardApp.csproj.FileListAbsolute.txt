@@ -9,3 +9,15 @@ D:\cursuri\LICENTA\BoardApp\BoardApp\obj\Debug\BoardApp.csproj.GenerateResource.
 D:\cursuri\LICENTA\BoardApp\BoardApp\obj\Debug\BoardApp.csproj.CoreCompileInputs.cache
 D:\cursuri\LICENTA\BoardApp\BoardApp\obj\Debug\BoardApp.exe
 D:\cursuri\LICENTA\BoardApp\BoardApp\obj\Debug\BoardApp.pdb
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\BoardApp.exe.config
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\BoardApp.exe
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\BoardApp.pdb
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\obj\Debug\BoardApp.csprojResolveAssemblyReference.cache
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\obj\Debug\BoardApp.BoardAppMain.resources
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\obj\Debug\BoardApp.Form1.resources
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\obj\Debug\BoardApp.Properties.Resources.resources
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\obj\Debug\BoardApp.csproj.GenerateResource.Cache
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\obj\Debug\BoardApp.csproj.CoreCompileInputs.cache
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\obj\Debug\BoardApp.exe
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\obj\Debug\BoardApp.pdb
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\obj\Debug\BoardApp.SpashScreen.resources
