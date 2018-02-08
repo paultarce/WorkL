@@ -19,6 +19,7 @@ namespace BoardApp
 
         private FilterInfoCollection VideoCaptureDevices;
         private VideoCaptureDevice FinalVideo;
+        private int pictureNr;
 
         public BoardAppMain()
         {
@@ -67,7 +68,11 @@ namespace BoardApp
 
         private void BoardAppMain_Load(object sender, EventArgs e)
         {
-
+            pictureNr = 0;
+            btnOpenImages.Enabled = false;
+            btnPlay.Enabled = false;
+            btnStop.Enabled = false;
+            btnSaveImage.Enabled = false;
         }
 
         public void StartForm()
@@ -93,6 +98,50 @@ namespace BoardApp
         {
             pictureBox.Image = liveCamera.Image ;
             FinalVideo.Stop();
+        }
+
+        private void btnSaveImage_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Bitmap b = new Bitmap("Poza");
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void rbDisplayMode_CheckedChanged(object sender, EventArgs e)
+        {
+           // rbCaptureMode.Enabled = false;
+            
+            btnPlay.Enabled = false;
+            btnStop.Enabled = false;
+            btnOpenImages.Enabled = true;
+            btnSaveImage.Enabled = false;
+
+        }
+
+        private void rbCaptureMode_CheckedChanged(object sender, EventArgs e)
+        {
+            btnPlay.Enabled = true;
+            btnStop.Enabled = true;
+            btnOpenImages.Enabled = false;
+            btnSaveImage.Enabled = true;
+        }
+
+        private void btnOpenImages_Click(object sender, EventArgs e)
+        {
+            using (var fbd = new FolderBrowserDialog())
+            {
+                DialogResult result = fbd.ShowDialog();
+                if(result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                {
+                    string path = fbd.SelectedPath;
+                }
+            }
+           
         }
     }
 }
