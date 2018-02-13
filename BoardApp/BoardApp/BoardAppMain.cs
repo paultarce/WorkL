@@ -11,6 +11,7 @@ using AForge.Video;
 using AForge.Video.DirectShow;
 using AForge;
 using System.Threading;
+using System.IO;
 
 namespace BoardApp
 {
@@ -135,13 +136,44 @@ namespace BoardApp
         {
             using (var fbd = new FolderBrowserDialog())
             {
+                fbd.SelectedPath = @"D:\cursuri\LICENTA\WorkL\BoardApp\PhotoRepo";
                 DialogResult result = fbd.ShowDialog();
-                if(result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                //fbd.RootFolder = @"D:\cursuri\LICENTA\WorkL\BoardApp\PhotoRepo";
+               
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
+                    fbd.Description = "Select the lecture folder";
                     string path = fbd.SelectedPath;
+                    
+
+                    foreach (string file in Directory.EnumerateFiles(path, "*.jpg")) 
+                    {
+                        PictureBox myPict = new PictureBox(); //dinamicly created control
+                        //pictureBox.Image = Bitmap.FromFile(file);
+
+                        myPict.Name = "Pict";
+                        myPict.SetBounds(0, 0, 80, 80);
+                        myPict.BackColor = Color.Black;
+                        myPict.SizeMode = PictureBoxSizeMode.Zoom;
+                        myPict.Image = Bitmap.FromFile(file);
+
+                        flowLayoutPanel1.AutoScroll = true;
+                        flowLayoutPanel1.Controls.Add(myPict);
+
+                        myPict.Click += MyPict_Click;
+                    }
+                    
                 }
             }
            
+        }
+
+        //"sender" -> PictureBox 
+        private void MyPict_Click(object sender, EventArgs e)
+        {
+            flowLayoutPanel1.BorderStyle = BorderStyle.Fixed3D;
+            //pictureBox.SizeMode = PictureBox.Au
+            pictureBox = (PictureBox)sender;
         }
     }
 }
