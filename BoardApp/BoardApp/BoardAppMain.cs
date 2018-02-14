@@ -34,7 +34,7 @@ namespace BoardApp
             #region  Get attached cameras
             VideoCaptureDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
 
-            foreach(FilterInfo VideoCaptureDevice in VideoCaptureDevices)
+            foreach (FilterInfo VideoCaptureDevice in VideoCaptureDevices)
             {
                 cbAttachedCameras.Items.Add(VideoCaptureDevice.Name);
             }
@@ -43,7 +43,7 @@ namespace BoardApp
 
             #region Get supported modes
             FinalVideo = new VideoCaptureDevice(VideoCaptureDevices[cbAttachedCameras.SelectedIndex].MonikerString);
-            foreach(var capability in FinalVideo.VideoCapabilities)
+            foreach (var capability in FinalVideo.VideoCapabilities)
             {
                 cbSupportedModes.Items.Add(capability.FrameSize.ToString() + ":" + capability.MaximumFrameRate.ToString() + ":" + capability.BitCount.ToString());
 
@@ -53,18 +53,18 @@ namespace BoardApp
 
             #endregion
             FinalVideo.NewFrame += new NewFrameEventHandler(FinalVideo_NewFrame);
-            
+
         }
 
         private void FinalVideo_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            if(liveCamera.Image != null)
+            if (liveCamera.Image != null)
             {
                 liveCamera.Image.Dispose();
             }
             Bitmap tempBitmap = (Bitmap)eventArgs.Frame.Clone();
             liveCamera.Image = tempBitmap;
-            
+
         }
 
         private void BoardAppMain_Load(object sender, EventArgs e)
@@ -97,7 +97,7 @@ namespace BoardApp
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            pictureBox.Image = liveCamera.Image ;
+            pictureBox.Image = liveCamera.Image;
             FinalVideo.Stop();
         }
 
@@ -115,8 +115,8 @@ namespace BoardApp
 
         private void rbDisplayMode_CheckedChanged(object sender, EventArgs e)
         {
-           // rbCaptureMode.Enabled = false;
-            
+            // rbCaptureMode.Enabled = false;
+
             btnPlay.Enabled = false;
             btnStop.Enabled = false;
             btnOpenImages.Enabled = true;
@@ -139,14 +139,14 @@ namespace BoardApp
                 fbd.SelectedPath = @"D:\cursuri\LICENTA\WorkL\BoardApp\PhotoRepo";
                 DialogResult result = fbd.ShowDialog();
                 //fbd.RootFolder = @"D:\cursuri\LICENTA\WorkL\BoardApp\PhotoRepo";
-               
+
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
                     fbd.Description = "Select the lecture folder";
                     string path = fbd.SelectedPath;
-                    
 
-                    foreach (string file in Directory.EnumerateFiles(path, "*.jpg")) 
+
+                    foreach (string file in Directory.EnumerateFiles(path, "*.jpg"))
                     {
                         PictureBox myPict = new PictureBox(); //dinamicly created control
                         //pictureBox.Image = Bitmap.FromFile(file);
@@ -162,18 +162,29 @@ namespace BoardApp
 
                         myPict.Click += MyPict_Click;
                     }
-                    
+
                 }
             }
-           
+
         }
 
         //"sender" -> PictureBox 
         private void MyPict_Click(object sender, EventArgs e)
         {
-            flowLayoutPanel1.BorderStyle = BorderStyle.Fixed3D;
+            //  flowLayoutPanel1.BorderStyle = BorderStyle.Fixed3D;
             //pictureBox.SizeMode = PictureBox.Au
-            pictureBox = (PictureBox)sender;
+            //  pictureBox = (PictureBox)sender;
+            ///  foreach (var picture in flowLayoutPanel1.Controls)
+            // {
+            var myPicture = (PictureBox)sender;
+            //myPicture.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox.SetBounds(0, 0, 300, 300);
+            pictureBox.BackColor = Color.Black;
+            pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+
+            pictureBox.Image = myPicture.Image;
+            label5.Text = myPicture.Name;
+            //  }
         }
     }
 }

@@ -49,6 +49,7 @@
             this.rbDisplayMode = new System.Windows.Forms.RadioButton();
             this.btnOpenImages = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -118,7 +119,7 @@
             this.liveCamera.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.liveCamera.Location = new System.Drawing.Point(3, 3);
             this.liveCamera.Name = "liveCamera";
-            this.liveCamera.Size = new System.Drawing.Size(306, 328);
+            this.liveCamera.Size = new System.Drawing.Size(306, 312);
             this.liveCamera.TabIndex = 6;
             this.liveCamera.TabStop = false;
             // 
@@ -130,7 +131,7 @@
             this.pictureBox.BackColor = System.Drawing.SystemColors.ControlDark;
             this.pictureBox.Location = new System.Drawing.Point(315, 3);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(307, 328);
+            this.pictureBox.Size = new System.Drawing.Size(307, 312);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox.TabIndex = 7;
             this.pictureBox.TabStop = false;
@@ -143,16 +144,16 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.liveCamera, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label4, 1, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(359, 12);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.liveCamera, 0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(359, 31);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 88.68501F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.31498F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(625, 377);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(625, 359);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
             // label3
@@ -160,16 +161,16 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 334);
+            this.label3.Location = new System.Drawing.Point(3, 318);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(66, 43);
+            this.label3.Size = new System.Drawing.Size(66, 41);
             this.label3.TabIndex = 8;
             this.label3.Text = "Live Camera";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(315, 334);
+            this.label4.Location = new System.Drawing.Point(315, 318);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 13);
             this.label4.TabIndex = 9;
@@ -238,19 +239,28 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 244);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(341, 99);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(341, 146);
             this.flowLayoutPanel1.TabIndex = 17;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(650, 9);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 13);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "label5";
             // 
             // BoardAppMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(996, 401);
+            this.ClientSize = new System.Drawing.Size(996, 448);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.btnOpenImages);
             this.Controls.Add(this.groupBox1);
@@ -299,5 +309,6 @@
         private System.Windows.Forms.RadioButton rbDisplayMode;
         private System.Windows.Forms.Button btnOpenImages;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Label label5;
     }
 }
