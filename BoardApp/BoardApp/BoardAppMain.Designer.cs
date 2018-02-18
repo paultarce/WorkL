@@ -50,15 +50,24 @@
             this.btnOpenImages = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
+            this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnPlay
             // 
-            this.btnPlay.Location = new System.Drawing.Point(12, 170);
+            this.btnPlay.Location = new System.Drawing.Point(3, 164);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(75, 23);
             this.btnPlay.TabIndex = 0;
@@ -68,18 +77,18 @@
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(93, 170);
+            this.btnStop.Location = new System.Drawing.Point(84, 164);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(75, 23);
+            this.btnStop.Size = new System.Drawing.Size(87, 23);
             this.btnStop.TabIndex = 1;
-            this.btnStop.Text = "Stop";
+            this.btnStop.Text = "Capture/Stop";
             this.btnStop.UseVisualStyleBackColor = true;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 87);
+            this.label1.Location = new System.Drawing.Point(17, 81);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 13);
             this.label1.TabIndex = 2;
@@ -88,7 +97,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 127);
+            this.label2.Location = new System.Drawing.Point(17, 121);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(91, 13);
             this.label2.TabIndex = 3;
@@ -97,7 +106,7 @@
             // cbAttachedCameras
             // 
             this.cbAttachedCameras.FormattingEnabled = true;
-            this.cbAttachedCameras.Location = new System.Drawing.Point(29, 103);
+            this.cbAttachedCameras.Location = new System.Drawing.Point(20, 97);
             this.cbAttachedCameras.Name = "cbAttachedCameras";
             this.cbAttachedCameras.Size = new System.Drawing.Size(172, 21);
             this.cbAttachedCameras.TabIndex = 4;
@@ -105,7 +114,7 @@
             // cbSupportedModes
             // 
             this.cbSupportedModes.FormattingEnabled = true;
-            this.cbSupportedModes.Location = new System.Drawing.Point(29, 143);
+            this.cbSupportedModes.Location = new System.Drawing.Point(20, 137);
             this.cbSupportedModes.Name = "cbSupportedModes";
             this.cbSupportedModes.Size = new System.Drawing.Size(172, 21);
             this.cbSupportedModes.TabIndex = 5;
@@ -116,10 +125,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.liveCamera.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.liveCamera.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.liveCamera.Cursor = System.Windows.Forms.Cursors.Default;
             this.liveCamera.Location = new System.Drawing.Point(3, 3);
             this.liveCamera.Name = "liveCamera";
-            this.liveCamera.Size = new System.Drawing.Size(306, 312);
+            this.liveCamera.Size = new System.Drawing.Size(305, 342);
             this.liveCamera.TabIndex = 6;
             this.liveCamera.TabStop = false;
             // 
@@ -129,9 +138,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pictureBox.Location = new System.Drawing.Point(315, 3);
+            this.pictureBox.Location = new System.Drawing.Point(314, 3);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(307, 312);
+            this.pictureBox.Size = new System.Drawing.Size(306, 342);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox.TabIndex = 7;
             this.pictureBox.TabStop = false;
@@ -148,12 +157,12 @@
             this.tableLayoutPanel1.Controls.Add(this.label4, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.pictureBox, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.liveCamera, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(359, 31);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(350, 6);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 88.68501F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.31498F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(625, 359);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 94.60784F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.392157F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(623, 368);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
             // label3
@@ -161,16 +170,16 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 318);
+            this.label3.Location = new System.Drawing.Point(3, 348);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(66, 41);
+            this.label3.Size = new System.Drawing.Size(66, 20);
             this.label3.TabIndex = 8;
             this.label3.Text = "Live Camera";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(315, 318);
+            this.label4.Location = new System.Drawing.Point(314, 348);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 13);
             this.label4.TabIndex = 9;
@@ -178,7 +187,7 @@
             // 
             // btnSaveImage
             // 
-            this.btnSaveImage.Location = new System.Drawing.Point(93, 207);
+            this.btnSaveImage.Location = new System.Drawing.Point(84, 201);
             this.btnSaveImage.Name = "btnSaveImage";
             this.btnSaveImage.Size = new System.Drawing.Size(75, 23);
             this.btnSaveImage.TabIndex = 13;
@@ -208,7 +217,7 @@
             // 
             this.groupBox1.Controls.Add(this.rbDisplayMode);
             this.groupBox1.Controls.Add(this.rbCaptureMode);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(3, 6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(183, 59);
             this.groupBox1.TabIndex = 15;
@@ -229,7 +238,7 @@
             // 
             // btnOpenImages
             // 
-            this.btnOpenImages.Location = new System.Drawing.Point(12, 199);
+            this.btnOpenImages.Location = new System.Drawing.Point(3, 193);
             this.btnOpenImages.Name = "btnOpenImages";
             this.btnOpenImages.Size = new System.Drawing.Size(75, 39);
             this.btnOpenImages.TabIndex = 16;
@@ -241,9 +250,9 @@
             // 
             this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 244);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 238);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(341, 146);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(341, 192);
             this.flowLayoutPanel1.TabIndex = 17;
             // 
             // label5
@@ -255,34 +264,92 @@
             this.label5.TabIndex = 18;
             this.label5.Text = "label5";
             // 
+            // directorySearcher1
+            // 
+            this.directorySearcher1.ClientTimeout = System.TimeSpan.Parse("-00:00:01");
+            this.directorySearcher1.ServerPageTimeLimit = System.TimeSpan.Parse("-00:00:01");
+            this.directorySearcher1.ServerTimeLimit = System.TimeSpan.Parse("-00:00:01");
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Location = new System.Drawing.Point(2, 0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(997, 451);
+            this.tabControl1.TabIndex = 19;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tabPage2.Controls.Add(this.groupBox1);
+            this.tabPage2.Controls.Add(this.btnPlay);
+            this.tabPage2.Controls.Add(this.tableLayoutPanel1);
+            this.tabPage2.Controls.Add(this.flowLayoutPanel1);
+            this.tabPage2.Controls.Add(this.btnStop);
+            this.tabPage2.Controls.Add(this.btnOpenImages);
+            this.tabPage2.Controls.Add(this.label1);
+            this.tabPage2.Controls.Add(this.label2);
+            this.tabPage2.Controls.Add(this.btnSaveImage);
+            this.tabPage2.Controls.Add(this.cbAttachedCameras);
+            this.tabPage2.Controls.Add(this.cbSupportedModes);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(989, 425);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Main Tab";
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.flowLayoutPanel2);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(989, 425);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(16, 20);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(325, 161);
+            this.flowLayoutPanel2.TabIndex = 18;
+            // 
             // BoardAppMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(996, 448);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.btnOpenImages);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnSaveImage);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.cbSupportedModes);
-            this.Controls.Add(this.cbAttachedCameras);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnStop);
-            this.Controls.Add(this.btnPlay);
+            this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(500, 300);
             this.Name = "BoardAppMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
             this.Text = "BoardAppMain";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BoardAppMain_FormClosing);
             this.Load += new System.EventHandler(this.BoardAppMain_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BoardAppMain_KeyPress);
             ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -310,5 +377,11 @@
         private System.Windows.Forms.Button btnOpenImages;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Label label5;
+        private System.DirectoryServices.DirectorySearcher directorySearcher1;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

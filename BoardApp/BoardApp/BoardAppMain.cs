@@ -87,8 +87,11 @@ namespace BoardApp
             FinalVideo.Stop();
             FinalVideo.VideoResolution = FinalVideo.VideoCapabilities[cbSupportedModes.SelectedIndex];
 
-            this.Width = FinalVideo.VideoResolution.FrameSize.Width + 40;
-            this.Height = FinalVideo.VideoResolution.FrameSize.Height + 70;
+            //this.Width = FinalVideo.VideoResolution.FrameSize.Width + 140;
+            //this.Height = FinalVideo.VideoResolution.FrameSize.Height + 100;
+            this.WindowState = FormWindowState.Maximized;
+            this.MinimumSize = this.Size;
+            this.MaximumSize = this.Size;
 
             this.liveCamera.Width = FinalVideo.VideoResolution.FrameSize.Width;
             this.liveCamera.Height = FinalVideo.VideoResolution.FrameSize.Height;
@@ -97,15 +100,18 @@ namespace BoardApp
 
         private void btnStop_Click(object sender, EventArgs e)
         {
+            //pictureBox.Image.Dispose();
+            //this.ClearPictureBox();
             pictureBox.Image = liveCamera.Image;
-            FinalVideo.Stop();
+            //FinalVideo.Stop();
         }
 
         private void btnSaveImage_Click(object sender, EventArgs e)
         {
             try
             {
-                Bitmap b = new Bitmap("Poza");
+                //Bitmap b = new Bitmap("Poza");
+
             }
             catch
             {
@@ -134,6 +140,14 @@ namespace BoardApp
 
         private void btnOpenImages_Click(object sender, EventArgs e)
         {
+            /* foreach (Control control in flowLayoutPanel1.Controls)
+             {
+                 flowLayoutPanel1.Controls.Remove(control);
+                 control.Dispose();
+
+             }*/
+            flowLayoutPanel1.Controls.Clear();
+            //flowLayou
             using (var fbd = new FolderBrowserDialog())
             {
                 fbd.SelectedPath = @"D:\cursuri\LICENTA\WorkL\BoardApp\PhotoRepo";
@@ -167,7 +181,6 @@ namespace BoardApp
             }
 
         }
-
         //"sender" -> PictureBox 
         private void MyPict_Click(object sender, EventArgs e)
         {
@@ -181,10 +194,33 @@ namespace BoardApp
             pictureBox.SetBounds(0, 0, 300, 300);
             pictureBox.BackColor = Color.Black;
             pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-
-            pictureBox.Image = myPicture.Image;
             label5.Text = myPicture.Name;
+            pictureBox.Image = myPicture.Image;
             //  }
         }
+
+        private void ClearPictureBox()
+        {
+            //pict.Image = null;
+            if (pictureBox.Image != null)
+            {
+                pictureBox.Image.Dispose();
+                //pict.Image = null;
+                pictureBox = new PictureBox();
+            }
+        }
+
+        private void BoardAppMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            FinalVideo.Stop();
+            Application.Exit();
+        }
+
+        private void BoardAppMain_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar >= 48 && e.KeyChar <= 57) // numeric
+            {
+
+            }
     }
 }
