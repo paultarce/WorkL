@@ -218,9 +218,27 @@ namespace BoardApp
 
         private void BoardAppMain_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar >= 48 && e.KeyChar <= 57) // numeric
+            if (pictureBox.Image != null)
             {
+                if (e.KeyChar >= 48 && e.KeyChar <= 57) // numeric
+                {
 
+                }
+                if (e.KeyChar == (char)Keys.F || e.KeyChar == char.ToLower((char)Keys.F))
+                {
+                    FullScreenForm f = new FullScreenForm();         
+                    Screen[] screens = Screen.AllScreens;
+                    Rectangle bounds = screens[1].Bounds;
+                    f.SetBounds(bounds.X, bounds.Y, bounds.Width, bounds.Height);
+
+                    f.pb.Image = pictureBox.Image;
+                    f.Show();
+                }
             }
+            else
+            {
+                MessageBox.Show("No picture to display", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        } 
     }
 }

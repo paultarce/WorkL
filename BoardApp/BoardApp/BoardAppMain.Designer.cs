@@ -282,6 +282,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(997, 451);
             this.tabControl1.TabIndex = 19;
+            this.tabControl1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BoardAppMain_KeyPress);
             // 
             // tabPage2
             // 

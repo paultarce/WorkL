@@ -21,3 +21,4 @@ D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\obj\Debug\BoardApp.csproj.CoreCompile
 D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\obj\Debug\BoardApp.exe
 D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\obj\Debug\BoardApp.pdb
 D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\obj\Debug\BoardApp.SpashScreen.resources
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\obj\Debug\BoardApp.FullScreenForm.resources
