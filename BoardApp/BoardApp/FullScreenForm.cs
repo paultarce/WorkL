@@ -17,7 +17,7 @@ namespace BoardApp
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None;
-            
+            this.Location = Screen.AllScreens[0].WorkingArea.Location;
         }
 
         public PictureBox pb

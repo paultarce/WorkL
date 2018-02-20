@@ -21,6 +21,7 @@ namespace BoardApp
         private FilterInfoCollection VideoCaptureDevices;
         private VideoCaptureDevice FinalVideo;
         private int pictureNr;
+        private FullScreenForm f;
 
         public BoardAppMain()
         {
@@ -54,6 +55,7 @@ namespace BoardApp
             #endregion
             FinalVideo.NewFrame += new NewFrameEventHandler(FinalVideo_NewFrame);
 
+            f = new FullScreenForm();
         }
 
         private void FinalVideo_NewFrame(object sender, NewFrameEventArgs eventArgs)
@@ -102,8 +104,11 @@ namespace BoardApp
         {
             //pictureBox.Image.Dispose();
             //this.ClearPictureBox();
-            pictureBox.Image = liveCamera.Image;
+
+            //    pictureBox.Image = liveCamera.Image;
             //FinalVideo.Stop();
+            Bitmap b = new Bitmap(liveCamera.Image);
+            pictureBox.Image = b;
         }
 
         private void btnSaveImage_Click(object sender, EventArgs e)
@@ -111,7 +116,9 @@ namespace BoardApp
             try
             {
                 //Bitmap b = new Bitmap("Poza");
-
+                Bitmap b = new Bitmap(pictureBox.Image);
+                Graphics gr = Graphics.FromImage(b);
+                pictureBox.Image = b;
             }
             catch
             {
@@ -226,19 +233,24 @@ namespace BoardApp
                 }
                 if (e.KeyChar == (char)Keys.F || e.KeyChar == char.ToLower((char)Keys.F))
                 {
-                    FullScreenForm f = new FullScreenForm();         
+                    f.Close();
+                    f = new FullScreenForm();
                     Screen[] screens = Screen.AllScreens;
-                    Rectangle bounds = screens[1].Bounds;
+                    Rectangle bounds = screens[0].Bounds;
                     f.SetBounds(bounds.X, bounds.Y, bounds.Width, bounds.Height);
 
+                    //f.pb.SetBounds(0, 0, 300, 300);
+                    f.pb.BackColor = Color.Black;
+                    f.pb.SizeMode = PictureBoxSizeMode.StretchImage;
+
                     f.pb.Image = pictureBox.Image;
-                    f.Show();
+                    f.Show(); ///Close after showing once
                 }
             }
             else
             {
                 MessageBox.Show("No picture to display", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-        } 
+        }
     }
 }
