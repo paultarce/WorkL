@@ -22,3 +22,4 @@ D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\obj\Debug\BoardApp.exe
 D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\obj\Debug\BoardApp.pdb
 D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\obj\Debug\BoardApp.SpashScreen.resources
 D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\obj\Debug\BoardApp.FullScreenForm.resources
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\obj\Debug\BoardApp.SecondaryForms.LectureForm.resources

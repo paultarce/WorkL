@@ -21,6 +21,7 @@ namespace BoardApp
         }
 
         public PictureBox pb
+
         {
             get { return this.pbFullScreen; }
         }

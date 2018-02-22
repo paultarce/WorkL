@@ -76,6 +76,8 @@ namespace BoardApp
             btnPlay.Enabled = false;
             btnStop.Enabled = false;
             btnSaveImage.Enabled = false;
+            btnDeletePict.Enabled = false;
+
         }
 
         public void StartForm()
@@ -109,6 +111,7 @@ namespace BoardApp
             //FinalVideo.Stop();
             Bitmap b = new Bitmap(liveCamera.Image);
             pictureBox.Image = b;
+            flowLayoutPanel1.Controls.Add(pictureBox);
         }
 
         private void btnSaveImage_Click(object sender, EventArgs e)
@@ -134,6 +137,7 @@ namespace BoardApp
             btnStop.Enabled = false;
             btnOpenImages.Enabled = true;
             btnSaveImage.Enabled = false;
+            // open DialogBox to enter the name of the lecture
 
         }
 
@@ -245,11 +249,23 @@ namespace BoardApp
 
                     f.pb.Image = pictureBox.Image;
                     f.Show(); ///Close after showing once
-                }
+                }              
             }
             else
             {
                 MessageBox.Show("No picture to display", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            if(flowLayoutPanel1.Controls.Count > 0)
+            {
+                if(e.KeyChar == (char)Keys.Right)
+                {
+
+                }
+                if(e.KeyChar == (char)Keys.Left)
+                {
+
+                }
+                
             }
         }
     }

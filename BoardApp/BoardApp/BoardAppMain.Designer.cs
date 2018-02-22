@@ -56,6 +56,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.btnDeletePict = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -250,9 +251,9 @@
             // 
             this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 238);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 267);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(341, 192);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(341, 163);
             this.flowLayoutPanel1.TabIndex = 17;
             // 
             // label5
@@ -287,6 +288,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tabPage2.Controls.Add(this.btnDeletePict);
             this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.btnPlay);
             this.tabPage2.Controls.Add(this.tableLayoutPanel1);
@@ -324,6 +326,15 @@
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(325, 161);
             this.flowLayoutPanel2.TabIndex = 18;
+            // 
+            // btnDeletePict
+            // 
+            this.btnDeletePict.Location = new System.Drawing.Point(84, 230);
+            this.btnDeletePict.Name = "btnDeletePict";
+            this.btnDeletePict.Size = new System.Drawing.Size(87, 23);
+            this.btnDeletePict.TabIndex = 18;
+            this.btnDeletePict.Text = "Delete Picture";
+            this.btnDeletePict.UseVisualStyleBackColor = true;
             // 
             // BoardAppMain
             // 
@@ -384,5 +395,6 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button btnDeletePict;
     }
 }
