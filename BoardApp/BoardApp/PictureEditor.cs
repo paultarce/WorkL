@@ -11,6 +11,13 @@ namespace BoardApp
     // this class has methods that have raw Bitmaps / picture and sets their size
     public class PictureEditor
     {
-        public static FlowLayoutParse(ref PictureBox)
+        public static PictureBox PictBoxTOflowLayout( PictureBox myPict)
+        {
+            myPict.SetBounds(0, 0, 80, 80);
+            myPict.BackColor = Color.Black;
+            myPict.SizeMode = PictureBoxSizeMode.Zoom;
+
+            return myPict;
+        }
     }
 }

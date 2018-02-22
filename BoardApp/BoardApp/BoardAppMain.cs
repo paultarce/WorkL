@@ -107,11 +107,21 @@ namespace BoardApp
             //pictureBox.Image.Dispose();
             //this.ClearPictureBox();
 
-            //    pictureBox.Image = liveCamera.Image;
+            //pictureBox.Image = liveCamera.Image;
             //FinalVideo.Stop();
             Bitmap b = new Bitmap(liveCamera.Image);
             pictureBox.Image = b;
-            flowLayoutPanel1.Controls.Add(pictureBox);
+
+
+            PictureBox myPict = new PictureBox(); //dinamicly created control
+                                                  //pictureBox.Image = Bitmap.FromFile(file);
+            myPict = PictureEditor.PictBoxTOflowLayout(myPict);
+
+            myPict.Image = pictureBox.Image;
+
+            flowLayoutPanel1.AutoScroll = true;
+            flowLayoutPanel1.Controls.Add(myPict);
+            myPict.Click += MyPict_Click;
         }
 
         private void btnSaveImage_Click(object sender, EventArgs e)
@@ -249,23 +259,32 @@ namespace BoardApp
 
                     f.pb.Image = pictureBox.Image;
                     f.Show(); ///Close after showing once
-                }              
+                }
             }
             else
             {
                 MessageBox.Show("No picture to display", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            if(flowLayoutPanel1.Controls.Count > 0)
+            if (flowLayoutPanel1.Controls.Count > 0)
             {
-                if(e.KeyChar == (char)Keys.Right)
+                if (e.KeyChar == (char)Keys.Right)
                 {
 
                 }
-                if(e.KeyChar == (char)Keys.Left)
+                if (e.KeyChar == (char)Keys.Left)
                 {
 
                 }
-                
+
+            }
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+            flowLayoutPanel2.AutoScroll = true;
+            foreach(Control ctrl in flowLayoutPanel1.Controls)
+            {
+                flowLayoutPanel2.Controls.Add(ctrl);
             }
         }
     }
