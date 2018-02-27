@@ -12,6 +12,7 @@ using AForge.Video.DirectShow;
 using AForge;
 using System.Threading;
 using System.IO;
+using BoardApp.Exceptions_Algorithms;
 
 namespace BoardApp
 {
@@ -22,6 +23,7 @@ namespace BoardApp
         private VideoCaptureDevice FinalVideo;
         private int pictureNr;
         private FullScreenForm f;
+        public List<PictureBox> flpPictureList; // to dispaly a flowLayoutPanel in tab2
 
         public BoardAppMain()
         {
@@ -55,6 +57,7 @@ namespace BoardApp
             #endregion
             FinalVideo.NewFrame += new NewFrameEventHandler(FinalVideo_NewFrame);
 
+            flpPictureList = new List<PictureBox>();
             f = new FullScreenForm();
         }
 
@@ -194,6 +197,7 @@ namespace BoardApp
 
                         flowLayoutPanel1.AutoScroll = true;
                         flowLayoutPanel1.Controls.Add(myPict);
+                        flpPictureList.Add(myPict);
 
                         myPict.Click += MyPict_Click;
                     }
@@ -282,9 +286,17 @@ namespace BoardApp
         private void tabPage1_Click(object sender, EventArgs e)
         {
             flowLayoutPanel2.AutoScroll = true;
-            foreach(Control ctrl in flowLayoutPanel1.Controls)
+            flowLayoutPanel2.Controls.Clear();
+            //foreach(Control ctrl in flowLayoutPanel1.Controls)
+            //{
+            //flowLayoutPanel2.Controls.Add(Clone);
+            //Control c2 = 
+            //}
+            foreach (Control pict in flowLayoutPanel1.Controls)
             {
-                flowLayoutPanel2.Controls.Add(ctrl);
+                Control p = new Control();
+                p = CopyControl.Clone<Control>(pict);
+                flowLayoutPanel2.Controls.Add(p);
             }
         }
     }

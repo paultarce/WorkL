@@ -60,6 +60,7 @@
     <Compile Include="BoardAppMain.Designer.cs">
       <DependentUpon>BoardAppMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Exceptions-Algorithms\CopyControl.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,8 +126,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Exceptions\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
