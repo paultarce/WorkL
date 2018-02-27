@@ -59,6 +59,8 @@ namespace BoardApp
 
             flpPictureList = new List<PictureBox>();
             f = new FullScreenForm();
+
+            tabPage2
         }
 
         private void FinalVideo_NewFrame(object sender, NewFrameEventArgs eventArgs)
@@ -287,16 +289,30 @@ namespace BoardApp
         {
             flowLayoutPanel2.AutoScroll = true;
             flowLayoutPanel2.Controls.Clear();
-            //foreach(Control ctrl in flowLayoutPanel1.Controls)
-            //{
-            //flowLayoutPanel2.Controls.Add(Clone);
-            //Control c2 = 
-            //}
-            foreach (Control pict in flowLayoutPanel1.Controls)
+            /* foreach (Control ctrl in flowLayoutPanel1.Controls)
+             {
+                 flowLayoutPanel2.Controls.Add(Clone);
+                 Control c2 =
+             }*/
+            /*foreach (Control pict in flowLayoutPanel1.Controls)
+             {
+                 Control p = new Control();
+                 p = CopyControl.Clone<Control>(pict);
+                 flowLayoutPanel3.Controls.Add(p);
+             }
+             */
+            /*  foreach (PictureBox pict in flowLayoutPanel1.Controls)
+              {
+                  PictureBox p = new PictureBox();
+                  p = CopyControl.Clone<PictureBox>(pict);
+                  flowLayoutPanel3.Controls.Add(p);
+              }
+              */
+            foreach (PictureBox pict in flowLayoutPanel1.Controls)
             {
-                Control p = new Control();
-                p = CopyControl.Clone<Control>(pict);
-                flowLayoutPanel2.Controls.Add(p);
+                PictureBox p = pict.CreateNewWithAttribute();
+                PictureBox p2 = PictureEditor.PictBoxTOflowLayout(p);
+                flowLayoutPanel2.Controls.Add(p2);
             }
         }
     }

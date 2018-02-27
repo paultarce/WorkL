@@ -10,7 +10,7 @@ namespace BoardApp.Exceptions_Algorithms
 {
     public static class CopyControl
     {
-        public static T Clone<T>(this T control) where T : Control
+        public static T Clone<T>(this T control) where T : PictureBox
         {
             T result = Activator.CreateInstance<T>();
             PropertyInfo[] piCollection = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);

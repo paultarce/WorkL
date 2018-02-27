@@ -53,10 +53,10 @@
             this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnDeletePict = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.btnDeletePict = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -307,6 +307,15 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Main Tab";
             // 
+            // btnDeletePict
+            // 
+            this.btnDeletePict.Location = new System.Drawing.Point(84, 230);
+            this.btnDeletePict.Name = "btnDeletePict";
+            this.btnDeletePict.Size = new System.Drawing.Size(87, 23);
+            this.btnDeletePict.TabIndex = 18;
+            this.btnDeletePict.Text = "Delete Picture";
+            this.btnDeletePict.UseVisualStyleBackColor = true;
+            // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.flowLayoutPanel2);
@@ -327,15 +336,6 @@
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(325, 161);
             this.flowLayoutPanel2.TabIndex = 18;
-            // 
-            // btnDeletePict
-            // 
-            this.btnDeletePict.Location = new System.Drawing.Point(84, 230);
-            this.btnDeletePict.Name = "btnDeletePict";
-            this.btnDeletePict.Size = new System.Drawing.Size(87, 23);
-            this.btnDeletePict.TabIndex = 18;
-            this.btnDeletePict.Text = "Delete Picture";
-            this.btnDeletePict.UseVisualStyleBackColor = true;
             // 
             // BoardAppMain
             // 
