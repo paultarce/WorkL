@@ -57,6 +57,10 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -288,6 +292,10 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tabPage2.Controls.Add(this.label9);
+            this.tabPage2.Controls.Add(this.label8);
+            this.tabPage2.Controls.Add(this.label7);
+            this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Controls.Add(this.btnDeletePict);
             this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.btnPlay);
@@ -327,6 +335,7 @@
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
+            this.tabPage1.Enter += new System.EventHandler(this.tabPage1_Enter);
             // 
             // flowLayoutPanel2
             // 
@@ -336,6 +345,42 @@
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(325, 161);
             this.flowLayoutPanel2.TabIndex = 18;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(209, 25);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(132, 13);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "F - Show picture fullscreen";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(209, 48);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(95, 13);
+            this.label7.TabIndex = 20;
+            this.label7.Text = "C - Capture picture";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(209, 61);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(40, 13);
+            this.label8.TabIndex = 21;
+            this.label8.Text = "4 - Left";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(209, 74);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(40, 13);
+            this.label9.TabIndex = 22;
+            this.label9.Text = "6 - Left";
             // 
             // BoardAppMain
             // 
@@ -397,5 +442,9 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Button btnDeletePict;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
     }
 }

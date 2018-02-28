@@ -24,6 +24,7 @@ namespace BoardApp
         private int pictureNr;
         private FullScreenForm f;
         public List<PictureBox> flpPictureList; // to dispaly a flowLayoutPanel in tab2
+        private int pictPosition = 0;
 
         public BoardAppMain()
         {
@@ -60,7 +61,7 @@ namespace BoardApp
             flpPictureList = new List<PictureBox>();
             f = new FullScreenForm();
 
-            tabPage2
+
         }
 
         private void FinalVideo_NewFrame(object sender, NewFrameEventArgs eventArgs)
@@ -245,48 +246,66 @@ namespace BoardApp
 
         private void BoardAppMain_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (pictureBox.Image != null)
+
+            if (e.KeyChar >= 48 && e.KeyChar <= 57) // numeric
             {
-                if (e.KeyChar >= 48 && e.KeyChar <= 57) // numeric
-                {
 
+            }
+            if (e.KeyChar == (char)Keys.F || e.KeyChar == char.ToLower((char)Keys.F))
+            {
+                if (pictureBox.Image != null)
+                {
+                    PictureEditor.ShowPictureFullSreen(ref f,ref pictureBox); //to update "this" controls 
                 }
-                if (e.KeyChar == (char)Keys.F || e.KeyChar == char.ToLower((char)Keys.F))
+                else
                 {
-                    f.Close();
-                    f = new FullScreenForm();
-                    Screen[] screens = Screen.AllScreens;
-                    Rectangle bounds = screens[0].Bounds;
-                    f.SetBounds(bounds.X, bounds.Y, bounds.Width, bounds.Height);
-
-                    //f.pb.SetBounds(0, 0, 300, 300);
-                    f.pb.BackColor = Color.Black;
-                    f.pb.SizeMode = PictureBoxSizeMode.StretchImage;
-
-                    f.pb.Image = pictureBox.Image;
-                    f.Show(); ///Close after showing once
+                    MessageBox.Show("No picture to display", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
-            else
-            {
-                MessageBox.Show("No picture to display", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
+
             if (flowLayoutPanel1.Controls.Count > 0)
             {
-                if (e.KeyChar == (char)Keys.Right)
+                
+                if (e.KeyChar == '6')
                 {
+                    if(pictureNr >= 0 && pictureNr < flowLayoutPanel1.Controls.Count-1)
+                    {
+                        MyPict_Click((PictureBox)flowLayoutPanel1.Controls[pictureNr], e);
+                        //flowLayoutPanel1.Controls[pictureNr].Click += MyPict_Click;
+                        pictureNr++;
+                        PictureEditor.ShowPictureFullSreen(ref f, ref pictureBox);
+                    }
+                    
 
                 }
-                if (e.KeyChar == (char)Keys.Left)
+                if (e.KeyChar == '4')
                 {
-
+                    if (pictureNr > 0 && pictureNr <= flowLayoutPanel1.Controls.Count-1)
+                    {
+                        MyPict_Click((PictureBox)flowLayoutPanel1.Controls[pictureNr], e);
+                        //flowLayoutPanel1.Controls[pictureNr].Click += MyPict_Click;
+                        pictureNr--;
+                        PictureEditor.ShowPictureFullSreen(ref f, ref pictureBox);
+                    }
                 }
 
+            }
+            if (liveCamera.Image != null)
+            {
+                if (e.KeyChar == (char)Keys.C || e.KeyChar == char.ToLower((char)Keys.C))
+                {
+                    btnStop_Click(sender, e);
+                }
             }
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
         {
+        }
+
+        private void tabPage1_Enter(object sender, EventArgs e)
+        {
+
             flowLayoutPanel2.AutoScroll = true;
             flowLayoutPanel2.Controls.Clear();
             /* foreach (Control ctrl in flowLayoutPanel1.Controls)
