@@ -255,7 +255,8 @@ namespace BoardApp
             {
                 if (pictureBox.Image != null)
                 {
-                    PictureEditor.ShowPictureFullSreen(ref f,ref pictureBox); //to update "this" controls 
+                    PictureEditor.ShowPictureFullSreen2(ref f, ref pictureBox); //to update "this" controls 
+                    this.BringToFront();
                 }
                 else
                 {
@@ -265,27 +266,36 @@ namespace BoardApp
 
             if (flowLayoutPanel1.Controls.Count > 0)
             {
-                
+
                 if (e.KeyChar == '6')
                 {
-                    if(pictureNr >= 0 && pictureNr < flowLayoutPanel1.Controls.Count-1)
+                    if (pictureNr >= 0 && pictureNr <= flowLayoutPanel1.Controls.Count-1)
                     {
-                        MyPict_Click((PictureBox)flowLayoutPanel1.Controls[pictureNr], e);
                         //flowLayoutPanel1.Controls[pictureNr].Click += MyPict_Click;
+                        //MyPict_Click((PictureBox)flowLayoutPanel1.Controls[pictureNr], e);
+                        FullScreenDisplay();
+
+                        
+                        PictureEditor.ShowPictureFullSreen2(ref f, ref pictureBox);
+                        this.BringToFront();
                         pictureNr++;
-                        PictureEditor.ShowPictureFullSreen(ref f, ref pictureBox);
                     }
-                    
+
 
                 }
                 if (e.KeyChar == '4')
                 {
-                    if (pictureNr > 0 && pictureNr <= flowLayoutPanel1.Controls.Count-1)
+                    if (pictureNr > 0 && pictureNr <= flowLayoutPanel1.Controls.Count )
                     {
-                        MyPict_Click((PictureBox)flowLayoutPanel1.Controls[pictureNr], e);
                         //flowLayoutPanel1.Controls[pictureNr].Click += MyPict_Click;
+                        //MyPict_Click((PictureBox)flowLayoutPanel1.Controls[pictureNr], e);
                         pictureNr--;
-                        PictureEditor.ShowPictureFullSreen(ref f, ref pictureBox);
+                        FullScreenDisplay();
+
+                       
+                        PictureEditor.ShowPictureFullSreen2(ref f, ref pictureBox);
+                        this.BringToFront();
+                        
                     }
                 }
 
@@ -297,6 +307,15 @@ namespace BoardApp
                     btnStop_Click(sender, e);
                 }
             }
+        }
+
+        private void FullScreenDisplay()
+        {
+            pictureBox.SetBounds(0, 0, 300, 300);
+            pictureBox.BackColor = Color.Black;
+            pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+            label5.Text = flowLayoutPanel1.Controls[pictureNr].Name;
+            pictureBox.Image = ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).Image;
         }
 
         private void tabPage1_Click(object sender, EventArgs e)

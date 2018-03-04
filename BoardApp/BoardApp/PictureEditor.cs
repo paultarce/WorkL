@@ -35,5 +35,41 @@ namespace BoardApp
             f.pb.Image = p.Image;
             f.Show(); ///Close after showing once
         }
+
+        public static void ShowPictureFullSreen2(ref FullScreenForm f, ref PictureBox p)
+        {
+            f.Close();
+            f = new FullScreenForm();
+
+            if (Screen.AllScreens.Length > 1)
+            {
+                f.StartPosition = FormStartPosition.Manual;
+                Screen screen = GetSecondaryScreen();
+                f.Location = screen.WorkingArea.Location;
+                f.Size = new Size(screen.WorkingArea.Width, screen.WorkingArea.Height);
+
+                f.pb.BackColor = Color.Black;
+                f.pb.SizeMode = PictureBoxSizeMode.StretchImage;
+                f.pb.Image = p.Image;
+                f.Show();
+
+            }
+        }
+
+        private static  Screen GetSecondaryScreen()
+        {
+            if(Screen.AllScreens.Length == 1)
+            {
+                return null;
+            }
+            foreach(Screen screen in Screen.AllScreens)
+            {
+                if(screen.Primary == false)
+                {
+                    return screen;
+                }
+            }
+            return null;
+        }
     }
 }
