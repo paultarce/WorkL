@@ -13,6 +13,10 @@ using AForge;
 using System.Threading;
 using System.IO;
 using BoardApp.Exceptions_Algorithms;
+using System.Drawing.Imaging;
+
+using Emgu.CV;
+using Emgu.CV.Structure;
 
 namespace BoardApp
 {
@@ -135,13 +139,15 @@ namespace BoardApp
             try
             {
                 //Bitmap b = new Bitmap("Poza");
-                Bitmap b = new Bitmap(pictureBox.Image);
-                Graphics gr = Graphics.FromImage(b);
-                pictureBox.Image = b;
-            }
-            catch
-            {
+                /* Bitmap b = new Bitmap(pictureBox.Image);
+                 Graphics gr = Graphics.FromImage(b);
+                 pictureBox.Image = b;*/
+                pictureBox.Image.Save(@"D:\cursuri\LICENTA\WorkL\BoardApp\courses\Pict"+pictureNr.ToString()+".jpeg", ImageFormat.Jpeg);
 
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Save error:" + ex.Message);
             }
         }
 
@@ -353,5 +359,40 @@ namespace BoardApp
                 flowLayoutPanel2.Controls.Add(p2);
             }
         }
+
+        /*
+         * CROP PART
+         */
+        #region CropRegion
+
+        private Crop c = new Crop();
+        bool IsMouseDown = false;
+
+        private void pictureBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            c.GetRectangle();
+        }
+
+        private void pictureBox_MouseMove(object sender, MouseEventArgs e)
+        {
+           
+        }
+
+        private void pictureBox_Paint(object sender, PaintEventArgs e)
+        {
+
+            c.Paint(e);
+        }
+
+        private void pictureBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            if(IsMouseDown == true)
+            {
+
+            }
+        }
+        #endregion
+
+
     }
 }
