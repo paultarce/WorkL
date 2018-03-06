@@ -29,6 +29,7 @@ namespace BoardApp
         private FullScreenForm f;
         public List<PictureBox> flpPictureList; // to dispaly a flowLayoutPanel in tab2
         private int pictPosition = 0;
+        //private Crop c;
 
         public BoardAppMain()
         {
@@ -142,10 +143,10 @@ namespace BoardApp
                 /* Bitmap b = new Bitmap(pictureBox.Image);
                  Graphics gr = Graphics.FromImage(b);
                  pictureBox.Image = b;*/
-                pictureBox.Image.Save(@"D:\cursuri\LICENTA\WorkL\BoardApp\courses\Pict"+pictureNr.ToString()+".jpeg", ImageFormat.Jpeg);
+                pictureBox.Image.Save(@"D:\cursuri\LICENTA\WorkL\BoardApp\courses\Pict" + pictureNr.ToString() + ".jpeg", ImageFormat.Jpeg);
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Save error:" + ex.Message);
             }
@@ -275,13 +276,13 @@ namespace BoardApp
 
                 if (e.KeyChar == '6')
                 {
-                    if (pictureNr >= 0 && pictureNr <= flowLayoutPanel1.Controls.Count-1)
+                    if (pictureNr >= 0 && pictureNr <= flowLayoutPanel1.Controls.Count - 1)
                     {
                         //flowLayoutPanel1.Controls[pictureNr].Click += MyPict_Click;
                         //MyPict_Click((PictureBox)flowLayoutPanel1.Controls[pictureNr], e);
                         FullScreenDisplay();
 
-                        
+
                         PictureEditor.ShowPictureFullSreen2(ref f, ref pictureBox);
                         this.BringToFront();
                         pictureNr++;
@@ -291,17 +292,17 @@ namespace BoardApp
                 }
                 if (e.KeyChar == '4')
                 {
-                    if (pictureNr > 0 && pictureNr <= flowLayoutPanel1.Controls.Count )
+                    if (pictureNr > 0 && pictureNr <= flowLayoutPanel1.Controls.Count)
                     {
                         //flowLayoutPanel1.Controls[pictureNr].Click += MyPict_Click;
                         //MyPict_Click((PictureBox)flowLayoutPanel1.Controls[pictureNr], e);
                         pictureNr--;
                         FullScreenDisplay();
 
-                       
+
                         PictureEditor.ShowPictureFullSreen2(ref f, ref pictureBox);
                         this.BringToFront();
-                        
+
                     }
                 }
 
@@ -365,32 +366,143 @@ namespace BoardApp
          */
         #region CropRegion
 
-        private Crop c = new Crop();
+        /*
         bool IsMouseDown = false;
 
         private void pictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            c.GetRectangle();
+            IsMouseDown = true;
+            
+            c.MouseDown(e);
+            //c.GetRectangle();
         }
 
         private void pictureBox_MouseMove(object sender, MouseEventArgs e)
         {
+            if(pictureBox.Image !=null)
+            {
+                
+                if (IsMouseDown == true)
+                {
+                    c.MouseMove(e, ref pictureBox);
+
+                }
+            }
            
         }
 
         private void pictureBox_Paint(object sender, PaintEventArgs e)
         {
+            
+            
+            if(pictureBox.Image != null)
+            {
 
-            c.Paint(e);
+                c.Paint(e);
+                
+            }
         }
 
         private void pictureBox_MouseUp(object sender, MouseEventArgs e)
         {
-            if(IsMouseDown == true)
+            if (IsMouseDown == true)
             {
+                c.MouseUp(e,ref IsMouseDown,ref pictureBox);
+            }
+        }*/
+        #endregion
 
+        #region CropRegion2
+
+        Image<Bgr, byte> imgInput;
+        Rectangle rect;
+        Point StartLocation;
+        Point EndLocation;
+        bool IsMouseDown = false;
+
+       
+
+        private void pictureBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            if(rbCropMode.Checked == true)
+            {
+                IsMouseDown = true;
+                StartLocation = e.Location;
+            }
+            
+        }
+        private void pictureBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (rbCropMode.Checked == true)
+            {
+                if (IsMouseDown == true)
+                {
+                    EndLocation = e.Location;
+                    pictureBox.Invalidate();
+                }
             }
         }
+
+
+        private void pictureBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (rbCropMode.Checked == true)
+            {
+                if (IsMouseDown == true)
+                {
+                    EndLocation = e.Location;
+                    IsMouseDown = false;
+                    if (rect != null)
+                    {
+                        imgInput.ROI = rect;// region of interest
+                        Image<Bgr, byte> temp = imgInput.CopyBlank();
+                        imgInput.CopyTo(temp);
+                        imgInput.ROI = Rectangle.Empty;
+                        //pbCrop.Image = temp.Bitmap;
+                        pictureBox.Image = temp.Bitmap;
+                        pbCrop.Image=PictureEditor.PictBoxTOflowLayout(pictureBox).Image;
+                    }
+                }
+            }
+        }
+
+        private void pictureBox_Paint(object sender, PaintEventArgs e)
+        {
+            if (rbCropMode.Checked == true)
+            {
+
+                if (rect != null)
+                {
+                    e.Graphics.DrawRectangle(Pens.Red, GetRectangle());
+                }
+            }
+        }
+        public Rectangle GetRectangle()
+        {
+            rect = new Rectangle();
+            rect.X = Math.Min(StartLocation.X, EndLocation.X); //pentru a putea desena dreptunghiul de crop in oricare directie
+            rect.Y = Math.Min(StartLocation.Y, EndLocation.Y);
+            rect.Width = Math.Abs(StartLocation.X - EndLocation.X);
+            rect.Height = Math.Abs(StartLocation.Y - EndLocation.Y);
+
+            return rect;
+        }
+
+        private void rbCropMode_CheckedChanged(object sender, EventArgs e)
+        {
+            if (pictureBox.Image != null)
+            {
+                Bitmap b = new Bitmap(pictureBox.Image);
+                imgInput = new Image<Bgr, byte>(b);
+                pictureBox.Image = imgInput.Bitmap;
+                //if(rbCaptureMode)
+            }
+            else
+            {
+                MessageBox.Show("No picture in PictureBox!!");
+            }
+        }
+
         #endregion
 
 

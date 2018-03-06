@@ -61,6 +61,8 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.rbCropMode = new System.Windows.Forms.RadioButton();
+            this.pbCrop = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -68,11 +70,12 @@
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCrop)).BeginInit();
             this.SuspendLayout();
             // 
             // btnPlay
             // 
-            this.btnPlay.Location = new System.Drawing.Point(3, 164);
+            this.btnPlay.Location = new System.Drawing.Point(3, 168);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(75, 23);
             this.btnPlay.TabIndex = 0;
@@ -82,7 +85,7 @@
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(84, 164);
+            this.btnStop.Location = new System.Drawing.Point(84, 168);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(87, 23);
             this.btnStop.TabIndex = 1;
@@ -93,7 +96,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 81);
+            this.label1.Location = new System.Drawing.Point(17, 85);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 13);
             this.label1.TabIndex = 2;
@@ -102,7 +105,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 121);
+            this.label2.Location = new System.Drawing.Point(17, 125);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(91, 13);
             this.label2.TabIndex = 3;
@@ -111,7 +114,7 @@
             // cbAttachedCameras
             // 
             this.cbAttachedCameras.FormattingEnabled = true;
-            this.cbAttachedCameras.Location = new System.Drawing.Point(20, 97);
+            this.cbAttachedCameras.Location = new System.Drawing.Point(20, 101);
             this.cbAttachedCameras.Name = "cbAttachedCameras";
             this.cbAttachedCameras.Size = new System.Drawing.Size(172, 21);
             this.cbAttachedCameras.TabIndex = 4;
@@ -119,7 +122,7 @@
             // cbSupportedModes
             // 
             this.cbSupportedModes.FormattingEnabled = true;
-            this.cbSupportedModes.Location = new System.Drawing.Point(20, 137);
+            this.cbSupportedModes.Location = new System.Drawing.Point(20, 141);
             this.cbSupportedModes.Name = "cbSupportedModes";
             this.cbSupportedModes.Size = new System.Drawing.Size(172, 21);
             this.cbSupportedModes.TabIndex = 5;
@@ -196,7 +199,7 @@
             // 
             // btnSaveImage
             // 
-            this.btnSaveImage.Location = new System.Drawing.Point(84, 201);
+            this.btnSaveImage.Location = new System.Drawing.Point(84, 205);
             this.btnSaveImage.Name = "btnSaveImage";
             this.btnSaveImage.Size = new System.Drawing.Size(75, 23);
             this.btnSaveImage.TabIndex = 13;
@@ -213,7 +216,7 @@
             // rbCaptureMode
             // 
             this.rbCaptureMode.AutoSize = true;
-            this.rbCaptureMode.Location = new System.Drawing.Point(17, 19);
+            this.rbCaptureMode.Location = new System.Drawing.Point(17, 15);
             this.rbCaptureMode.Name = "rbCaptureMode";
             this.rbCaptureMode.Size = new System.Drawing.Size(92, 17);
             this.rbCaptureMode.TabIndex = 14;
@@ -224,11 +227,12 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.rbCropMode);
             this.groupBox1.Controls.Add(this.rbDisplayMode);
             this.groupBox1.Controls.Add(this.rbCaptureMode);
             this.groupBox1.Location = new System.Drawing.Point(3, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(183, 59);
+            this.groupBox1.Size = new System.Drawing.Size(183, 72);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Select Desired Mode";
@@ -236,7 +240,7 @@
             // rbDisplayMode
             // 
             this.rbDisplayMode.AutoSize = true;
-            this.rbDisplayMode.Location = new System.Drawing.Point(17, 42);
+            this.rbDisplayMode.Location = new System.Drawing.Point(16, 32);
             this.rbDisplayMode.Name = "rbDisplayMode";
             this.rbDisplayMode.Size = new System.Drawing.Size(89, 17);
             this.rbDisplayMode.TabIndex = 15;
@@ -247,7 +251,7 @@
             // 
             // btnOpenImages
             // 
-            this.btnOpenImages.Location = new System.Drawing.Point(3, 193);
+            this.btnOpenImages.Location = new System.Drawing.Point(3, 197);
             this.btnOpenImages.Name = "btnOpenImages";
             this.btnOpenImages.Size = new System.Drawing.Size(75, 39);
             this.btnOpenImages.TabIndex = 16;
@@ -296,6 +300,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tabPage2.Controls.Add(this.pbCrop);
             this.tabPage2.Controls.Add(this.label9);
             this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.label7);
@@ -322,7 +327,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(209, 74);
+            this.label9.Location = new System.Drawing.Point(209, 78);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(40, 13);
             this.label9.TabIndex = 22;
@@ -357,7 +362,7 @@
             // 
             // btnDeletePict
             // 
-            this.btnDeletePict.Location = new System.Drawing.Point(84, 230);
+            this.btnDeletePict.Location = new System.Drawing.Point(84, 234);
             this.btnDeletePict.Name = "btnDeletePict";
             this.btnDeletePict.Size = new System.Drawing.Size(87, 23);
             this.btnDeletePict.TabIndex = 18;
@@ -386,6 +391,26 @@
             this.flowLayoutPanel2.Size = new System.Drawing.Size(325, 161);
             this.flowLayoutPanel2.TabIndex = 18;
             // 
+            // rbCropMode
+            // 
+            this.rbCropMode.AutoSize = true;
+            this.rbCropMode.Location = new System.Drawing.Point(17, 55);
+            this.rbCropMode.Name = "rbCropMode";
+            this.rbCropMode.Size = new System.Drawing.Size(77, 17);
+            this.rbCropMode.TabIndex = 23;
+            this.rbCropMode.TabStop = true;
+            this.rbCropMode.Text = "Crop Mode";
+            this.rbCropMode.UseVisualStyleBackColor = true;
+            this.rbCropMode.CheckedChanged += new System.EventHandler(this.rbCropMode_CheckedChanged);
+            // 
+            // pbCrop
+            // 
+            this.pbCrop.Location = new System.Drawing.Point(212, 101);
+            this.pbCrop.Name = "pbCrop";
+            this.pbCrop.Size = new System.Drawing.Size(119, 107);
+            this.pbCrop.TabIndex = 23;
+            this.pbCrop.TabStop = false;
+            // 
             // BoardAppMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -412,6 +437,7 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbCrop)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -450,5 +476,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.RadioButton rbCropMode;
+        private System.Windows.Forms.PictureBox pbCrop;
     }
 }

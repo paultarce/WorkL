@@ -23,3 +23,17 @@ D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\obj\Debug\BoardApp.pdb
 D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\obj\Debug\BoardApp.SpashScreen.resources
 D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\obj\Debug\BoardApp.FullScreenForm.resources
 D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\obj\Debug\BoardApp.SecondaryForms.LectureForm.resources
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\Emgu.CV.DebuggerVisualizers.VS2017.dll
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\Emgu.CV.UI.dll
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\Emgu.CV.UI.GL.dll
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\Emgu.CV.World.dll
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\Microsoft.VisualStudio.DebuggerVisualizers.dll
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\ZedGraph.dll
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\Emgu.CV.UI.xml
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\Emgu.CV.UI.GL.xml
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\Emgu.CV.World.xml
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\concrt140.dll
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\cvextern.dll
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\msvcp140.dll
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\opencv_ffmpeg330.dll
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\vcruntime140.dll

@@ -16,11 +16,13 @@ namespace BoardApp.Exceptions_Algorithms
         Rectangle rect;
         Point StartLocation;
         Point EndLocation;
-        
 
-        public void CropPicture(ref BoardAppMain f)
+
+        public Crop(ref PictureBox p)
         {
-
+            Bitmap b = new Bitmap(p.Image);
+            imgInput = new Image<Bgr, byte>(b);
+            p.Image = imgInput.Bitmap;
         }
 
         public Rectangle GetRectangle()
@@ -39,6 +41,34 @@ namespace BoardApp.Exceptions_Algorithms
             {
                 e.Graphics.DrawRectangle(Pens.Red, GetRectangle());
             }
+        }
+        public void MouseDown(MouseEventArgs e)
+        {
+            StartLocation = e.Location;
+        }
+        public void MouseMove(MouseEventArgs e,ref PictureBox p)
+        {
+            EndLocation = e.Location;
+            p.Invalidate();
+
+        }
+        public void MouseUp(MouseEventArgs e,ref bool IsMouseDown,ref PictureBox p)
+        {
+            
+            if(IsMouseDown == true)
+            {
+                EndLocation = e.Location;
+                IsMouseDown = false;
+                if(rect != null)
+                {
+                    imgInput.ROI = rect;// region of interest
+                    Image<Bgr, byte> temp = imgInput.CopyBlank();
+                    imgInput.CopyTo(temp);
+                    imgInput.ROI = Rectangle.Empty;
+                    p.Image = temp.Bitmap;
+                }
+            }
+
         }
     }
 }
