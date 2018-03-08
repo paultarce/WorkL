@@ -46,6 +46,7 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.rbCaptureMode = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbCropMode = new System.Windows.Forms.RadioButton();
             this.rbDisplayMode = new System.Windows.Forms.RadioButton();
             this.btnOpenImages = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -53,6 +54,7 @@
             this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.pbCrop = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -61,16 +63,18 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.rbCropMode = new System.Windows.Forms.RadioButton();
-            this.pbCrop = new System.Windows.Forms.PictureBox();
+            this.pbEditPhoto = new System.Windows.Forms.PictureBox();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCrop)).BeginInit();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbEditPhoto)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnPlay
@@ -136,7 +140,7 @@
             this.liveCamera.Cursor = System.Windows.Forms.Cursors.Default;
             this.liveCamera.Location = new System.Drawing.Point(3, 3);
             this.liveCamera.Name = "liveCamera";
-            this.liveCamera.Size = new System.Drawing.Size(305, 342);
+            this.liveCamera.Size = new System.Drawing.Size(305, 350);
             this.liveCamera.TabIndex = 6;
             this.liveCamera.TabStop = false;
             // 
@@ -148,7 +152,7 @@
             this.pictureBox.BackColor = System.Drawing.SystemColors.ControlDark;
             this.pictureBox.Location = new System.Drawing.Point(314, 3);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(306, 342);
+            this.pictureBox.Size = new System.Drawing.Size(306, 350);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox.TabIndex = 7;
             this.pictureBox.TabStop = false;
@@ -174,7 +178,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 94.60784F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.392157F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(623, 368);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(623, 377);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
             // label3
@@ -182,16 +186,16 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 348);
+            this.label3.Location = new System.Drawing.Point(3, 356);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(66, 20);
+            this.label3.Size = new System.Drawing.Size(66, 21);
             this.label3.TabIndex = 8;
             this.label3.Text = "Live Camera";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(314, 348);
+            this.label4.Location = new System.Drawing.Point(314, 356);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 13);
             this.label4.TabIndex = 9;
@@ -237,6 +241,18 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Select Desired Mode";
             // 
+            // rbCropMode
+            // 
+            this.rbCropMode.AutoSize = true;
+            this.rbCropMode.Location = new System.Drawing.Point(17, 55);
+            this.rbCropMode.Name = "rbCropMode";
+            this.rbCropMode.Size = new System.Drawing.Size(77, 17);
+            this.rbCropMode.TabIndex = 23;
+            this.rbCropMode.TabStop = true;
+            this.rbCropMode.Text = "Crop Mode";
+            this.rbCropMode.UseVisualStyleBackColor = true;
+            this.rbCropMode.CheckedChanged += new System.EventHandler(this.rbCropMode_CheckedChanged);
+            // 
             // rbDisplayMode
             // 
             this.rbDisplayMode.AutoSize = true;
@@ -265,7 +281,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 267);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(341, 163);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(341, 172);
             this.flowLayoutPanel1.TabIndex = 17;
             // 
             // label5
@@ -293,7 +309,7 @@
             this.tabControl1.Location = new System.Drawing.Point(2, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(997, 451);
+            this.tabControl1.Size = new System.Drawing.Size(997, 460);
             this.tabControl1.TabIndex = 19;
             this.tabControl1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BoardAppMain_KeyPress);
             // 
@@ -320,9 +336,17 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(989, 425);
+            this.tabPage2.Size = new System.Drawing.Size(989, 434);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Main Tab";
+            // 
+            // pbCrop
+            // 
+            this.pbCrop.Location = new System.Drawing.Point(212, 101);
+            this.pbCrop.Name = "pbCrop";
+            this.pbCrop.Size = new System.Drawing.Size(119, 107);
+            this.pbCrop.TabIndex = 23;
+            this.pbCrop.TabStop = false;
             // 
             // label9
             // 
@@ -371,11 +395,13 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.trackBar1);
+            this.tabPage1.Controls.Add(this.pbEditPhoto);
             this.tabPage1.Controls.Add(this.flowLayoutPanel2);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(989, 425);
+            this.tabPage1.Size = new System.Drawing.Size(989, 434);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -388,34 +414,39 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.flowLayoutPanel2.Location = new System.Drawing.Point(16, 20);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(325, 161);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(325, 170);
             this.flowLayoutPanel2.TabIndex = 18;
             // 
-            // rbCropMode
+            // pbEditPhoto
             // 
-            this.rbCropMode.AutoSize = true;
-            this.rbCropMode.Location = new System.Drawing.Point(17, 55);
-            this.rbCropMode.Name = "rbCropMode";
-            this.rbCropMode.Size = new System.Drawing.Size(77, 17);
-            this.rbCropMode.TabIndex = 23;
-            this.rbCropMode.TabStop = true;
-            this.rbCropMode.Text = "Crop Mode";
-            this.rbCropMode.UseVisualStyleBackColor = true;
-            this.rbCropMode.CheckedChanged += new System.EventHandler(this.rbCropMode_CheckedChanged);
+            this.pbEditPhoto.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbEditPhoto.Location = new System.Drawing.Point(435, 59);
+            this.pbEditPhoto.Name = "pbEditPhoto";
+            this.pbEditPhoto.Size = new System.Drawing.Size(496, 318);
+            this.pbEditPhoto.TabIndex = 19;
+            this.pbEditPhoto.TabStop = false;
             // 
-            // pbCrop
+            // trackBar1
             // 
-            this.pbCrop.Location = new System.Drawing.Point(212, 101);
-            this.pbCrop.Name = "pbCrop";
-            this.pbCrop.Size = new System.Drawing.Size(119, 107);
-            this.pbCrop.TabIndex = 23;
-            this.pbCrop.TabStop = false;
+            this.trackBar1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.trackBar1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.trackBar1.Location = new System.Drawing.Point(435, 383);
+            this.trackBar1.Maximum = 300;
+            this.trackBar1.Minimum = 10;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(212, 45);
+            this.trackBar1.TabIndex = 20;
+            this.trackBar1.TickFrequency = 25;
+            this.trackBar1.Value = 10;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // BoardAppMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(996, 448);
+            this.ClientSize = new System.Drawing.Size(996, 457);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label5);
             this.HelpButton = true;
@@ -436,8 +467,11 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbCrop)).EndInit();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbEditPhoto)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -478,5 +512,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.RadioButton rbCropMode;
         private System.Windows.Forms.PictureBox pbCrop;
+        private System.Windows.Forms.PictureBox pbEditPhoto;
+        private System.Windows.Forms.TrackBar trackBar1;
     }
 }

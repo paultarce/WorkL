@@ -228,9 +228,10 @@ namespace BoardApp
             //myPicture.BorderStyle = BorderStyle.Fixed3D;
             pictureBox.SetBounds(0, 0, 300, 300);
             pictureBox.BackColor = Color.Black;
-            pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             label5.Text = myPicture.Name;
             pictureBox.Image = myPicture.Image;
+            
             //  }
         }
 
@@ -329,7 +330,7 @@ namespace BoardApp
         {
         }
 
-        private void tabPage1_Enter(object sender, EventArgs e)
+        private void tabPage1_Enter(object sender, EventArgs e) // clone control
         {
 
             flowLayoutPanel2.AutoScroll = true;
@@ -359,6 +360,8 @@ namespace BoardApp
                 PictureBox p2 = PictureEditor.PictBoxTOflowLayout(p);
                 flowLayoutPanel2.Controls.Add(p2);
             }
+            pbEditPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbEditPhoto.Image = pictureBox.Image;
         }
 
         /*
@@ -452,6 +455,7 @@ namespace BoardApp
                 {
                     EndLocation = e.Location;
                     IsMouseDown = false;
+                    pictureBox.Image = null;
                     if (rect != null)
                     {
                         imgInput.ROI = rect;// region of interest
@@ -460,7 +464,8 @@ namespace BoardApp
                         imgInput.ROI = Rectangle.Empty;
                         //pbCrop.Image = temp.Bitmap;
                         pictureBox.Image = temp.Bitmap;
-                        pbCrop.Image=PictureEditor.PictBoxTOflowLayout(pictureBox).Image;
+                        //pbCrop.Image=PictureEditor.PictBoxTOflowLayout(pictureBox).Image;
+                        rbCropMode.Checked = false;
                     }
                 }
             }
@@ -492,10 +497,20 @@ namespace BoardApp
         {
             if (pictureBox.Image != null)
             {
-                Bitmap b = new Bitmap(pictureBox.Image);
-                imgInput = new Image<Bgr, byte>(b);
-                pictureBox.Image = imgInput.Bitmap;
-                //if(rbCaptureMode)
+                  Bitmap b = new Bitmap(pictureBox.Image);
+                  imgInput = new Image<Bgr, byte>(b);
+                  pictureBox.Image = imgInput.Bitmap;
+                  //if(rbCaptureMode)
+                  
+              /*  OpenFileDialog ofd = new OpenFileDialog();
+                {
+                    if(ofd.ShowDialog() == DialogResult.OK)
+                    {
+                        imgInput = new Image<Bgr, byte>(ofd.FileName);
+                        pictureBox.Image = imgInput.Bitmap;
+                    }
+                }
+                */
             }
             else
             {
@@ -503,8 +518,14 @@ namespace BoardApp
             }
         }
 
+
         #endregion
 
+        #region TAB2
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
 
+        }
+        #endregion
     }
 }
