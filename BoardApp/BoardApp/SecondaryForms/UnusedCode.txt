@@ -1,0 +1,27 @@
+﻿private void tabPage1_Paint(object sender, PaintEventArgs e)
+        {
+            if (pictureBox.Image != null)
+            {
+                Bitmap bit_map = new Bitmap(pictureBox.Image.Width, pictureBox.Image.Height);
+                Graphics gfx = Graphics.FromImage(bit_map);
+
+                gfx.TranslateTransform(bit_map.Width / 2, bit_map.Height / 2);
+                gfx.RotateTransform(angle); //rotates my picture
+                gfx.TranslateTransform(-bit_map.Width / 2, -bit_map.Height / 2);
+                gfx.InterpolationMode = InterpolationMode.HighQualityBicubic;   //SYstem.Drawing.Drawing2D
+
+                gfx.DrawImage(pictureBox.Image, 0, 0);
+                e.Graphics.TranslateTransform(this.Width / 2, this.Height / 2);
+                e.Graphics.DrawImage(bit_map, -bit_map.Width / 2, -bit_map.Height / 2); /// ca sa am poza in centru
+            }
+        }
+
+        private void tbRotate_ValueChanged(object sender, EventArgs e)
+        {
+            angle = tbRotate.Value;
+        }
+
+        private void tabPage1_Resize(object sender, EventArgs e)
+        {
+            Invalidate();
+        }

@@ -9,11 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AForge.Video;
 using AForge.Video.DirectShow;
+using AForge.Imaging.Filters;
 using AForge;
 using System.Threading;
 using System.IO;
 using BoardApp.Exceptions_Algorithms;
 using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
 
 using Emgu.CV;
 using Emgu.CV.Structure;
@@ -30,6 +32,7 @@ namespace BoardApp
         public List<PictureBox> flpPictureList; // to dispaly a flowLayoutPanel in tab2
         private int pictPosition = 0;
         //private Crop c;
+        
 
         public BoardAppMain()
         {
@@ -334,10 +337,6 @@ namespace BoardApp
             pictureBox.Image = ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).Image;
         }
 
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-        }
-
         private void tabPage1_Enter(object sender, EventArgs e) // clone control
         {
 
@@ -372,7 +371,7 @@ namespace BoardApp
             pbEditPhoto.Image = pictureBox.Image;
 
             //tbResize1.Value = pbEditPhoto.Size.Width;
-            
+            //img = Image.FromFile(@"D:\POZE\torturi\P2150615.jpg");
         }
 
         /*
@@ -532,7 +531,10 @@ namespace BoardApp
 
         #endregion
 
-        #region TAB2
+        #region TAB2 TRACK BAR + ROTATE region
+
+        //int angle;
+        
 
         private void tbResize1_Scroll(object sender, EventArgs e)
         {
@@ -542,13 +544,38 @@ namespace BoardApp
 
         }
 
-        #endregion
-
         private void tbResizeVer_Scroll(object sender, EventArgs e)
         {
             pbEditPhoto.Size = new Size(pbEditPhoto.Size.Width, tbResizeVer.Value);
             pbEditPhoto.Left = (this.ClientSize.Width - pbEditPhoto.Width) / 2;
             pbEditPhoto.Top = (this.ClientSize.Height - pbEditPhoto.Height) / 2;
         }
+
+        private void tbRotate_Scroll(object sender, EventArgs e)
+        {
+            Bitmap image = (Bitmap)pictureBox.Image;
+            Bitmap a = AForge.Imaging.Image.Clone(image, PixelFormat.Format24bppRgb);  //convert your image to 8bpp and grayscale
+            //AForge.Imaging.Image.SetGrayscalePalette(a);                   
+            RotateBilinear ro = new RotateBilinear(tbRotate.Value, true);
+            Bitmap image2 = ro.Apply(a);
+            pbEditPhoto.Image = image2;
+        }
+
+
+
+        private void tbRotate_ValueChanged(object sender, EventArgs e)
+        {
+          
+        }
+
+
+
+
+
+
+
+        #endregion
+
+        
     }
 }

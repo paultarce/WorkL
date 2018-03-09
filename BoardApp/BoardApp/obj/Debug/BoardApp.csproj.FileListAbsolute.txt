@@ -37,3 +37,9 @@ D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\cvextern.dll
 D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\msvcp140.dll
 D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\opencv_ffmpeg330.dll
 D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\vcruntime140.dll
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\AForge.Imaging.dll
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\AForge.dll
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\AForge.Math.dll
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\AForge.Imaging.xml
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\AForge.xml
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\AForge.Math.xml

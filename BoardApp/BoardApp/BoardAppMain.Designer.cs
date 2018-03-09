@@ -61,11 +61,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.btnDeletePict = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tbRotate = new System.Windows.Forms.TrackBar();
+            this.tbResizeVer = new System.Windows.Forms.TrackBar();
             this.tbResize1 = new System.Windows.Forms.TrackBar();
             this.pbEditPhoto = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.tbResizeVer = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -74,9 +75,10 @@
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCrop)).BeginInit();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbRotate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbResizeVer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbResize1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEditPhoto)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbResizeVer)).BeginInit();
             this.SuspendLayout();
             // 
             // btnPlay
@@ -397,6 +399,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.tbRotate);
             this.tabPage1.Controls.Add(this.tbResizeVer);
             this.tabPage1.Controls.Add(this.tbResize1);
             this.tabPage1.Controls.Add(this.pbEditPhoto);
@@ -408,18 +411,44 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
-            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             this.tabPage1.Enter += new System.EventHandler(this.tabPage1_Enter);
+            // 
+            // tbRotate
+            // 
+            this.tbRotate.Location = new System.Drawing.Point(435, 8);
+            this.tbRotate.Maximum = 100;
+            this.tbRotate.Name = "tbRotate";
+            this.tbRotate.Size = new System.Drawing.Size(496, 45);
+            this.tbRotate.TabIndex = 22;
+            this.tbRotate.Scroll += new System.EventHandler(this.tbRotate_Scroll);
+            this.tbRotate.ValueChanged += new System.EventHandler(this.tbRotate_ValueChanged);
+            // 
+            // tbResizeVer
+            // 
+            this.tbResizeVer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbResizeVer.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tbResizeVer.Location = new System.Drawing.Point(941, 20);
+            this.tbResizeVer.Maximum = 600;
+            this.tbResizeVer.Minimum = 10;
+            this.tbResizeVer.Name = "tbResizeVer";
+            this.tbResizeVer.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.tbResizeVer.Size = new System.Drawing.Size(45, 357);
+            this.tbResizeVer.TabIndex = 21;
+            this.tbResizeVer.TickFrequency = 25;
+            this.tbResizeVer.Value = 10;
+            this.tbResizeVer.Scroll += new System.EventHandler(this.tbResizeVer_Scroll);
             // 
             // tbResize1
             // 
-            this.tbResize1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.tbResize1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbResize1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.tbResize1.Location = new System.Drawing.Point(435, 383);
-            this.tbResize1.Maximum = 500;
+            this.tbResize1.Maximum = 800;
             this.tbResize1.Minimum = 10;
             this.tbResize1.Name = "tbResize1";
-            this.tbResize1.Size = new System.Drawing.Size(212, 45);
+            this.tbResize1.Size = new System.Drawing.Size(444, 45);
             this.tbResize1.TabIndex = 20;
             this.tbResize1.TickFrequency = 25;
             this.tbResize1.Value = 10;
@@ -430,6 +459,7 @@
             this.pbEditPhoto.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbEditPhoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbEditPhoto.Location = new System.Drawing.Point(435, 59);
             this.pbEditPhoto.Name = "pbEditPhoto";
             this.pbEditPhoto.Size = new System.Drawing.Size(496, 318);
@@ -442,23 +472,8 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.flowLayoutPanel2.Location = new System.Drawing.Point(16, 20);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(325, 170);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(200, 170);
             this.flowLayoutPanel2.TabIndex = 18;
-            // 
-            // tbResizeVer
-            // 
-            this.tbResizeVer.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.tbResizeVer.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.tbResizeVer.Location = new System.Drawing.Point(941, 59);
-            this.tbResizeVer.Maximum = 600;
-            this.tbResizeVer.Minimum = 10;
-            this.tbResizeVer.Name = "tbResizeVer";
-            this.tbResizeVer.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbResizeVer.Size = new System.Drawing.Size(45, 212);
-            this.tbResizeVer.TabIndex = 21;
-            this.tbResizeVer.TickFrequency = 25;
-            this.tbResizeVer.Value = 10;
-            this.tbResizeVer.Scroll += new System.EventHandler(this.tbResizeVer_Scroll);
             // 
             // BoardAppMain
             // 
@@ -488,9 +503,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbCrop)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbRotate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbResizeVer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbResize1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEditPhoto)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbResizeVer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -534,5 +550,6 @@
         private System.Windows.Forms.PictureBox pbEditPhoto;
         private System.Windows.Forms.TrackBar tbResize1;
         private System.Windows.Forms.TrackBar tbResizeVer;
+        private System.Windows.Forms.TrackBar tbRotate;
     }
 }
