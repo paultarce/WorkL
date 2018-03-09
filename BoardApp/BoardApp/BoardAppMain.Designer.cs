@@ -61,10 +61,11 @@
             this.label6 = new System.Windows.Forms.Label();
             this.btnDeletePict = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tbResize1 = new System.Windows.Forms.TrackBar();
+            this.pbEditPhoto = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.pbEditPhoto = new System.Windows.Forms.PictureBox();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.tbResizeVer = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -73,8 +74,9 @@
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCrop)).BeginInit();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbResize1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEditPhoto)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbResizeVer)).BeginInit();
             this.SuspendLayout();
             // 
             // btnPlay
@@ -395,7 +397,8 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.trackBar1);
+            this.tabPage1.Controls.Add(this.tbResizeVer);
+            this.tabPage1.Controls.Add(this.tbResize1);
             this.tabPage1.Controls.Add(this.pbEditPhoto);
             this.tabPage1.Controls.Add(this.flowLayoutPanel2);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
@@ -408,14 +411,19 @@
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             this.tabPage1.Enter += new System.EventHandler(this.tabPage1_Enter);
             // 
-            // flowLayoutPanel2
+            // tbResize1
             // 
-            this.flowLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(16, 20);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(325, 170);
-            this.flowLayoutPanel2.TabIndex = 18;
+            this.tbResize1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.tbResize1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tbResize1.Location = new System.Drawing.Point(435, 383);
+            this.tbResize1.Maximum = 500;
+            this.tbResize1.Minimum = 10;
+            this.tbResize1.Name = "tbResize1";
+            this.tbResize1.Size = new System.Drawing.Size(212, 45);
+            this.tbResize1.TabIndex = 20;
+            this.tbResize1.TickFrequency = 25;
+            this.tbResize1.Value = 10;
+            this.tbResize1.Scroll += new System.EventHandler(this.tbResize1_Scroll);
             // 
             // pbEditPhoto
             // 
@@ -428,19 +436,29 @@
             this.pbEditPhoto.TabIndex = 19;
             this.pbEditPhoto.TabStop = false;
             // 
-            // trackBar1
+            // flowLayoutPanel2
             // 
-            this.trackBar1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.trackBar1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.trackBar1.Location = new System.Drawing.Point(435, 383);
-            this.trackBar1.Maximum = 300;
-            this.trackBar1.Minimum = 10;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(212, 45);
-            this.trackBar1.TabIndex = 20;
-            this.trackBar1.TickFrequency = 25;
-            this.trackBar1.Value = 10;
-            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            this.flowLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(16, 20);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(325, 170);
+            this.flowLayoutPanel2.TabIndex = 18;
+            // 
+            // tbResizeVer
+            // 
+            this.tbResizeVer.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.tbResizeVer.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tbResizeVer.Location = new System.Drawing.Point(941, 59);
+            this.tbResizeVer.Maximum = 600;
+            this.tbResizeVer.Minimum = 10;
+            this.tbResizeVer.Name = "tbResizeVer";
+            this.tbResizeVer.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.tbResizeVer.Size = new System.Drawing.Size(45, 212);
+            this.tbResizeVer.TabIndex = 21;
+            this.tbResizeVer.TickFrequency = 25;
+            this.tbResizeVer.Value = 10;
+            this.tbResizeVer.Scroll += new System.EventHandler(this.tbResizeVer_Scroll);
             // 
             // BoardAppMain
             // 
@@ -470,8 +488,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbCrop)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbResize1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEditPhoto)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbResizeVer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -513,6 +532,7 @@
         private System.Windows.Forms.RadioButton rbCropMode;
         private System.Windows.Forms.PictureBox pbCrop;
         private System.Windows.Forms.PictureBox pbEditPhoto;
-        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.TrackBar tbResize1;
+        private System.Windows.Forms.TrackBar tbResizeVer;
     }
 }

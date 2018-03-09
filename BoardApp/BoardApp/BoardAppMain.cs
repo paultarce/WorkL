@@ -89,6 +89,14 @@ namespace BoardApp
             btnSaveImage.Enabled = false;
             btnDeletePict.Enabled = false;
 
+            tbResize1.Value = pbEditPhoto.Size.Width;
+            tbResizeVer.Value = pbEditPhoto.Size.Height;
+
+            pbEditPhoto.Left = (this.ClientSize.Width - pbEditPhoto.Width) / 2;
+            pbEditPhoto.Top = (this.ClientSize.Height - pbEditPhoto.Height) / 2;
+
+
+
         }
 
         public void StartForm()
@@ -362,6 +370,9 @@ namespace BoardApp
             }
             pbEditPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
             pbEditPhoto.Image = pictureBox.Image;
+
+            //tbResize1.Value = pbEditPhoto.Size.Width;
+            
         }
 
         /*
@@ -522,10 +533,22 @@ namespace BoardApp
         #endregion
 
         #region TAB2
-        private void trackBar1_Scroll(object sender, EventArgs e)
+
+        private void tbResize1_Scroll(object sender, EventArgs e)
         {
+            pbEditPhoto.Size = new Size(tbResize1.Value, pbEditPhoto.Size.Height);
+            pbEditPhoto.Left = (this.ClientSize.Width - pbEditPhoto.Width) / 2;
+            pbEditPhoto.Top = (this.ClientSize.Height - pbEditPhoto.Height) / 2;
 
         }
+
         #endregion
+
+        private void tbResizeVer_Scroll(object sender, EventArgs e)
+        {
+            pbEditPhoto.Size = new Size(pbEditPhoto.Size.Width, tbResizeVer.Value);
+            pbEditPhoto.Left = (this.ClientSize.Width - pbEditPhoto.Width) / 2;
+            pbEditPhoto.Top = (this.ClientSize.Height - pbEditPhoto.Height) / 2;
+        }
     }
 }
