@@ -33,7 +33,9 @@ namespace BoardApp
 
         private void pbFullScreen_Click(object sender, EventArgs e)
         {
-            this.Close();
+
+            //this.Close();
+            this.pb.Image = new PictureBox() { BackColor = Color.Black }.Image;
         }
     }
 }

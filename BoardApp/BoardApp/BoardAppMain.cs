@@ -32,7 +32,7 @@ namespace BoardApp
         public List<PictureBox> flpPictureList; // to dispaly a flowLayoutPanel in tab2
         private int pictPosition = 0;
         //private Crop c;
-        
+
 
         public BoardAppMain()
         {
@@ -68,7 +68,9 @@ namespace BoardApp
 
             flpPictureList = new List<PictureBox>();
             f = new FullScreenForm();
-
+            f.pb.BackColor = Color.Black;
+            PictureBox pict = new PictureBox(); pict.BackColor = Color.Black;
+            PictureEditor.ShowPictureFullSreen2(ref f, ref pict);
 
         }
 
@@ -118,6 +120,8 @@ namespace BoardApp
             this.WindowState = FormWindowState.Maximized;
             this.MinimumSize = this.Size;
             this.MaximumSize = this.Size;
+
+            this.btnStop.Enabled = true;
 
             this.liveCamera.Width = FinalVideo.VideoResolution.FrameSize.Width;
             this.liveCamera.Height = FinalVideo.VideoResolution.FrameSize.Height;
@@ -178,7 +182,7 @@ namespace BoardApp
         private void rbCaptureMode_CheckedChanged(object sender, EventArgs e)
         {
             btnPlay.Enabled = true;
-            btnStop.Enabled = true;
+            //btnStop.Enabled = true;
             btnOpenImages.Enabled = false;
             btnSaveImage.Enabled = true;
         }
@@ -272,7 +276,7 @@ namespace BoardApp
             }
             if (e.KeyChar == (char)Keys.F || e.KeyChar == char.ToLower((char)Keys.F))
             {
-                if (pictureBox.Image != null)
+                /*if (pictureBox.Image != null)
                 {
                     PictureEditor.ShowPictureFullSreen2(ref f, ref pictureBox); //to update "this" controls 
                     this.BringToFront();
@@ -280,6 +284,11 @@ namespace BoardApp
                 else
                 {
                     MessageBox.Show("No picture to display", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }*/
+
+                if(pbEditPhoto.Image != null)
+                {
+                    PictureEditor.ShowPictureFullSreen2(ref f, ref pbEditPhoto);
                 }
             }
 
@@ -369,6 +378,12 @@ namespace BoardApp
             }
             pbEditPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
             pbEditPhoto.Image = pictureBox.Image;
+            if(pbEditPhoto.Image != null)
+            {
+                tbResize1.Enabled = true;
+                tbRotate.Enabled = true;
+                tbResizeVer.Enabled = true;
+            }
 
             //tbResize1.Value = pbEditPhoto.Size.Width;
             //img = Image.FromFile(@"D:\POZE\torturi\P2150615.jpg");
@@ -542,6 +557,9 @@ namespace BoardApp
             pbEditPhoto.Left = (this.ClientSize.Width - pbEditPhoto.Width) / 2;
             pbEditPhoto.Top = (this.ClientSize.Height - pbEditPhoto.Height) / 2;
 
+            f.pb.Size = new Size(tbResize1.Value, f.pb.Size.Height);
+            f.pb.Left = (f.ClientSize.Width - f.pb.Width) / 2;
+            f.pb.Top = (f.ClientSize.Height - f.pb.Height) / 2;
         }
 
         private void tbResizeVer_Scroll(object sender, EventArgs e)
@@ -549,6 +567,10 @@ namespace BoardApp
             pbEditPhoto.Size = new Size(pbEditPhoto.Size.Width, tbResizeVer.Value);
             pbEditPhoto.Left = (this.ClientSize.Width - pbEditPhoto.Width) / 2;
             pbEditPhoto.Top = (this.ClientSize.Height - pbEditPhoto.Height) / 2;
+
+            f.pb.Size = new Size(f.pb.Size.Width, tbResizeVer.Value);
+            f.pb.Left = (f.ClientSize.Width - f.pb.Width) / 2;
+            f.pb.Top = (f.ClientSize.Height - f.pb.Height) / 2;
         }
 
         private void tbRotate_Scroll(object sender, EventArgs e)
@@ -559,19 +581,14 @@ namespace BoardApp
             RotateBilinear ro = new RotateBilinear(tbRotate.Value, true);
             Bitmap image2 = ro.Apply(a);
             pbEditPhoto.Image = image2;
+
+            PictureEditor.TbRotate(ref f,pbEditPhoto,tbRotate.Value);
         }
-
-
 
         private void tbRotate_ValueChanged(object sender, EventArgs e)
         {
           
         }
-
-
-
-
-
 
 
         #endregion

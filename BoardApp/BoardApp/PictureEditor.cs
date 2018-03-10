@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
+using AForge.Imaging.Filters;
+using AForge.Imaging;
+using System.Drawing.Imaging;
 
 namespace BoardApp
 {
@@ -49,12 +52,32 @@ namespace BoardApp
                 f.Size = new Size(screen.WorkingArea.Width, screen.WorkingArea.Height);
 
                 f.pb.BackColor = Color.Black;
-                f.pb.SizeMode = PictureBoxSizeMode.StretchImage;
+                f.pb.SizeMode = PictureBoxSizeMode.StretchImage ;
                 f.pb.Image = p.Image;
                 f.Show();
 
             }
         }
+
+        public static void TbRotate(ref FullScreenForm f,PictureBox p,int value)
+        {
+
+            /*Bitmap image = (Bitmap)f.pb.Image;
+            Bitmap a = AForge.Imaging.Image.Clone(image, PixelFormat.Format24bppRgb);  //convert your image to 8bpp and grayscale
+            //AForge.Imaging.Image.SetGrayscalePalette(a);                   
+            RotateBilinear ro = new RotateBilinear(value, true);
+            Bitmap image2 = ro.Apply(a);
+            f.pb.Image = image2;
+            //f.Invalidate();
+            */
+            f.pb.Image = p.Image;
+
+        }
+        public static void TbSizeVertical(ref FullScreenForm f,ref PictureBox p)
+        {
+            f.pb.Image = p.Image;
+        }
+         
 
         private static  Screen GetSecondaryScreen()
         {

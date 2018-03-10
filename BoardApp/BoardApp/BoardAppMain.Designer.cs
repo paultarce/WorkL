@@ -415,8 +415,10 @@
             // 
             // tbRotate
             // 
+            this.tbRotate.Enabled = false;
             this.tbRotate.Location = new System.Drawing.Point(435, 8);
-            this.tbRotate.Maximum = 100;
+            this.tbRotate.Maximum = 180;
+            this.tbRotate.Minimum = -180;
             this.tbRotate.Name = "tbRotate";
             this.tbRotate.Size = new System.Drawing.Size(496, 45);
             this.tbRotate.TabIndex = 22;
@@ -428,6 +430,7 @@
             this.tbResizeVer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbResizeVer.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tbResizeVer.Enabled = false;
             this.tbResizeVer.Location = new System.Drawing.Point(941, 20);
             this.tbResizeVer.Maximum = 600;
             this.tbResizeVer.Minimum = 10;
@@ -444,8 +447,9 @@
             this.tbResize1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbResize1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tbResize1.Enabled = false;
             this.tbResize1.Location = new System.Drawing.Point(435, 383);
-            this.tbResize1.Maximum = 800;
+            this.tbResize1.Maximum = 900;
             this.tbResize1.Minimum = 10;
             this.tbResize1.Name = "tbResize1";
             this.tbResize1.Size = new System.Drawing.Size(444, 45);
