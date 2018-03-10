@@ -69,6 +69,8 @@ namespace BoardApp
             flpPictureList = new List<PictureBox>();
             f = new FullScreenForm();
             f.pb.BackColor = Color.Black;
+            f.BackColor = Color.Black;
+            
             PictureBox pict = new PictureBox(); pict.BackColor = Color.Black;
             PictureEditor.ShowPictureFullSreen2(ref f, ref pict);
 
@@ -387,6 +389,7 @@ namespace BoardApp
 
             //tbResize1.Value = pbEditPhoto.Size.Width;
             //img = Image.FromFile(@"D:\POZE\torturi\P2150615.jpg");
+            imageOriginal = pbEditPhoto.Image;
         }
 
         /*
@@ -546,7 +549,7 @@ namespace BoardApp
 
         #endregion
 
-        #region TAB2 TRACK BAR + ROTATE region
+        #region TAB2 TRACK BAR + ROTATE ZOOM region
 
         //int angle;
         
@@ -585,14 +588,36 @@ namespace BoardApp
             PictureEditor.TbRotate(ref f,pbEditPhoto,tbRotate.Value);
         }
 
+        Image imageOriginal;
+        private void tbZoom_Scroll(object sender, EventArgs e)
+        {
+          /* if(tbZoom.Value > 0)
+            {
+                pbEditPhoto.Image = Zoom(imageOriginal, new Size(tbZoom.Value, tbZoom.Value));
+            }
+            */
+            if(tbZoom.Value > 0)
+            {
+                //f.pb.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+        }
+
+        Image Zoom(Image img,Size size)
+        {
+            Bitmap bmp = new Bitmap(img, img.Width + (img.Width * size.Width / 100), img.Height + (img.Height * size.Height / 100));
+            Graphics g = Graphics.FromImage(bmp);
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            return bmp;
+        }
         private void tbRotate_ValueChanged(object sender, EventArgs e)
         {
           
         }
 
 
+
         #endregion
 
-        
+       
     }
 }

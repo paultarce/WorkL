@@ -67,6 +67,7 @@
             this.pbEditPhoto = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.tbZoom = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -79,6 +80,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbResizeVer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbResize1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEditPhoto)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbZoom)).BeginInit();
             this.SuspendLayout();
             // 
             // btnPlay
@@ -399,6 +401,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.tbZoom);
             this.tabPage1.Controls.Add(this.tbRotate);
             this.tabPage1.Controls.Add(this.tbResizeVer);
             this.tabPage1.Controls.Add(this.tbResize1);
@@ -432,7 +435,7 @@
             this.tbResizeVer.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.tbResizeVer.Enabled = false;
             this.tbResizeVer.Location = new System.Drawing.Point(941, 20);
-            this.tbResizeVer.Maximum = 600;
+            this.tbResizeVer.Maximum = 984;
             this.tbResizeVer.Minimum = 10;
             this.tbResizeVer.Name = "tbResizeVer";
             this.tbResizeVer.Orientation = System.Windows.Forms.Orientation.Vertical;
@@ -444,15 +447,14 @@
             // 
             // tbResize1
             // 
-            this.tbResize1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbResize1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tbResize1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.tbResize1.Enabled = false;
             this.tbResize1.Location = new System.Drawing.Point(435, 383);
-            this.tbResize1.Maximum = 900;
+            this.tbResize1.Maximum = 1280;
             this.tbResize1.Minimum = 10;
             this.tbResize1.Name = "tbResize1";
-            this.tbResize1.Size = new System.Drawing.Size(444, 45);
+            this.tbResize1.Size = new System.Drawing.Size(279, 45);
             this.tbResize1.TabIndex = 20;
             this.tbResize1.TickFrequency = 25;
             this.tbResize1.Value = 10;
@@ -478,6 +480,19 @@
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(200, 170);
             this.flowLayoutPanel2.TabIndex = 18;
+            // 
+            // tbZoom
+            // 
+            this.tbZoom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbZoom.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tbZoom.Location = new System.Drawing.Point(720, 383);
+            this.tbZoom.Maximum = 100;
+            this.tbZoom.Name = "tbZoom";
+            this.tbZoom.Size = new System.Drawing.Size(258, 45);
+            this.tbZoom.TabIndex = 23;
+            this.tbZoom.TickFrequency = 25;
+            this.tbZoom.Value = 10;
+            this.tbZoom.Scroll += new System.EventHandler(this.tbZoom_Scroll);
             // 
             // BoardAppMain
             // 
@@ -511,6 +526,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbResizeVer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbResize1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEditPhoto)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbZoom)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -555,5 +571,6 @@
         private System.Windows.Forms.TrackBar tbResize1;
         private System.Windows.Forms.TrackBar tbResizeVer;
         private System.Windows.Forms.TrackBar tbRotate;
+        private System.Windows.Forms.TrackBar tbZoom;
     }
 }

@@ -59,6 +59,22 @@ namespace BoardApp
             }
         }
 
+        private static Screen GetSecondaryScreen()
+        {
+            if (Screen.AllScreens.Length == 1)
+            {
+                return null;
+            }
+            foreach (Screen screen in Screen.AllScreens)
+            {
+                if (screen.Primary == false)
+                {
+                    return screen;
+                }
+            }
+            return null;
+        }
+
         public static void TbRotate(ref FullScreenForm f,PictureBox p,int value)
         {
 
@@ -78,21 +94,11 @@ namespace BoardApp
             f.pb.Image = p.Image;
         }
          
-
-        private static  Screen GetSecondaryScreen()
+        public static void Zoom()
         {
-            if(Screen.AllScreens.Length == 1)
-            {
-                return null;
-            }
-            foreach(Screen screen in Screen.AllScreens)
-            {
-                if(screen.Primary == false)
-                {
-                    return screen;
-                }
-            }
-            return null;
+
         }
+
+        
     }
 }
