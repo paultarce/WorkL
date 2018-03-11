@@ -390,7 +390,17 @@ namespace BoardApp
             //tbResize1.Value = pbEditPhoto.Size.Width;
             //img = Image.FromFile(@"D:\POZE\torturi\P2150615.jpg");
             imageOriginal = pbEditPhoto.Image;
+            //imageOriginal = pbEdi
+            //tbResize1.Value = tbResize1.Maximum;
+            //tbResizeVer.Value = tbResizeVer.Maximum;
+            tbResize1.Value = pbEditPhoto.Width;
+            tbResizeVer.Value = pbEditPhoto.Height;
+            tbZoom.Value = 0;
+
+            this.pbEditPhoto.MouseWheel += PbEditPhoto_MouseWheel;
         }
+
+        
 
         /*
          * CROP PART
@@ -589,6 +599,7 @@ namespace BoardApp
         }
 
         Image imageOriginal;
+        float value = 1;
         private void tbZoom_Scroll(object sender, EventArgs e)
         {
           /* if(tbZoom.Value > 0)
@@ -604,15 +615,44 @@ namespace BoardApp
 
         Image Zoom(Image img,Size size)
         {
+         
             Bitmap bmp = new Bitmap(img, img.Width + (img.Width * size.Width / 100), img.Height + (img.Height * size.Height / 100));
             Graphics g = Graphics.FromImage(bmp);
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
             return bmp;
         }
+
+
+        private void PbEditPhoto_MouseWheel(object sender, MouseEventArgs e)
+        {
+            f.pb.SizeMode = PictureBoxSizeMode.Normal;
+            if(e.Delta > 0)
+            {
+                value += 0.1f;
+                f.pb.Image = new Bitmap(pbEditPhoto.Image, new Size((int)(pbEditPhoto.Image.Width * value), (int)(pbEditPhoto.Image.Height * value)));
+            }
+            else
+            {
+                value -= 0.1f;
+                if (value > 0)
+                    f.pb.Image = new Bitmap(pbEditPhoto.Image, new Size((int)(pbEditPhoto.Image.Width * value), (int)(pbEditPhoto.Height * value)));
+                else
+                    value = 0;
+            }
+            tbResize1.Value = pbEditPhoto.Width;
+            tbResizeVer.Value = pbEditPhoto.Height;
+        }
+
+        private void pbEditPhoto_MouseHover(object sender, EventArgs e)
+        {
+            f.pb.Focus();
+        }
+
         private void tbRotate_ValueChanged(object sender, EventArgs e)
         {
           
         }
+
 
 
 

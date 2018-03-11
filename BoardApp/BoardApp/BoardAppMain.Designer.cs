@@ -61,13 +61,13 @@
             this.label6 = new System.Windows.Forms.Label();
             this.btnDeletePict = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tbZoom = new System.Windows.Forms.TrackBar();
             this.tbRotate = new System.Windows.Forms.TrackBar();
             this.tbResizeVer = new System.Windows.Forms.TrackBar();
             this.tbResize1 = new System.Windows.Forms.TrackBar();
             this.pbEditPhoto = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.tbZoom = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -76,11 +76,11 @@
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCrop)).BeginInit();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbZoom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbRotate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbResizeVer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbResize1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEditPhoto)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbZoom)).BeginInit();
             this.SuspendLayout();
             // 
             // btnPlay
@@ -416,6 +416,19 @@
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Enter += new System.EventHandler(this.tabPage1_Enter);
             // 
+            // tbZoom
+            // 
+            this.tbZoom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbZoom.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tbZoom.Location = new System.Drawing.Point(720, 383);
+            this.tbZoom.Maximum = 100;
+            this.tbZoom.Name = "tbZoom";
+            this.tbZoom.Size = new System.Drawing.Size(258, 45);
+            this.tbZoom.TabIndex = 23;
+            this.tbZoom.TickFrequency = 25;
+            this.tbZoom.Value = 10;
+            this.tbZoom.Scroll += new System.EventHandler(this.tbZoom_Scroll);
+            // 
             // tbRotate
             // 
             this.tbRotate.Enabled = false;
@@ -471,6 +484,7 @@
             this.pbEditPhoto.Size = new System.Drawing.Size(496, 318);
             this.pbEditPhoto.TabIndex = 19;
             this.pbEditPhoto.TabStop = false;
+            this.pbEditPhoto.MouseHover += new System.EventHandler(this.pbEditPhoto_MouseHover);
             // 
             // flowLayoutPanel2
             // 
@@ -480,19 +494,6 @@
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(200, 170);
             this.flowLayoutPanel2.TabIndex = 18;
-            // 
-            // tbZoom
-            // 
-            this.tbZoom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbZoom.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.tbZoom.Location = new System.Drawing.Point(720, 383);
-            this.tbZoom.Maximum = 100;
-            this.tbZoom.Name = "tbZoom";
-            this.tbZoom.Size = new System.Drawing.Size(258, 45);
-            this.tbZoom.TabIndex = 23;
-            this.tbZoom.TickFrequency = 25;
-            this.tbZoom.Value = 10;
-            this.tbZoom.Scroll += new System.EventHandler(this.tbZoom_Scroll);
             // 
             // BoardAppMain
             // 
@@ -522,11 +523,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbCrop)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbZoom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbRotate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbResizeVer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbResize1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEditPhoto)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbZoom)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
