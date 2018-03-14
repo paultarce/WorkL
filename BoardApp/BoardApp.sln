@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardApp", "BoardApp\BoardApp.csproj", "{A13B0A05-476B-4444-9454-A84B502EFECA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FullScreenWPF", "FullScreenWPF\FullScreenWPF.csproj", "{DA00D21B-C900-4922-A315-3C9457B8FEBB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{A13B0A05-476B-4444-9454-A84B502EFECA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A13B0A05-476B-4444-9454-A84B502EFECA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A13B0A05-476B-4444-9454-A84B502EFECA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA00D21B-C900-4922-A315-3C9457B8FEBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA00D21B-C900-4922-A315-3C9457B8FEBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA00D21B-C900-4922-A315-3C9457B8FEBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA00D21B-C900-4922-A315-3C9457B8FEBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

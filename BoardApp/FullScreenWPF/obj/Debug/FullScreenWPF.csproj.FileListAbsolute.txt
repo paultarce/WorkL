@@ -1,0 +1,15 @@
+D:\cursuri\LICENTA\WorkL\BoardApp\FullScreenWPF\bin\Debug\FullScreenWPF.exe.config
+D:\cursuri\LICENTA\WorkL\BoardApp\FullScreenWPF\bin\Debug\FullScreenWPF.exe
+D:\cursuri\LICENTA\WorkL\BoardApp\FullScreenWPF\bin\Debug\FullScreenWPF.pdb
+D:\cursuri\LICENTA\WorkL\BoardApp\FullScreenWPF\obj\Debug\FullScreenWPF.csprojResolveAssemblyReference.cache
+D:\cursuri\LICENTA\WorkL\BoardApp\FullScreenWPF\obj\Debug\MainWindow.g.cs
+D:\cursuri\LICENTA\WorkL\BoardApp\FullScreenWPF\obj\Debug\App.g.cs
+D:\cursuri\LICENTA\WorkL\BoardApp\FullScreenWPF\obj\Debug\FullScreenWPF_MarkupCompile.cache
+D:\cursuri\LICENTA\WorkL\BoardApp\FullScreenWPF\obj\Debug\FullScreenWPF_MarkupCompile.lref
+D:\cursuri\LICENTA\WorkL\BoardApp\FullScreenWPF\obj\Debug\MainWindow.baml
+D:\cursuri\LICENTA\WorkL\BoardApp\FullScreenWPF\obj\Debug\FullScreenWPF.g.resources
+D:\cursuri\LICENTA\WorkL\BoardApp\FullScreenWPF\obj\Debug\FullScreenWPF.Properties.Resources.resources
+D:\cursuri\LICENTA\WorkL\BoardApp\FullScreenWPF\obj\Debug\FullScreenWPF.csproj.GenerateResource.Cache
+D:\cursuri\LICENTA\WorkL\BoardApp\FullScreenWPF\obj\Debug\FullScreenWPF.csproj.CoreCompileInputs.cache
+D:\cursuri\LICENTA\WorkL\BoardApp\FullScreenWPF\obj\Debug\FullScreenWPF.exe
+D:\cursuri\LICENTA\WorkL\BoardApp\FullScreenWPF\obj\Debug\FullScreenWPF.pdb

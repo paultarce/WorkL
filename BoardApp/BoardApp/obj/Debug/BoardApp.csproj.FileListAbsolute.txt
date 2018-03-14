@@ -43,3 +43,6 @@ D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\AForge.Math.dll
 D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\AForge.Imaging.xml
 D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\AForge.xml
 D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\AForge.Math.xml
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\FullScreenWPF.exe
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\FullScreenWPF.pdb
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\FullScreenWPF.exe.config

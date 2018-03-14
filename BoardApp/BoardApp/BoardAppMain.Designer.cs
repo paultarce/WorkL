@@ -398,6 +398,7 @@
             this.btnDeletePict.TabIndex = 18;
             this.btnDeletePict.Text = "Delete Picture";
             this.btnDeletePict.UseVisualStyleBackColor = true;
+            this.btnDeletePict.Click += new System.EventHandler(this.btnDeletePict_Click);
             // 
             // tabPage1
             // 

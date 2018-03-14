@@ -16,9 +16,12 @@ using System.IO;
 using BoardApp.Exceptions_Algorithms;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms.Integration;
+
 
 using Emgu.CV;
 using Emgu.CV.Structure;
+using System.Windows.Media.Imaging;
 
 namespace BoardApp
 {
@@ -31,6 +34,8 @@ namespace BoardApp
         private FullScreenForm f;
         public List<PictureBox> flpPictureList; // to dispaly a flowLayoutPanel in tab2
         private int pictPosition = 0;
+        FullScreenWPF.MainWindow wpfwindow;
+        //public var wpfwindow;
         //private Crop c;
 
 
@@ -94,7 +99,7 @@ namespace BoardApp
             btnPlay.Enabled = false;
             btnStop.Enabled = false;
             btnSaveImage.Enabled = false;
-            btnDeletePict.Enabled = false;
+            btnDeletePict.Enabled = true;
 
             tbResize1.Value = pbEditPhoto.Size.Width;
             tbResizeVer.Value = pbEditPhoto.Size.Height;
@@ -291,6 +296,8 @@ namespace BoardApp
                 if(pbEditPhoto.Image != null)
                 {
                     PictureEditor.ShowPictureFullSreen2(ref f, ref pbEditPhoto);
+                    imageOriginal = f.pb.Image;
+                    imageOriginal2 = pbEditPhoto.Image;
                 }
             }
 
@@ -389,7 +396,7 @@ namespace BoardApp
 
             //tbResize1.Value = pbEditPhoto.Size.Width;
             //img = Image.FromFile(@"D:\POZE\torturi\P2150615.jpg");
-            imageOriginal = pbEditPhoto.Image;
+            //imageOriginal = pbEditPhoto.Image;
             //imageOriginal = pbEdi
             //tbResize1.Value = tbResize1.Maximum;
             //tbResizeVer.Value = tbResizeVer.Maximum;
@@ -598,7 +605,7 @@ namespace BoardApp
             PictureEditor.TbRotate(ref f,pbEditPhoto,tbRotate.Value);
         }
 
-        Image imageOriginal;
+        Image imageOriginal,imageOriginal2; // imageOriginal -> for secondary screen image ...imageOriginal2 - for pbEditPhoto image
         float value = 1;
         private void tbZoom_Scroll(object sender, EventArgs e)
         {
@@ -626,16 +633,23 @@ namespace BoardApp
         private void PbEditPhoto_MouseWheel(object sender, MouseEventArgs e)
         {
             f.pb.SizeMode = PictureBoxSizeMode.Normal;
+          
             if(e.Delta > 0)
             {
                 value += 0.1f;
-                f.pb.Image = new Bitmap(pbEditPhoto.Image, new Size((int)(pbEditPhoto.Image.Width * value), (int)(pbEditPhoto.Image.Height * value)));
+                //f.pb.Image = new Bitmap(pbEditPhoto.Image, new Size((int)(pbEditPhoto.Image.Width * value), (int)(pbEditPhoto.Image.Height * value)));
+                //f.pb.Image = new Bitmap(imageOriginal, new Size((int)(imageOriginal.Width * value), (int)(imageOriginal.Height * value)));
+                //pbEditPhoto.Image = new Bitmap(imageOriginal2, new Size((int)(imageOriginal2.Width * value), (int)(imageOriginal2.Height *value)));
             }
             else
             {
                 value -= 0.1f;
                 if (value > 0)
-                    f.pb.Image = new Bitmap(pbEditPhoto.Image, new Size((int)(pbEditPhoto.Image.Width * value), (int)(pbEditPhoto.Height * value)));
+                {
+                    //f.pb.Image = new Bitmap(pbEditPhoto.Image, new Size((int)(pbEditPhoto.Image.Width * value), (int)(pbEditPhoto.Height * value)));
+                    //f.pb.Image = new Bitmap(imageOriginal, new Size((int)(imageOriginal.Width * value), (int)(imageOriginal.Height * value)));
+                    //pbEditPhoto.Image = new Bitmap(imageOriginal2, new Size((int)(imageOriginal2.Width * value), (int)(imageOriginal2.Height * value)));
+                }
                 else
                     value = 0;
             }
@@ -646,6 +660,16 @@ namespace BoardApp
         private void pbEditPhoto_MouseHover(object sender, EventArgs e)
         {
             f.pb.Focus();
+        }
+
+        private void btnDeletePict_Click(object sender, EventArgs e)
+        {
+            //BitmapTOImgSource.BitmapToImageSource(pbEditPhoto.Image);
+            BitmapImage bitImage = FormImageToWpfcs.ToWpfImage(pbEditPhoto.Image);
+            wpfwindow = new FullScreenWPF.MainWindow(bitImage);
+            ElementHost.EnableModelessKeyboardInterop(wpfwindow);
+            wpfwindow.Show();
+            
         }
 
         private void tbRotate_ValueChanged(object sender, EventArgs e)
