@@ -75,7 +75,7 @@ namespace BoardApp
             f = new FullScreenForm();
             f.pb.BackColor = Color.Black;
             f.BackColor = Color.Black;
-            
+
             PictureBox pict = new PictureBox(); pict.BackColor = Color.Black;
             PictureEditor.ShowPictureFullSreen2(ref f, ref pict);
 
@@ -253,7 +253,7 @@ namespace BoardApp
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             label5.Text = myPicture.Name;
             pictureBox.Image = myPicture.Image;
-            
+
             //  }
         }
 
@@ -293,7 +293,7 @@ namespace BoardApp
                     MessageBox.Show("No picture to display", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }*/
 
-                if(pbEditPhoto.Image != null)
+                if (pbEditPhoto.Image != null)
                 {
                     PictureEditor.ShowPictureFullSreen2(ref f, ref pbEditPhoto);
                     imageOriginal = f.pb.Image;
@@ -387,7 +387,7 @@ namespace BoardApp
             }
             pbEditPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
             pbEditPhoto.Image = pictureBox.Image;
-            if(pbEditPhoto.Image != null)
+            if (pbEditPhoto.Image != null)
             {
                 tbResize1.Enabled = true;
                 tbRotate.Enabled = true;
@@ -407,7 +407,7 @@ namespace BoardApp
             this.pbEditPhoto.MouseWheel += PbEditPhoto_MouseWheel;
         }
 
-        
+
 
         /*
          * CROP PART
@@ -468,16 +468,16 @@ namespace BoardApp
         Point EndLocation;
         bool IsMouseDown = false;
 
-       
+
 
         private void pictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            if(rbCropMode.Checked == true)
+            if (rbCropMode.Checked == true)
             {
                 IsMouseDown = true;
                 StartLocation = e.Location;
             }
-            
+
         }
         private void pictureBox_MouseMove(object sender, MouseEventArgs e)
         {
@@ -542,20 +542,20 @@ namespace BoardApp
         {
             if (pictureBox.Image != null)
             {
-                  Bitmap b = new Bitmap(pictureBox.Image);
-                  imgInput = new Image<Bgr, byte>(b);
-                  pictureBox.Image = imgInput.Bitmap;
-                  //if(rbCaptureMode)
-                  
-              /*  OpenFileDialog ofd = new OpenFileDialog();
-                {
-                    if(ofd.ShowDialog() == DialogResult.OK)
-                    {
-                        imgInput = new Image<Bgr, byte>(ofd.FileName);
-                        pictureBox.Image = imgInput.Bitmap;
-                    }
-                }
-                */
+                Bitmap b = new Bitmap(pictureBox.Image);
+                imgInput = new Image<Bgr, byte>(b);
+                pictureBox.Image = imgInput.Bitmap;
+                //if(rbCaptureMode)
+
+                /*  OpenFileDialog ofd = new OpenFileDialog();
+                  {
+                      if(ofd.ShowDialog() == DialogResult.OK)
+                      {
+                          imgInput = new Image<Bgr, byte>(ofd.FileName);
+                          pictureBox.Image = imgInput.Bitmap;
+                      }
+                  }
+                  */
             }
             else
             {
@@ -569,7 +569,7 @@ namespace BoardApp
         #region TAB2 TRACK BAR + ROTATE ZOOM region
 
         //int angle;
-        
+
 
         private void tbResize1_Scroll(object sender, EventArgs e)
         {
@@ -602,27 +602,27 @@ namespace BoardApp
             Bitmap image2 = ro.Apply(a);
             pbEditPhoto.Image = image2;
 
-            PictureEditor.TbRotate(ref f,pbEditPhoto,tbRotate.Value);
+            PictureEditor.TbRotate(ref f, pbEditPhoto, tbRotate.Value);
         }
 
-        Image imageOriginal,imageOriginal2; // imageOriginal -> for secondary screen image ...imageOriginal2 - for pbEditPhoto image
+        Image imageOriginal, imageOriginal2; // imageOriginal -> for secondary screen image ...imageOriginal2 - for pbEditPhoto image
         float value = 1;
         private void tbZoom_Scroll(object sender, EventArgs e)
         {
-          /* if(tbZoom.Value > 0)
-            {
-                pbEditPhoto.Image = Zoom(imageOriginal, new Size(tbZoom.Value, tbZoom.Value));
-            }
-            */
-            if(tbZoom.Value > 0)
+            /* if(tbZoom.Value > 0)
+              {
+                  pbEditPhoto.Image = Zoom(imageOriginal, new Size(tbZoom.Value, tbZoom.Value));
+              }
+              */
+            if (tbZoom.Value > 0)
             {
                 //f.pb.SizeMode = PictureBoxSizeMode.Zoom;
             }
         }
 
-        Image Zoom(Image img,Size size)
+        Image Zoom(Image img, Size size)
         {
-         
+
             Bitmap bmp = new Bitmap(img, img.Width + (img.Width * size.Width / 100), img.Height + (img.Height * size.Height / 100));
             Graphics g = Graphics.FromImage(bmp);
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
@@ -633,8 +633,8 @@ namespace BoardApp
         private void PbEditPhoto_MouseWheel(object sender, MouseEventArgs e)
         {
             f.pb.SizeMode = PictureBoxSizeMode.Normal;
-          
-            if(e.Delta > 0)
+
+            if (e.Delta > 0)
             {
                 value += 0.1f;
                 //f.pb.Image = new Bitmap(pbEditPhoto.Image, new Size((int)(pbEditPhoto.Image.Width * value), (int)(pbEditPhoto.Image.Height * value)));
@@ -665,16 +665,34 @@ namespace BoardApp
         private void btnDeletePict_Click(object sender, EventArgs e)
         {
             //BitmapTOImgSource.BitmapToImageSource(pbEditPhoto.Image);
-            BitmapImage bitImage = FormImageToWpfcs.ToWpfImage(pbEditPhoto.Image);
-            wpfwindow = new FullScreenWPF.MainWindow(bitImage);
+            // BitmapImage bitImage = FormImageToWpfcs.ToWpfImage(pbEditPhoto.Image);
+            //System.Windows.Controls.Image image = FormImageToWpfcs.ConvertDrawingImageToWPFImage(pbEditPhoto.Image);
+            
+            BitmapSource btS = FormImageToWpfcs.BitmapFromBase64(FormImageToWpfcs.BitmapToBase64String(pbEditPhoto.Image));
+            pbCrop.Image = BitmapFromSource(btS);
+            wpfwindow = new FullScreenWPF.MainWindow(btS);
             ElementHost.EnableModelessKeyboardInterop(wpfwindow);
             wpfwindow.Show();
-            
+
+        }
+
+
+        Bitmap BitmapFromSource(BitmapSource bitmapsource)
+        {
+            Bitmap bitmap;
+            using (MemoryStream outStream = new MemoryStream())
+            {
+                BitmapEncoder enc = new BmpBitmapEncoder();
+                enc.Frames.Add(BitmapFrame.Create(bitmapsource));
+                enc.Save(outStream);
+                bitmap = new Bitmap(outStream);
+            }
+            return bitmap;
         }
 
         private void tbRotate_ValueChanged(object sender, EventArgs e)
         {
-          
+
         }
 
 
@@ -682,6 +700,6 @@ namespace BoardApp
 
         #endregion
 
-       
+
     }
 }

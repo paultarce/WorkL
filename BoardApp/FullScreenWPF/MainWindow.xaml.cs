@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 
+
 namespace FullScreenWPF
 {
     /// <summary>
@@ -21,8 +22,9 @@ namespace FullScreenWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        public Image image { get; set; }
+        //public Image image { get; set; }
         public BitmapImage bitImage { get; set; }
+        public BitmapSource btS { get; set; }
 
         /*  public MainWindow(BitmapImage im)
           {
@@ -31,11 +33,26 @@ namespace FullScreenWPF
               INIT();
           }*/
 
-        public MainWindow(BitmapImage im)
+        /*public MainWindow(BitmapImage im)
         {
             InitializeComponent();
             bitImage = im;
             INIT();
+        }
+
+        public MainWindow(Image im)
+        {
+            InitializeComponent();
+            image = im;
+            INIT();
+        }*/
+
+        public MainWindow(BitmapSource btS)
+        {
+            InitializeComponent();
+            this.btS = btS;
+            INIT();
+            
         }
         // FirstPoint use to move image
         private Point firsPoint = new Point();
@@ -44,23 +61,49 @@ namespace FullScreenWPF
 
         public void INIT()
         {
-            image = new Image { Source = bitImage };
+            //image = new Image { Source = btS };
             //imgSource.= image;
             //cavRoot.Children.Add(image);
-            imgSource = image;
-
-            imgSource.MouseLeftButtonDown += (ss, ee) =>
+            /// imgSource = image;
+            /* = new Image();
+            image.Height = 200;
+            image.Width = 200;
+            image.Source = btS;*/
+            
+            //this.Content = image;
+            //cavRoot.Children.Add(image);
+            
+          
+            image.MouseLeftButtonDown += (ss, ee) =>
             {
                 firsPoint = ee.GetPosition(this);
-                imgSource.CaptureMouse();
+                image.CaptureMouse();
 
             };
 
 
-            imgSource.MouseWheel += (ss, ee) =>
+
+            image.MouseMove += (ss, ee) =>
             {
-                Matrix mat = imgSource.RenderTransform.Value;
-                Point mouse = ee.GetPosition(imgSource);
+                if (ee.LeftButton == MouseButtonState.Pressed)
+                {
+                    // Creat temp point
+                    Point temp = ee.GetPosition(this);
+                    Point res = new Point(firsPoint.X - temp.X, firsPoint.Y - temp.Y);
+
+                    //Update image location
+                    Canvas.SetLeft(image, Canvas.GetLeft(image) - res.X);
+                    Canvas.SetTop(image, Canvas.GetTop(image) - res.Y);
+
+                    //Update first point
+                    firsPoint = temp;
+                }
+            };
+
+            image.MouseWheel += (ss, ee) =>
+            {
+                Matrix mat = image.RenderTransform.Value;
+                Point mouse = ee.GetPosition(image);
 
                 if (ee.RightButton == MouseButtonState.Pressed)
                 {
@@ -79,30 +122,11 @@ namespace FullScreenWPF
                         mat.ScaleAtPrepend(1 / 1.15, 1 / 1.15, mouse.X, mouse.Y);
                 }
                 MatrixTransform mtf = new MatrixTransform(mat);
-                imgSource.RenderTransform = mtf;
+                image.RenderTransform = mtf;
             };
-
-
-
-            imgSource.MouseMove += (ss, ee) =>
+            image.MouseUp += (ss, ee) =>
             {
-                if (ee.LeftButton == MouseButtonState.Pressed)
-                {
-                    // Creat temp point
-                    Point temp = ee.GetPosition(this);
-                    Point res = new Point(firsPoint.X - temp.X, firsPoint.Y - temp.Y);
-
-                    //Update image location
-                    Canvas.SetLeft(imgSource, Canvas.GetLeft(imgSource) - res.X);
-                    Canvas.SetTop(imgSource, Canvas.GetTop(imgSource) - res.Y);
-
-                    //Update first point
-                    firsPoint = temp;
-                }
-            };
-            imgSource.MouseUp += (ss, ee) =>
-            {
-                imgSource.ReleaseMouseCapture();
+                image.ReleaseMouseCapture();
             };
         }
     }
