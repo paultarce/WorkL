@@ -58,17 +58,18 @@ namespace FullScreenWPF
         private Point firsPoint = new Point();
 
 
-
+       
         public void INIT()
         {
+           
             //image = new Image { Source = btS };
             //imgSource.= image;
             //cavRoot.Children.Add(image);
             /// imgSource = image;
-            /* = new Image();
+            //image = new Image();
             image.Height = 200;
             image.Width = 200;
-            image.Source = btS;*/
+            image.Source = btS;
             
             //this.Content = image;
             //cavRoot.Children.Add(image);
@@ -128,6 +129,17 @@ namespace FullScreenWPF
             {
                 image.ReleaseMouseCapture();
             };
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if(System.Windows.Forms.Screen.AllScreens.Length >= 2)
+            {
+                System.Drawing.Rectangle screenBounds = System.Windows.Forms.Screen.AllScreens[1].Bounds;
+                this.Left = screenBounds.Left;
+                this.Top = screenBounds.Top;
+            }
+            this.WindowState = WindowState.Maximized;
         }
     }
 }
