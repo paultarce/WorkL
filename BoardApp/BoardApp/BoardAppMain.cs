@@ -274,6 +274,7 @@ namespace BoardApp
             Application.Exit();
         }
 
+ #region KEYS PRESSED
         private void BoardAppMain_KeyPress(object sender, KeyPressEventArgs e)
         {
 
@@ -293,8 +294,10 @@ namespace BoardApp
                     MessageBox.Show("No picture to display", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }*/
 
-                if (pbEditPhoto.Image != null)
+                if (pbEditPhoto.Image != null || pictureBox.Image != null)
                 {
+                    tabControl1.SelectedIndex = 1;
+
                     PictureEditor.ShowPictureFullSreen2(ref f, ref pbEditPhoto);
                     imageOriginal = f.pb.Image;
                     imageOriginal2 = pbEditPhoto.Image;
@@ -344,8 +347,22 @@ namespace BoardApp
                     btnStop_Click(sender, e);
                 }
             }
+            
+        }
+       
+        private void BoardAppMain_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (wpfwindow.IsLoaded == true)
+            {
+                if (e.KeyCode == Keys.Escape)
+                {
+                    wpfwindow.Close();
+                }
+            }
         }
 
+        
+        #endregion
         private void FullScreenDisplay()
         {
             pictureBox.SetBounds(0, 0, 300, 300);
@@ -412,7 +429,7 @@ namespace BoardApp
         /*
          * CROP PART
          */
-        #region CropRegion
+ #region CropRegion
 
         /*
         bool IsMouseDown = false;
@@ -460,7 +477,7 @@ namespace BoardApp
         }*/
         #endregion
 
-        #region CropRegion2
+ #region CropRegion2
 
         Image<Bgr, byte> imgInput;
         Rectangle rect;
@@ -566,7 +583,7 @@ namespace BoardApp
 
         #endregion
 
-        #region TAB2 TRACK BAR + ROTATE ZOOM region
+ #region TAB2 TRACK BAR + ROTATE ZOOM region
 
         //int angle;
 
@@ -689,6 +706,8 @@ namespace BoardApp
             }
             return bitmap;
         }
+
+       
 
         private void tbRotate_ValueChanged(object sender, EventArgs e)
         {

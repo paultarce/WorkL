@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -61,14 +62,16 @@ namespace FullScreenWPF
        
         public void INIT()
         {
-           
+
             //image = new Image { Source = btS };
             //imgSource.= image;
             //cavRoot.Children.Add(image);
             /// imgSource = image;
             //image = new Image();
-            image.Height = 200;
-            image.Width = 200;
+            System.Drawing.Rectangle screenBounds = System.Windows.Forms.Screen.AllScreens[1].Bounds;
+
+            image.Height = Math.Abs(screenBounds.Height);
+            image.Width = Math.Abs(screenBounds.Width);
             image.Source = btS;
             
             //this.Content = image;
@@ -138,6 +141,7 @@ namespace FullScreenWPF
                 System.Drawing.Rectangle screenBounds = System.Windows.Forms.Screen.AllScreens[1].Bounds;
                 this.Left = screenBounds.Left;
                 this.Top = screenBounds.Top;
+                INIT();
             }
             this.WindowState = WindowState.Maximized;
         }
