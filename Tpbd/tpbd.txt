@@ -1,0 +1,90 @@
+create table salariati (
+                        nr_crt int primary key,
+                        nume varchar(20) not null,
+                        prenume varchar(20) not null,
+                        functie varchar(20) not null,
+                        salar_negociat int not null,
+                        salar_realizat int not null,
+                        vechime int not null,
+                        spor int not null,
+                        premii_brute int not null,
+                        compensatie int not null,
+                        total_brut int ,
+                        brut_impozabil int ,
+                        impozit int ,
+                        cas int,
+                        somaj int,
+                        sanat int,
+                        avans int not null,
+                        retineri int not null,
+                        rest_plata int
+                       );
+
+create table procente (
+                        cas float not null,
+                        sanat float not null,
+                        somaj float not null,
+                        impozit float not null,
+                        parola varchar(50) 
+                       );
+
+create sequence auto_seq;
+
+//triggere
+
+create or replace trigger andrada
+before insert on salariati
+for each row
+  begin
+    select auto_seq.nextval into :new.nr_crt from dual;
+end;
+/
+
+create or replace trigger andrada1
+before insert or update of salar_negociat,salar_realizat,vechime,spor,premii_brute,avans,retineri,compensatie on salariati 
+for each row
+declare
+cas float;
+sanat float;
+somaj float;
+impozit float;
+begin
+          select cas into cas from procente;
+          select sanat into sanat from procente ;
+          select somaj into somaj from procente ;
+          select impozit into impozit from procente;
+	 :new.total_brut := (:new.salar_negociat * :new.salar_realizat/100)*(1+ :new.vechime/100+ :new.spor/100)+:new.premii_brute+:new.compensatie;
+         :new.cas := :new.total_brut*cas;
+         :new.somaj :=:new.total_brut*somaj;
+         :new.sanat :=:new.total_brut*sanat;
+         :new.brut_impozabil :=:new.total_brut-:new.cas-:new.somaj-:new.sanat;  
+         :new.impozit := :new.brut_impozabil * impozit ;
+         :new.rest_plata :=:new.total_brut-:new.impozit-:new.cas-:new.somaj-:new.sanat-:new.retineri-:new.avans;
+end;
+/   
+
+create or replace trigger andrada2
+before update of cas,sanat,somaj,impozit on procente 
+for each row
+declare
+cas1 float;
+sanat1 float;
+somaj1 float;
+impozit1 float;
+begin
+         cas1 := :new.cas;
+         sanat1 := :new.sanat;
+         somaj1 := :new.somaj;
+         impozit1 := :new.impozit;
+
+	 update  salariati set total_brut= (salar_negociat * salar_realizat/100)*(1+vechime/100+spor/100)+premii_brute+compensatie;
+         update  salariati set cas=total_brut*cas1;
+         update  salariati set somaj=total_brut*somaj1;
+         update  salariati set sanat =total_brut*sanat1;
+         update  salariati set brut_impozabil=total_brut-cas-somaj-sanat;  
+         update  salariati set impozit= brut_impozabil * impozit1 ;
+         update  salariati set rest_plata=total_brut-impozit-cas-somaj-sanat-retineri-avans;
+end;
+/  
+
+Provider=MSDAORA;Data Source=XE;Password=student;User ID=student

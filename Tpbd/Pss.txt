@@ -1,0 +1,7 @@
+Pass Oracle: monitor1234
+DATA SOURCE=localhost:1521/xe;PASSWORD=STUDENT;USER ID=STUDENT
+
+-start oracle services -> run- >services.msc
+-> start database file
+
+DATA SOURCE=localhost:1521/XE;PASSWORD=STUDENT;PERSIST SECURITY INFO=True;USER ID=STUDENT

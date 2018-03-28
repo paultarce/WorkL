@@ -1,0 +1,43 @@
+Trigger for primary key:
+
+	- create table salarii .....
+	- create sequence : 
+		create sequence nr_crt_seq;
+	TRIGGER:
+		create trigger trg_nr_crt
+ 	        before insert on salarii
+ 	        for each row
+ 	   begin
+ 	      select nr_crt_seq.nextval
+ 	       into :new.nr_crt
+  	       from dual;
+ 	   end;
+ 	   /
+
+create table salarii(nr_crt int PRIMARY KEY,nume varchar(30),prenume varchar(30),functie varchar(30),salar_baza int,spor int,premii_brute int,total_brut int,brut_impz int,impozit int,CAS int,CASS int,retineri int, virat_card int);
+insert into salarii values(0,'Angajat5','Ion','ing',5,5,5,5,5,6,7,8,4,5);
+
+insert into salarii values(0,'Hal','Lindes','Musician',4000,10,0,0,0,0,0,0,0,0);
+http://www.codenuclear.com/before-insert-trigger-example/
+
+
+trigger insert
+
+create or replace trigger insert_date 
+before insert or update on salarii
+for each row
+DECLARE
+ sanat int;
+ 
+BEGIN 
+	  
+   :NEW.total_brut := :new.salar_baza*(1 + :NEW.spor/100) + :NEW.premii_brute;
+   :NEW.cass := 0.1 * :NEW.total_brut;
+   :NEW.cas := 0.25 * :NEW.total_brut;
+   :NEW.brut_impz := :new.total_brut - :new.CAS - :new.cass;
+   :NEW.impozit := :NEW.brut_impz * 0.1;
+   :NEW.retineri := 0;
+   :NEW.virat_card := :new.total_brut - :new.impozit - :new.cas - :new.cass - :new.retineri;
+  END;
+  /
+   
