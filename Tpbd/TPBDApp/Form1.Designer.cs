@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.crystalReportViewer1 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.button1 = new System.Windows.Forms.Button();
@@ -44,14 +46,29 @@
             this.ajutorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iesireToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btnAdaugare = new System.Windows.Forms.Button();
             this.btnActualizare = new System.Windows.Forms.Button();
             this.btnStergere = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabMainPage = new System.Windows.Forms.TabPage();
             this.tabAdaugare = new System.Windows.Forms.TabPage();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnAdaugareA = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtNumeA = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtPrenumeA = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtFunctieA = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtSalarBazaA = new System.Windows.Forms.TextBox();
+            this.txtSporA = new System.Windows.Forms.TextBox();
+            this.txtRetineriA = new System.Windows.Forms.TextBox();
+            this.tabActualizareDate = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.btnModifParola = new System.Windows.Forms.Button();
             this.panelChangePass = new System.Windows.Forms.Panel();
@@ -63,31 +80,38 @@
             this.btnSalvareProcente = new System.Windows.Forms.Button();
             this.btnAutentificare = new System.Windows.Forms.Button();
             this.dgvProcente = new System.Windows.Forms.DataGridView();
-            this.txtNumeA = new System.Windows.Forms.TextBox();
-            this.txtPrenumeA = new System.Windows.Forms.TextBox();
-            this.txtFunctieA = new System.Windows.Forms.TextBox();
-            this.txtSalarBazaA = new System.Windows.Forms.TextBox();
-            this.txtSporA = new System.Windows.Forms.TextBox();
-            this.txtRetineriA = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label9 = new System.Windows.Forms.Label();
-            this.btnAdaugareA = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtPremiiBruteA = new System.Windows.Forms.TextBox();
+            this.dgvActualizareDate = new System.Windows.Forms.DataGridView();
+            this.txtNumeCautat = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabMainPage.SuspendLayout();
             this.tabAdaugare.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.tabActualizareDate.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.panelChangePass.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProcente)).BeginInit();
-            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvActualizareDate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
+            this.bindingNavigator1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -146,7 +170,6 @@
             this.introducereDateToolStripMenuItem.Name = "introducereDateToolStripMenuItem";
             this.introducereDateToolStripMenuItem.Size = new System.Drawing.Size(107, 20);
             this.introducereDateToolStripMenuItem.Text = "Introducere Date";
-            this.introducereDateToolStripMenuItem.Click += new System.EventHandler(this.introducereDateToolStripMenuItem_Click);
             // 
             // actualizareDateToolStripMenuItem
             // 
@@ -160,6 +183,7 @@
             this.adaugareAngajatiToolStripMenuItem.Name = "adaugareAngajatiToolStripMenuItem";
             this.adaugareAngajatiToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.adaugareAngajatiToolStripMenuItem.Text = "Adaugare angajați";
+            this.adaugareAngajatiToolStripMenuItem.Click += new System.EventHandler(this.adaugareAngajatiToolStripMenuItem_Click);
             // 
             // stergereAngajatiToolStripMenuItem
             // 
@@ -217,7 +241,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button5);
+            this.panel1.Controls.Add(this.btnAdaugare);
             this.panel1.Controls.Add(this.btnActualizare);
             this.panel1.Controls.Add(this.btnStergere);
             this.panel1.Controls.Add(this.btnSave);
@@ -226,41 +250,47 @@
             this.panel1.Size = new System.Drawing.Size(349, 207);
             this.panel1.TabIndex = 4;
             // 
-            // button5
+            // btnAdaugare
             // 
-            this.button5.Location = new System.Drawing.Point(149, 82);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(115, 37);
-            this.button5.TabIndex = 3;
-            this.button5.Text = "Adaugare Angajati";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnAdaugare.BackColor = System.Drawing.Color.Lime;
+            this.btnAdaugare.Location = new System.Drawing.Point(12, 91);
+            this.btnAdaugare.Name = "btnAdaugare";
+            this.btnAdaugare.Size = new System.Drawing.Size(106, 37);
+            this.btnAdaugare.TabIndex = 3;
+            this.btnAdaugare.Text = "Adaugare Angajati";
+            this.btnAdaugare.UseVisualStyleBackColor = false;
+            this.btnAdaugare.Click += new System.EventHandler(this.adaugareAngajatiToolStripMenuItem_Click);
             // 
             // btnActualizare
             // 
-            this.btnActualizare.Location = new System.Drawing.Point(12, 82);
+            this.btnActualizare.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnActualizare.Location = new System.Drawing.Point(12, 48);
             this.btnActualizare.Name = "btnActualizare";
             this.btnActualizare.Size = new System.Drawing.Size(106, 37);
             this.btnActualizare.TabIndex = 2;
             this.btnActualizare.Text = "Actualizare Date";
-            this.btnActualizare.UseVisualStyleBackColor = true;
+            this.btnActualizare.UseVisualStyleBackColor = false;
+            this.btnActualizare.Click += new System.EventHandler(this.actualizareDateToolStripMenuItem_Click);
             // 
             // btnStergere
             // 
-            this.btnStergere.Location = new System.Drawing.Point(12, 22);
+            this.btnStergere.BackColor = System.Drawing.Color.Lime;
+            this.btnStergere.Location = new System.Drawing.Point(12, 12);
             this.btnStergere.Name = "btnStergere";
             this.btnStergere.Size = new System.Drawing.Size(106, 30);
             this.btnStergere.TabIndex = 1;
             this.btnStergere.Text = "Stergere Angajati";
-            this.btnStergere.UseVisualStyleBackColor = true;
+            this.btnStergere.UseVisualStyleBackColor = false;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(135, 22);
+            this.btnSave.BackColor = System.Drawing.Color.Lime;
+            this.btnSave.Location = new System.Drawing.Point(12, 143);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(115, 30);
+            this.btnSave.Size = new System.Drawing.Size(106, 30);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // tabControl1
@@ -270,7 +300,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabMainPage);
             this.tabControl1.Controls.Add(this.tabAdaugare);
-            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabActualizareDate);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(12, 27);
             this.tabControl1.Name = "tabControl1";
@@ -305,15 +335,164 @@
             this.tabAdaugare.Text = "Adăugare";
             this.tabAdaugare.UseVisualStyleBackColor = true;
             // 
-            // tabPage1
+            // label9
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(859, 380);
-            this.tabPage1.TabIndex = 2;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Gadugi", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label9.Location = new System.Drawing.Point(101, 15);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(171, 21);
+            this.label9.TabIndex = 12;
+            this.label9.Text = "Adaugare Angajat";
+            // 
+            // panel2
+            // 
+            this.panel2.CausesValidation = false;
+            this.panel2.Controls.Add(this.txtPremiiBruteA);
+            this.panel2.Controls.Add(this.label10);
+            this.panel2.Controls.Add(this.btnAdaugareA);
+            this.panel2.Controls.Add(this.label8);
+            this.panel2.Controls.Add(this.label3);
+            this.panel2.Controls.Add(this.label7);
+            this.panel2.Controls.Add(this.txtNumeA);
+            this.panel2.Controls.Add(this.label6);
+            this.panel2.Controls.Add(this.txtPrenumeA);
+            this.panel2.Controls.Add(this.label5);
+            this.panel2.Controls.Add(this.txtFunctieA);
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.txtSalarBazaA);
+            this.panel2.Controls.Add(this.txtSporA);
+            this.panel2.Controls.Add(this.txtRetineriA);
+            this.panel2.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel2.ForeColor = System.Drawing.Color.DarkGreen;
+            this.panel2.Location = new System.Drawing.Point(51, 49);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(297, 324);
+            this.panel2.TabIndex = 12;
+            // 
+            // btnAdaugareA
+            // 
+            this.btnAdaugareA.ForeColor = System.Drawing.Color.Black;
+            this.btnAdaugareA.Location = new System.Drawing.Point(138, 277);
+            this.btnAdaugareA.Name = "btnAdaugareA";
+            this.btnAdaugareA.Size = new System.Drawing.Size(118, 38);
+            this.btnAdaugareA.TabIndex = 12;
+            this.btnAdaugareA.Text = "Adăugare";
+            this.btnAdaugareA.UseVisualStyleBackColor = true;
+            this.btnAdaugareA.Click += new System.EventHandler(this.btnAdaugareA_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(33, 248);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(65, 17);
+            this.label8.TabIndex = 11;
+            this.label8.Text = "Retineri";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(33, 29);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(49, 17);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Nume";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(33, 175);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(42, 17);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "Spor";
+            // 
+            // txtNumeA
+            // 
+            this.txtNumeA.Location = new System.Drawing.Point(138, 29);
+            this.txtNumeA.Name = "txtNumeA";
+            this.txtNumeA.Size = new System.Drawing.Size(118, 23);
+            this.txtNumeA.TabIndex = 0;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(33, 139);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(87, 17);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "Salar Baza";
+            // 
+            // txtPrenumeA
+            // 
+            this.txtPrenumeA.Location = new System.Drawing.Point(138, 66);
+            this.txtPrenumeA.Name = "txtPrenumeA";
+            this.txtPrenumeA.Size = new System.Drawing.Size(118, 23);
+            this.txtPrenumeA.TabIndex = 1;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(33, 101);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(61, 17);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Functie";
+            // 
+            // txtFunctieA
+            // 
+            this.txtFunctieA.Location = new System.Drawing.Point(138, 101);
+            this.txtFunctieA.Name = "txtFunctieA";
+            this.txtFunctieA.Size = new System.Drawing.Size(118, 23);
+            this.txtFunctieA.TabIndex = 2;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(33, 66);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(72, 17);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Prenume";
+            // 
+            // txtSalarBazaA
+            // 
+            this.txtSalarBazaA.Location = new System.Drawing.Point(138, 136);
+            this.txtSalarBazaA.Name = "txtSalarBazaA";
+            this.txtSalarBazaA.Size = new System.Drawing.Size(118, 23);
+            this.txtSalarBazaA.TabIndex = 3;
+            // 
+            // txtSporA
+            // 
+            this.txtSporA.Location = new System.Drawing.Point(138, 175);
+            this.txtSporA.Name = "txtSporA";
+            this.txtSporA.Size = new System.Drawing.Size(118, 23);
+            this.txtSporA.TabIndex = 4;
+            // 
+            // txtRetineriA
+            // 
+            this.txtRetineriA.Location = new System.Drawing.Point(138, 248);
+            this.txtRetineriA.Name = "txtRetineriA";
+            this.txtRetineriA.Size = new System.Drawing.Size(118, 23);
+            this.txtRetineriA.TabIndex = 5;
+            // 
+            // tabActualizareDate
+            // 
+            this.tabActualizareDate.Controls.Add(this.bindingNavigator1);
+            this.tabActualizareDate.Controls.Add(this.label12);
+            this.tabActualizareDate.Controls.Add(this.label11);
+            this.tabActualizareDate.Controls.Add(this.txtNumeCautat);
+            this.tabActualizareDate.Controls.Add(this.dgvActualizareDate);
+            this.tabActualizareDate.Location = new System.Drawing.Point(4, 22);
+            this.tabActualizareDate.Name = "tabActualizareDate";
+            this.tabActualizareDate.Padding = new System.Windows.Forms.Padding(3);
+            this.tabActualizareDate.Size = new System.Drawing.Size(859, 380);
+            this.tabActualizareDate.TabIndex = 2;
+            this.tabActualizareDate.Text = "ActualizareDate";
+            this.tabActualizareDate.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
@@ -424,147 +603,172 @@
             this.dgvProcente.Size = new System.Drawing.Size(435, 105);
             this.dgvProcente.TabIndex = 0;
             // 
-            // txtNumeA
+            // label10
             // 
-            this.txtNumeA.Location = new System.Drawing.Point(126, 26);
-            this.txtNumeA.Name = "txtNumeA";
-            this.txtNumeA.Size = new System.Drawing.Size(118, 23);
-            this.txtNumeA.TabIndex = 0;
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(33, 217);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(97, 17);
+            this.label10.TabIndex = 13;
+            this.label10.Text = "Premii Brute";
             // 
-            // txtPrenumeA
+            // txtPremiiBruteA
             // 
-            this.txtPrenumeA.Location = new System.Drawing.Point(126, 63);
-            this.txtPrenumeA.Name = "txtPrenumeA";
-            this.txtPrenumeA.Size = new System.Drawing.Size(118, 23);
-            this.txtPrenumeA.TabIndex = 1;
+            this.txtPremiiBruteA.Location = new System.Drawing.Point(138, 214);
+            this.txtPremiiBruteA.Name = "txtPremiiBruteA";
+            this.txtPremiiBruteA.Size = new System.Drawing.Size(118, 23);
+            this.txtPremiiBruteA.TabIndex = 14;
             // 
-            // txtFunctieA
+            // dgvActualizareDate
             // 
-            this.txtFunctieA.Location = new System.Drawing.Point(126, 98);
-            this.txtFunctieA.Name = "txtFunctieA";
-            this.txtFunctieA.Size = new System.Drawing.Size(118, 23);
-            this.txtFunctieA.TabIndex = 2;
+            this.dgvActualizareDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvActualizareDate.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvActualizareDate.Location = new System.Drawing.Point(19, 63);
+            this.dgvActualizareDate.Name = "dgvActualizareDate";
+            this.dgvActualizareDate.Size = new System.Drawing.Size(834, 133);
+            this.dgvActualizareDate.TabIndex = 1;
             // 
-            // txtSalarBazaA
+            // txtNumeCautat
             // 
-            this.txtSalarBazaA.Location = new System.Drawing.Point(126, 133);
-            this.txtSalarBazaA.Name = "txtSalarBazaA";
-            this.txtSalarBazaA.Size = new System.Drawing.Size(118, 23);
-            this.txtSalarBazaA.TabIndex = 3;
+            this.txtNumeCautat.Location = new System.Drawing.Point(143, 271);
+            this.txtNumeCautat.Name = "txtNumeCautat";
+            this.txtNumeCautat.Size = new System.Drawing.Size(169, 20);
+            this.txtNumeCautat.TabIndex = 2;
+            this.txtNumeCautat.TextChanged += new System.EventHandler(this.txtNumeCautat_TextChanged);
             // 
-            // txtSporA
+            // label11
             // 
-            this.txtSporA.Location = new System.Drawing.Point(126, 172);
-            this.txtSporA.Name = "txtSporA";
-            this.txtSporA.Size = new System.Drawing.Size(118, 23);
-            this.txtSporA.TabIndex = 4;
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(34, 274);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(108, 13);
+            this.label11.TabIndex = 3;
+            this.label11.Text = "Nume Angajat Cautat";
             // 
-            // txtRetineriA
+            // label12
             // 
-            this.txtRetineriA.Location = new System.Drawing.Point(126, 212);
-            this.txtRetineriA.Name = "txtRetineriA";
-            this.txtRetineriA.Size = new System.Drawing.Size(118, 23);
-            this.txtRetineriA.TabIndex = 5;
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Gadugi", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label12.Location = new System.Drawing.Point(267, 28);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(231, 21);
+            this.label12.TabIndex = 13;
+            this.label12.Text = "Actualizare date(Update)";
             // 
-            // label3
+            // bindingNavigator1
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(33, 29);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(49, 17);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Nume";
+            this.bindingNavigator1.AddNewItem = this.bindingNavigatorAddNewItem;
+            this.bindingNavigator1.CountItem = this.bindingNavigatorCountItem;
+            this.bindingNavigator1.DeleteItem = this.bindingNavigatorDeleteItem;
+            this.bindingNavigator1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bindingNavigatorMoveFirstItem,
+            this.bindingNavigatorMovePreviousItem,
+            this.bindingNavigatorSeparator,
+            this.bindingNavigatorPositionItem,
+            this.bindingNavigatorCountItem,
+            this.bindingNavigatorSeparator1,
+            this.bindingNavigatorMoveNextItem,
+            this.bindingNavigatorMoveLastItem,
+            this.bindingNavigatorSeparator2,
+            this.bindingNavigatorAddNewItem,
+            this.bindingNavigatorDeleteItem});
+            this.bindingNavigator1.Location = new System.Drawing.Point(3, 3);
+            this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
+            this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
+            this.bindingNavigator1.MoveNextItem = this.bindingNavigatorMoveNextItem;
+            this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
+            this.bindingNavigator1.Name = "bindingNavigator1";
+            this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
+            this.bindingNavigator1.Size = new System.Drawing.Size(853, 25);
+            this.bindingNavigator1.TabIndex = 14;
+            this.bindingNavigator1.Text = "bindingNavigator1";
             // 
-            // label4
+            // bindingNavigatorMoveFirstItem
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(33, 66);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(72, 17);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Prenume";
+            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
+            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
+            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveFirstItem.Text = "Move first";
             // 
-            // label5
+            // bindingNavigatorMovePreviousItem
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(33, 101);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(61, 17);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "Functie";
+            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
+            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
+            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
             // 
-            // label6
+            // bindingNavigatorSeparator
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(33, 136);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(87, 17);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "Salar Baza";
+            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
             // 
-            // label7
+            // bindingNavigatorPositionItem
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(33, 175);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(42, 17);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "Spor";
+            this.bindingNavigatorPositionItem.AccessibleName = "Position";
+            this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
+            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
+            this.bindingNavigatorPositionItem.Text = "0";
+            this.bindingNavigatorPositionItem.ToolTipText = "Current position";
             // 
-            // label8
+            // bindingNavigatorCountItem
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(33, 215);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(65, 17);
-            this.label8.TabIndex = 11;
-            this.label8.Text = "Retineri";
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
+            this.bindingNavigatorCountItem.Text = "of {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
             // 
-            // panel2
+            // bindingNavigatorSeparator1
             // 
-            this.panel2.CausesValidation = false;
-            this.panel2.Controls.Add(this.btnAdaugareA);
-            this.panel2.Controls.Add(this.label8);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.label7);
-            this.panel2.Controls.Add(this.txtNumeA);
-            this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.txtPrenumeA);
-            this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this.txtFunctieA);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.txtSalarBazaA);
-            this.panel2.Controls.Add(this.txtSporA);
-            this.panel2.Controls.Add(this.txtRetineriA);
-            this.panel2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel2.ForeColor = System.Drawing.Color.DarkGreen;
-            this.panel2.Location = new System.Drawing.Point(51, 70);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(297, 303);
-            this.panel2.TabIndex = 12;
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // label9
+            // bindingNavigatorMoveNextItem
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Gadugi", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label9.Location = new System.Drawing.Point(100, 25);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(171, 21);
-            this.label9.TabIndex = 12;
-            this.label9.Text = "Adaugare Angajat";
+            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
+            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
+            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveNextItem.Text = "Move next";
             // 
-            // btnAdaugareA
+            // bindingNavigatorMoveLastItem
             // 
-            this.btnAdaugareA.ForeColor = System.Drawing.Color.Black;
-            this.btnAdaugareA.Location = new System.Drawing.Point(126, 250);
-            this.btnAdaugareA.Name = "btnAdaugareA";
-            this.btnAdaugareA.Size = new System.Drawing.Size(118, 38);
-            this.btnAdaugareA.TabIndex = 12;
-            this.btnAdaugareA.Text = "Adăugare";
-            this.btnAdaugareA.UseVisualStyleBackColor = true;
-            this.btnAdaugareA.Click += new System.EventHandler(this.btnAdaugareA_Click);
+            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
+            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
+            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveLastItem.Text = "Move last";
+            // 
+            // bindingNavigatorSeparator2
+            // 
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorAddNewItem
+            // 
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorAddNewItem.Text = "Add new";
+            // 
+            // bindingNavigatorDeleteItem
+            // 
+            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
+            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
+            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorDeleteItem.Text = "Delete";
             // 
             // Form1
             // 
@@ -575,7 +779,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Evidenta Salarii-Angajati";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
@@ -585,12 +789,18 @@
             this.tabMainPage.ResumeLayout(false);
             this.tabAdaugare.ResumeLayout(false);
             this.tabAdaugare.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.tabActualizareDate.ResumeLayout(false);
+            this.tabActualizareDate.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.panelChangePass.ResumeLayout(false);
             this.panelChangePass.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProcente)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvActualizareDate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
+            this.bindingNavigator1.ResumeLayout(false);
+            this.bindingNavigator1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -613,7 +823,7 @@
         private System.Windows.Forms.ToolStripMenuItem modifProcenteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem iesireToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btnAdaugare;
         private System.Windows.Forms.Button btnActualizare;
         private System.Windows.Forms.Button btnStergere;
         private System.Windows.Forms.Button btnSave;
@@ -621,7 +831,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabMainPage;
         private System.Windows.Forms.TabPage tabAdaugare;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabActualizareDate;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.DataGridView dgvProcente;
         private System.Windows.Forms.Button btnAutentificare;
@@ -648,6 +858,24 @@
         private System.Windows.Forms.TextBox txtSalarBazaA;
         private System.Windows.Forms.TextBox txtSporA;
         private System.Windows.Forms.TextBox txtRetineriA;
+        private System.Windows.Forms.TextBox txtPremiiBruteA;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txtNumeCautat;
+        private System.Windows.Forms.DataGridView dgvActualizareDate;
+        private System.Windows.Forms.BindingNavigator bindingNavigator1;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
+        private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
+        private System.Windows.Forms.ToolStripTextBox bindingNavigatorPositionItem;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator1;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
     }
 }
 

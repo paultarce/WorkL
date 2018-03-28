@@ -11,6 +11,7 @@ using Oracle.ManagedDataAccess.Client;
 using TPBDApp.CrystalReports;
 using TPBDApp.DataSets;
 using TPBDApp.SecondaryForms;
+using TPBDApp.Algorithms;
 
 
 namespace TPBDApp
@@ -21,6 +22,7 @@ namespace TPBDApp
         OracleConnection cn;
         OracleDataAdapter da, daPass;
         DataSet ds, dsPass;
+        OracleCommand cm;
         String strSQL;
         public BindingSource bindingSource1;
         public Form1()
@@ -40,7 +42,10 @@ namespace TPBDApp
             bindingSource1.DataSource = ds.Tables["salarii"];
 
             dataGridView1.DataSource = ds.Tables["salarii"];
-
+            dgvActualizareDate.DataSource = ds.Tables["salarii"];
+            dataGridView1.AllowUserToAddRows = false;
+            //dgvActualizareDate = DuplicateGridView.CopyDataGridView(dataGridView1);
+            dgvActualizareDate.AllowUserToAddRows = false;
 
             btnSalvareProcente.Enabled = false;
             panelChangePass.Visible = false;
@@ -53,11 +58,6 @@ namespace TPBDApp
             //crystalReportViewer1
             raport.SetDataSource(ds.Tables["salarii"]);
             crystalReportViewer1.ReportSource = raport;
-        }
-
-        private void introducereDateToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void ajutorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -77,17 +77,28 @@ namespace TPBDApp
 
         private void actualizareDateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form1_Load(sender, e);
-            button1_Click(sender, e);
+            //Form1_Load(sender, e);
+            // button1_Click(sender, e);
+            tabControl1.SelectedIndex = 2;
+            //dgvActualizareDate = dataGridView1;
         }
 
         
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            OracleCommandBuilder comanda = new OracleCommandBuilder(da);
-            da.Update(ds.Tables["salarii"]);
-        }
+            try
+            {
+                OracleCommandBuilder comanda = new OracleCommandBuilder(da);
+                da.Update(ds.Tables["salarii"]);
+                MessageBox.Show("Actulalizare reusita");
+            }
+            catch(OracleException ex)
+            {
+                MessageBox.Show("Eroare Actualizare");
+            }
+
+            }
 
         #region NewPass
         private void btnModifParola_Click(object sender, EventArgs e)
@@ -147,17 +158,67 @@ namespace TPBDApp
 
 
         }
+
+        
+
         private void btnSalvareProcente_Click(object sender, EventArgs e)
         {
             OracleCommandBuilder comanda = new OracleCommandBuilder(daPass);
             daPass.Update(dsPass.Tables["procente"]);
         }
+
+       
         #endregion
 
+        #region ADAUGARE
 
         private void btnAdaugareA_Click(object sender, EventArgs e)
         {
-            OracleCommandBuilder comanda = new OracleCommandBuilder(da);
+            //OracleCommandBuilder comanda = new OracleCommandBuilder(da);
+            try
+            {
+               
+
+                cn.Open();
+                string sqlString = "INSERT INTO salarii (nume,prenume,functie,salar_baza,spor,premii_brute,retineri) values ('"
+                    + txtNumeA.Text +"','"+txtPrenumeA.Text+"','"+txtFunctieA.Text+"',"+txtSalarBazaA.Text+","+txtSporA.Text +","
+                    + txtPremiiBruteA.Text + "," + txtRetineriA.Text+")";
+                cm = new OracleCommand(sqlString, cn);
+                int i = cm.ExecuteNonQuery();
+                MessageBox.Show("Succes Adaugare", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch(OracleException ex)
+            {
+                MessageBox.Show("Eroare Adaugare:"+ex.Message, "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (cn.State == ConnectionState.Open)
+                    cn.Close();
+            }
+        }
+
+        private void adaugareAngajatiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 1;
+            txtNumeA.Text = "Jon"; txtPrenumeA.Text = "Jimmmy"; txtFunctieA.Text = "avocat"; txtSalarBazaA.Text = "4300";
+            txtSporA.Text = "10"; txtPremiiBruteA.Text = "0"; txtRetineriA.Text = "0";
+        }
+        #endregion
+
+        private void txtNumeCautat_TextChanged(object sender, EventArgs e)
+        {
+            int loc = bindingSource1.Find("nume", txtNumeCautat.Text);
+            if(loc == -1)
+            {
+
+            }
+            else
+            {
+
+
+            }
+            bindingSource1.Position = loc;
         }
     }
 }
