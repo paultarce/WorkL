@@ -1,4 +1,5 @@
 Trigger for primary key:
+parola GIT : paulprogrammer1
 
 	- create table salarii .....
 	- create sequence : 
@@ -14,14 +15,7 @@ Trigger for primary key:
  	   end;
  	   /
 
--- drop sequence pentru resetare nr_crt
--- sa arat ca intr-o caseta nu pot sa scriu decat cifre
--- valori pozitive permise doar
--- sa imi spuna daca nu am completat toate datele 
--- chiar daca am restrictii hard-codate , pun si try-catch
-	-romana
-
-create table salarii(nr_crt int PRIMARY KEY,nume varchar(30) not null,prenume varchar(30) not null,functie varchar(70) not null,salar_baza int null,spor int default 0,premii_brute int default 0,total_brut int null,brut_impz int null,impozit int null,CAS int null,CASS int null,retineri int default 0, virat_card int null);
+create table salarii(nr_crt int PRIMARY KEY,nume varchar(30),prenume varchar(30),functie varchar(30),salar_baza int,spor int,premii_brute int,total_brut int,brut_impz int,impozit int,CAS int,CASS int,retineri int, virat_card int);
 insert into salarii values(0,'Angajat5','Ion','ing',5,5,5,5,5,6,7,8,4,5);
 
 insert into salarii values(0,'Hal','Lindes','Musician',4000,10,0,0,0,0,0,0,0,0);
@@ -34,14 +28,10 @@ create or replace trigger insert_date
 before insert or update on salarii
 for each row
 DECLARE
- cas_p int;
- cass_p int;
- impozit_p int;
+ sanat int;
  
 BEGIN 
-   select cas into cas_p from procente;
-   select cass into cass_p from procente;
-   select impozit into impozit_p from procente;  
+	  
    :NEW.total_brut := :new.salar_baza*(1 + :NEW.spor/100) + :NEW.premii_brute;
    :NEW.cass := 0.1 * :NEW.total_brut;
    :NEW.cas := 0.25 * :NEW.total_brut;
@@ -51,70 +41,4 @@ BEGIN
    :NEW.virat_card := :new.total_brut - :new.impozit - :new.cas - :new.cass - :new.retineri;
   END;
   /
-
-Trigger tabela procente( sa aiba doar un rand)
-
-create trigger onerow_trig on procente before insert
-rollback
-return
-
-create or replace trigger one_row_trig 
-before insert on procente
-rollback
-/
-
- create or replace trigger modificare_procente
-    after update on procente
-    for each row
-    BEGIN
-    update salarii S set S.cas = :NEW.cas * S.total_brut where ;
-    update salarii S set S.cass = :NEW.cass * S.total_brut;
-    update salarii S set S.impozit = S.brut_impz * :NEW.impozit;
-    END;
-    /
-========================================================
-create or replace trigger modificare_procente
-after update of cas,cass,impozit on procente
-for each row
-declare 
-cas_n float;
-cass_n float;
-impozit_n float;
-BEGIN
-
-	cas_n := :NEW.cas;
-	cass_n := :NEW.cass;
-	impozit_n := :NEW.impozit;
-
-	update salarii set total_brut =  salar_baza*(1 + spor/100) + premii_brute;
-	update salarii set cass = cass_n * total_brut;
-	update salarii set cas = cas_n * total_brut;
-	update salarii set brut_impz = total_brut - cas_n - cass_n;
-	update salarii set impozit = brut_impz * impozit_n;
-	update salarii set retineri = 0;	
-	update salarii set virat_card = total_brut - impozit_n - cas_n - cass_n - retineri;
-END;	
-	
-
-==========================================================
-create or replace trigger insert_date 
-before insert or update of salar_baza,spor,premii_brute,retineri on salarii 
-for each row
-DECLARE
- cas_p float;
- cass_p float;
- impozit_p float;
- 
-BEGIN 
-   select cas into cas_p from procente where ROWNUM = 1;
-   select cass into cass_p from procente where ROWNUM = 1;
-   select impozit into impozit_p from procente where ROWNUM = 1;  
-   :NEW.total_brut := :new.salar_baza*(1 + :NEW.spor/100) + :NEW.premii_brute;
-   :NEW.cass := cass_p * :NEW.total_brut;
-   :NEW.cas := cas_p * :NEW.total_brut;
-   :NEW.brut_impz := :new.total_brut - :new.CAS - :new.cass;
-   :NEW.impozit := :NEW.brut_impz * impozit_p;
-   :NEW.retineri := 0;
-   :NEW.virat_card := :new.total_brut - :new.impozit - :new.cas - :new.cass - :new.retineri;
-  END;
-  /
+   

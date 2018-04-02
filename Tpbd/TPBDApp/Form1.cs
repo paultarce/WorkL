@@ -83,7 +83,7 @@ namespace TPBDApp
             //dgvActualizareDate = dataGridView1;
         }
 
-        
+
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -93,18 +93,18 @@ namespace TPBDApp
                 da.Update(ds.Tables["salarii"]);
                 MessageBox.Show("Actulalizare reusita");
             }
-            catch(OracleException ex)
+            catch (OracleException ex)
             {
                 MessageBox.Show("Eroare Actualizare");
             }
 
-            }
+        }
 
         #region NewPass
         private void btnModifParola_Click(object sender, EventArgs e)
         {
             panelChangePass.Visible = true;
-           
+
         }
 
         private void btnConfirmModificParola_Click(object sender, EventArgs e)
@@ -116,19 +116,19 @@ namespace TPBDApp
                     dsPass.Tables["procente"].Rows[0]["parola"] = txtNewPass.Text;
                     OracleCommandBuilder comanda = new OracleCommandBuilder(daPass);
                     daPass.Update(dsPass.Tables["procente"]);
-                    MessageBox.Show("Modificare realizata cu succes", "Succes", MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    MessageBox.Show("Modificare realizata cu succes", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show("Modificare nerealizata", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-                
-               
+
+
             }
         }
 
 
-       
+
         #endregion
 
         #region PROCENTE
@@ -159,37 +159,50 @@ namespace TPBDApp
 
         }
 
-        
+
 
         private void btnSalvareProcente_Click(object sender, EventArgs e)
         {
-            OracleCommandBuilder comanda = new OracleCommandBuilder(daPass);
-            daPass.Update(dsPass.Tables["procente"]);
+            try
+            {
+                OracleCommandBuilder comanda = new OracleCommandBuilder(daPass);
+                daPass.Update(dsPass.Tables["procente"]);
+                MessageBox.Show("Salvare Procente reusita");
+            }
+            catch (OracleException ex)
+            {
+                MessageBox.Show("Salvare Procente esuata");
+            }
         }
 
-       
+
         #endregion
 
         #region ADAUGARE
 
         private void btnAdaugareA_Click(object sender, EventArgs e)
         {
+            int k = 0;
+            if(txtNumeA.Text.Length < 2 && txtPrenumeA.Text.Length < 2 && txtFunctieA.Text.Length < 2)
+            {
+                MessageBox.Show("Câmpurile 'Nume','Prenume','Funcție' trebuie să conțină minim 2 caractere!","Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                k = 0;
+            }
+            if()
             //OracleCommandBuilder comanda = new OracleCommandBuilder(da);
             try
             {
-               
-
                 cn.Open();
                 string sqlString = "INSERT INTO salarii (nume,prenume,functie,salar_baza,spor,premii_brute,retineri) values ('"
-                    + txtNumeA.Text +"','"+txtPrenumeA.Text+"','"+txtFunctieA.Text+"',"+txtSalarBazaA.Text+","+txtSporA.Text +","
-                    + txtPremiiBruteA.Text + "," + txtRetineriA.Text+")";
+                    + txtNumeA.Text + "','" + txtPrenumeA.Text + "','" + txtFunctieA.Text + "'," + txtSalarBazaA.Text + "," + txtSporA.Text + ","
+                    + txtPremiiBruteA.Text + "," + txtRetineriA.Text + ")";
                 cm = new OracleCommand(sqlString, cn);
                 int i = cm.ExecuteNonQuery();
                 MessageBox.Show("Succes Adaugare", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch(OracleException ex)
+            catch (OracleException ex)
             {
-                MessageBox.Show("Eroare Adaugare:"+ex.Message, "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Eroare Adaugare:" + ex.Message, "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -197,6 +210,8 @@ namespace TPBDApp
                     cn.Close();
             }
         }
+
+
 
         private void adaugareAngajatiToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -206,19 +221,63 @@ namespace TPBDApp
         }
         #endregion
 
+       
+
         private void txtNumeCautat_TextChanged(object sender, EventArgs e)
         {
-            int loc = bindingSource1.Find("nume", txtNumeCautat.Text);
-            if(loc == -1)
-            {
+           
+            string variab = "nume like " + "'" + txtNumeCautat.Text + "*'";
+            bindingSource1.Filter = variab;
 
-            }
-            else
-            {
-
-
-            }
-            bindingSource1.Position = loc;
         }
+        #region KeyPress
+        private void txtNumeA_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((!char.IsLetter(e.KeyChar)) & ((Keys)e.KeyChar != Keys.Back) & (e.KeyChar != ('-')) & (e.KeyChar != (' ')))
+                e.Handled = true;
+        }
+
+
+        private void txtPrenumeA_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((!char.IsLetter(e.KeyChar)) & ((Keys)e.KeyChar != Keys.Back) & (e.KeyChar != ('-')) & (e.KeyChar != (' ')))
+                e.Handled = true;
+        }
+
+        private void txtFunctieA_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((!char.IsLetter(e.KeyChar)) & ((Keys)e.KeyChar != Keys.Back) & (e.KeyChar != ('-')) & (e.KeyChar != (' ')))
+                e.Handled = true;
+        }
+
+        private void txtSalarBazaA_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((!char.IsDigit(e.KeyChar)) & (!char.IsControl(e.KeyChar)))
+                e.Handled = true;
+        }
+
+        private void txtSporA_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((!char.IsDigit(e.KeyChar)) & (!char.IsControl(e.KeyChar)))
+                e.Handled = true;
+        }
+
+        private void btnAnulareAdaugare_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtPremiiBruteA_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((!char.IsDigit(e.KeyChar)) & (!char.IsControl(e.KeyChar)))
+                e.Handled = true;
+        }
+
+        private void txtRetineriA_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((!char.IsDigit(e.KeyChar)) & (!char.IsControl(e.KeyChar)))
+                e.Handled = true;
+        }
+        #endregion
     }
 }
