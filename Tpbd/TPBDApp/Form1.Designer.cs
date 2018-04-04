@@ -78,6 +78,7 @@
             this.txtSporA = new System.Windows.Forms.TextBox();
             this.txtRetineriA = new System.Windows.Forms.TextBox();
             this.tabActualizareDate = new System.Windows.Forms.TabPage();
+            this.button2 = new System.Windows.Forms.Button();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
@@ -105,9 +106,11 @@
             this.btnSalvareProcente = new System.Windows.Forms.Button();
             this.btnAutentificare = new System.Windows.Forms.Button();
             this.dgvProcente = new System.Windows.Forms.DataGridView();
-            this.button2 = new System.Windows.Forms.Button();
             this.tabStergere = new System.Windows.Forms.TabPage();
-            this.dgvStergere = new System.Windows.Forms.DataGridView();
+            this.label15 = new System.Windows.Forms.Label();
+            this.btnSaveStergere = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtCautareStergere = new System.Windows.Forms.TextBox();
             this.bindingNavigator2 = new System.Windows.Forms.BindingNavigator(this.components);
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
@@ -120,10 +123,7 @@
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnSaveStergere = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
-            this.txtCautareStergere = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
+            this.dgvStergere = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -140,9 +140,9 @@
             this.panelChangePass.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProcente)).BeginInit();
             this.tabStergere.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStergere)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator2)).BeginInit();
             this.bindingNavigator2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStergere)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -631,6 +631,17 @@
             this.tabActualizareDate.Text = "ActualizareDate";
             this.tabActualizareDate.UseVisualStyleBackColor = true;
             // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Lime;
+            this.button2.Location = new System.Drawing.Point(365, 265);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(106, 30);
+            this.button2.TabIndex = 15;
+            this.button2.Text = "Salvare";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // bindingNavigator1
             // 
             this.bindingNavigator1.AddNewItem = this.bindingNavigatorAddNewItem;
@@ -779,8 +790,9 @@
             this.dgvActualizareDate.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvActualizareDate.Location = new System.Drawing.Point(19, 63);
             this.dgvActualizareDate.Name = "dgvActualizareDate";
-            this.dgvActualizareDate.Size = new System.Drawing.Size(834, 133);
+            this.dgvActualizareDate.Size = new System.Drawing.Size(834, 176);
             this.dgvActualizareDate.TabIndex = 1;
+            this.dgvActualizareDate.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvActualizareDate_EditingControlShowing);
             // 
             // tabPage3
             // 
@@ -890,17 +902,7 @@
             this.dgvProcente.Name = "dgvProcente";
             this.dgvProcente.Size = new System.Drawing.Size(435, 105);
             this.dgvProcente.TabIndex = 0;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.Lime;
-            this.button2.Location = new System.Drawing.Point(365, 265);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(106, 30);
-            this.button2.TabIndex = 15;
-            this.button2.Text = "Salvare";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.btnSave_Click);
+            this.dgvProcente.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvProcente_EditingControlShowing);
             // 
             // tabStergere
             // 
@@ -918,15 +920,44 @@
             this.tabStergere.Text = "Ștergere";
             this.tabStergere.UseVisualStyleBackColor = true;
             // 
-            // dgvStergere
+            // label15
             // 
-            this.dgvStergere.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvStergere.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvStergere.Location = new System.Drawing.Point(12, 124);
-            this.dgvStergere.Name = "dgvStergere";
-            this.dgvStergere.Size = new System.Drawing.Size(834, 133);
-            this.dgvStergere.TabIndex = 2;
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Gadugi", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label15.Location = new System.Drawing.Point(299, 28);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(165, 21);
+            this.label15.TabIndex = 19;
+            this.label15.Text = "Stergere Angajati";
+            // 
+            // btnSaveStergere
+            // 
+            this.btnSaveStergere.BackColor = System.Drawing.Color.Lime;
+            this.btnSaveStergere.Location = new System.Drawing.Point(491, 290);
+            this.btnSaveStergere.Name = "btnSaveStergere";
+            this.btnSaveStergere.Size = new System.Drawing.Size(106, 30);
+            this.btnSaveStergere.TabIndex = 18;
+            this.btnSaveStergere.Text = "Stergere";
+            this.btnSaveStergere.UseVisualStyleBackColor = false;
+            this.btnSaveStergere.Click += new System.EventHandler(this.btnSaveStergere_Click);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(160, 299);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(108, 13);
+            this.label14.TabIndex = 17;
+            this.label14.Text = "Nume Angajat Cautat";
+            // 
+            // txtCautareStergere
+            // 
+            this.txtCautareStergere.Location = new System.Drawing.Point(269, 296);
+            this.txtCautareStergere.Name = "txtCautareStergere";
+            this.txtCautareStergere.Size = new System.Drawing.Size(169, 20);
+            this.txtCautareStergere.TabIndex = 16;
+            this.txtCautareStergere.TextChanged += new System.EventHandler(this.txtCautareStergere_TextChanged);
             // 
             // bindingNavigator2
             // 
@@ -1041,44 +1072,15 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
-            // btnSaveStergere
+            // dgvStergere
             // 
-            this.btnSaveStergere.BackColor = System.Drawing.Color.Lime;
-            this.btnSaveStergere.Location = new System.Drawing.Point(491, 290);
-            this.btnSaveStergere.Name = "btnSaveStergere";
-            this.btnSaveStergere.Size = new System.Drawing.Size(106, 30);
-            this.btnSaveStergere.TabIndex = 18;
-            this.btnSaveStergere.Text = "Stergere";
-            this.btnSaveStergere.UseVisualStyleBackColor = false;
-            this.btnSaveStergere.Click += new System.EventHandler(this.btnSaveStergere_Click);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(160, 299);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(108, 13);
-            this.label14.TabIndex = 17;
-            this.label14.Text = "Nume Angajat Cautat";
-            // 
-            // txtCautareStergere
-            // 
-            this.txtCautareStergere.Location = new System.Drawing.Point(269, 296);
-            this.txtCautareStergere.Name = "txtCautareStergere";
-            this.txtCautareStergere.Size = new System.Drawing.Size(169, 20);
-            this.txtCautareStergere.TabIndex = 16;
-            this.txtCautareStergere.TextChanged += new System.EventHandler(this.txtCautareStergere_TextChanged);
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Gadugi", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label15.Location = new System.Drawing.Point(299, 53);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(165, 21);
-            this.label15.TabIndex = 19;
-            this.label15.Text = "Stergere Angajati";
+            this.dgvStergere.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvStergere.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvStergere.Location = new System.Drawing.Point(12, 52);
+            this.dgvStergere.Name = "dgvStergere";
+            this.dgvStergere.Size = new System.Drawing.Size(834, 205);
+            this.dgvStergere.TabIndex = 2;
             // 
             // Form1
             // 
@@ -1114,10 +1116,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvProcente)).EndInit();
             this.tabStergere.ResumeLayout(false);
             this.tabStergere.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStergere)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator2)).EndInit();
             this.bindingNavigator2.ResumeLayout(false);
             this.bindingNavigator2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStergere)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

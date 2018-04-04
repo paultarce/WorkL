@@ -65,6 +65,7 @@ namespace TPBDApp
             panelChangePass.Visible = false;
             btnModifParola.Enabled = true;
 
+            dgvActualizareDate.Columns["nr_crt"].ReadOnly = true; dgvActualizareDate.Columns["nr_crt"].DefaultCellStyle.BackColor = Color.Gold;
             dgvActualizareDate.Columns["total_brut"].ReadOnly = true; dgvActualizareDate.Columns["total_brut"].DefaultCellStyle.BackColor = Color.Gold;
             dgvActualizareDate.Columns["brut_impz"].ReadOnly = true; dgvActualizareDate.Columns["brut_impz"].DefaultCellStyle.BackColor = Color.Gold;
             dgvActualizareDate.Columns["impozit"].ReadOnly = true; dgvActualizareDate.Columns["impozit"].DefaultCellStyle.BackColor = Color.Gold;
@@ -105,28 +106,148 @@ namespace TPBDApp
         }
 
 
-
+        #region ACTUALIZARE DATE 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            bool k = false;
+            k = CheckActualizare();
+            if (k == false)
             {
-                /*   OracleCommandBuilder comanda = new OracleCommandBuilder(da);
-                   da.Update(ds.Tables["salarii"]);
-                   MessageBox.Show("Actulalizare reusita");  */
-                OracleCommandBuilder comanda = new OracleCommandBuilder(da);
-                bindingSource1.EndEdit();
-                da.Update(ds.Tables["salarii"]);
-                ds.AcceptChanges();
-                Form1_Load(sender, e);          //Pentru a actualiza datele imediat si in dgv
-                MessageBox.Show("Actulalizare reusita");
+                try
+                {
+                    /*   OracleCommandBuilder comanda = new OracleCommandBuilder(da);
+                       da.Update(ds.Tables["salarii"]);
+                       MessageBox.Show("Actulalizare reusita");  */
+                    OracleCommandBuilder comanda = new OracleCommandBuilder(da);
+                    bindingSource1.EndEdit();
+                    da.Update(ds.Tables["salarii"]);
+                    ds.AcceptChanges();
+                    Form1_Load(sender, e);          //Pentru a actualiza datele imediat si in dgv
+                    MessageBox.Show("Actulalizare reusita");
 
+                }
+                catch (OracleException ex)
+                {
+                    MessageBox.Show("Eroare Actualizare: Completati câmpurile Text cu minim 2 caractere \nCompletați " +
+                         "câmpurile numerice astfel: \n  -> 1.900 < Salar_baza < 100.000 \n -> 0 < Spor < 100 \n -> 0 < Premii_brute < Salar_baza/2 \n ->   0 < retineri < Salar_baza/2 ", "Actualizare Esuata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Form1_Load(sender, e);
+                }
             }
-            catch (OracleException ex)
+            else
             {
-                MessageBox.Show("Eroare Actualizare");
+                Form1_Load(sender, e);
             }
 
         }
+
+        private bool CheckActualizare()
+        {
+            bool k = false;
+            int kNume = 0, kPrenume = 0, kFunctie = 0, kSpor = 0, kPremii = 0, kRetineri = 0, kSalar = 0;
+
+            try
+            {
+                for (int i = 0; i < dgvActualizareDate.Columns.Count; i++)
+                {
+                    for (int j = 0; j < dgvActualizareDate.Rows.Count; j++)
+                    {
+                        if (i == 1) // coloana nume  + varianta in care preiau numele coloanei
+                        {
+                            //int cell = Convert.ToInt32(dgvActualizareDate[1, j].Value.ToString());
+                            string cell = dgvActualizareDate[1, j].Value.ToString();
+                            if (cell.Length < 2)
+                                kNume = 1;
+
+                        }
+                        if (i == 2)
+                        {
+                            string cell = dgvActualizareDate[2, j].Value.ToString();
+                            if (cell.Length < 2)
+                                kPrenume = 1;
+                        }
+                        if (i == 3)
+                        {
+                            string cell = dgvActualizareDate[3, j].Value.ToString();
+                            if (cell.Length < 2)
+                                kFunctie = 1;
+                        }
+                        if (i == 4)
+                        {
+                            int cell = Convert.ToInt32(dgvActualizareDate[4, j].Value.ToString());
+
+                            if (cell < 1900 || cell > 100000)
+                                kSalar = 1;
+                        }
+                        if (i == 5)
+                        {
+                            int cell = Convert.ToInt32(dgvActualizareDate[5, j].Value.ToString());
+
+                            if (cell > 100)
+                                kSpor = 1;
+                        }
+                        if (i == 6)
+                        {
+                            int cell = Convert.ToInt32(dgvActualizareDate[6, j].Value.ToString());
+                            int cellB = Convert.ToInt32(dgvActualizareDate[4, j].Value.ToString());
+
+                            if (cell > cellB / 2)
+                                kPremii = 1;
+                        }
+                        if (i == 12)
+                        {
+                            int cell = Convert.ToInt32(dgvActualizareDate[12, j].Value.ToString());
+                            int cellB = Convert.ToInt32(dgvActualizareDate[4, j].Value.ToString());
+
+                            if (cell > cellB / 2)
+                                kRetineri = 1;
+                        }
+                    }
+                }
+            }
+            catch(OverflowException e)
+            {
+                MessageBox.Show("Valoare In afara limitelor","Eroare",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                k = true;
+            }
+            if(kNume == 1)
+            {
+                MessageBox.Show("Nume - minim 2 caractere", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                k = true;
+            }
+            if (kPrenume == 1)
+            {
+                MessageBox.Show("Prenume - minim 2 caractere", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                k = true;
+            }
+            if (kFunctie == 1)
+            {
+                MessageBox.Show("Functie - minim 2 caractere", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                k = true;
+            }
+            if(kSalar == 1)
+            {
+                MessageBox.Show("Salar baza gresit.Valori : [1900,100000]", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                k = true;
+            }
+            if(kSpor == 1)
+            {
+                MessageBox.Show("Spor gresit.Valori :[0,100]", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                k = true;
+            }
+            if(kPremii == 1)
+            {
+                MessageBox.Show("Premii_brute gresit.Valori: [0,Salar_baza/2]", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                k = true;
+            }
+            if(kRetineri == 1)
+            {
+                MessageBox.Show("Retineri gresit.Valori : [0,Salar_baza/2]", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                k = true;
+            }
+
+            return k; 
+        } 
+        #endregion
 
         #region NewPass
         private void btnModifParola_Click(object sender, EventArgs e)
@@ -194,16 +315,41 @@ namespace TPBDApp
 
         private void btnSalvareProcente_Click(object sender, EventArgs e)
         {
+            int k = 0; // pentru a valida modificarea
+            double cas, cass, impozit;
+
             try
             {
-                OracleCommandBuilder comanda = new OracleCommandBuilder(daPass);
-                daPass.Update(dsPass.Tables["procente"]);
-                Form1_Load(sender, e);
-                MessageBox.Show("Salvare Procente reusita.Date reactualizate");
+                cas = Convert.ToDouble(dgvProcente.Rows[0].Cells[0].Value.ToString());
+                cass = Convert.ToDouble(dgvProcente.Rows[0].Cells[1].Value.ToString());
+                impozit = Convert.ToDouble(dgvProcente.Rows[0].Cells[2].Value.ToString());
+                if( (cas >= 1)||(cass >= 1)||(impozit >= 1))
+                {
+                    k = 1;
+                    MessageBox.Show("Actualizare procente eșuată.Procentele au limitele:" +
+                        "\n -> 0 < cas < 1 \n -> 0 < cass < 1 \n -> 0 < impozit < 1", "Actualizare nereușită", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                }
             }
-            catch (OracleException ex)
+            catch(Exception ex)
             {
-                MessageBox.Show("Salvare Procente esuata");
+                MessageBox.Show("Date invalide:" + ex.GetType().Name);
+            }
+            //if((cas > 0)) // validare procente
+
+            if (k == 0)
+            {
+                try
+                {
+                    OracleCommandBuilder comanda = new OracleCommandBuilder(daPass);
+                    daPass.Update(dsPass.Tables["procente"]);
+                    Form1_Load(sender, e);
+                    btnSalvareProcente.Enabled = true;
+                    MessageBox.Show("Salvare Procente reusita.Date reactualizate");
+                }
+                catch (OracleException ex)
+                {
+                    MessageBox.Show("Salvare Procente esuata");
+                }
             }
         }
 
@@ -215,14 +361,14 @@ namespace TPBDApp
         private void btnAdaugareA_Click(object sender, EventArgs e)
         {
             int k = 0;
-            if(txtNumeA.Text.Length < 2 && txtPrenumeA.Text.Length < 2 && txtFunctieA.Text.Length < 2)
+            if(txtNumeA.Text.Length < 2 || txtPrenumeA.Text.Length < 2 || txtFunctieA.Text.Length < 2)
             {
                 MessageBox.Show("Câmpurile 'Nume','Prenume','Funcție' trebuie să conțină minim 2 caractere!","Atenție", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 k = 1;
             }
-            if (txtSalarBazaA.Text.Length < 4 )
+            if (txtSalarBazaA.Text.Length < 4 || Convert.ToInt32(txtSalarBazaA.Text) < 1900 )
             {
-                MessageBox.Show("Salariul de baza trebuie sa conțină minim 4 cifre", "Atenție", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Salariul de baza trebuie sa conțină minim 4 cifre si sa fie mai mare decat 1900 lei", "Atenție", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 k = 1;
             }
             if (txtPremiiBruteA.Text.Length < 1 || txtSporA.Text.Length < 1 || txtRetineriA.Text.Length < 1)
@@ -324,7 +470,7 @@ namespace TPBDApp
         {
             if ((!char.IsDigit(e.KeyChar)) & ((Keys)e.KeyChar != Keys.Back))
                 e.Handled = true;
-            if (txtSporA.Text.Length > 6 && ((Keys)e.KeyChar != Keys.Back))
+            if (txtSporA.Text.Length > 2 && ((Keys)e.KeyChar != Keys.Back))
                 e.Handled = true;
         }
 
@@ -357,6 +503,7 @@ namespace TPBDApp
         private void btnAnulareAdaugare_Click(object sender, EventArgs e)
         {
             adaugareAngajatiToolStripMenuItem_Click(sender, e);
+            lblChar.Visible = false;
         }
 
         
@@ -369,6 +516,8 @@ namespace TPBDApp
             tabControl1.SelectedIndex = 4;
         }
 
+
+        
         private void txtCautareStergere_TextChanged(object sender, EventArgs e)
         {
             string variab = "nume like " + "'" + txtCautareStergere.Text + "*'";
@@ -377,7 +526,7 @@ namespace TPBDApp
 
         private void btnSaveStergere_Click(object sender, EventArgs e)
         {
-            DialogResult dialog = MessageBox.Show("Doriti stergere?", "Stergere", MessageBoxButtons.YesNo);
+            DialogResult dialog = MessageBox.Show("Confirmati stergerea?", "Stergere", MessageBoxButtons.YesNo);
             if (dialog == DialogResult.Yes)
             {
                 if (bindingSource1.Count > 0)
@@ -386,7 +535,8 @@ namespace TPBDApp
                     {
                         bindingSource1.RemoveCurrent();
                         bindingSource1.EndEdit();
-                        btnSave_Click(sender, e);
+                        //btnSave_Click(sender, e);
+                        Save_Stergere();
                     }
                     catch (OracleException ex)
                     {
@@ -397,6 +547,106 @@ namespace TPBDApp
     
         }
 
+        private void Save_Stergere()
+        {
+            try
+            {
+                /*   OracleCommandBuilder comanda = new OracleCommandBuilder(da);
+                   da.Update(ds.Tables["salarii"]);
+                   MessageBox.Show("Actulalizare reusita");  */
+                OracleCommandBuilder comanda = new OracleCommandBuilder(da);
+                bindingSource1.EndEdit();
+                da.Update(ds.Tables["salarii"]);
+                ds.AcceptChanges();
+                Form1_Load(null, null);          //Pentru a actualiza datele imediat si in dgv
+                MessageBox.Show("Actulalizare reusita");
+
+            }
+            catch (OracleException ex)
+            {
+                //MessageBox.Show("Eroare Actualizare: Completati câmpurile Text cu minim 2 caractere \nCompletați " +
+                //     "câmpurile numerice astfel: \n  -> 1.900 < Salar_baza < 100.000 \n -> 0 < Spor < 100 \n -> 0 < Premii_brute < Salar_baza/2 \n ->   0 < retineri < Salar_baza/2 )", "Actualizare Esuata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Eroare Stergere", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        #endregion
+
+        #region DATA GRID VALIDATION
+        private void dgvActualizareDate_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            e.Control.KeyPress -= new KeyPressEventHandler(ColumnChar_KeyPress); //remove any key press event added prevoiusly in EditingControlShowing
+            e.Control.KeyPress -= new KeyPressEventHandler(ColumnNumber_KeyPress);
+            int col = dgvActualizareDate.CurrentCell.ColumnIndex;
+            if ( col == 1 || col == 2 || col == 3)
+            {
+                TextBox tb = e.Control as TextBox;
+                if(tb != null)
+                {
+                    tb.KeyPress += new KeyPressEventHandler(ColumnChar_KeyPress);
+                }
+            }
+            if(col == 4 || col == 5 || col == 6 || col == 12)
+            {
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.KeyPress += new KeyPressEventHandler(ColumnNumber_KeyPress);
+                }
+            }
+          
+        }
+
+        private void dgvProcente_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            e.Control.KeyPress -= new KeyPressEventHandler(ColumnNumberDot_KeyPress); //remove any key press event added prevoiusly in EditingControlShowing
+            int col = dgvProcente.CurrentCell.ColumnIndex;
+            if (col == 0 || col == 1 || col == 2)
+            {
+                tbP = e.Control as TextBox;
+                if (tbP != null)
+                {
+                    tbP.KeyPress += new KeyPressEventHandler(ColumnNumberDot_KeyPress);
+                }
+            }
+        }
+
+        private void ColumnChar_KeyPress(object sender,KeyPressEventArgs e)
+        {
+            if(!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) && (e.KeyChar != ('-')) && (e.KeyChar != (' ')))
+            {
+                e.Handled = true;
+            }
+        }
+        private void ColumnNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsNumber(e.KeyChar) )
+            {
+                e.Handled = true;
+            }
+        }
+
+        int dotExists = 0;
+        TextBox tbP;
+        private void ColumnNumberDot_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string txtProcente = tbP.Text;
+            if (!char.IsControl(e.KeyChar) && !char.IsNumber(e.KeyChar) && (e.KeyChar != ('.') ))
+            {
+                e.Handled = true;
+            }
+            if (e.KeyChar == ('.') && txtProcente.Length ==  0)
+                e.Handled = true;
+
+            if ( (dotExists == 1 && e.KeyChar==('.')) || (txtProcente == "" && e.KeyChar ==('.') ))
+                e.Handled = true;
+
+            if (txtProcente == "")
+                dotExists = 0;
+            if (e.KeyChar == ('.') && txtProcente != "" )
+                dotExists = 1;
+
+        }
         #endregion
     }
 }
