@@ -25,6 +25,7 @@ namespace TPBDApp
         OracleCommand cm;
         String strSQL;
         public BindingSource bindingSource1;
+        BindingSource bdSource2;
         public Form1()
         {
             InitializeComponent();
@@ -41,6 +42,7 @@ namespace TPBDApp
             da.Fill(ds, "salarii");
 
             bindingSource1 = new BindingSource();
+            bdSource2 = new BindingSource();
             bindingSource1.DataSource = ds.Tables["salarii"];
             bindingNavigator1.BindingSource = bindingSource1;
             bindingNavigator1.AddNewItem.Enabled = false;
@@ -54,8 +56,13 @@ namespace TPBDApp
             // dgvActualizareDate.DataSource = ds.Tables["salarii"];
             dgvActualizareDate.DataSource = bindingSource1;
             dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.ReadOnly = true;
             //dgvActualizareDate = DuplicateGridView.CopyDataGridView(dataGridView1);
             dgvActualizareDate.AllowUserToAddRows = false;
+
+            dgvCrystalRep.DataSource = bindingSource1;
+            dgvCrystalRep.AllowUserToAddRows = false;
+            dgvCrystalRep.ReadOnly = true;
 
             dgvStergere.DataSource = bindingSource1;
             dgvStergere.AllowUserToAddRows = false;
@@ -72,15 +79,17 @@ namespace TPBDApp
             dgvActualizareDate.Columns["cas"].ReadOnly = true; dgvActualizareDate.Columns["cas"].DefaultCellStyle.BackColor = Color.Gold;
             dgvActualizareDate.Columns["cass"].ReadOnly = true; dgvActualizareDate.Columns["cass"].DefaultCellStyle.BackColor = Color.Gold;
             dgvActualizareDate.Columns["virat_card"].ReadOnly = true; dgvActualizareDate.Columns["virat_card"].DefaultCellStyle.BackColor = Color.Gold;
+
+            crystalReportViewer1.Zoom(70);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+       /* private void button1_Click(object sender, EventArgs e)
         {
             CrystalReport1 raport = new CrystalReport1();
             //crystalReportViewer1
             raport.SetDataSource(ds.Tables["salarii"]);
             crystalReportViewer1.ReportSource = raport;
-        }
+        }*/
 
         private void ajutorToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -376,6 +385,32 @@ namespace TPBDApp
                 MessageBox.Show("Câmpurile 'PremiiBrute','Spor','Retineri' trebuie să conțină minim 1 caracter!", "Atenție", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 k = 1;
             }
+
+            int salar_baza, spor, premii, retineri;
+            salar_baza = Convert.ToInt32( txtSalarBazaA.Text);
+            spor = Convert.ToInt32(txtSporA.Text);
+            premii = Convert.ToInt32(txtPremiiBruteA.Text);
+            retineri = Convert.ToInt32(txtRetineriA.Text);
+            if(salar_baza >100000)
+            {
+                MessageBox.Show("Salar Baza < 100000");
+                k = 1;
+            }
+            if (spor > 100)
+            {
+                MessageBox.Show("Spor < 100", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                k = 1;
+            }
+            if (premii > salar_baza / 2)
+            {
+                MessageBox.Show("Premii < Salar_Baza/2", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                k = 1;
+            }
+            if (retineri > salar_baza / 2)
+            {
+                MessageBox.Show("Retineri < Salar_Bza/2", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                k = 1;
+            }
             //if()
             //OracleCommandBuilder comanda = new OracleCommandBuilder(da);
             if (k == 0)
@@ -627,7 +662,13 @@ namespace TPBDApp
         }
 
         int dotExists = 0;
+
+       
+
         TextBox tbP;
+
+       
+
         private void ColumnNumberDot_KeyPress(object sender, KeyPressEventArgs e)
         {
             string txtProcente = tbP.Text;
@@ -647,6 +688,93 @@ namespace TPBDApp
                 dotExists = 1;
 
         }
+
+        
+        #endregion
+
+        #region CrystalReports
+        private void statPlataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 5;
+        }
+        private void fluturașiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 5;
+        }
+        private void btnFluturasi_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 5;
+        }
+
+        private void btnFluturas_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                if (true)
+                {
+                    int cell = Convert.ToInt32(dgvCrystalRep[0, 0].Value.ToString());
+                    string id = ""; // = dgvCrystalRep.SelectedCells[0].Value.ToString();
+                                    //DataGridViewRow row = dgvCrystalRep.SelectedRows[1];
+                                    // string value = row.Cells[0].Value.ToString();
+                    foreach (DataGridViewRow row in dgvCrystalRep.SelectedRows)
+                    {
+                        id = row.Cells[0].Value.ToString();
+                        break;
+                    }
+
+
+                    string querry = "SELECT * from salarii where nr_crt=" + id;
+
+                    OracleDataAdapter daCr = new OracleDataAdapter(querry, cn);
+                    DataSet dsCr = new DataSet();
+
+                    dsCr.Tables.Add("salarii");
+                    daCr.Fill(dsCr, "salarii");
+
+                    Fluturasi fluturasi = new Fluturasi();
+                    //fluturasi.SetDataSource(ds.Tables["salarii"]);
+                    fluturasi.SetDataSource(dsCr.Tables["salarii"]);
+                    crystalReportViewer1.ReportSource = fluturasi;
+                }
+                else
+                {
+                    MessageBox.Show("Selectați o singura înregistrare!", "Atenție", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Selectati ÎNTREG RÂNDUL, nu doar o celulă!!!", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+            }
+        }
+
+        private void txtAngFluturas_TextChanged(object sender, EventArgs e)
+        {
+            string variab = "nume like " + "'" + txtAngFluturas.Text + "*'";
+            bindingSource1.Filter = variab;
+            bdSource2.DataSource = bindingSource1.Filter;
+        }
+
+        private void txtFluturasi_Click(object sender, EventArgs e)
+        {
+            Fluturasi fluturasi = new Fluturasi();
+            fluturasi.SetDataSource(ds.Tables["salarii"]);
+            crystalReportViewer1.ReportSource = fluturasi;
+
+        }
+
+
+        
+        
+        private void btnStatPlata_Click(object sender, EventArgs e)
+        {
+            CrystalReport1 raport = new CrystalReport1();
+            //crystalReportViewer1
+            raport.SetDataSource(ds.Tables["salarii"]);
+            crystalReportViewer1.ReportSource = raport;
+        }
+
+       
         #endregion
     }
 }

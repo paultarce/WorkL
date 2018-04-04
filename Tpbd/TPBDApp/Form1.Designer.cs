@@ -31,8 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.crystalReportViewer1 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
-            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.introducereDateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.actualizareDateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,12 +44,14 @@
             this.ajutorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iesireToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnFluturasi = new System.Windows.Forms.Button();
             this.btnAdaugare = new System.Windows.Forms.Button();
             this.btnActualizare = new System.Windows.Forms.Button();
             this.btnStergere = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabMainPage = new System.Windows.Forms.TabPage();
+            this.label17 = new System.Windows.Forms.Label();
             this.tabAdaugare = new System.Windows.Forms.TabPage();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -124,6 +124,14 @@
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.dgvStergere = new System.Windows.Forms.DataGridView();
+            this.tabFluturasi = new System.Windows.Forms.TabPage();
+            this.txtFluturasi = new System.Windows.Forms.Button();
+            this.btnStatPlata = new System.Windows.Forms.Button();
+            this.crystalReportViewer1 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
+            this.dgvCrystalRep = new System.Windows.Forms.DataGridView();
+            this.txtAngFluturas = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.btnFluturas = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -143,39 +151,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator2)).BeginInit();
             this.bindingNavigator2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStergere)).BeginInit();
+            this.tabFluturasi.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCrystalRep)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(22, 17);
+            this.dataGridView1.Location = new System.Drawing.Point(37, 107);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(237, 143);
+            this.dataGridView1.Size = new System.Drawing.Size(775, 143);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // crystalReportViewer1
-            // 
-            this.crystalReportViewer1.ActiveViewIndex = -1;
-            this.crystalReportViewer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.crystalReportViewer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.crystalReportViewer1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.crystalReportViewer1.Location = new System.Drawing.Point(392, 6);
-            this.crystalReportViewer1.Name = "crystalReportViewer1";
-            this.crystalReportViewer1.Size = new System.Drawing.Size(450, 368);
-            this.crystalReportViewer1.TabIndex = 1;
-            this.crystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(296, 64);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // menuStrip1
             // 
@@ -243,12 +229,14 @@
             this.statPlataToolStripMenuItem.Name = "statPlataToolStripMenuItem";
             this.statPlataToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.statPlataToolStripMenuItem.Text = "Stat plata";
+            this.statPlataToolStripMenuItem.Click += new System.EventHandler(this.statPlataToolStripMenuItem_Click);
             // 
             // fluturașiToolStripMenuItem
             // 
             this.fluturașiToolStripMenuItem.Name = "fluturașiToolStripMenuItem";
             this.fluturașiToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.fluturașiToolStripMenuItem.Text = "Fluturași";
+            this.fluturașiToolStripMenuItem.Click += new System.EventHandler(this.fluturașiToolStripMenuItem_Click);
             // 
             // modifProcenteToolStripMenuItem
             // 
@@ -273,21 +261,33 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnFluturasi);
             this.panel1.Controls.Add(this.btnAdaugare);
             this.panel1.Controls.Add(this.btnActualizare);
             this.panel1.Controls.Add(this.btnStergere);
             this.panel1.Controls.Add(this.btnSave);
-            this.panel1.Location = new System.Drawing.Point(22, 166);
+            this.panel1.Location = new System.Drawing.Point(158, 290);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(349, 207);
+            this.panel1.Size = new System.Drawing.Size(501, 147);
             this.panel1.TabIndex = 4;
+            // 
+            // btnFluturasi
+            // 
+            this.btnFluturasi.BackColor = System.Drawing.Color.Lime;
+            this.btnFluturasi.Location = new System.Drawing.Point(187, 90);
+            this.btnFluturasi.Name = "btnFluturasi";
+            this.btnFluturasi.Size = new System.Drawing.Size(106, 30);
+            this.btnFluturasi.TabIndex = 4;
+            this.btnFluturasi.Text = "Fluturași,Stat Plata";
+            this.btnFluturasi.UseVisualStyleBackColor = false;
+            this.btnFluturasi.Click += new System.EventHandler(this.btnFluturasi_Click);
             // 
             // btnAdaugare
             // 
             this.btnAdaugare.BackColor = System.Drawing.Color.Lime;
-            this.btnAdaugare.Location = new System.Drawing.Point(12, 91);
+            this.btnAdaugare.Location = new System.Drawing.Point(353, 12);
             this.btnAdaugare.Name = "btnAdaugare";
-            this.btnAdaugare.Size = new System.Drawing.Size(106, 37);
+            this.btnAdaugare.Size = new System.Drawing.Size(108, 30);
             this.btnAdaugare.TabIndex = 3;
             this.btnAdaugare.Text = "Adaugare Angajati";
             this.btnAdaugare.UseVisualStyleBackColor = false;
@@ -296,9 +296,9 @@
             // btnActualizare
             // 
             this.btnActualizare.BackColor = System.Drawing.Color.LimeGreen;
-            this.btnActualizare.Location = new System.Drawing.Point(12, 48);
+            this.btnActualizare.Location = new System.Drawing.Point(187, 12);
             this.btnActualizare.Name = "btnActualizare";
-            this.btnActualizare.Size = new System.Drawing.Size(106, 37);
+            this.btnActualizare.Size = new System.Drawing.Size(109, 30);
             this.btnActualizare.TabIndex = 2;
             this.btnActualizare.Text = "Actualizare Date";
             this.btnActualizare.UseVisualStyleBackColor = false;
@@ -317,7 +317,7 @@
             // btnSave
             // 
             this.btnSave.BackColor = System.Drawing.Color.Lime;
-            this.btnSave.Location = new System.Drawing.Point(12, 143);
+            this.btnSave.Location = new System.Drawing.Point(12, 90);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(106, 30);
             this.btnSave.TabIndex = 0;
@@ -335,25 +335,36 @@
             this.tabControl1.Controls.Add(this.tabActualizareDate);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabStergere);
+            this.tabControl1.Controls.Add(this.tabFluturasi);
             this.tabControl1.Location = new System.Drawing.Point(12, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(867, 406);
+            this.tabControl1.Size = new System.Drawing.Size(867, 494);
             this.tabControl1.TabIndex = 5;
             // 
             // tabMainPage
             // 
+            this.tabMainPage.Controls.Add(this.label17);
             this.tabMainPage.Controls.Add(this.dataGridView1);
-            this.tabMainPage.Controls.Add(this.button1);
             this.tabMainPage.Controls.Add(this.panel1);
-            this.tabMainPage.Controls.Add(this.crystalReportViewer1);
             this.tabMainPage.Location = new System.Drawing.Point(4, 22);
             this.tabMainPage.Name = "tabMainPage";
             this.tabMainPage.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMainPage.Size = new System.Drawing.Size(859, 380);
+            this.tabMainPage.Size = new System.Drawing.Size(859, 468);
             this.tabMainPage.TabIndex = 0;
             this.tabMainPage.Text = "Main Page";
             this.tabMainPage.UseVisualStyleBackColor = true;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Gadugi", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label17.Location = new System.Drawing.Point(316, 36);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(224, 21);
+            this.label17.TabIndex = 13;
+            this.label17.Text = "Evidenta Salarii Angajati";
             // 
             // tabAdaugare
             // 
@@ -366,7 +377,7 @@
             this.tabAdaugare.Location = new System.Drawing.Point(4, 22);
             this.tabAdaugare.Name = "tabAdaugare";
             this.tabAdaugare.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAdaugare.Size = new System.Drawing.Size(859, 380);
+            this.tabAdaugare.Size = new System.Drawing.Size(859, 468);
             this.tabAdaugare.TabIndex = 1;
             this.tabAdaugare.Text = "Adăugare";
             this.tabAdaugare.UseVisualStyleBackColor = true;
@@ -626,7 +637,7 @@
             this.tabActualizareDate.Location = new System.Drawing.Point(4, 22);
             this.tabActualizareDate.Name = "tabActualizareDate";
             this.tabActualizareDate.Padding = new System.Windows.Forms.Padding(3);
-            this.tabActualizareDate.Size = new System.Drawing.Size(859, 380);
+            this.tabActualizareDate.Size = new System.Drawing.Size(859, 468);
             this.tabActualizareDate.TabIndex = 2;
             this.tabActualizareDate.Text = "ActualizareDate";
             this.tabActualizareDate.UseVisualStyleBackColor = true;
@@ -804,7 +815,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(859, 380);
+            this.tabPage3.Size = new System.Drawing.Size(859, 468);
             this.tabPage3.TabIndex = 3;
             this.tabPage3.Text = "Modificare Procente";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -915,7 +926,7 @@
             this.tabStergere.Location = new System.Drawing.Point(4, 22);
             this.tabStergere.Name = "tabStergere";
             this.tabStergere.Padding = new System.Windows.Forms.Padding(3);
-            this.tabStergere.Size = new System.Drawing.Size(859, 380);
+            this.tabStergere.Size = new System.Drawing.Size(859, 468);
             this.tabStergere.TabIndex = 4;
             this.tabStergere.Text = "Ștergere";
             this.tabStergere.UseVisualStyleBackColor = true;
@@ -1082,11 +1093,99 @@
             this.dgvStergere.Size = new System.Drawing.Size(834, 205);
             this.dgvStergere.TabIndex = 2;
             // 
+            // tabFluturasi
+            // 
+            this.tabFluturasi.Controls.Add(this.btnFluturas);
+            this.tabFluturasi.Controls.Add(this.label18);
+            this.tabFluturasi.Controls.Add(this.txtAngFluturas);
+            this.tabFluturasi.Controls.Add(this.dgvCrystalRep);
+            this.tabFluturasi.Controls.Add(this.txtFluturasi);
+            this.tabFluturasi.Controls.Add(this.btnStatPlata);
+            this.tabFluturasi.Controls.Add(this.crystalReportViewer1);
+            this.tabFluturasi.Location = new System.Drawing.Point(4, 22);
+            this.tabFluturasi.Name = "tabFluturasi";
+            this.tabFluturasi.Padding = new System.Windows.Forms.Padding(3);
+            this.tabFluturasi.Size = new System.Drawing.Size(859, 468);
+            this.tabFluturasi.TabIndex = 5;
+            this.tabFluturasi.Text = "Fluturasi";
+            this.tabFluturasi.UseVisualStyleBackColor = true;
+            // 
+            // txtFluturasi
+            // 
+            this.txtFluturasi.Location = new System.Drawing.Point(22, 109);
+            this.txtFluturasi.Name = "txtFluturasi";
+            this.txtFluturasi.Size = new System.Drawing.Size(108, 26);
+            this.txtFluturasi.TabIndex = 4;
+            this.txtFluturasi.Text = "Fluturași";
+            this.txtFluturasi.UseVisualStyleBackColor = true;
+            this.txtFluturasi.Click += new System.EventHandler(this.txtFluturasi_Click);
+            // 
+            // btnStatPlata
+            // 
+            this.btnStatPlata.Location = new System.Drawing.Point(22, 57);
+            this.btnStatPlata.Name = "btnStatPlata";
+            this.btnStatPlata.Size = new System.Drawing.Size(108, 26);
+            this.btnStatPlata.TabIndex = 3;
+            this.btnStatPlata.Text = "Stat Plata";
+            this.btnStatPlata.UseVisualStyleBackColor = true;
+            this.btnStatPlata.Click += new System.EventHandler(this.btnStatPlata_Click);
+            // 
+            // crystalReportViewer1
+            // 
+            this.crystalReportViewer1.ActiveViewIndex = -1;
+            this.crystalReportViewer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.crystalReportViewer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.crystalReportViewer1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.crystalReportViewer1.Location = new System.Drawing.Point(152, 134);
+            this.crystalReportViewer1.Name = "crystalReportViewer1";
+            this.crystalReportViewer1.Size = new System.Drawing.Size(690, 327);
+            this.crystalReportViewer1.TabIndex = 2;
+            this.crystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
+            // 
+            // dgvCrystalRep
+            // 
+            this.dgvCrystalRep.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvCrystalRep.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCrystalRep.Location = new System.Drawing.Point(182, 3);
+            this.dgvCrystalRep.Name = "dgvCrystalRep";
+            this.dgvCrystalRep.Size = new System.Drawing.Size(660, 115);
+            this.dgvCrystalRep.TabIndex = 5;
+            // 
+            // txtAngFluturas
+            // 
+            this.txtAngFluturas.Location = new System.Drawing.Point(6, 182);
+            this.txtAngFluturas.Name = "txtAngFluturas";
+            this.txtAngFluturas.Size = new System.Drawing.Size(140, 20);
+            this.txtAngFluturas.TabIndex = 6;
+            this.txtAngFluturas.TextChanged += new System.EventHandler(this.txtAngFluturas_TextChanged);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(6, 166);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(107, 13);
+            this.label18.TabIndex = 7;
+            this.label18.Text = "Nume Angajat căutat";
+            // 
+            // btnFluturas
+            // 
+            this.btnFluturas.Location = new System.Drawing.Point(22, 220);
+            this.btnFluturas.Name = "btnFluturas";
+            this.btnFluturas.Size = new System.Drawing.Size(108, 37);
+            this.btnFluturas.TabIndex = 8;
+            this.btnFluturas.Text = "Afișare Fluturaș";
+            this.btnFluturas.UseVisualStyleBackColor = true;
+            this.btnFluturas.Click += new System.EventHandler(this.btnFluturas_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(891, 434);
+            this.ClientSize = new System.Drawing.Size(891, 522);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -1099,6 +1198,7 @@
             this.panel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabMainPage.ResumeLayout(false);
+            this.tabMainPage.PerformLayout();
             this.tabAdaugare.ResumeLayout(false);
             this.tabAdaugare.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -1120,6 +1220,9 @@
             this.bindingNavigator2.ResumeLayout(false);
             this.bindingNavigator2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStergere)).EndInit();
+            this.tabFluturasi.ResumeLayout(false);
+            this.tabFluturasi.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCrystalRep)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1128,8 +1231,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem introducereDateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem actualizareDateToolStripMenuItem;
@@ -1221,6 +1322,16 @@
         private System.Windows.Forms.ToolStripButton toolStripButton6;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.DataGridView dgvStergere;
+        private System.Windows.Forms.TabPage tabFluturasi;
+        private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer1;
+        private System.Windows.Forms.Button btnFluturasi;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Button btnStatPlata;
+        private System.Windows.Forms.Button txtFluturasi;
+        private System.Windows.Forms.Button btnFluturas;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox txtAngFluturas;
+        private System.Windows.Forms.DataGridView dgvCrystalRep;
     }
 }
 
