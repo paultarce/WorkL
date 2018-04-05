@@ -125,13 +125,17 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.dgvStergere = new System.Windows.Forms.DataGridView();
             this.tabFluturasi = new System.Windows.Forms.TabPage();
+            this.btnFluturas = new System.Windows.Forms.Button();
+            this.label18 = new System.Windows.Forms.Label();
+            this.txtAngFluturas = new System.Windows.Forms.TextBox();
+            this.dgvCrystalRep = new System.Windows.Forms.DataGridView();
             this.txtFluturasi = new System.Windows.Forms.Button();
             this.btnStatPlata = new System.Windows.Forms.Button();
             this.crystalReportViewer1 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
-            this.dgvCrystalRep = new System.Windows.Forms.DataGridView();
-            this.txtAngFluturas = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.btnFluturas = new System.Windows.Forms.Button();
+            this.btnSalvarePDF = new System.Windows.Forms.Button();
+            this.label19 = new System.Windows.Forms.Label();
+            this.txtNumePdf = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -819,6 +823,7 @@
             this.tabPage3.TabIndex = 3;
             this.tabPage3.Text = "Modificare Procente";
             this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabPage3.Enter += new System.EventHandler(this.modifProcenteToolStripMenuItem_Click);
             // 
             // btnModifParola
             // 
@@ -1095,6 +1100,10 @@
             // 
             // tabFluturasi
             // 
+            this.tabFluturasi.Controls.Add(this.button1);
+            this.tabFluturasi.Controls.Add(this.label19);
+            this.tabFluturasi.Controls.Add(this.txtNumePdf);
+            this.tabFluturasi.Controls.Add(this.btnSalvarePDF);
             this.tabFluturasi.Controls.Add(this.btnFluturas);
             this.tabFluturasi.Controls.Add(this.label18);
             this.tabFluturasi.Controls.Add(this.txtAngFluturas);
@@ -1110,19 +1119,56 @@
             this.tabFluturasi.Text = "Fluturasi";
             this.tabFluturasi.UseVisualStyleBackColor = true;
             // 
+            // btnFluturas
+            // 
+            this.btnFluturas.Location = new System.Drawing.Point(22, 220);
+            this.btnFluturas.Name = "btnFluturas";
+            this.btnFluturas.Size = new System.Drawing.Size(108, 37);
+            this.btnFluturas.TabIndex = 8;
+            this.btnFluturas.Text = "Fluturaș angajat căutat";
+            this.btnFluturas.UseVisualStyleBackColor = true;
+            this.btnFluturas.Click += new System.EventHandler(this.btnFluturas_Click);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(6, 166);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(107, 13);
+            this.label18.TabIndex = 7;
+            this.label18.Text = "Nume Angajat căutat";
+            // 
+            // txtAngFluturas
+            // 
+            this.txtAngFluturas.Location = new System.Drawing.Point(6, 182);
+            this.txtAngFluturas.Name = "txtAngFluturas";
+            this.txtAngFluturas.Size = new System.Drawing.Size(140, 20);
+            this.txtAngFluturas.TabIndex = 6;
+            this.txtAngFluturas.TextChanged += new System.EventHandler(this.txtAngFluturas_TextChanged);
+            // 
+            // dgvCrystalRep
+            // 
+            this.dgvCrystalRep.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvCrystalRep.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCrystalRep.Location = new System.Drawing.Point(182, 3);
+            this.dgvCrystalRep.Name = "dgvCrystalRep";
+            this.dgvCrystalRep.Size = new System.Drawing.Size(660, 115);
+            this.dgvCrystalRep.TabIndex = 5;
+            // 
             // txtFluturasi
             // 
-            this.txtFluturasi.Location = new System.Drawing.Point(22, 109);
+            this.txtFluturasi.Location = new System.Drawing.Point(22, 74);
             this.txtFluturasi.Name = "txtFluturasi";
             this.txtFluturasi.Size = new System.Drawing.Size(108, 26);
             this.txtFluturasi.TabIndex = 4;
-            this.txtFluturasi.Text = "Fluturași";
+            this.txtFluturasi.Text = "Listă fluturași";
             this.txtFluturasi.UseVisualStyleBackColor = true;
             this.txtFluturasi.Click += new System.EventHandler(this.txtFluturasi_Click);
             // 
             // btnStatPlata
             // 
-            this.btnStatPlata.Location = new System.Drawing.Point(22, 57);
+            this.btnStatPlata.Location = new System.Drawing.Point(22, 24);
             this.btnStatPlata.Name = "btnStatPlata";
             this.btnStatPlata.Size = new System.Drawing.Size(108, 26);
             this.btnStatPlata.TabIndex = 3;
@@ -1144,42 +1190,41 @@
             this.crystalReportViewer1.TabIndex = 2;
             this.crystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             // 
-            // dgvCrystalRep
+            // btnSalvarePDF
             // 
-            this.dgvCrystalRep.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvCrystalRep.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCrystalRep.Location = new System.Drawing.Point(182, 3);
-            this.dgvCrystalRep.Name = "dgvCrystalRep";
-            this.dgvCrystalRep.Size = new System.Drawing.Size(660, 115);
-            this.dgvCrystalRep.TabIndex = 5;
+            this.btnSalvarePDF.Location = new System.Drawing.Point(22, 272);
+            this.btnSalvarePDF.Name = "btnSalvarePDF";
+            this.btnSalvarePDF.Size = new System.Drawing.Size(108, 41);
+            this.btnSalvarePDF.TabIndex = 9;
+            this.btnSalvarePDF.Text = "Salvare PDF stat plata";
+            this.btnSalvarePDF.UseVisualStyleBackColor = true;
+            this.btnSalvarePDF.Click += new System.EventHandler(this.btnSalvarePDF_Click);
             // 
-            // txtAngFluturas
+            // label19
             // 
-            this.txtAngFluturas.Location = new System.Drawing.Point(6, 182);
-            this.txtAngFluturas.Name = "txtAngFluturas";
-            this.txtAngFluturas.Size = new System.Drawing.Size(140, 20);
-            this.txtAngFluturas.TabIndex = 6;
-            this.txtAngFluturas.TextChanged += new System.EventHandler(this.txtAngFluturas_TextChanged);
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(6, 393);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(59, 13);
+            this.label19.TabIndex = 11;
+            this.label19.Text = "Nume PDF";
             // 
-            // label18
+            // txtNumePdf
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(6, 166);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(107, 13);
-            this.label18.TabIndex = 7;
-            this.label18.Text = "Nume Angajat căutat";
+            this.txtNumePdf.Location = new System.Drawing.Point(6, 409);
+            this.txtNumePdf.Name = "txtNumePdf";
+            this.txtNumePdf.Size = new System.Drawing.Size(140, 20);
+            this.txtNumePdf.TabIndex = 10;
             // 
-            // btnFluturas
+            // button1
             // 
-            this.btnFluturas.Location = new System.Drawing.Point(22, 220);
-            this.btnFluturas.Name = "btnFluturas";
-            this.btnFluturas.Size = new System.Drawing.Size(108, 37);
-            this.btnFluturas.TabIndex = 8;
-            this.btnFluturas.Text = "Afișare Fluturaș";
-            this.btnFluturas.UseVisualStyleBackColor = true;
-            this.btnFluturas.Click += new System.EventHandler(this.btnFluturas_Click);
+            this.button1.Location = new System.Drawing.Point(22, 330);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(108, 41);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "Salvare PDF fluturas";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
@@ -1332,6 +1377,10 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox txtAngFluturas;
         private System.Windows.Forms.DataGridView dgvCrystalRep;
+        private System.Windows.Forms.Button btnSalvarePDF;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox txtNumePdf;
+        private System.Windows.Forms.Button button1;
     }
 }
 

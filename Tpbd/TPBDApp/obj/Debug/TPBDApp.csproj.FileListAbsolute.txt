@@ -28,3 +28,7 @@ D:\cursuri\An4\TPBD\proiect\TPBDApp\TPBDApp\bin\Debug\ShockwaveFlashObjects.dll
 D:\cursuri\An4\TPBD\proiect\TPBDApp\TPBDApp\bin\Debug\CrystalDecisions.ReportAppServer.CommonControls.dll
 D:\cursuri\An4\TPBD\proiect\TPBDApp\TPBDApp\bin\Debug\stdole.dll
 D:\cursuri\An4\TPBD\proiect\TPBDApp\TPBDApp\obj\Debug\TPBDApp.SecondaryForms.LoginForm.resources
+D:\cursuri\An4\TPBD\proiect\TPBDApp\TPBDApp\bin\Debug\CrystalReports\CrystalReport1.rpt
+D:\cursuri\An4\TPBD\proiect\TPBDApp\TPBDApp\bin\Debug\CrystalReports\Fluturasi.rpt
+D:\cursuri\An4\TPBD\proiect\TPBDApp\TPBDApp\bin\Debug\CrystalReports\CrystalReport1.cs
+D:\cursuri\An4\TPBD\proiect\TPBDApp\TPBDApp\bin\Debug\CrystalReports\Fluturasi.cs

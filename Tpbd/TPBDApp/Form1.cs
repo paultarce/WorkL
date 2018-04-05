@@ -12,7 +12,8 @@ using TPBDApp.CrystalReports;
 using TPBDApp.DataSets;
 using TPBDApp.SecondaryForms;
 using TPBDApp.Algorithms;
-
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
 
 namespace TPBDApp
 {
@@ -26,6 +27,7 @@ namespace TPBDApp
         String strSQL;
         public BindingSource bindingSource1;
         BindingSource bdSource2;
+        public static int pdfIndex = 0;
         public Form1()
         {
             InitializeComponent();
@@ -38,7 +40,7 @@ namespace TPBDApp
             da = new OracleDataAdapter(strSQL, cn);
             ds = new DataSet();
             ds.Tables.Add("salarii");
-          
+
             da.Fill(ds, "salarii");
 
             bindingSource1 = new BindingSource();
@@ -68,7 +70,11 @@ namespace TPBDApp
             dgvStergere.AllowUserToAddRows = false;
             dgvStergere.ReadOnly = true;
 
-            btnSalvareProcente.Enabled = false;
+            if (pdfIndex == 0)
+            {
+                btnSalvareProcente.Enabled = false;
+                pdfIndex = 1;
+            }
             panelChangePass.Visible = false;
             btnModifParola.Enabled = true;
 
@@ -81,15 +87,17 @@ namespace TPBDApp
             dgvActualizareDate.Columns["virat_card"].ReadOnly = true; dgvActualizareDate.Columns["virat_card"].DefaultCellStyle.BackColor = Color.Gold;
 
             crystalReportViewer1.Zoom(70);
+            btnFluturasi.Enabled = false;
+            button1.Enabled = false;
         }
 
-       /* private void button1_Click(object sender, EventArgs e)
-        {
-            CrystalReport1 raport = new CrystalReport1();
-            //crystalReportViewer1
-            raport.SetDataSource(ds.Tables["salarii"]);
-            crystalReportViewer1.ReportSource = raport;
-        }*/
+        /* private void button1_Click(object sender, EventArgs e)
+         {
+             CrystalReport1 raport = new CrystalReport1();
+             //crystalReportViewer1
+             raport.SetDataSource(ds.Tables["salarii"]);
+             crystalReportViewer1.ReportSource = raport;
+         }*/
 
         private void ajutorToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -133,6 +141,7 @@ namespace TPBDApp
                     ds.AcceptChanges();
                     Form1_Load(sender, e);          //Pentru a actualiza datele imediat si in dgv
                     MessageBox.Show("Actulalizare reusita");
+                    txtNumeCautat.Text = "";
 
                 }
                 catch (OracleException ex)
@@ -184,7 +193,7 @@ namespace TPBDApp
                         {
                             int cell = Convert.ToInt32(dgvActualizareDate[4, j].Value.ToString());
 
-                            if (cell < 1900 || cell > 100000)
+                            if (cell < 900 || cell > 100000)
                                 kSalar = 1;
                         }
                         if (i == 5)
@@ -213,12 +222,16 @@ namespace TPBDApp
                     }
                 }
             }
-            catch(OverflowException e)
+            catch (OverflowException e)
             {
-                MessageBox.Show("Valoare In afara limitelor","Eroare",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Valoare In afara limitelor", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 k = true;
             }
-            if(kNume == 1)
+            catch (FormatException ex)
+            {
+                MessageBox.Show("Lispă valori în celule", "Atenție", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            if (kNume == 1)
             {
                 MessageBox.Show("Nume - minim 2 caractere", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 k = true;
@@ -233,29 +246,29 @@ namespace TPBDApp
                 MessageBox.Show("Functie - minim 2 caractere", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 k = true;
             }
-            if(kSalar == 1)
+            if (kSalar == 1)
             {
                 MessageBox.Show("Salar baza gresit.Valori : [1900,100000]", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 k = true;
             }
-            if(kSpor == 1)
+            if (kSpor == 1)
             {
                 MessageBox.Show("Spor gresit.Valori :[0,100]", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 k = true;
             }
-            if(kPremii == 1)
+            if (kPremii == 1)
             {
                 MessageBox.Show("Premii_brute gresit.Valori: [0,Salar_baza/2]", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 k = true;
             }
-            if(kRetineri == 1)
+            if (kRetineri == 1)
             {
                 MessageBox.Show("Retineri gresit.Valori : [0,Salar_baza/2]", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 k = true;
             }
 
-            return k; 
-        } 
+            return k;
+        }
         #endregion
 
         #region NewPass
@@ -295,28 +308,40 @@ namespace TPBDApp
         #region PROCENTE
         private void modifProcenteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            String strSqlPass = "select * from procente";
-            daPass = new OracleDataAdapter(strSqlPass, cn);
-            dsPass = new DataSet();
-            daPass.Fill(dsPass, "procente");
-            //dataGridView1.DataSource = ds.Tables["procente"];
-            LoginForm loginForm = new LoginForm(cn, daPass, dsPass);
-            DialogResult dr = loginForm.ShowDialog();
-            if (dr == DialogResult.Cancel)
+            if (pdfIndex != 2)
             {
-                loginForm.Close();
-            }
+                try
+                {
+                    String strSqlPass = "select * from procente";
+                    daPass = new OracleDataAdapter(strSqlPass, cn);
+                    dsPass = new DataSet();
+                    daPass.Fill(dsPass, "procente");
+                    //dataGridView1.DataSource = ds.Tables["procente"];
+                    LoginForm loginForm = new LoginForm(cn, daPass, dsPass);
+                    DialogResult dr = loginForm.ShowDialog();
+                    if (dr == DialogResult.Cancel)
+                    {
+                        loginForm.Close();
+                    }
 
-            if (LoginForm.correctPass == true)
-            {
-                loginForm.Close();
+                    if (LoginForm.correctPass == true)
+                    {
+                        loginForm.Close();
+                        tabControl1.SelectedIndex = 3;
+                        dgvProcente.DataSource = dsPass.Tables["procente"];
+                        dgvProcente.Columns["parola"].Visible = false;
+                        dgvProcente.AllowUserToAddRows = false;
+                        btnSalvareProcente.Enabled = true;
+                        pdfIndex = 2;
+                    }
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("Valoare greșită.Procentele au valori float intre 0 si 1", "Date Eronate", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            else
                 tabControl1.SelectedIndex = 3;
-                dgvProcente.DataSource = dsPass.Tables["procente"];
-                dgvProcente.Columns["parola"].Visible = false;
-                dgvProcente.AllowUserToAddRows = false;
-                btnSalvareProcente.Enabled = true;
-            }
-
 
         }
 
@@ -332,14 +357,14 @@ namespace TPBDApp
                 cas = Convert.ToDouble(dgvProcente.Rows[0].Cells[0].Value.ToString());
                 cass = Convert.ToDouble(dgvProcente.Rows[0].Cells[1].Value.ToString());
                 impozit = Convert.ToDouble(dgvProcente.Rows[0].Cells[2].Value.ToString());
-                if( (cas >= 1)||(cass >= 1)||(impozit >= 1))
+                if ((cas >= 1) || (cass >= 1) || (impozit >= 1))
                 {
                     k = 1;
                     MessageBox.Show("Actualizare procente eșuată.Procentele au limitele:" +
-                        "\n -> 0 < cas < 1 \n -> 0 < cass < 1 \n -> 0 < impozit < 1", "Actualizare nereușită", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                        "\n -> 0 < cas < 1 \n -> 0 < cass < 1 \n -> 0 < impozit < 1", "Actualizare nereușită", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Date invalide:" + ex.GetType().Name);
             }
@@ -370,12 +395,12 @@ namespace TPBDApp
         private void btnAdaugareA_Click(object sender, EventArgs e)
         {
             int k = 0;
-            if(txtNumeA.Text.Length < 2 || txtPrenumeA.Text.Length < 2 || txtFunctieA.Text.Length < 2)
+            if (txtNumeA.Text.Length < 2 || txtPrenumeA.Text.Length < 2 || txtFunctieA.Text.Length < 2)
             {
-                MessageBox.Show("Câmpurile 'Nume','Prenume','Funcție' trebuie să conțină minim 2 caractere!","Atenție", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Câmpurile 'Nume','Prenume','Funcție' trebuie să conțină minim 2 caractere!", "Atenție", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 k = 1;
             }
-            if (txtSalarBazaA.Text.Length < 4 || Convert.ToInt32(txtSalarBazaA.Text) < 1900 )
+            if (txtSalarBazaA.Text.Length < 4 || Convert.ToInt32(txtSalarBazaA.Text) < 900)
             {
                 MessageBox.Show("Salariul de baza trebuie sa conțină minim 4 cifre si sa fie mai mare decat 1900 lei", "Atenție", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 k = 1;
@@ -386,30 +411,39 @@ namespace TPBDApp
                 k = 1;
             }
 
-            int salar_baza, spor, premii, retineri;
-            salar_baza = Convert.ToInt32( txtSalarBazaA.Text);
-            spor = Convert.ToInt32(txtSporA.Text);
-            premii = Convert.ToInt32(txtPremiiBruteA.Text);
-            retineri = Convert.ToInt32(txtRetineriA.Text);
-            if(salar_baza >100000)
+            try
             {
-                MessageBox.Show("Salar Baza < 100000");
-                k = 1;
+                int salar_baza, spor, premii, retineri;
+                salar_baza = Convert.ToInt32(txtSalarBazaA.Text);
+                spor = Convert.ToInt32(txtSporA.Text);
+                premii = Convert.ToInt32(txtPremiiBruteA.Text);
+                retineri = Convert.ToInt32(txtRetineriA.Text);
+
+
+                if (salar_baza > 100000)
+                {
+                    MessageBox.Show("Salar Baza < 100000");
+                    k = 1;
+                }
+                if (spor > 100)
+                {
+                    MessageBox.Show("Spor < 100", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    k = 1;
+                }
+                if (premii > salar_baza / 2)
+                {
+                    MessageBox.Show("Premii < Salar_Baza/2", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    k = 1;
+                }
+                if (retineri > salar_baza / 2)
+                {
+                    MessageBox.Show("Retineri < Salar_Bza/2", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    k = 1;
+                }
             }
-            if (spor > 100)
+            catch (Exception ex)
             {
-                MessageBox.Show("Spor < 100", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                k = 1;
-            }
-            if (premii > salar_baza / 2)
-            {
-                MessageBox.Show("Premii < Salar_Baza/2", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                k = 1;
-            }
-            if (retineri > salar_baza / 2)
-            {
-                MessageBox.Show("Retineri < Salar_Bza/2", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                k = 1;
+                MessageBox.Show("Lispă valori în textBox-uri", "Atenție", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             //if()
             //OracleCommandBuilder comanda = new OracleCommandBuilder(da);
@@ -425,6 +459,7 @@ namespace TPBDApp
                     int i = cm.ExecuteNonQuery();
                     Form1_Load(sender, e);
                     MessageBox.Show("Succes Adaugare", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    adaugareAngajatiToolStripMenuItem_Click(sender, e);
                 }
                 catch (OracleException ex)
                 {
@@ -441,16 +476,16 @@ namespace TPBDApp
         private void adaugareAngajatiToolStripMenuItem_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedIndex = 1;
-            txtNumeA.Text = "Jon"; txtPrenumeA.Text = "Jimmmy"; txtFunctieA.Text = "avocat"; txtSalarBazaA.Text = "0"; // NUME PRENUME FUNCTII defaul -> empty
+            txtNumeA.Text = ""; txtPrenumeA.Text = ""; txtFunctieA.Text = ""; txtSalarBazaA.Text = ""; // NUME PRENUME FUNCTII defaul -> empty
             txtSporA.Text = "0"; txtPremiiBruteA.Text = "0"; txtRetineriA.Text = "0";
         }
         #endregion
 
-       
+
 
         private void txtNumeCautat_TextChanged(object sender, EventArgs e)
         {
-           
+
             string variab = "nume like " + "'" + txtNumeCautat.Text + "*'";
             bindingSource1.Filter = variab;
 
@@ -495,9 +530,11 @@ namespace TPBDApp
 
         private void txtSalarBazaA_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if ((!char.IsDigit(e.KeyChar)) & ((Keys)e.KeyChar != Keys.Back) )
+            if ((!char.IsDigit(e.KeyChar)) & ((Keys)e.KeyChar != Keys.Back))
                 e.Handled = true;
             if (e.KeyChar == '0' && txtSalarBazaA.Text.Length == 0)
+                e.Handled = true;
+            if (txtSalarBazaA.Text.Length > 5 && ((Keys)e.KeyChar != Keys.Back))
                 e.Handled = true;
         }
 
@@ -509,31 +546,31 @@ namespace TPBDApp
                 e.Handled = true;
         }
 
-       
+
         private void txtSalarBazaA_Enter(object sender, EventArgs e)
         {
-            txtSalarBazaA.Text = "";
+            txtSalarBazaA.Text = "0";
         }
 
         private void txtPremiiBruteA_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((!char.IsDigit(e.KeyChar)) & ((Keys)e.KeyChar != Keys.Back))
                 e.Handled = true;
-            if (txtPremiiBruteA.Text.Length > 6 && ((Keys)e.KeyChar != Keys.Back) )
+            if (txtPremiiBruteA.Text.Length > 6 && ((Keys)e.KeyChar != Keys.Back))
                 e.Handled = true;
         }
 
-       
+
 
         private void txtRetineriA_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((!char.IsDigit(e.KeyChar)) & ((Keys)e.KeyChar != Keys.Back))
-                e.Handled = true; 
-            if (txtRetineriA.Text.Length > 6 && ((Keys)e.KeyChar != Keys.Back) ) 
+                e.Handled = true;
+            if (txtRetineriA.Text.Length > 6 && ((Keys)e.KeyChar != Keys.Back))
                 e.Handled = true;
         }
 
-       
+
 
         private void btnAnulareAdaugare_Click(object sender, EventArgs e)
         {
@@ -541,7 +578,7 @@ namespace TPBDApp
             lblChar.Visible = false;
         }
 
-        
+
 
         #endregion
 
@@ -552,7 +589,7 @@ namespace TPBDApp
         }
 
 
-        
+
         private void txtCautareStergere_TextChanged(object sender, EventArgs e)
         {
             string variab = "nume like " + "'" + txtCautareStergere.Text + "*'";
@@ -579,7 +616,7 @@ namespace TPBDApp
                     }
                 }
             }
-    
+
         }
 
         private void Save_Stergere()
@@ -613,15 +650,15 @@ namespace TPBDApp
             e.Control.KeyPress -= new KeyPressEventHandler(ColumnChar_KeyPress); //remove any key press event added prevoiusly in EditingControlShowing
             e.Control.KeyPress -= new KeyPressEventHandler(ColumnNumber_KeyPress);
             int col = dgvActualizareDate.CurrentCell.ColumnIndex;
-            if ( col == 1 || col == 2 || col == 3)
+            if (col == 1 || col == 2 || col == 3)
             {
                 TextBox tb = e.Control as TextBox;
-                if(tb != null)
+                if (tb != null)
                 {
                     tb.KeyPress += new KeyPressEventHandler(ColumnChar_KeyPress);
                 }
             }
-            if(col == 4 || col == 5 || col == 6 || col == 12)
+            if (col == 4 || col == 5 || col == 6 || col == 12)
             {
                 TextBox tb = e.Control as TextBox;
                 if (tb != null)
@@ -629,7 +666,7 @@ namespace TPBDApp
                     tb.KeyPress += new KeyPressEventHandler(ColumnNumber_KeyPress);
                 }
             }
-          
+
         }
 
         private void dgvProcente_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
@@ -646,16 +683,16 @@ namespace TPBDApp
             }
         }
 
-        private void ColumnChar_KeyPress(object sender,KeyPressEventArgs e)
+        private void ColumnChar_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) && (e.KeyChar != ('-')) && (e.KeyChar != (' ')))
+            if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) && (e.KeyChar != ('-')) && (e.KeyChar != (' ')))
             {
                 e.Handled = true;
             }
         }
         private void ColumnNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsNumber(e.KeyChar) )
+            if (!char.IsControl(e.KeyChar) && !char.IsNumber(e.KeyChar))
             {
                 e.Handled = true;
             }
@@ -663,47 +700,52 @@ namespace TPBDApp
 
         int dotExists = 0;
 
-       
+
 
         TextBox tbP;
 
-       
+
 
         private void ColumnNumberDot_KeyPress(object sender, KeyPressEventArgs e)
         {
             string txtProcente = tbP.Text;
-            if (!char.IsControl(e.KeyChar) && !char.IsNumber(e.KeyChar) && (e.KeyChar != ('.') ))
+            if (!char.IsControl(e.KeyChar) && !char.IsNumber(e.KeyChar) && (e.KeyChar != ('.')))
             {
                 e.Handled = true;
             }
-            if (e.KeyChar == ('.') && txtProcente.Length ==  0)
+            if (e.KeyChar == ('.') && txtProcente.Length == 0)
                 e.Handled = true;
 
-            if ( (dotExists == 1 && e.KeyChar==('.')) || (txtProcente == "" && e.KeyChar ==('.') ))
+            if ((dotExists == 1 && e.KeyChar == ('.')) || (txtProcente == "" && e.KeyChar == ('.')))
                 e.Handled = true;
 
             if (txtProcente == "")
                 dotExists = 0;
-            if (e.KeyChar == ('.') && txtProcente != "" )
+            if (e.KeyChar == ('.') && txtProcente != "")
                 dotExists = 1;
+            if (txtProcente.Contains(".") && e.KeyChar == ('.'))
+                e.Handled = true;
 
         }
 
-        
+
         #endregion
 
         #region CrystalReports
         private void statPlataToolStripMenuItem_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedIndex = 5;
+            crystalReportViewer1.Refresh();
         }
         private void fluturașiToolStripMenuItem_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedIndex = 5;
+            crystalReportViewer1.Refresh();
         }
         private void btnFluturasi_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedIndex = 5;
+            crystalReportViewer1.Refresh();
         }
 
         private void btnFluturas_Click(object sender, EventArgs e)
@@ -713,21 +755,24 @@ namespace TPBDApp
             {
                 if (true)
                 {
-                    int cell = Convert.ToInt32(dgvCrystalRep[0, 0].Value.ToString());
+                    //int cell = Convert.ToInt32(dgvCrystalRep[0, 0].Value.ToString());
                     string id = ""; // = dgvCrystalRep.SelectedCells[0].Value.ToString();
                                     //DataGridViewRow row = dgvCrystalRep.SelectedRows[1];
                                     // string value = row.Cells[0].Value.ToString();
+                   
                     foreach (DataGridViewRow row in dgvCrystalRep.SelectedRows)
                     {
                         id = row.Cells[0].Value.ToString();
                         break;
                     }
+                    if (dgvCrystalRep.SelectedRows.Count == 0)
+                        id = dgvCrystalRep[0, 0].Value.ToString();
 
 
                     string querry = "SELECT * from salarii where nr_crt=" + id;
 
                     OracleDataAdapter daCr = new OracleDataAdapter(querry, cn);
-                    DataSet dsCr = new DataSet();
+                    dsCr = new DataSet();
 
                     dsCr.Tables.Add("salarii");
                     daCr.Fill(dsCr, "salarii");
@@ -736,18 +781,19 @@ namespace TPBDApp
                     //fluturasi.SetDataSource(ds.Tables["salarii"]);
                     fluturasi.SetDataSource(dsCr.Tables["salarii"]);
                     crystalReportViewer1.ReportSource = fluturasi;
+                    btnFluturasi.Enabled = true;
                 }
                 else
                 {
                     MessageBox.Show("Selectați o singura înregistrare!", "Atenție", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show("Selectati ÎNTREG RÂNDUL, nu doar o celulă!!!", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                MessageBox.Show("Selectati ÎNTREG RÂNDUL, nu doar o celulă!!!", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+        DataSet dsCr;
         private void txtAngFluturas_TextChanged(object sender, EventArgs e)
         {
             string variab = "nume like " + "'" + txtAngFluturas.Text + "*'";
@@ -755,17 +801,100 @@ namespace TPBDApp
             bdSource2.DataSource = bindingSource1.Filter;
         }
 
+        private void btnSalvarePDF_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                //ReportDocument cryRpt = new ReportDocument();
+                // cryRpt.Load(@"D:\cursuri\An4\TPBD\proiect\TPBDApp\TPBDApp\CrystalReports\CrystalReport1.rpt");
+                ReportDocument rdReport = new ReportDocument();
+
+                rdReport.Load(@"D:\cursuri\An4\TPBD\proiect\TPBDApp\TPBDApp\CrystalReports\CrystalReport1.rpt");
+                rdReport.Database.Tables["salarii"].SetDataSource(bindingSource1.DataSource);
+                ExportOptions exportOption;
+                DiskFileDestinationOptions diskFileDestiationOptions = new DiskFileDestinationOptions();
+
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "Pdf Files|*.pdf";
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    diskFileDestiationOptions.DiskFileName = sfd.FileName;
+                }
+
+                exportOption = rdReport.ExportOptions;
+                {
+                    exportOption.ExportDestinationType = ExportDestinationType.DiskFile;
+                    exportOption.ExportFormatType = ExportFormatType.PortableDocFormat;
+                    exportOption.ExportDestinationOptions = diskFileDestiationOptions;
+                    exportOption.ExportFormatOptions = new PdfRtfWordFormatOptions();
+                }
+                rdReport.Export();
+                MessageBox.Show("Salvare realizata");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Eroare");
+            }
+            
+            //crystalReportViewer1.ReportSource = cryRpt;
+
+            //crystalReportViewer1.Refresh();
+
+            //cryRpt.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, @"D:\cursuri\An4\TPBD\proiect\TPBDApp\TPBDApp\CrystalReports\"+txtNumePdf.Text+".pdf");
+
+            // MessageBox.Show("Exported PDF reusit");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+
+                ReportDocument rdReport = new ReportDocument();
+
+                rdReport.Load(@"D:\cursuri\An4\TPBD\proiect\TPBDApp\TPBDApp\CrystalReports\Fluturasi.rpt");
+                rdReport.Database.Tables["salarii"].SetDataSource(dsCr.Tables["salarii"]);
+                ExportOptions exportOption;
+                DiskFileDestinationOptions diskFileDestiationOptions = new DiskFileDestinationOptions();
+
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "Pdf Files|*.pdf";
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    diskFileDestiationOptions.DiskFileName = sfd.FileName;
+                }
+
+                exportOption = rdReport.ExportOptions;
+                {
+                    exportOption.ExportDestinationType = ExportDestinationType.DiskFile;
+                    exportOption.ExportFormatType = ExportFormatType.PortableDocFormat;
+                    exportOption.ExportDestinationOptions = diskFileDestiationOptions;
+                    exportOption.ExportFormatOptions = new PdfRtfWordFormatOptions();
+                }
+                rdReport.Export();
+                MessageBox.Show("Salvare realizata");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error");
+            }
+
+        }
+
         private void txtFluturasi_Click(object sender, EventArgs e)
         {
             Fluturasi fluturasi = new Fluturasi();
             fluturasi.SetDataSource(ds.Tables["salarii"]);
             crystalReportViewer1.ReportSource = fluturasi;
+            button1.Enabled = true;
 
         }
 
 
-        
-        
+
+
         private void btnStatPlata_Click(object sender, EventArgs e)
         {
             CrystalReport1 raport = new CrystalReport1();
@@ -774,7 +903,7 @@ namespace TPBDApp
             crystalReportViewer1.ReportSource = raport;
         }
 
-       
+
         #endregion
     }
 }
