@@ -48,6 +48,11 @@ namespace FullScreenWPF
             INIT();
         }*/
 
+        public MainWindow()
+        {
+            InitializeComponent();
+            //this.btS = 
+        }
         public MainWindow(BitmapSource btS)
         {
             InitializeComponent();
@@ -73,18 +78,24 @@ namespace FullScreenWPF
             image.Height = Math.Abs(screenBounds.Height);
             image.Width = Math.Abs(screenBounds.Width);
             image.Source = btS;
-            
+
             //this.Content = image;
             //cavRoot.Children.Add(image);
-            
-          
-            image.MouseLeftButtonDown += (ss, ee) =>
+
+
+            /*  image.MouseLeftButtonDown += (ss, ee) =>
+              {
+                  firsPoint = ee.GetPosition(this);
+                  image.CaptureMouse();
+
+              };*/
+            image.MouseLeftButtonDown += Image_MouseLeftButtonDown;
+
+            void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
             {
-                firsPoint = ee.GetPosition(this);
+                firsPoint = e.GetPosition(this);
                 image.CaptureMouse();
-
-            };
-
+            }
 
 
             image.MouseMove += (ss, ee) =>
@@ -133,6 +144,8 @@ namespace FullScreenWPF
                 image.ReleaseMouseCapture();
             };
         }
+
+        
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {

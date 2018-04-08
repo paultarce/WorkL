@@ -514,6 +514,7 @@
             this.Load += new System.EventHandler(this.BoardAppMain_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BoardAppMain_KeyDown);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BoardAppMain_KeyPress);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.BoardAppMain_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);

@@ -88,6 +88,7 @@ namespace BoardApp
                 liveCamera.Image.Dispose();
             }
             Bitmap tempBitmap = (Bitmap)eventArgs.Frame.Clone();
+            liveCamera.SizeMode = PictureBoxSizeMode.StretchImage;
             liveCamera.Image = tempBitmap;
 
         }
@@ -108,6 +109,9 @@ namespace BoardApp
             pbEditPhoto.Top = (this.ClientSize.Height - pbEditPhoto.Height) / 2;
 
 
+            wpfwindow = new FullScreenWPF.MainWindow();
+            ElementHost.EnableModelessKeyboardInterop(wpfwindow);
+            wpfwindow.Show();
 
         }
 
@@ -143,6 +147,7 @@ namespace BoardApp
             //pictureBox.Image = liveCamera.Image;
             //FinalVideo.Stop();
             Bitmap b = new Bitmap(liveCamera.Image);
+            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox.Image = b;
 
 
@@ -157,22 +162,7 @@ namespace BoardApp
             myPict.Click += MyPict_Click;
         }
 
-        private void btnSaveImage_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //Bitmap b = new Bitmap("Poza");
-                /* Bitmap b = new Bitmap(pictureBox.Image);
-                 Graphics gr = Graphics.FromImage(b);
-                 pictureBox.Image = b;*/
-                pictureBox.Image.Save(@"D:\cursuri\LICENTA\WorkL\BoardApp\courses\Pict" + pictureNr.ToString() + ".jpeg", ImageFormat.Jpeg);
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Save error:" + ex.Message);
-            }
-        }
 
         private void rbDisplayMode_CheckedChanged(object sender, EventArgs e)
         {
@@ -274,95 +264,6 @@ namespace BoardApp
             Application.Exit();
         }
 
- #region KEYS PRESSED
-        private void BoardAppMain_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-            if (e.KeyChar >= 48 && e.KeyChar <= 57) // numeric
-            {
-
-            }
-            if (e.KeyChar == (char)Keys.F || e.KeyChar == char.ToLower((char)Keys.F))
-            {
-                /*if (pictureBox.Image != null)
-                {
-                    PictureEditor.ShowPictureFullSreen2(ref f, ref pictureBox); //to update "this" controls 
-                    this.BringToFront();
-                }
-                else
-                {
-                    MessageBox.Show("No picture to display", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }*/
-
-                if (pbEditPhoto.Image != null || pictureBox.Image != null)
-                {
-                    tabControl1.SelectedIndex = 1;
-
-                    PictureEditor.ShowPictureFullSreen2(ref f, ref pbEditPhoto);
-                    imageOriginal = f.pb.Image;
-                    imageOriginal2 = pbEditPhoto.Image;
-                }
-            }
-
-            if (flowLayoutPanel1.Controls.Count > 0)
-            {
-
-                if (e.KeyChar == '6')
-                {
-                    if (pictureNr >= 0 && pictureNr <= flowLayoutPanel1.Controls.Count - 1)
-                    {
-                        //flowLayoutPanel1.Controls[pictureNr].Click += MyPict_Click;
-                        //MyPict_Click((PictureBox)flowLayoutPanel1.Controls[pictureNr], e);
-                        FullScreenDisplay();
-
-
-                        PictureEditor.ShowPictureFullSreen2(ref f, ref pictureBox);
-                        this.BringToFront();
-                        pictureNr++;
-                    }
-
-
-                }
-                if (e.KeyChar == '4')
-                {
-                    if (pictureNr > 0 && pictureNr <= flowLayoutPanel1.Controls.Count)
-                    {
-                        //flowLayoutPanel1.Controls[pictureNr].Click += MyPict_Click;
-                        //MyPict_Click((PictureBox)flowLayoutPanel1.Controls[pictureNr], e);
-                        pictureNr--;
-                        FullScreenDisplay();
-
-
-                        PictureEditor.ShowPictureFullSreen2(ref f, ref pictureBox);
-                        this.BringToFront();
-
-                    }
-                }
-
-            }
-            if (liveCamera.Image != null)
-            {
-                if (e.KeyChar == (char)Keys.C || e.KeyChar == char.ToLower((char)Keys.C))
-                {
-                    btnStop_Click(sender, e);
-                }
-            }
-            
-        }
-       
-        private void BoardAppMain_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (wpfwindow.IsLoaded == true)
-            {
-                if (e.KeyCode == Keys.Escape)
-                {
-                    wpfwindow.Close();
-                }
-            }
-        }
-
-        
-        #endregion
         private void FullScreenDisplay()
         {
             pictureBox.SetBounds(0, 0, 300, 300);
@@ -424,12 +325,149 @@ namespace BoardApp
             this.pbEditPhoto.MouseWheel += PbEditPhoto_MouseWheel;
         }
 
+        #region KEYS PRESSED
+        private void BoardAppMain_KeyPress(object sender, KeyPressEventArgs e)
+        {
 
+            /*    if (e.KeyChar >= 48 && e.KeyChar <= 57) // numeric
+                {
+
+                }
+                if (e.KeyChar == (char)Keys.F || e.KeyChar == char.ToLower((char)Keys.F))
+                {
+                    /*if (pictureBox.Image != null)
+                    {
+                        PictureEditor.ShowPictureFullSreen2(ref f, ref pictureBox); //to update "this" controls 
+                        this.BringToFront();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No picture to display", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+
+                  if (pbEditPhoto.Image != null || pictureBox.Image != null)
+                   {
+                       tabControl1.SelectedIndex = 1;
+
+                       PictureEditor.ShowPictureFullSreen2(ref f, ref pbEditPhoto);
+                       imageOriginal = f.pb.Image;
+                       imageOriginal2 = pbEditPhoto.Image;
+                   }
+               }
+
+               if (flowLayoutPanel1.Controls.Count > 0)
+               {
+
+                   if (e.KeyChar == '6')
+                   {
+                       if (pictureNr >= 0 && pictureNr <= flowLayoutPanel1.Controls.Count - 1)
+                       {
+                           //flowLayoutPanel1.Controls[pictureNr].Click += MyPict_Click;
+                           //MyPict_Click((PictureBox)flowLayoutPanel1.Controls[pictureNr], e);
+                           FullScreenDisplay();
+
+
+                           PictureEditor.ShowPictureFullSreen2(ref f, ref pictureBox);
+                           this.BringToFront();
+                           pictureNr++;
+                       }
+
+
+                   }
+                   if (e.KeyChar == '4')
+                   {
+                       if (pictureNr > 0 && pictureNr <= flowLayoutPanel1.Controls.Count)
+                       {
+                           //flowLayoutPanel1.Controls[pictureNr].Click += MyPict_Click;
+                           //MyPict_Click((PictureBox)flowLayoutPanel1.Controls[pictureNr], e);
+                           pictureNr--;
+                           FullScreenDisplay();
+
+
+                           PictureEditor.ShowPictureFullSreen2(ref f, ref pictureBox);
+                           this.BringToFront();
+
+                       }
+                   }
+
+               }
+               if (liveCamera.Image != null)
+               {
+                   if (e.KeyChar == (char)Keys.C || e.KeyChar == char.ToLower((char)Keys.C))
+                   {
+                       btnStop_Click(sender, e);
+                   }
+               }
+               */
+        }
+
+
+        /* private void BoardAppMain_KeyPress(object sender, KeyPressEventArgs e)
+         {
+             // C - TAKE PICTURE 
+             if (liveCamera.Image != null)
+             {
+                 if (e.KeyChar == (char)Keys.C || e.KeyChar == char.ToLower((char)Keys.C))
+                 {
+                     btnStop_Click(sender, e);
+                 }
+             }
+             else {// MessageBox.Show("Camera foto nu a fost pornita!", "Atentie"); 
+             }
+
+             if (e.KeyChar == (char)Keys.F || e.KeyChar == char.ToLower((char)Keys.F))
+             {
+                 if (pictureBox.Image != null)
+                 {
+                     //PictureEditor.ShowPictureFullSreen2(ref f, ref pictureBox); //to update "this" controls 
+                     //this.BringToFront();
+                     BitmapSource btS = FormImageToWpfcs.BitmapFromBase64(FormImageToWpfcs.BitmapToBase64String(pictureBox.Image));
+                     pbCrop.Image = BitmapFromSource(btS);
+                     wpfwindow = new FullScreenWPF.MainWindow(btS);
+                     ElementHost.EnableModelessKeyboardInterop(wpfwindow);
+                     wpfwindow.Show();
+
+                 }
+                 else
+                 {
+                     MessageBox.Show("No picture to display", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                 }
+
+                 /*         if (pbEditPhoto.Image != null || pictureBox.Image != null)
+                          {
+                              tabControl1.SelectedIndex = 1;
+
+                              PictureEditor.ShowPictureFullSreen2(ref f, ref pbEditPhoto);
+                              imageOriginal = f.pb.Image;
+                              imageOriginal2 = pbEditPhoto.Image;
+                          }
+                      }
+
+
+             }
+
+
+
+         }*/
+
+        private void BoardAppMain_KeyDown(object sender, KeyEventArgs e)
+        {
+            /*  if (wpfwindow.IsLoaded == true)
+              {
+                  if (e.KeyCode == Keys.Escape)
+                  {
+                      wpfwindow.Close();
+                  }
+              }
+              */
+        }
+
+        #endregion
 
         /*
          * CROP PART
          */
- #region CropRegion
+        #region CropRegion
 
         /*
         bool IsMouseDown = false;
@@ -477,7 +515,7 @@ namespace BoardApp
         }*/
         #endregion
 
- #region CropRegion2
+        #region CropRegion2
 
         Image<Bgr, byte> imgInput;
         Rectangle rect;
@@ -583,7 +621,7 @@ namespace BoardApp
 
         #endregion
 
- #region TAB2 TRACK BAR + ROTATE ZOOM region
+        #region TAB2 TRACK BAR + ROTATE ZOOM region
 
         //int angle;
 
@@ -679,12 +717,27 @@ namespace BoardApp
             f.pb.Focus();
         }
 
+
+
+
+
+        private void tbRotate_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+
+        #endregion
+
+        #region TO WPF
         private void btnDeletePict_Click(object sender, EventArgs e)
         {
             //BitmapTOImgSource.BitmapToImageSource(pbEditPhoto.Image);
             // BitmapImage bitImage = FormImageToWpfcs.ToWpfImage(pbEditPhoto.Image);
             //System.Windows.Controls.Image image = FormImageToWpfcs.ConvertDrawingImageToWPFImage(pbEditPhoto.Image);
-            
+
             BitmapSource btS = FormImageToWpfcs.BitmapFromBase64(FormImageToWpfcs.BitmapToBase64String(pbEditPhoto.Image));
             pbCrop.Image = BitmapFromSource(btS);
             wpfwindow = new FullScreenWPF.MainWindow(btS);
@@ -707,18 +760,73 @@ namespace BoardApp
             return bitmap;
         }
 
-       
-
-        private void tbRotate_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
-
 
         #endregion
 
+        private void BoardAppMain_KeyUp(object sender, KeyEventArgs e)
+        {
+            // C - TAKE PICTURE 
+            if (liveCamera.Image != null)
+            {
+                if (e.KeyCode == Keys.C)
+                {
+                    btnStop_Click(sender, e);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Camera foto nu a fost pornita!", "Atentie");
+            }
 
+            if (e.KeyCode == Keys.F)
+            {
+                if (pictureBox.Image != null)
+                {
+                    //PictureEditor.ShowPictureFullSreen2(ref f, ref pictureBox); //to update "this" controls 
+                    //this.BringToFront();
+                    BitmapSource btS = FormImageToWpfcs.BitmapFromBase64(FormImageToWpfcs.BitmapToBase64String(pictureBox.Image));
+                    pbCrop.Image = BitmapFromSource(btS);
+                    //wpfwindow = new FullScreenWPF.MainWindow(btS);
+                    //ElementHost.EnableModelessKeyboardInterop(wpfwindow);
+                    //wpfwindow.Show();
+                    wpfwindow.btS = btS;
+                    wpfwindow.INIT();
+
+                }
+                else
+                {
+                    MessageBox.Show("No picture to display", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+
+                /*if (pbEditPhoto.Image != null || pictureBox.Image != null)
+                {
+                    tabControl1.SelectedIndex = 1;
+
+                    PictureEditor.ShowPictureFullSreen2(ref f, ref pbEditPhoto);
+                    imageOriginal = f.pb.Image;
+                    imageOriginal2 = pbEditPhoto.Image;
+                }*/
+            }
+        }
+
+
+        #region SAVE 
+        private void btnSaveImage_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Bitmap b = new Bitmap("Poza");
+                /* Bitmap b = new Bitmap(pictureBox.Image);
+                 Graphics gr = Graphics.FromImage(b);
+                 pictureBox.Image = b;*/
+                pictureBox.Image.Save(@"D:\cursuri\LICENTA\WorkL\BoardApp\courses\Pict" + pictureNr.ToString() + ".jpeg", ImageFormat.Jpeg);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Save error:" + ex.Message);
+            }
+        }
+        #endregion
     }
 }
