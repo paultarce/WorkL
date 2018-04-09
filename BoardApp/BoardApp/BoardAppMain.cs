@@ -35,6 +35,7 @@ namespace BoardApp
         public List<PictureBox> flpPictureList; // to dispaly a flowLayoutPanel in tab2
         private int pictPosition = 0;
         FullScreenWPF.MainWindow wpfwindow;
+        Image prevImage;
         //public var wpfwindow;
         //private Crop c;
 
@@ -108,6 +109,8 @@ namespace BoardApp
             pbEditPhoto.Left = (this.ClientSize.Width - pbEditPhoto.Width) / 2;
             pbEditPhoto.Top = (this.ClientSize.Height - pbEditPhoto.Height) / 2;
 
+            prevImage = Image.FromFile(@"C:\Users\Paul\Desktop\Untitled.png");
+            
 
             wpfwindow = new FullScreenWPF.MainWindow();
             ElementHost.EnableModelessKeyboardInterop(wpfwindow);
@@ -146,12 +149,21 @@ namespace BoardApp
 
             //pictureBox.Image = liveCamera.Image;
             //FinalVideo.Stop();
-            Bitmap b = new Bitmap(liveCamera.Image);
-            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox.Image = b;
+            try
+            {
+                Bitmap b = new Bitmap(liveCamera.Image);
+                pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                pictureBox.Image = b;
+                //prevImage = pictureBox.Image;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Va rugam asteptati pornirea camerei foto", "Asteptati", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+            
 
 
-            PictureBox myPict = new PictureBox(); //dinamicly created control
+           /* PictureBox myPict = new PictureBox(); //dinamicly created control
                                                   //pictureBox.Image = Bitmap.FromFile(file);
             myPict = PictureEditor.PictBoxTOflowLayout(myPict);
 
@@ -160,6 +172,7 @@ namespace BoardApp
             flowLayoutPanel1.AutoScroll = true;
             flowLayoutPanel1.Controls.Add(myPict);
             myPict.Click += MyPict_Click;
+            */
         }
 
 
@@ -782,6 +795,8 @@ namespace BoardApp
             {
                 if (pictureBox.Image != null)
                 {
+
+                    
                     //PictureEditor.ShowPictureFullSreen2(ref f, ref pictureBox); //to update "this" controls 
                     //this.BringToFront();
                     BitmapSource btS = FormImageToWpfcs.BitmapFromBase64(FormImageToWpfcs.BitmapToBase64String(pictureBox.Image));
@@ -789,8 +804,19 @@ namespace BoardApp
                     //wpfwindow = new FullScreenWPF.MainWindow(btS);
                     //ElementHost.EnableModelessKeyboardInterop(wpfwindow);
                     //wpfwindow.Show();
-                    wpfwindow.btS = btS;
-                    wpfwindow.INIT();
+                    if (wpfwindow.IsVisible != false)
+                    {
+                        wpfwindow.btS = btS;
+                        wpfwindow.INIT();
+                    }
+                    else
+                    {
+                        wpfwindow = new FullScreenWPF.MainWindow();
+                        ElementHost.EnableModelessKeyboardInterop(wpfwindow);
+                        wpfwindow.Show();
+                        wpfwindow.btS = btS;
+                        wpfwindow.INIT();
+                    }
 
                 }
                 else
@@ -807,8 +833,36 @@ namespace BoardApp
                     imageOriginal2 = pbEditPhoto.Image;
                 }*/
             }
-        }
+            
+            if(e.KeyCode == Keys.S)
+            {
+                
+                if (pictureBox.Image != null && !(prevImage == pictureBox.Image) )
+                {
+                    PictureBox myPict = new PictureBox(); //dinamicly created control
+                                                          //pictureBox.Image = Bitmap.FromFile(file);
+                    myPict = PictureEditor.PictBoxTOflowLayout(myPict);
 
+                    myPict.Image = pictureBox.Image;
+
+                    flowLayoutPanel1.AutoScroll = true;
+                    flowLayoutPanel1.Controls.Add(myPict);
+                    myPict.Click += MyPict_Click;
+
+                    prevImage = pictureBox.Image;
+                }
+                else
+                {
+                    MessageBox.Show("No picture to save or picture already saved", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+            if(e.KeyCode == Keys.NumPad1) /// sa il fac ca in timp ce e apasat sa se faca zoom out
+            {
+                if(wpfwindow.btS != null)
+                    wpfwindow.ZoomOut();
+            }
+        }
+       
 
         #region SAVE 
         private void btnSaveImage_Click(object sender, EventArgs e)
