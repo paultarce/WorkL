@@ -110,7 +110,7 @@ namespace BoardApp
             pbEditPhoto.Top = (this.ClientSize.Height - pbEditPhoto.Height) / 2;
 
             prevImage = Image.FromFile(@"C:\Users\Paul\Desktop\Untitled.png");
-            
+
 
             wpfwindow = new FullScreenWPF.MainWindow();
             ElementHost.EnableModelessKeyboardInterop(wpfwindow);
@@ -156,23 +156,23 @@ namespace BoardApp
                 pictureBox.Image = b;
                 //prevImage = pictureBox.Image;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Va rugam asteptati pornirea camerei foto", "Asteptati", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
-            
 
 
-           /* PictureBox myPict = new PictureBox(); //dinamicly created control
-                                                  //pictureBox.Image = Bitmap.FromFile(file);
-            myPict = PictureEditor.PictBoxTOflowLayout(myPict);
 
-            myPict.Image = pictureBox.Image;
+            /* PictureBox myPict = new PictureBox(); //dinamicly created control
+                                                   //pictureBox.Image = Bitmap.FromFile(file);
+             myPict = PictureEditor.PictBoxTOflowLayout(myPict);
 
-            flowLayoutPanel1.AutoScroll = true;
-            flowLayoutPanel1.Controls.Add(myPict);
-            myPict.Click += MyPict_Click;
-            */
+             myPict.Image = pictureBox.Image;
+
+             flowLayoutPanel1.AutoScroll = true;
+             flowLayoutPanel1.Controls.Add(myPict);
+             myPict.Click += MyPict_Click;
+             */
         }
 
 
@@ -412,6 +412,32 @@ namespace BoardApp
                    }
                }
                */
+            if (e.KeyChar == '2')
+            {
+                wpfwindow.MoveDown();
+            }
+            if (e.KeyChar == '8')
+            {
+                wpfwindow.MoveUp();
+            }
+            if (e.KeyChar == '4')
+            {
+                wpfwindow.MoveLeft();
+            }
+            if (e.KeyChar == '6')
+            {
+                wpfwindow.MoveRight();
+            }
+            if(e.KeyChar == '+')
+            {
+                if (wpfwindow.btS != null)
+                    wpfwindow.ZoomIn();
+            }
+            if(e.KeyChar == '-')
+            {
+                if (wpfwindow.btS != null)
+                    wpfwindow.ZoomOut();
+            }
         }
 
 
@@ -796,7 +822,7 @@ namespace BoardApp
                 if (pictureBox.Image != null)
                 {
 
-                    
+
                     //PictureEditor.ShowPictureFullSreen2(ref f, ref pictureBox); //to update "this" controls 
                     //this.BringToFront();
                     BitmapSource btS = FormImageToWpfcs.BitmapFromBase64(FormImageToWpfcs.BitmapToBase64String(pictureBox.Image));
@@ -833,11 +859,11 @@ namespace BoardApp
                     imageOriginal2 = pbEditPhoto.Image;
                 }*/
             }
-            
-            if(e.KeyCode == Keys.S)
+
+            if (e.KeyCode == Keys.S)
             {
-                
-                if (pictureBox.Image != null && !(prevImage == pictureBox.Image) )
+
+                if (pictureBox.Image != null && !(prevImage == pictureBox.Image))
                 {
                     PictureBox myPict = new PictureBox(); //dinamicly created control
                                                           //pictureBox.Image = Bitmap.FromFile(file);
@@ -856,13 +882,18 @@ namespace BoardApp
                     MessageBox.Show("No picture to save or picture already saved", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
-            if(e.KeyCode == Keys.NumPad1) /// sa il fac ca in timp ce e apasat sa se faca zoom out
+            if (e.KeyCode == Keys.NumPad1) /// sa il fac ca in timp ce e apasat sa se faca zoom out
             {
-                if(wpfwindow.btS != null)
-                    wpfwindow.ZoomOut();
+               
             }
+
+            if (e.KeyCode == Keys.NumPad3)
+            {
+                
+            }
+
         }
-       
+
 
         #region SAVE 
         private void btnSaveImage_Click(object sender, EventArgs e)

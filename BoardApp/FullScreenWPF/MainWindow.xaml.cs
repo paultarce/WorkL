@@ -26,6 +26,7 @@ namespace FullScreenWPF
         //public Image image { get; set; }
         public BitmapImage bitImage { get; set; }
         public BitmapSource btS { get; set; }
+        public System.Drawing.Rectangle screenBounds;
 
         /*  public MainWindow(BitmapImage im)
           {
@@ -73,15 +74,15 @@ namespace FullScreenWPF
             //cavRoot.Children.Add(image);
             /// imgSource = image;
             //image = new Image();
-            System.Drawing.Rectangle screenBounds = System.Windows.Forms.Screen.AllScreens[1].Bounds;
+            screenBounds = System.Windows.Forms.Screen.AllScreens[1].Bounds;
 
             image.Height = Math.Abs(screenBounds.Height);
             image.Width = Math.Abs(screenBounds.Width);
             image.Source = btS;
 
-            image.MouseLeftButtonDown += Image_MouseLeftButtonDown;
-            image.MouseMove += Image_MouseMove;
-            image.MouseWheel += Image_MouseWheel;
+            //image.MouseLeftButtonDown += Image_MouseLeftButtonDown;
+            //image.MouseMove += Image_MouseMove;
+            //image.MouseWheel += Image_MouseWheel;
 
             //this.Content = image;
             //cavRoot.Children.Add(image);
@@ -142,7 +143,7 @@ namespace FullScreenWPF
 
         private void Image_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            Matrix mat = image.RenderTransform.Value;
+          /*  Matrix mat = image.RenderTransform.Value;
             Point mouse = e.GetPosition(image);
 
             if (e.RightButton == MouseButtonState.Pressed)
@@ -163,18 +164,47 @@ namespace FullScreenWPF
             }
             MatrixTransform mtf = new MatrixTransform(mat);
             image.RenderTransform = mtf;
+            */
+        }
+        public void MoveDown()
+        {
+            Canvas.SetRight(image, Canvas.GetRight(image) - 1);
+            Canvas.SetTop(image, Canvas.GetTop(image) + 1);
+        }
+        public void MoveUp()
+        {         
+            Canvas.SetRight(image, Canvas.GetRight(image) - 1);
+            Canvas.SetTop(image, Canvas.GetTop(image) - 1);
+
+        }
+        public void MoveRight()
+        {
+            Canvas.SetLeft(image, Canvas.GetLeft(image) + 1);
+        }
+        public void MoveLeft()
+        {
+            Canvas.SetLeft(image, Canvas.GetLeft(image) - 1);
         }
         public void ZoomOut()
         {
             Matrix mat = image.RenderTransform.Value;
-            mat.ScaleAtPrepend(1 / 1.15, 1 / 1.15,500, 500);
+            mat.ScaleAtPrepend(1 / 1.005, 1 / 1.005, 1024 / 2, 768 / 2);
+
+            MatrixTransform mtf = new MatrixTransform(mat);
+            image.RenderTransform = mtf;
+
+        }
+        public void ZoomIn()
+        {
+            Matrix mat = image.RenderTransform.Value;
+            mat.ScaleAtPrepend(1.005, 1.005, 1024/2, 768 / 2);
 
             MatrixTransform mtf = new MatrixTransform(mat);
             image.RenderTransform = mtf;
 
         }
 
-        private void Image_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        /*private void Image_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
@@ -189,21 +219,21 @@ namespace FullScreenWPF
                 //Update first point
                 firsPoint = temp;
             }
-        }
+        }*/
 
-        void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+       /* void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             firsPoint = e.GetPosition(this);
             image.CaptureMouse();
         }
-
+        */
 
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             if(System.Windows.Forms.Screen.AllScreens.Length >= 2)
             {
-                System.Drawing.Rectangle screenBounds = System.Windows.Forms.Screen.AllScreens[1].Bounds;
+                screenBounds = System.Windows.Forms.Screen.AllScreens[1].Bounds;
                 this.Left = screenBounds.Left;
                 this.Top = screenBounds.Top;
                 INIT();
