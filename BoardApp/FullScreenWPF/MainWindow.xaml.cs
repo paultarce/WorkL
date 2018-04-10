@@ -201,9 +201,25 @@ namespace FullScreenWPF
 
             MatrixTransform mtf = new MatrixTransform(mat);
             image.RenderTransform = mtf;
-
         }
 
+        public void RotateRight()
+        {
+            Matrix mat = image.RenderTransform.Value;
+            mat.RotateAtPrepend(0.5, image.Width/2, image.Height/2); // 0.5 pentru ca event-ul e apelat de 2 ori la o apasare !!!
+
+            MatrixTransform mtf = new MatrixTransform(mat);
+            image.RenderTransform = mtf;
+        }
+
+        public void RotateLeft()
+        {
+            Matrix mat = image.RenderTransform.Value;
+            mat.RotateAtPrepend(-0.5, image.Width / 2, image.Height / 2);
+
+            MatrixTransform mtf = new MatrixTransform(mat);
+            image.RenderTransform = mtf;
+        }
         /*private void Image_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)

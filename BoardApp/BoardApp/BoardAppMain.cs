@@ -438,6 +438,14 @@ namespace BoardApp
                 if (wpfwindow.btS != null)
                     wpfwindow.ZoomOut();
             }
+            if(e.KeyChar == '9')
+            {
+                wpfwindow.RotateRight();
+            }
+            if(e.KeyChar == '7')
+            {
+                wpfwindow.RotateLeft();
+            }
         }
 
 
