@@ -256,6 +256,7 @@ namespace BoardApp
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             label5.Text = myPicture.Name;
             pictureBox.Image = myPicture.Image;
+            pictureNr = flowLayoutPanel1.Controls.GetChildIndex((PictureBox)sender);
 
             //  }
         }
@@ -428,21 +429,21 @@ namespace BoardApp
             {
                 wpfwindow.MoveRight();
             }
-            if(e.KeyChar == '+')
+            if (e.KeyChar == '+')
             {
                 if (wpfwindow.btS != null)
                     wpfwindow.ZoomIn();
             }
-            if(e.KeyChar == '-')
+            if (e.KeyChar == '-')
             {
                 if (wpfwindow.btS != null)
                     wpfwindow.ZoomOut();
             }
-            if(e.KeyChar == '9')
+            if (e.KeyChar == '9')
             {
                 wpfwindow.RotateRight();
             }
-            if(e.KeyChar == '7')
+            if (e.KeyChar == '7')
             {
                 wpfwindow.RotateLeft();
             }
@@ -499,14 +500,15 @@ namespace BoardApp
 
         private void BoardAppMain_KeyDown(object sender, KeyEventArgs e)
         {
-            /*  if (wpfwindow.IsLoaded == true)
-              {
-                  if (e.KeyCode == Keys.Escape)
-                  {
-                      wpfwindow.Close();
-                  }
-              }
-              */
+            if (wpfwindow.IsLoaded == true)
+            {
+                if (e.KeyCode == Keys.Escape)
+                {
+                    wpfwindow.btS = null;
+                    wpfwindow.INIT();
+                }
+            }
+
         }
 
         #endregion
@@ -829,29 +831,7 @@ namespace BoardApp
             {
                 if (pictureBox.Image != null)
                 {
-
-
-                    //PictureEditor.ShowPictureFullSreen2(ref f, ref pictureBox); //to update "this" controls 
-                    //this.BringToFront();
-                    BitmapSource btS = FormImageToWpfcs.BitmapFromBase64(FormImageToWpfcs.BitmapToBase64String(pictureBox.Image));
-                    pbCrop.Image = BitmapFromSource(btS);
-                    //wpfwindow = new FullScreenWPF.MainWindow(btS);
-                    //ElementHost.EnableModelessKeyboardInterop(wpfwindow);
-                    //wpfwindow.Show();
-                    if (wpfwindow.IsVisible != false)
-                    {
-                        wpfwindow.btS = btS;
-                        wpfwindow.INIT();
-                    }
-                    else
-                    {
-                        wpfwindow = new FullScreenWPF.MainWindow();
-                        ElementHost.EnableModelessKeyboardInterop(wpfwindow);
-                        wpfwindow.Show();
-                        wpfwindow.btS = btS;
-                        wpfwindow.INIT();
-                    }
-
+                    this.ShowWpfLogic();
                 }
                 else
                 {
@@ -890,18 +870,87 @@ namespace BoardApp
                     MessageBox.Show("No picture to save or picture already saved", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
-            if (e.KeyCode == Keys.NumPad1) /// sa il fac ca in timp ce e apasat sa se faca zoom out
+            /*if (e.KeyCode == Keys.NumPad1) /// sa il fac ca in timp ce e apasat sa se faca zoom out
             {
-               
+                if (pictureNr > 0 && pictureNr <= flowLayoutPanel1.Controls.Count)
+                {                 
+                    pictureBox.Image = ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).Image;
+                    this.ShowWpfLogic();
+                    if(flowLayoutPanel1.Controls.Count > 0)
+                        pictureNr--;                                      
+                }
             }
 
             if (e.KeyCode == Keys.NumPad3)
             {
-                
-            }
+                if (pictureNr >= 0 && pictureNr <= flowLayoutPanel1.Controls.Count - 1)
+                {                   
+                    pictureBox.Image = ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).Image;
+                    this.ShowWpfLogic();
+                    if(flowLayoutPanel1.Controls.Count > 0 && pictureNr < flowLayoutPanel1.Controls.Count-1  )
+                        pictureNr++;
+                }
+            }*/
+            if (e.KeyCode == Keys.NumPad1) /// sa il fac ca in timp ce e apasat sa se faca zoom out
+            {
+                if (flowLayoutPanel1.Controls.Count > 1)
+                {
+                    if (pictureNr >= 1)
+                    {
+                        pictureNr--;
+                        pictureBox.Image = ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).Image;
+                        this.ShowWpfLogic();
 
+                    }
+                }
+            }
+            if (e.KeyCode == Keys.NumPad3)
+            {
+                if (flowLayoutPanel1.Controls.Count > 1)
+                {
+                    if (pictureNr < flowLayoutPanel1.Controls.Count - 1)
+                    {
+                        pictureNr++;
+                        pictureBox.Image = ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).Image;
+                        this.ShowWpfLogic();
+                    }
+                }
+            }
         }
 
+        public void ShowWpfLogic()
+        {
+            //PictureEditor.ShowPictureFullSreen2(ref f, ref pictureBox); //to update "this" controls 
+            //this.BringToFront();
+            BitmapSource btS = FormImageToWpfcs.BitmapFromBase64(FormImageToWpfcs.BitmapToBase64String(pictureBox.Image));
+            pbCrop.Image = BitmapFromSource(btS);
+            //wpfwindow = new FullScreenWPF.MainWindow(btS);
+            //ElementHost.EnableModelessKeyboardInterop(wpfwindow);
+            //wpfwindow.Show();
+            if (wpfwindow.IsVisible != false)
+            {
+                // wpfwindow.NewImage();
+                //wpfwindow.INIT();
+                // wpfwindow.btS = btS;
+                //wpfwindow.INIT();
+                wpfwindow.Close();
+                wpfwindow = new FullScreenWPF.MainWindow();
+                ElementHost.EnableModelessKeyboardInterop(wpfwindow);
+                wpfwindow.Show();
+                wpfwindow.btS = btS;
+                wpfwindow.INIT();
+                this.BringToFront();
+            }
+            else
+            {
+                wpfwindow = new FullScreenWPF.MainWindow();
+                ElementHost.EnableModelessKeyboardInterop(wpfwindow);
+                wpfwindow.Show();
+                wpfwindow.btS = btS;
+                wpfwindow.INIT();
+                this.BringToFront();
+            }
+        }
 
         #region SAVE 
         private void btnSaveImage_Click(object sender, EventArgs e)

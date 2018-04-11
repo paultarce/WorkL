@@ -256,5 +256,11 @@ namespace FullScreenWPF
             }
             this.WindowState = WindowState.Maximized;
         }
+
+        public void NewImage()
+        {
+            this.Close();
+            this.Show();
+        }
     }
 }
