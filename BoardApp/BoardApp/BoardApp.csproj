@@ -82,6 +82,7 @@
     <Compile Include="Exceptions-Algorithms\BitmapTOImgSource.cs" />
     <Compile Include="Exceptions-Algorithms\CopyControl.cs" />
     <Compile Include="Exceptions-Algorithms\Crop.cs" />
+    <Compile Include="Exceptions-Algorithms\CropImage.cs" />
     <Compile Include="Exceptions-Algorithms\FormImageToWpfcs.cs" />
     <Compile Include="Exceptions-Algorithms\MyExtensions.cs" />
     <Compile Include="Exceptions-Algorithms\WorkAroundMetadataError.cs" />
