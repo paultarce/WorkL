@@ -691,7 +691,7 @@ namespace BoardApp
             }
         }
         #endregion
-   
+
         #region CropRegion
 
         /*
@@ -750,29 +750,28 @@ namespace BoardApp
 
 
 
-        private void pictureBox_MouseDown(object sender, MouseEventArgs e)
+        /*private void pictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             if (rbCropMode.Checked == true)
             {
                 IsMouseDown = true;
                 StartLocation = e.Location;
             }
+        }*/
 
-        }
-        private void pictureBox_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (rbCropMode.Checked == true)
-            {
-                if (IsMouseDown == true)
-                {
-                    EndLocation = e.Location;
-                    pictureBox.Invalidate();
-                }
-            }
-        }
+        /* private void pictureBox_MouseMove(object sender, MouseEventArgs e)
+         {
+             if (rbCropMode.Checked == true)
+             {
+                 if (IsMouseDown == true)
+                 {
+                     EndLocation = e.Location;
+                     pictureBox.Invalidate();
+                 }
+             }
+         }*/
 
-
-        private void pictureBox_MouseUp(object sender, MouseEventArgs e)
+        /*private void pictureBox_MouseUp(object sender, MouseEventArgs e)
         {
             if (rbCropMode.Checked == true)
             {
@@ -795,20 +794,20 @@ namespace BoardApp
                     }
                 }
             }
-        }
+        }*/
 
-        private void pictureBox_Paint(object sender, PaintEventArgs e)
-        {
-            if (rbCropMode.Checked == true)
-            {
+        /* private void pictureBox_Paint(object sender, PaintEventArgs e)
+         {
+             if (rbCropMode.Checked == true)
+             {
 
-                if (rect != null)
-                {
-                    e.Graphics.DrawRectangle(Pens.Red, GetRectangle());
-                }
-            }
-        }
-        public Rectangle GetRectangle()
+                 if (rect != null)
+                 {
+                     e.Graphics.DrawRectangle(Pens.Red, GetRectangle());
+                 }
+             }
+         }*/
+        /*public Rectangle GetRectangle()
         {
             rect = new Rectangle();
             rect.X = Math.Min(StartLocation.X, EndLocation.X); //pentru a putea desena dreptunghiul de crop in oricare directie
@@ -817,13 +816,13 @@ namespace BoardApp
             rect.Height = Math.Abs(StartLocation.Y - EndLocation.Y);
 
             return rect;
-        }
+        }*/
 
         private void rbCropMode_CheckedChanged(object sender, EventArgs e)
         {
             if (pictureBox.Image != null)
             {
-                Bitmap b = new Bitmap(pictureBox.Image);
+               /* Bitmap b = new Bitmap(pictureBox.Image);
                 imgInput = new Image<Bgr, byte>(b);
                 pictureBox.Image = imgInput.Bitmap;
                 //if(rbCaptureMode)
@@ -841,6 +840,7 @@ namespace BoardApp
             else
             {
                 MessageBox.Show("No picture in PictureBox!!");
+                rbCaptureMode.Checked = false;
             }
         }
 
@@ -848,66 +848,58 @@ namespace BoardApp
         #endregion
 
         #region CROP IMAGE
-        public static Image Crop(this Image image, Rectangle selection)
+
+        private bool _selecting;
+        private Rectangle _selection;
+        private void pictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            Bitmap bmp = image as Bitmap;
-
-            // Check if it is a bitmap:
-            if (bmp == null)
-                throw new ArgumentException("No valid bitmap");
-
-            // Crop the image:
-            Bitmap cropBmp = bmp.Clone(selection, bmp.PixelFormat);
-
-            // Release the resources:
-            image.Dispose();
-
-            return cropBmp;
+            // Starting point of the selection:
+            if (e.Button == MouseButtons.Left)
+            {
+                _selecting = true;
+                _selection = new Rectangle(new Point(e.X, e.Y), new Size());
+            }
         }
-        public static Image Fit2PictureBox(this Image image, PictureBox picBox)
+
+        private void pictureBox_MouseMove(object sender, MouseEventArgs e)
         {
-            Bitmap bmp = null;
-            Graphics g;
+            // Update the actual size of the selection:
+            if (_selecting)
+            {
+                _selection.Width = e.X - _selection.X;
+                _selection.Height = e.Y - _selection.Y;
 
-            // Scale:
-            double scaleY = (double)image.Width / picBox.Width;
-            double scaleX = (double)image.Height / picBox.Height;
-            double scale = scaleY < scaleX ? scaleX : scaleY;
+                // Redraw the picturebox:
+                pictureBox.Refresh();
+            }
+        }
 
-            // Create new bitmap:
-            bmp = new Bitmap(
-                (int)((double)image.Width / scale),
-                (int)((double)image.Height / scale));
+        private void pictureBox_Paint(object sender, PaintEventArgs e)
+        {
+            if (_selecting)
+            {
+                // Draw a rectangle displaying the current selection
+                Pen pen = Pens.GreenYellow;
+                e.Graphics.DrawRectangle(pen, _selection);
+            }
+        }
 
-            // Set resolution of the new image:
-            bmp.SetResolution(
-                image.HorizontalResolution,
-                image.VerticalResolution);
+        private void pictureBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left && _selecting && _selection.Size != new Size())
+            {
+                // Create cropped image:
+                Image img = pictureBox.Image.Crop(_selection,pictureBox);
 
-            // Create graphics:
-            g = Graphics.FromImage(bmp);
-
-            // Set interpolation mode:
-            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-
-            // Draw the new image:
-            g.DrawImage(
-                image,
-                new Rectangle(            // Destination
-                    0, 0,
-                    bmp.Width, bmp.Height),
-                new Rectangle(            // Source
-                    0, 0,
-                    image.Width, image.Height),
-                GraphicsUnit.Pixel);
-
-            // Release the resources of the graphics:
-            g.Dispose();
-
-            // Release the resources of the origin image:
-            image.Dispose();
-
-            return bmp;
+                //int factorX
+                // Fit image to the picturebox:
+                //pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                // pictureBox.Image = img.Fit2PictureBox(pictureBox);
+                pictureBox.Image = img;
+                _selecting = false;
+            }
+            else
+                _selecting = false;
         }
         #endregion
 
@@ -1052,7 +1044,7 @@ namespace BoardApp
 
 
         #endregion
-        
+
         #region SAVE 
         private void btnSaveImage_Click(object sender, EventArgs e)
         {

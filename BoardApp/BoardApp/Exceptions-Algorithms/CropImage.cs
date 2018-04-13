@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
 namespace BoardApp.Exceptions_Algorithms
 {
-    public class CropImage
+    public static class CropImage
     {
 
         public static Image Fit2PictureBox(this Image image, PictureBox picBox)
@@ -23,8 +24,8 @@ namespace BoardApp.Exceptions_Algorithms
 
             // Create new bitmap:
             bmp = new Bitmap(
-                (int)((double)image.Width / scale),
-                (int)((double)image.Height / scale));
+                (int)((double)picBox.Width / scale),
+                (int)((double)picBox.Height / scale));
 
             // Set resolution of the new image:
             bmp.SetResolution(
@@ -55,6 +56,33 @@ namespace BoardApp.Exceptions_Algorithms
             image.Dispose();
 
             return bmp;
+        }
+
+        public static Image Crop(this Image image, Rectangle selection,PictureBox pict)
+        {
+            Bitmap bmp = image as Bitmap;
+
+            // Check if it is a bitmap:
+            if (bmp == null)
+                throw new ArgumentException("No valid bitmap");
+
+            // Crop the image:
+            double factorX =(double)image.Width / pict.Width;
+            double factorY = (double)image.Height / pict.Height;
+
+            double width = factorX * selection.Width;
+            double height = factorY * selection.Height;
+
+            selection.Height = (int)Math.Floor(height);
+            selection.Width = (int)Math.Floor(width);
+            selection.X = (int)Math.Floor( selection.X * factorX);
+            selection.Y = (int)Math.Floor(selection.Y * factorY);
+            Bitmap cropBmp = bmp.Clone(selection, bmp.PixelFormat);
+
+            // Release the resources:
+            image.Dispose();
+
+            return cropBmp;
         }
     }
 }
