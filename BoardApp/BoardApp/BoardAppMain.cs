@@ -17,7 +17,7 @@ using BoardApp.Exceptions_Algorithms;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms.Integration;
-
+using BoardApp.ImageProcessAlgo;
 
 using Emgu.CV;
 using Emgu.CV.Structure;
@@ -1042,6 +1042,8 @@ namespace BoardApp
             return bitmap;
         }
 
+       
+
 
         #endregion
 
@@ -1061,6 +1063,93 @@ namespace BoardApp
             {
                 MessageBox.Show("Save error:" + ex.Message);
             }
+        }
+        #endregion
+
+        #region PROCESARE IMAGINE
+
+        int brightness = 0;
+        static float contrast = 0;
+        
+
+        private void tbImageProcess_Enter(object sender, EventArgs e)
+        {
+            if (pictureBox.Image != null)
+            {
+                pbProcessImage.Image = pictureBox.Image;
+                pbProcessImage.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                tbBrightness.Value = 0;
+                originalImage = (Bitmap)pbProcessImage.Image;
+            }
+        }
+
+        Bitmap originalImage;
+        private void tbBrightness_Scroll(object sender, EventArgs e)
+        {
+            pbProcessImage.Image = AdjustBrightness(originalImage, tbBrightness.Value);
+        }
+
+        private void tbContrast_Scroll(object sender, EventArgs e)
+        {
+            
+            pbProcessImage.Image = AdjustContrast(originalImage,tbContrast.Value);
+            
+        }
+
+        private void btnSaveProcesare_Click(object sender, EventArgs e)
+        {
+            pictureBox.Image = pbProcessImage.Image;
+        }
+
+       
+        public static Bitmap AdjustContrast(Bitmap Image, int value)
+        {
+            contrast = 0.04f * value;
+            Bitmap TempBitmap = Image;
+            Bitmap bmp = new Bitmap(TempBitmap.Width, TempBitmap.Height);
+            Graphics g = Graphics.FromImage(bmp);
+            ImageAttributes ia = new ImageAttributes();
+            ColorMatrix cm = new ColorMatrix(
+                new float[][]
+                {
+                    new float[]{ contrast, 0f, 0f ,0f, 0f },
+                    new float[]{ 0f, contrast, 0f ,0f, 0f },
+                    new float[]{ 0f, 0f, contrast, 0f, 0f },
+                    new float[]{ 0f, 0f, 0f, 1f, 0f },
+                    new float[]{ 0.001f, 0.001f, 0.001f, 0f,1f }
+                });
+
+            ia.SetColorMatrix(cm);
+            g.DrawImage(TempBitmap, new Rectangle(0, 0, TempBitmap.Width, TempBitmap.Height), 0, 0, TempBitmap.Width, TempBitmap.Height, GraphicsUnit.Pixel, ia);
+            g.Dispose();
+            ia.Dispose();
+            return bmp;
+        }
+        public static Bitmap AdjustBrightness(Bitmap Image , int value)
+        {
+            Bitmap TempBitmap = Image;
+            float FinalValue = (float)value / 255.0f;
+            Bitmap NewBitmap = new Bitmap(TempBitmap.Width, TempBitmap.Height);
+            Graphics NewGraphics = Graphics.FromImage(NewBitmap);
+
+            float[][] FloatColorMatrix =
+            {
+                new float[] {1, 0, 0, 0, 0},
+                new float[] {0, 1, 0, 0, 0},
+                new float[] {0, 0, 1, 0, 0},
+                new float[] {0, 0, 0, 1, 0},
+                new float[] {FinalValue, FinalValue, FinalValue, 1, 1}
+            };
+            ColorMatrix NewColorMatrix = new ColorMatrix(FloatColorMatrix);
+            ImageAttributes Attributes = new ImageAttributes();
+            Attributes.SetColorMatrix(NewColorMatrix);
+            NewGraphics.DrawImage(TempBitmap, new Rectangle(0, 0, TempBitmap.Width, TempBitmap.Height), 0, 0, TempBitmap.Width, TempBitmap.Height, GraphicsUnit.Pixel, Attributes);
+            Attributes.Dispose();
+            NewGraphics.Dispose();
+
+            
+            return NewBitmap;
         }
         #endregion
     }

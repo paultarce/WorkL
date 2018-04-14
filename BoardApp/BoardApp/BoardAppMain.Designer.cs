@@ -60,6 +60,13 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.btnDeletePict = new System.Windows.Forms.Button();
+            this.tbImageProcess = new System.Windows.Forms.TabPage();
+            this.tbContrast = new System.Windows.Forms.TrackBar();
+            this.tbBrightness = new System.Windows.Forms.TrackBar();
+            this.btnSaveProcesare = new System.Windows.Forms.Button();
+            this.lblContrast = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.pbProcessImage = new System.Windows.Forms.PictureBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tbZoom = new System.Windows.Forms.TrackBar();
             this.tbRotate = new System.Windows.Forms.TrackBar();
@@ -75,6 +82,10 @@
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCrop)).BeginInit();
+            this.tbImageProcess.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbContrast)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbBrightness)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbProcessImage)).BeginInit();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbZoom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbRotate)).BeginInit();
@@ -311,6 +322,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tbImageProcess);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Location = new System.Drawing.Point(2, 0);
             this.tabControl1.Name = "tabControl1";
@@ -399,6 +411,88 @@
             this.btnDeletePict.Text = "Delete Picture";
             this.btnDeletePict.UseVisualStyleBackColor = true;
             this.btnDeletePict.Click += new System.EventHandler(this.btnDeletePict_Click);
+            // 
+            // tbImageProcess
+            // 
+            this.tbImageProcess.Controls.Add(this.tbContrast);
+            this.tbImageProcess.Controls.Add(this.tbBrightness);
+            this.tbImageProcess.Controls.Add(this.btnSaveProcesare);
+            this.tbImageProcess.Controls.Add(this.lblContrast);
+            this.tbImageProcess.Controls.Add(this.label10);
+            this.tbImageProcess.Controls.Add(this.pbProcessImage);
+            this.tbImageProcess.Location = new System.Drawing.Point(4, 22);
+            this.tbImageProcess.Name = "tbImageProcess";
+            this.tbImageProcess.Padding = new System.Windows.Forms.Padding(3);
+            this.tbImageProcess.Size = new System.Drawing.Size(989, 434);
+            this.tbImageProcess.TabIndex = 2;
+            this.tbImageProcess.Text = "Editare Poza";
+            this.tbImageProcess.UseVisualStyleBackColor = true;
+            this.tbImageProcess.Enter += new System.EventHandler(this.tbImageProcess_Enter);
+            // 
+            // tbContrast
+            // 
+            this.tbContrast.LargeChange = 100;
+            this.tbContrast.Location = new System.Drawing.Point(133, 107);
+            this.tbContrast.Maximum = 100;
+            this.tbContrast.Name = "tbContrast";
+            this.tbContrast.Size = new System.Drawing.Size(242, 45);
+            this.tbContrast.SmallChange = 5;
+            this.tbContrast.TabIndex = 29;
+            this.tbContrast.TickFrequency = 5;
+            this.tbContrast.Scroll += new System.EventHandler(this.tbContrast_Scroll);
+            // 
+            // tbBrightness
+            // 
+            this.tbBrightness.LargeChange = 100;
+            this.tbBrightness.Location = new System.Drawing.Point(133, 16);
+            this.tbBrightness.Maximum = 100;
+            this.tbBrightness.Minimum = -100;
+            this.tbBrightness.Name = "tbBrightness";
+            this.tbBrightness.Size = new System.Drawing.Size(242, 45);
+            this.tbBrightness.SmallChange = 5;
+            this.tbBrightness.TabIndex = 26;
+            this.tbBrightness.TickFrequency = 5;
+            this.tbBrightness.Scroll += new System.EventHandler(this.tbBrightness_Scroll);
+            // 
+            // btnSaveProcesare
+            // 
+            this.btnSaveProcesare.Location = new System.Drawing.Point(333, 378);
+            this.btnSaveProcesare.Name = "btnSaveProcesare";
+            this.btnSaveProcesare.Size = new System.Drawing.Size(105, 34);
+            this.btnSaveProcesare.TabIndex = 25;
+            this.btnSaveProcesare.Text = "Salvare Modificari";
+            this.btnSaveProcesare.UseVisualStyleBackColor = true;
+            this.btnSaveProcesare.Click += new System.EventHandler(this.btnSaveProcesare_Click);
+            // 
+            // lblContrast
+            // 
+            this.lblContrast.AutoSize = true;
+            this.lblContrast.Location = new System.Drawing.Point(42, 122);
+            this.lblContrast.Name = "lblContrast";
+            this.lblContrast.Size = new System.Drawing.Size(46, 13);
+            this.lblContrast.TabIndex = 23;
+            this.lblContrast.Text = "Contrast";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(42, 34);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(56, 13);
+            this.label10.TabIndex = 22;
+            this.label10.Text = "Brightness";
+            // 
+            // pbProcessImage
+            // 
+            this.pbProcessImage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbProcessImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbProcessImage.Location = new System.Drawing.Point(475, 16);
+            this.pbProcessImage.Name = "pbProcessImage";
+            this.pbProcessImage.Size = new System.Drawing.Size(482, 396);
+            this.pbProcessImage.TabIndex = 20;
+            this.pbProcessImage.TabStop = false;
             // 
             // tabPage1
             // 
@@ -525,6 +619,11 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCrop)).EndInit();
+            this.tbImageProcess.ResumeLayout(false);
+            this.tbImageProcess.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbContrast)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbBrightness)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbProcessImage)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbZoom)).EndInit();
@@ -577,5 +676,12 @@
         private System.Windows.Forms.TrackBar tbResizeVer;
         private System.Windows.Forms.TrackBar tbRotate;
         private System.Windows.Forms.TrackBar tbZoom;
+        private System.Windows.Forms.TabPage tbImageProcess;
+        private System.Windows.Forms.PictureBox pbProcessImage;
+        private System.Windows.Forms.Button btnSaveProcesare;
+        private System.Windows.Forms.Label lblContrast;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TrackBar tbBrightness;
+        private System.Windows.Forms.TrackBar tbContrast;
     }
 }
