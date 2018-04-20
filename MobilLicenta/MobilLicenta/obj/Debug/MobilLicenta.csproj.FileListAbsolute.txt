@@ -1,0 +1,15 @@
+D:\cursuri\LICENTA\WorkL\MobilLicenta\MobilLicenta\bin\Debug\MobilLicenta.dll
+D:\cursuri\LICENTA\WorkL\MobilLicenta\MobilLicenta\bin\Debug\MobilLicenta.pdb
+D:\cursuri\LICENTA\WorkL\MobilLicenta\MobilLicenta\bin\Debug\MobilLicenta.MobilLicenta.apk
+D:\cursuri\LICENTA\WorkL\MobilLicenta\MobilLicenta\bin\Debug\MobilLicenta.MobilLicenta-Signed.apk
+D:\cursuri\LICENTA\WorkL\MobilLicenta\MobilLicenta\obj\Debug\MobilLicenta.csprojResolveAssemblyReference.cache
+D:\cursuri\LICENTA\WorkL\MobilLicenta\MobilLicenta\obj\Debug\MobilLicenta.dll
+D:\cursuri\LICENTA\WorkL\MobilLicenta\MobilLicenta\obj\Debug\MobilLicenta.pdb
+D:\cursuri\LICENTA\WorkL\MobilLicenta\MobilLicenta\obj\Debug\android\bin\MobilLicenta.MobilLicenta.apk
+D:\cursuri\LICENTA\WorkL\MobilLicenta\MobilLicenta\obj\Debug\res\layout\main.xml
+D:\cursuri\LICENTA\WorkL\MobilLicenta\MobilLicenta\obj\Debug\res\values\strings.xml
+D:\cursuri\LICENTA\WorkL\MobilLicenta\MobilLicenta\obj\Debug\res\drawable\icon.png
+D:\cursuri\LICENTA\WorkL\MobilLicenta\MobilLicenta\obj\Debug\R.cs.flag
+D:\cursuri\LICENTA\WorkL\MobilLicenta\MobilLicenta\obj\Debug\uploadflags.txt
+D:\cursuri\LICENTA\WorkL\MobilLicenta\MobilLicenta\obj\Debug\MobilLicenta.dll.mdb
+D:\cursuri\LICENTA\WorkL\MobilLicenta\MobilLicenta\bin\Debug\MobilLicenta.dll.mdb
