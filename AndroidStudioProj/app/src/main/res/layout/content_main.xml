@@ -169,5 +169,13 @@
             android:layout_marginBottom="68dp"
             android:text="Capture"
             android:textSize="10dp" />
+
+        <Button
+            android:id="@+id/btnConnections"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/btnZoomIn"
+            android:layout_alignTop="@+id/btnEsc"
+            android:text="Connections" />
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
