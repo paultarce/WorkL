@@ -85,6 +85,7 @@
     <Compile Include="Exceptions-Algorithms\CropImage.cs" />
     <Compile Include="Exceptions-Algorithms\FormImageToWpfcs.cs" />
     <Compile Include="Exceptions-Algorithms\MyExtensions.cs" />
+    <Compile Include="Exceptions-Algorithms\SerialPortData.cs" />
     <Compile Include="Exceptions-Algorithms\WorkAroundMetadataError.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

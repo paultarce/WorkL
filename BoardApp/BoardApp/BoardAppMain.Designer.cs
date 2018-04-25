@@ -75,6 +75,11 @@
             this.pbEditPhoto = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.cbPorts = new System.Windows.Forms.ComboBox();
+            this.btnConnectPort = new System.Windows.Forms.Button();
+            this.propertyGridPorts = new System.Windows.Forms.PropertyGrid();
+            this.txtSerialPort = new System.Windows.Forms.TextBox();
+            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -298,7 +303,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 267);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(341, 172);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(341, 161);
             this.flowLayoutPanel1.TabIndex = 17;
             // 
             // label5
@@ -360,16 +365,16 @@
             // 
             // pbCrop
             // 
-            this.pbCrop.Location = new System.Drawing.Point(212, 101);
+            this.pbCrop.Location = new System.Drawing.Point(212, 72);
             this.pbCrop.Name = "pbCrop";
-            this.pbCrop.Size = new System.Drawing.Size(119, 107);
+            this.pbCrop.Size = new System.Drawing.Size(129, 66);
             this.pbCrop.TabIndex = 23;
             this.pbCrop.TabStop = false;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(209, 78);
+            this.label9.Location = new System.Drawing.Point(209, 56);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(40, 13);
             this.label9.TabIndex = 22;
@@ -378,7 +383,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(209, 61);
+            this.label8.Location = new System.Drawing.Point(209, 39);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(40, 13);
             this.label8.TabIndex = 21;
@@ -387,7 +392,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(209, 48);
+            this.label7.Location = new System.Drawing.Point(209, 26);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(95, 13);
             this.label7.TabIndex = 20;
@@ -396,7 +401,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(209, 25);
+            this.label6.Location = new System.Drawing.Point(209, 3);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(132, 13);
             this.label6.TabIndex = 19;
@@ -496,6 +501,10 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.txtSerialPort);
+            this.tabPage1.Controls.Add(this.propertyGridPorts);
+            this.tabPage1.Controls.Add(this.btnConnectPort);
+            this.tabPage1.Controls.Add(this.cbPorts);
             this.tabPage1.Controls.Add(this.tbZoom);
             this.tabPage1.Controls.Add(this.tbRotate);
             this.tabPage1.Controls.Add(this.tbResizeVer);
@@ -587,8 +596,46 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.flowLayoutPanel2.Location = new System.Drawing.Point(16, 20);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(200, 170);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(285, 141);
             this.flowLayoutPanel2.TabIndex = 18;
+            // 
+            // cbPorts
+            // 
+            this.cbPorts.FormattingEnabled = true;
+            this.cbPorts.Location = new System.Drawing.Point(16, 215);
+            this.cbPorts.Name = "cbPorts";
+            this.cbPorts.Size = new System.Drawing.Size(121, 21);
+            this.cbPorts.TabIndex = 24;
+            this.cbPorts.SelectedIndexChanged += new System.EventHandler(this.cbPorts_SelectedIndexChanged);
+            // 
+            // btnConnectPort
+            // 
+            this.btnConnectPort.Location = new System.Drawing.Point(185, 213);
+            this.btnConnectPort.Name = "btnConnectPort";
+            this.btnConnectPort.Size = new System.Drawing.Size(75, 23);
+            this.btnConnectPort.TabIndex = 25;
+            this.btnConnectPort.Text = "Connect";
+            this.btnConnectPort.UseVisualStyleBackColor = true;
+            this.btnConnectPort.Click += new System.EventHandler(this.btnConnectPort_Click);
+            // 
+            // propertyGridPorts
+            // 
+            this.propertyGridPorts.Location = new System.Drawing.Point(16, 247);
+            this.propertyGridPorts.Name = "propertyGridPorts";
+            this.propertyGridPorts.Size = new System.Drawing.Size(228, 176);
+            this.propertyGridPorts.TabIndex = 26;
+            // 
+            // txtSerialPort
+            // 
+            this.txtSerialPort.Location = new System.Drawing.Point(261, 271);
+            this.txtSerialPort.Multiline = true;
+            this.txtSerialPort.Name = "txtSerialPort";
+            this.txtSerialPort.Size = new System.Drawing.Size(168, 106);
+            this.txtSerialPort.TabIndex = 27;
+            // 
+            // serialPort1
+            // 
+            this.serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort1_DataReceived);
             // 
             // BoardAppMain
             // 
@@ -683,5 +730,10 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TrackBar tbBrightness;
         private System.Windows.Forms.TrackBar tbContrast;
+        private System.Windows.Forms.Button btnConnectPort;
+        private System.Windows.Forms.ComboBox cbPorts;
+        private System.Windows.Forms.PropertyGrid propertyGridPorts;
+        private System.Windows.Forms.TextBox txtSerialPort;
+        private System.IO.Ports.SerialPort serialPort1;
     }
 }

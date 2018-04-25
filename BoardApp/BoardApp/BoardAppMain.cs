@@ -22,6 +22,7 @@ using BoardApp.ImageProcessAlgo;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using System.Windows.Media.Imaging;
+using System.IO.Ports;
 
 namespace BoardApp
 {
@@ -337,6 +338,17 @@ namespace BoardApp
             tbZoom.Value = 0;
 
             this.pbEditPhoto.MouseWheel += PbEditPhoto_MouseWheel;
+
+
+            string[] ArrayComPortsNames = null;
+            ArrayComPortsNames = SerialPort.GetPortNames();
+            cbPorts.Items.Clear();
+            foreach (string portName in ArrayComPortsNames)
+            {
+                cbPorts.Items.Add(portName);
+            }
+            cbPorts.SelectedIndex = 0;
+            serialPort1.PortName = cbPorts.Text;
         }
 
         #region KEYS PRESSED
@@ -511,16 +523,13 @@ namespace BoardApp
 
         }
 
-
-        private void BoardAppMain_KeyUp(object sender, KeyEventArgs e)
+        private void Key_Up(Keys k)
         {
-            // C - TAKE PICTURE 
-
-            if (e.KeyCode == Keys.C)
+            if (k == Keys.C)
             {
                 if (liveCamera.Image != null)
                 {
-                    btnStop_Click(sender, e);
+                    btnStop_Click(null, null);
                 }
                 else
                 {
@@ -528,7 +537,45 @@ namespace BoardApp
                 }
             }
 
+            if (k == Keys.F)
+            {
+                if (pictureBox.Image != null)
+                {
+                    this.ShowWpfLogic();
+                }
+                else
+                {
+                    MessageBox.Show("No picture to display", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
 
+                /*if (pbEditPhoto.Image != null || pictureBox.Image != null)
+                {
+                    tabControl1.SelectedIndex = 1;
+
+                    PictureEditor.ShowPictureFullSreen2(ref f, ref pbEditPhoto);
+                    imageOriginal = f.pb.Image;
+                    imageOriginal2 = pbEditPhoto.Image;
+                }*/
+            }
+        }
+
+        private void BoardAppMain_KeyUp(object sender, KeyEventArgs e)
+        {
+            // C - TAKE PICTURE 
+
+
+            Key_Up(e.KeyCode);
+           /* if (k == Keys.C)
+            {
+                if (liveCamera.Image != null)
+                {
+                    btnStop_Click(null, null);
+                }
+                else
+                {
+                    MessageBox.Show("Camera foto nu a fost pornita!", "Atentie");
+                }
+            }*/
 
             if (e.KeyCode == Keys.F)
             {
@@ -1126,6 +1173,9 @@ namespace BoardApp
             ia.Dispose();
             return bmp;
         }
+
+       
+
         public static Bitmap AdjustBrightness(Bitmap Image , int value)
         {
             Bitmap TempBitmap = Image;
@@ -1151,6 +1201,65 @@ namespace BoardApp
             
             return NewBitmap;
         }
+
+        
         #endregion
+
+        #region SERIAL PORT
+
+        private void btnConnectPort_Click(object sender, EventArgs e)
+        {
+            serialPort1.Open();// deschiderea portului serial pentru comunicare.
+           // propertyGridPorts.Prope
+        }
+
+        delegate void SetTextCallback(string text);
+
+        private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            string txt = "";
+            txt += serialPort1.ReadExisting().ToString();
+            SetText(txt.ToString());
+        }
+
+        private void cbPorts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            serialPort1.PortName = cbPorts.Text;
+            propertyGridPorts.SelectedObject = serialPort1;
+            //serialPort1.Open();
+        }
+
+        private void SetText(string text)
+        {
+            if(this.txtSerialPort.InvokeRequired)
+            {
+                SetTextCallback textCallback = new SetTextCallback(SetText);
+                this.Invoke(textCallback, new object[] { text });
+            }
+            else
+            {
+                this.txtSerialPort.Text += text;
+                SetEventsFromBluetoothData(text);
+            }
+        }
+
+        private void SetEventsFromBluetoothData(string text)
+        {
+            Keys k;
+            switch(text)
+            {
+                case "36":
+                    k = Keys.C;
+                    Key_Up(k);
+                    break;
+                case "38":
+                    k = Keys.F;
+                    Key_Up(k);
+                    break;
+
+            }
+        }
+        #endregion
+
     }
 }

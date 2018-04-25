@@ -40,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                     Log.d(TAG,"onClick: btnNavToSecond.");
-                    Intent intent = new Intent(MainActivity.this, SecondScreen.class);
+                    Intent intent = new Intent(MainActivity.this, ConnectionScreen.class);
+
                     startActivity(intent);
             }
         });

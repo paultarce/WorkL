@@ -1,4 +1,0 @@
-MobilLicenta.MainActivity, MobilLicenta;md5914282a71914765ecc2fcf8c9596ee85.MainActivity
-MobilLicenta.MainActivity, MobilLicenta, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5914282a71914765ecc2fcf8c9596ee85.MainActivity
-MobilLicenta.MainActivity;md5914282a71914765ecc2fcf8c9596ee85.MainActivity
-mobillicenta.MainActivity;md5914282a71914765ecc2fcf8c9596ee85.MainActivity

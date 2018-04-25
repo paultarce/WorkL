@@ -54,9 +54,18 @@
         android:layout_height="304dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="207dp">
+        android:layout_marginTop="207dp"
+        >
 
     </ListView>
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnOFF"
+        android:layout_alignEnd="@+id/btnList"
+        android:text="Status" />
 
 
 </RelativeLayout>
