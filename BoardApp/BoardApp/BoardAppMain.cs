@@ -1209,7 +1209,29 @@ namespace BoardApp
 
         private void btnConnectPort_Click(object sender, EventArgs e)
         {
-            serialPort1.Open();// deschiderea portului serial pentru comunicare.
+            //serialPort1.Open();// deschiderea portului serial pentru comunicare.
+            if (serialPort1.IsOpen)
+            {
+                serialPort1.Close();
+                MessageBox.Show("Serial port - CLOSED");
+                btnConnectPort.Text = "Connect";
+                lblConexiuneTelefon.Text = "Conexiune Telefon - NU exista";
+            }
+            else if(!serialPort1.IsOpen)
+            {
+                try
+                {
+                    serialPort1.Open();
+                    MessageBox.Show("Serial port - OPENED");
+                    btnConnectPort.Text = "Disconnect";
+                    lblConexiuneTelefon.Text = "Telefon conectat";
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("Eroare la conexiunea cu Portul Serial!", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+          
+            }
            // propertyGridPorts.Prope
         }
 

@@ -21,7 +21,8 @@ import java.util.UUID;
 public class MainActivity extends Activity {
     private static final String TAG = "bluetooth1";
 
-    Button btnOn, btnOff;
+    Button btnOn, btnOff,btnZoomIn,btnZoomOut,btnEsc,btnRotateLeft,btnRotateRight,btnMoveUp,btnMoveDown,btnMoveRight,btnMoveLeft;
+    Button btnPrevious,btnNext,btnDelete,btnFullScreen,btnSave,btnCapture;
 
     private BluetoothAdapter btAdapter = null;
     private BluetoothSocket btSocket = null;
@@ -33,6 +34,123 @@ public class MainActivity extends Activity {
     // MAC-address of Bluetooth module (you must edit this line)
     private static String address = "00:21:13:04:1F:F7";
 
+    private void findButtonsByID()
+    {
+        btnOn = (Button) findViewById(R.id.btnZoomIn);
+        btnOff = (Button) findViewById(R.id.btnZoomOut);
+        btnCapture = (Button) findViewById(R.id.btnCapture2);
+        btnDelete = (Button) findViewById(R.id.btnDelete);
+        btnFullScreen = (Button) findViewById(R.id.btnFullScreen);
+        btnSave = (Button) findViewById(R.id.btnSave);
+        btnMoveDown = (Button) findViewById(R.id.btnMoveDown);
+        btnMoveUp = (Button) findViewById(R.id.btnMoveUp);
+        btnMoveRight = (Button) findViewById(R.id.btnMoveRight);
+        btnMoveLeft = (Button) findViewById(R.id.btnMoveLeft);
+        btnRotateLeft = (Button) findViewById(R.id.btnRotateLeft);
+        btnRotateRight = (Button) findViewById(R.id.btnRotateRight);
+        btnNext = (Button) findViewById(R.id.btnNext);
+        btnPrevious = (Button) findViewById(R.id.btnPrevious);
+        btnEsc = (Button) findViewById(R.id.btnEsc);
+
+    }
+
+    private void ClickListeners()
+    {
+        btnOn.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                sendData("zoomin");
+                Toast.makeText(getBaseContext(), "Turn on LED", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnOff.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                sendData("zoomout");
+                Toast.makeText(getBaseContext(), "Turn off LED", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnCapture.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    sendData("capture");
+            }
+        });
+        btnSave.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendData("save");
+            }
+        });
+        btnFullScreen.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendData("fullscreen");
+            }
+        });
+        btnDelete.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendData("delete");
+            }
+        });
+        btnMoveRight.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendData("moveright");
+            }
+        });
+        btnMoveLeft.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendData("moveleft");
+            }
+        });
+        btnMoveUp.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendData("moveup");
+            }
+        });
+        btnMoveDown.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendData("movedown");
+            }
+        });
+        btnRotateRight.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendData("rotateright");
+            }
+        });
+        btnRotateLeft.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendData("rotateleft");
+            }
+        });
+        btnNext.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendData("next");
+            }
+        });
+        btnPrevious.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendData("previous");
+            }
+        });
+        btnEsc.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendData("esc");
+            }
+        });
+
+
+    }
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,25 +158,11 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.activity_main);
 
-         btnOn = (Button) findViewById(R.id.btnZoomIn);
-         btnOff = (Button) findViewById(R.id.btnZoomOut);
+         findButtonsByID();
 
         btAdapter = BluetoothAdapter.getDefaultAdapter();
         checkBTState();
 
-        btnOn.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                sendData("36");
-                Toast.makeText(getBaseContext(), "Turn on LED", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        btnOff.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                sendData("38");
-                Toast.makeText(getBaseContext(), "Turn off LED", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
@@ -130,7 +234,8 @@ public class MainActivity extends Activity {
             try {
                 outStream.flush();
             } catch (IOException e) {
-                errorExit("Fatal Error", "In onPause() and failed to flush output stream: " + e.getMessage() + ".");
+                //errorExit("Fatal Error", "In onPause() and failed to flush output stream: " + e.getMessage() + ".");
+                errorExit("FlushError!","Activate Bluetooth,Connect to Arduino Bluetooth and restart this application");
             }
         }
 
@@ -170,12 +275,12 @@ public class MainActivity extends Activity {
         try {
             outStream.write(msgBuffer);
         } catch (IOException e) {
-            String msg = "In onResume() and an exception occurred during write: " + e.getMessage();
+           /* String msg = "In onResume() and an exception occurred during write: " + e.getMessage();
             if (address.equals("00:00:00:00:00:00"))
                 msg = msg + ".\n\nUpdate your server address from 00:00:00:00:00:00 to the correct address on line 35 in the java code";
-            msg = msg +  ".\n\nCheck that the SPP UUID: " + MY_UUID.toString() + " exists on server.\n\n";
+            msg = msg +  ".\n\nCheck that the SPP UUID: " + MY_UUID.toString() + " exists on server.\n\n";*/
 
-            errorExit("Fatal Error", msg);
+            errorExit("Eroare Trimitere Date", "Activate Bluetooth,Connect to Arduino Bluetooth and restart this application");
         }
     }
 }

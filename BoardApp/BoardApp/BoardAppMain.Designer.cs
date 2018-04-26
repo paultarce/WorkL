@@ -68,6 +68,10 @@
             this.label10 = new System.Windows.Forms.Label();
             this.pbProcessImage = new System.Windows.Forms.PictureBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txtSerialPort = new System.Windows.Forms.TextBox();
+            this.propertyGridPorts = new System.Windows.Forms.PropertyGrid();
+            this.btnConnectPort = new System.Windows.Forms.Button();
+            this.cbPorts = new System.Windows.Forms.ComboBox();
             this.tbZoom = new System.Windows.Forms.TrackBar();
             this.tbRotate = new System.Windows.Forms.TrackBar();
             this.tbResizeVer = new System.Windows.Forms.TrackBar();
@@ -75,11 +79,8 @@
             this.pbEditPhoto = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.cbPorts = new System.Windows.Forms.ComboBox();
-            this.btnConnectPort = new System.Windows.Forms.Button();
-            this.propertyGridPorts = new System.Windows.Forms.PropertyGrid();
-            this.txtSerialPort = new System.Windows.Forms.TextBox();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.lblConexiuneTelefon = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -339,6 +340,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tabPage2.Controls.Add(this.lblConexiuneTelefon);
             this.tabPage2.Controls.Add(this.pbCrop);
             this.tabPage2.Controls.Add(this.label9);
             this.tabPage2.Controls.Add(this.label8);
@@ -365,7 +367,7 @@
             // 
             // pbCrop
             // 
-            this.pbCrop.Location = new System.Drawing.Point(212, 72);
+            this.pbCrop.Location = new System.Drawing.Point(197, 182);
             this.pbCrop.Name = "pbCrop";
             this.pbCrop.Size = new System.Drawing.Size(129, 66);
             this.pbCrop.TabIndex = 23;
@@ -516,9 +518,43 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(989, 434);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.Text = "Phone Connection";
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Enter += new System.EventHandler(this.tabPage1_Enter);
+            // 
+            // txtSerialPort
+            // 
+            this.txtSerialPort.Location = new System.Drawing.Point(302, 171);
+            this.txtSerialPort.Multiline = true;
+            this.txtSerialPort.Name = "txtSerialPort";
+            this.txtSerialPort.Size = new System.Drawing.Size(106, 106);
+            this.txtSerialPort.TabIndex = 27;
+            // 
+            // propertyGridPorts
+            // 
+            this.propertyGridPorts.Location = new System.Drawing.Point(16, 219);
+            this.propertyGridPorts.Name = "propertyGridPorts";
+            this.propertyGridPorts.Size = new System.Drawing.Size(267, 204);
+            this.propertyGridPorts.TabIndex = 26;
+            // 
+            // btnConnectPort
+            // 
+            this.btnConnectPort.Location = new System.Drawing.Point(185, 180);
+            this.btnConnectPort.Name = "btnConnectPort";
+            this.btnConnectPort.Size = new System.Drawing.Size(75, 23);
+            this.btnConnectPort.TabIndex = 25;
+            this.btnConnectPort.Text = "Connect";
+            this.btnConnectPort.UseVisualStyleBackColor = true;
+            this.btnConnectPort.Click += new System.EventHandler(this.btnConnectPort_Click);
+            // 
+            // cbPorts
+            // 
+            this.cbPorts.FormattingEnabled = true;
+            this.cbPorts.Location = new System.Drawing.Point(16, 180);
+            this.cbPorts.Name = "cbPorts";
+            this.cbPorts.Size = new System.Drawing.Size(121, 21);
+            this.cbPorts.TabIndex = 24;
+            this.cbPorts.SelectedIndexChanged += new System.EventHandler(this.cbPorts_SelectedIndexChanged);
             // 
             // tbZoom
             // 
@@ -579,8 +615,7 @@
             // 
             // pbEditPhoto
             // 
-            this.pbEditPhoto.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.pbEditPhoto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pbEditPhoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbEditPhoto.Location = new System.Drawing.Point(435, 59);
@@ -599,43 +634,21 @@
             this.flowLayoutPanel2.Size = new System.Drawing.Size(285, 141);
             this.flowLayoutPanel2.TabIndex = 18;
             // 
-            // cbPorts
-            // 
-            this.cbPorts.FormattingEnabled = true;
-            this.cbPorts.Location = new System.Drawing.Point(16, 215);
-            this.cbPorts.Name = "cbPorts";
-            this.cbPorts.Size = new System.Drawing.Size(121, 21);
-            this.cbPorts.TabIndex = 24;
-            this.cbPorts.SelectedIndexChanged += new System.EventHandler(this.cbPorts_SelectedIndexChanged);
-            // 
-            // btnConnectPort
-            // 
-            this.btnConnectPort.Location = new System.Drawing.Point(185, 213);
-            this.btnConnectPort.Name = "btnConnectPort";
-            this.btnConnectPort.Size = new System.Drawing.Size(75, 23);
-            this.btnConnectPort.TabIndex = 25;
-            this.btnConnectPort.Text = "Connect";
-            this.btnConnectPort.UseVisualStyleBackColor = true;
-            this.btnConnectPort.Click += new System.EventHandler(this.btnConnectPort_Click);
-            // 
-            // propertyGridPorts
-            // 
-            this.propertyGridPorts.Location = new System.Drawing.Point(16, 247);
-            this.propertyGridPorts.Name = "propertyGridPorts";
-            this.propertyGridPorts.Size = new System.Drawing.Size(228, 176);
-            this.propertyGridPorts.TabIndex = 26;
-            // 
-            // txtSerialPort
-            // 
-            this.txtSerialPort.Location = new System.Drawing.Point(261, 271);
-            this.txtSerialPort.Multiline = true;
-            this.txtSerialPort.Name = "txtSerialPort";
-            this.txtSerialPort.Size = new System.Drawing.Size(168, 106);
-            this.txtSerialPort.TabIndex = 27;
-            // 
             // serialPort1
             // 
             this.serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort1_DataReceived);
+            // 
+            // lblConexiuneTelefon
+            // 
+            this.lblConexiuneTelefon.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.lblConexiuneTelefon.AutoSize = true;
+            this.lblConexiuneTelefon.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConexiuneTelefon.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblConexiuneTelefon.Location = new System.Drawing.Point(353, 399);
+            this.lblConexiuneTelefon.Name = "lblConexiuneTelefon";
+            this.lblConexiuneTelefon.Size = new System.Drawing.Size(228, 17);
+            this.lblConexiuneTelefon.TabIndex = 24;
+            this.lblConexiuneTelefon.Text = "Conexiune Telefon - NU exista";
             // 
             // BoardAppMain
             // 
@@ -735,5 +748,6 @@
         private System.Windows.Forms.PropertyGrid propertyGridPorts;
         private System.Windows.Forms.TextBox txtSerialPort;
         private System.IO.Ports.SerialPort serialPort1;
+        private System.Windows.Forms.Label lblConexiuneTelefon;
     }
 }
