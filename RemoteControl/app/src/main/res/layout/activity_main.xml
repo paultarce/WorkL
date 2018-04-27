@@ -104,16 +104,6 @@
             android:textSize="10dp" />
 
         <Button
-            android:id="@+id/btnRotateLeft3"
-            android:layout_width="64dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignStart="@+id/btnEsc"
-            android:layout_marginTop="143dp"
-            android:text="Rotate Left"
-            android:textSize="10dp" />
-
-        <Button
             android:id="@+id/btnPrevious"
             android:layout_width="71dp"
             android:layout_height="wrap_content"

@@ -1240,7 +1240,9 @@ namespace BoardApp
         private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             string txt = "";
-            txt += serialPort1.ReadExisting().ToString();
+            //serialPort1.DtrEnable = true;
+            //txt += serialPort1.ReadExisting().ToString();
+            txt += serialPort1.ReadTo("\n");
             SetText(txt.ToString());
         }
 
@@ -1268,16 +1270,68 @@ namespace BoardApp
         private void SetEventsFromBluetoothData(string text)
         {
             Keys k;
-            switch(text)
+            switch(text)  /// daca vreau mai multe date , pot sa 
             {
-                case "36":
-                    k = Keys.C;
-                    Key_Up(k);
+                case "zoomin":
+                    if (wpfwindow.btS != null)
+                        wpfwindow.ZoomIn();
                     break;
-                case "38":
+
+                case "zoomout":
+                    if (wpfwindow.btS != null)
+                        wpfwindow.ZoomOut();
+                    break
+                        ;
+                case "fullscreen":
                     k = Keys.F;
                     Key_Up(k);
                     break;
+
+                case "delete":
+                    k = Keys.D;
+                    Key_Up(k);
+                    break;
+
+                case "capture":
+                    k = Keys.C;
+                    Key_Up(k);
+                    break;
+
+                case "save":
+                    break;
+
+                case "moveright":
+                    wpfwindow.MoveRight();
+                    break;
+
+                case "moveleft":
+                    wpfwindow.MoveLeft();
+                    break;
+
+                case "moveup":
+                    wpfwindow.MoveUp();
+                    break;
+
+                case "movedown":
+                    wpfwindow.MoveDown();
+                    break;
+
+                case "rotateright":
+                    wpfwindow.RotateRight();
+                    break;
+
+                case "rotateleft":
+                    wpfwindow.RotateLeft();
+                    break;
+
+                case "next":
+                    break;
+
+                case "previoius":
+                    break;
+
+                case "esc":
+                    break; 
 
             }
         }
