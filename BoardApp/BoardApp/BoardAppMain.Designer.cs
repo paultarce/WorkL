@@ -54,6 +54,7 @@
             this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.lblConexiuneTelefon = new System.Windows.Forms.Label();
             this.pbCrop = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -80,7 +81,6 @@
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
-            this.lblConexiuneTelefon = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -365,6 +365,18 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Main Tab";
             // 
+            // lblConexiuneTelefon
+            // 
+            this.lblConexiuneTelefon.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.lblConexiuneTelefon.AutoSize = true;
+            this.lblConexiuneTelefon.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConexiuneTelefon.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblConexiuneTelefon.Location = new System.Drawing.Point(353, 399);
+            this.lblConexiuneTelefon.Name = "lblConexiuneTelefon";
+            this.lblConexiuneTelefon.Size = new System.Drawing.Size(228, 17);
+            this.lblConexiuneTelefon.TabIndex = 24;
+            this.lblConexiuneTelefon.Text = "Conexiune Telefon - NU exista";
+            // 
             // pbCrop
             // 
             this.pbCrop.Location = new System.Drawing.Point(197, 182);
@@ -633,22 +645,6 @@
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(285, 141);
             this.flowLayoutPanel2.TabIndex = 18;
-            // 
-            // serialPort1
-            // 
-            this.serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort1_DataReceived);
-            // 
-            // lblConexiuneTelefon
-            // 
-            this.lblConexiuneTelefon.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.lblConexiuneTelefon.AutoSize = true;
-            this.lblConexiuneTelefon.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConexiuneTelefon.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblConexiuneTelefon.Location = new System.Drawing.Point(353, 399);
-            this.lblConexiuneTelefon.Name = "lblConexiuneTelefon";
-            this.lblConexiuneTelefon.Size = new System.Drawing.Size(228, 17);
-            this.lblConexiuneTelefon.TabIndex = 24;
-            this.lblConexiuneTelefon.Text = "Conexiune Telefon - NU exista";
             // 
             // BoardAppMain
             // 

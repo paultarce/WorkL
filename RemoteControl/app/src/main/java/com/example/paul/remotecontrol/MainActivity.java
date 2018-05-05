@@ -58,14 +58,14 @@ public class MainActivity extends Activity {
     {
         btnOn.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                sendData("zoomin");
+                sendData("zoomin\n");
                 Toast.makeText(getBaseContext(), "Turn on LED", Toast.LENGTH_SHORT).show();
             }
         });
 
         btnOff.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                sendData("zoomout");
+                sendData("zoomout\n");
                 Toast.makeText(getBaseContext(), "Turn off LED", Toast.LENGTH_SHORT).show();
             }
         });
@@ -73,79 +73,79 @@ public class MainActivity extends Activity {
         btnCapture.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                    sendData("capture");
+                    sendData("capture\n");
             }
         });
         btnSave.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendData("save");
+                sendData("save\n");
             }
         });
         btnFullScreen.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendData("fullscreen");
+                sendData("fullscreen\n");
             }
         });
         btnDelete.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendData("delete");
+                sendData("delete\n");
             }
         });
         btnMoveRight.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendData("moveright");
+                sendData("moveright\n");
             }
         });
         btnMoveLeft.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendData("moveleft");
+                sendData("moveleft\n");
             }
         });
         btnMoveUp.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendData("moveup");
+                sendData("moveup\n");
             }
         });
         btnMoveDown.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendData("movedown");
+                sendData("movedown\n");
             }
         });
         btnRotateRight.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendData("rotateright");
+                sendData("rotateright\n");
             }
         });
         btnRotateLeft.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendData("rotateleft");
+                sendData("rotateleft\n");
             }
         });
         btnNext.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendData("next");
+                sendData("next\n");
             }
         });
         btnPrevious.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendData("previous");
+                sendData("previous\n");
             }
         });
         btnEsc.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendData("esc");
+                sendData("esc\n");
             }
         });
 

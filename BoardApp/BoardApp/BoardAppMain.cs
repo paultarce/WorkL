@@ -340,16 +340,37 @@ namespace BoardApp
             this.pbEditPhoto.MouseWheel += PbEditPhoto_MouseWheel;
 
 
-            string[] ArrayComPortsNames = null;
-            ArrayComPortsNames = SerialPort.GetPortNames();
-            cbPorts.Items.Clear();
-            foreach (string portName in ArrayComPortsNames)
+            if (!serialPort1.IsOpen)
             {
-                cbPorts.Items.Add(portName);
+                string[] ArrayComPortsNames = null;
+                ArrayComPortsNames = SerialPort.GetPortNames();
+
+                cbPorts.Items.Clear();
+                int i = 0;
+                foreach (string portName in ArrayComPortsNames)
+                {
+                    if (portName == "COM7")
+                    {
+                        cbPorts.Items.Add("Bluetooth Telefon");
+                        cbPorts.SelectedIndex = 0;
+                        serialPort1.PortName = "COM7";
+                    }
+                    else
+                    {
+                        cbPorts.Items.Add(portName);
+                        cbPorts.SelectedIndex = i;
+                        serialPort1.PortName = cbPorts.Text;
+                    }
+                    i++;
+
+                }
+                serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(DataReceived);
+
             }
-            cbPorts.SelectedIndex = 0;
-            serialPort1.PortName = cbPorts.Text;
+            //serialPort1.PortName = cbPorts.Text;
         }
+
+
 
         #region KEYS PRESSED
         private void BoardAppMain_KeyPress(object sender, KeyPressEventArgs e)
@@ -512,14 +533,15 @@ namespace BoardApp
 
         private void BoardAppMain_KeyDown(object sender, KeyEventArgs e)
         {
-            if (wpfwindow.IsLoaded == true)
+            /*if (wpfwindow.IsLoaded == true)
             {
                 if (e.KeyCode == Keys.Escape)
                 {
                     wpfwindow.btS = null;
                     wpfwindow.INIT();
                 }
-            }
+            }*/
+            Key_Up(e.KeyCode);
 
         }
 
@@ -557,27 +579,123 @@ namespace BoardApp
                     imageOriginal2 = pbEditPhoto.Image;
                 }*/
             }
+
+            if (k == Keys.S)
+            {
+                if (pictureBox.Image != null && !(prevImage == pictureBox.Image))
+                {
+                    PictureBox myPict = new PictureBox(); //dinamicly created control
+                                                          //pictureBox.Image = Bitmap.FromFile(file);
+                    myPict = PictureEditor.PictBoxTOflowLayout(myPict);
+
+                    myPict.Image = pictureBox.Image;
+
+                    flowLayoutPanel1.AutoScroll = true;
+                    flowLayoutPanel1.Controls.Add(myPict);
+                    myPict.Click += MyPict_Click;
+
+                    prevImage = pictureBox.Image;
+                }
+                else
+                {
+                    MessageBox.Show("No picture to save or picture already saved", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+
+            if(k == Keys.D)
+            {
+                if (flowLayoutPanel1.Controls.Count > 0)
+                {
+
+                    int indexDelete = pictureNr;
+                    DialogResult dialogResult = MessageBox.Show("Stergeti Poza?", "Stergere", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        flowLayoutPanel1.Controls.Remove(flowLayoutPanel1.Controls[pictureNr]);
+                        //flowLayoutPanel1.Controls[pictureNr].Dispose();
+                        if (pictureNr > 0)
+                        {
+                            pictureNr--;
+                        }
+                        if (flowLayoutPanel1.Controls.Count > 0)
+                        {
+                            pictureBox.Image = ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).Image;
+                            this.ShowWpfLogic();
+                        }
+                        if (flowLayoutPanel1.Controls.Count == 0)
+                        {
+                            wpfwindow.btS = null;
+                            wpfwindow.INIT();
+                            pictureBox.Image = null;
+                        }
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Nu exista poze in colectie", "Atentie", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+            }
+
+            if(k == Keys.NumPad1)
+            {
+                if (flowLayoutPanel1.Controls.Count > 1)
+                {
+                    if (pictureNr >= 1)
+                    {
+                        pictureNr--;
+                        pictureBox.Image = ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).Image;
+                        this.ShowWpfLogic();
+
+                    }
+                }
+            }
+
+            if (k == Keys.NumPad3)
+            {
+                if (flowLayoutPanel1.Controls.Count > 1)
+                {
+                    if (pictureNr < flowLayoutPanel1.Controls.Count - 1)
+                    {
+                        pictureNr++;
+                        pictureBox.Image = ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).Image;
+                        this.ShowWpfLogic();
+                    }
+                }
+            }
+
+            if(k == Keys.Escape)
+            {
+                if (wpfwindow.IsLoaded == true)
+                {
+                    if (k == Keys.Escape)
+                    {
+                        wpfwindow.btS = null;
+                        wpfwindow.INIT();
+                    }
+                }
+            }
+
         }
 
         private void BoardAppMain_KeyUp(object sender, KeyEventArgs e)
         {
             // C - TAKE PICTURE 
 
-
             Key_Up(e.KeyCode);
-           /* if (k == Keys.C)
-            {
-                if (liveCamera.Image != null)
-                {
-                    btnStop_Click(null, null);
-                }
-                else
-                {
-                    MessageBox.Show("Camera foto nu a fost pornita!", "Atentie");
-                }
-            }*/
+            /* if (k == Keys.C)
+             {
+                 if (liveCamera.Image != null)
+                 {
+                     btnStop_Click(null, null);
+                 }
+                 else
+                 {
+                     MessageBox.Show("Camera foto nu a fost pornita!", "Atentie");
+                 }
+             }*/
 
-            if (e.KeyCode == Keys.F)
+            /*if (e.KeyCode == Keys.F)
             {
                 if (pictureBox.Image != null)
                 {
@@ -595,10 +713,10 @@ namespace BoardApp
                     PictureEditor.ShowPictureFullSreen2(ref f, ref pbEditPhoto);
                     imageOriginal = f.pb.Image;
                     imageOriginal2 = pbEditPhoto.Image;
-                }*/
-            }
+                }
+            }*/
 
-            if (e.KeyCode == Keys.S)
+           /* if (e.KeyCode == Keys.S)
             {
 
                 if (pictureBox.Image != null && !(prevImage == pictureBox.Image))
@@ -619,8 +737,9 @@ namespace BoardApp
                 {
                     MessageBox.Show("No picture to save or picture already saved", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
-            }
-            if (e.KeyCode == Keys.D)
+            }*/
+
+            /*if (e.KeyCode == Keys.D)
             {
                 if (flowLayoutPanel1.Controls.Count > 0)
                 {
@@ -655,7 +774,7 @@ namespace BoardApp
                 }
 
 
-            }
+            }*/
             /*if (e.KeyCode == Keys.NumPad1) /// sa il fac ca in timp ce e apasat sa se faca zoom out
             {
                 if (pictureNr > 0 && pictureNr <= flowLayoutPanel1.Controls.Count)
@@ -677,7 +796,7 @@ namespace BoardApp
                         pictureNr++;
                 }
             }*/
-            if (e.KeyCode == Keys.NumPad1) /// sa il fac ca in timp ce e apasat sa se faca zoom out
+            /*if (e.KeyCode == Keys.NumPad1) /// sa il fac ca in timp ce e apasat sa se faca zoom out
             {
                 if (flowLayoutPanel1.Controls.Count > 1)
                 {
@@ -701,7 +820,7 @@ namespace BoardApp
                         this.ShowWpfLogic();
                     }
                 }
-            }
+            }*/
         }
 
         public void ShowWpfLogic()
@@ -869,20 +988,20 @@ namespace BoardApp
         {
             if (pictureBox.Image != null)
             {
-               /* Bitmap b = new Bitmap(pictureBox.Image);
-                imgInput = new Image<Bgr, byte>(b);
-                pictureBox.Image = imgInput.Bitmap;
-                //if(rbCaptureMode)
+                /* Bitmap b = new Bitmap(pictureBox.Image);
+                 imgInput = new Image<Bgr, byte>(b);
+                 pictureBox.Image = imgInput.Bitmap;
+                 //if(rbCaptureMode)
 
-                /*  OpenFileDialog ofd = new OpenFileDialog();
-                  {
-                      if(ofd.ShowDialog() == DialogResult.OK)
-                      {
-                          imgInput = new Image<Bgr, byte>(ofd.FileName);
-                          pictureBox.Image = imgInput.Bitmap;
-                      }
-                  }
-                  */
+                 /*  OpenFileDialog ofd = new OpenFileDialog();
+                   {
+                       if(ofd.ShowDialog() == DialogResult.OK)
+                       {
+                           imgInput = new Image<Bgr, byte>(ofd.FileName);
+                           pictureBox.Image = imgInput.Bitmap;
+                       }
+                   }
+                   */
             }
             else
             {
@@ -936,7 +1055,7 @@ namespace BoardApp
             if (e.Button == MouseButtons.Left && _selecting && _selection.Size != new Size())
             {
                 // Create cropped image:
-                Image img = pictureBox.Image.Crop(_selection,pictureBox);
+                Image img = pictureBox.Image.Crop(_selection, pictureBox);
 
                 //int factorX
                 // Fit image to the picturebox:
@@ -1047,9 +1166,6 @@ namespace BoardApp
         }
 
 
-
-
-
         private void tbRotate_ValueChanged(object sender, EventArgs e)
         {
 
@@ -1089,7 +1205,7 @@ namespace BoardApp
             return bitmap;
         }
 
-       
+
 
 
         #endregion
@@ -1117,7 +1233,7 @@ namespace BoardApp
 
         int brightness = 0;
         static float contrast = 0;
-        
+
 
         private void tbImageProcess_Enter(object sender, EventArgs e)
         {
@@ -1139,9 +1255,9 @@ namespace BoardApp
 
         private void tbContrast_Scroll(object sender, EventArgs e)
         {
-            
-            pbProcessImage.Image = AdjustContrast(originalImage,tbContrast.Value);
-            
+
+            pbProcessImage.Image = AdjustContrast(originalImage, tbContrast.Value);
+
         }
 
         private void btnSaveProcesare_Click(object sender, EventArgs e)
@@ -1149,7 +1265,7 @@ namespace BoardApp
             pictureBox.Image = pbProcessImage.Image;
         }
 
-       
+
         public static Bitmap AdjustContrast(Bitmap Image, int value)
         {
             contrast = 0.04f * value;
@@ -1174,9 +1290,9 @@ namespace BoardApp
             return bmp;
         }
 
-       
 
-        public static Bitmap AdjustBrightness(Bitmap Image , int value)
+
+        public static Bitmap AdjustBrightness(Bitmap Image, int value)
         {
             Bitmap TempBitmap = Image;
             float FinalValue = (float)value / 255.0f;
@@ -1198,11 +1314,11 @@ namespace BoardApp
             Attributes.Dispose();
             NewGraphics.Dispose();
 
-            
+
             return NewBitmap;
         }
 
-        
+
         #endregion
 
         #region SERIAL PORT
@@ -1217,7 +1333,7 @@ namespace BoardApp
                 btnConnectPort.Text = "Connect";
                 lblConexiuneTelefon.Text = "Conexiune Telefon - NU exista";
             }
-            else if(!serialPort1.IsOpen)
+            else if (!serialPort1.IsOpen)
             {
                 try
                 {
@@ -1226,51 +1342,94 @@ namespace BoardApp
                     btnConnectPort.Text = "Disconnect";
                     lblConexiuneTelefon.Text = "Telefon conectat";
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show("Eroare la conexiunea cu Portul Serial!", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-          
+
             }
-           // propertyGridPorts.Prope
+            // propertyGridPorts.Prope
         }
 
         delegate void SetTextCallback(string text);
 
         private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            string txt = "";
-            //serialPort1.DtrEnable = true;
-            //txt += serialPort1.ReadExisting().ToString();
-            txt += serialPort1.ReadTo("\n");
-            SetText(txt.ToString());
+            /* string txt = "";
+             //serialPort1.DtrEnable = true;
+             txt += serialPort1.ReadExisting().ToString();
+             //txt += serialPort1.ReadTo("\n");
+             //txt += 
+             //txt = serialPort1.ReadLine();
+             SetText(txt.ToString());
+            // serialPort1.Close();
+            // serialPort1.Open();*/
+
+            //serialPort1 = new SerialPort("COM7", 9600, Parity.None, 8, StopBits.One);
+            //serialPort1.Open();
+            /*if (!serialPort1.IsOpen)
+                serialPort1.Open();
+            SerialPort sp = (SerialPort)sender;
+            this.Invoke((MethodInvoker)delegate
+            {
+                txtSerialPort.Text = sp.ReadExisting();
+
+            });
+            serialPort1.Close();
+            serialPort1 = new SerialPort("COM7", 9600, Parity.None, 8, StopBits.One);
+            serialPort1.Open();*/
+            //serialPort1.Close();
+
         }
 
         private void cbPorts_SelectedIndexChanged(object sender, EventArgs e)
         {
-            serialPort1.PortName = cbPorts.Text;
+            if (cbPorts.Text == "Bluetooth Telefon")
+            {
+                serialPort1.PortName = "COM7";
+            }
+            else
+            {
+                serialPort1.PortName = cbPorts.Text;
+            }
             propertyGridPorts.SelectedObject = serialPort1;
             //serialPort1.Open();
         }
 
         private void SetText(string text)
         {
-            if(this.txtSerialPort.InvokeRequired)
+            if (this.txtSerialPort.InvokeRequired)
             {
                 SetTextCallback textCallback = new SetTextCallback(SetText);
                 this.Invoke(textCallback, new object[] { text });
             }
             else
             {
-                this.txtSerialPort.Text += text;
+                this.txtSerialPort.Text = text;
                 SetEventsFromBluetoothData(text);
             }
+        }
+
+        private void DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            try
+            {
+                SerialPort spl = (SerialPort)sender;
+                string text = spl.ReadLine();
+                SetText(text.ToString());
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
         }
 
         private void SetEventsFromBluetoothData(string text)
         {
             Keys k;
-            switch(text)  /// daca vreau mai multe date , pot sa 
+            switch (text)  /// daca vreau mai multe date , pot sa 
             {
                 case "zoomin":
                     if (wpfwindow.btS != null)
@@ -1298,6 +1457,8 @@ namespace BoardApp
                     break;
 
                 case "save":
+                    k = Keys.S;
+                    Key_Up(k);
                     break;
 
                 case "moveright":
@@ -1325,13 +1486,17 @@ namespace BoardApp
                     break;
 
                 case "next":
+                    k = Keys.NumPad3;
+                    Key_Up(k);
                     break;
 
                 case "previoius":
+                    k = Keys.NumPad1;
+                    Key_Up(k);
                     break;
 
                 case "esc":
-                    break; 
+                    break;
 
             }
         }
