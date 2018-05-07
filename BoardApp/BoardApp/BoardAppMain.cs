@@ -451,8 +451,11 @@ namespace BoardApp
                    }
                }
                */
-            double grades = Convert.ToDouble(cbGrade.Text);
+            double grades = 1;
+            try {  grades = Convert.ToDouble(cbGrade.SelectedItem.ToString()); }
+            catch(Exception ex) {  grades = 1; }
 
+       
             if (e.KeyChar == '2')
             {
                 wpfwindow.MoveDown();
@@ -1438,6 +1441,11 @@ namespace BoardApp
 
         }
 
+        private void cbGrade_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            lblRotationAngle.Select();
+        }
+
         private void SetEventsFromBluetoothData(string text)
         {
             Keys k;
@@ -1455,8 +1463,11 @@ namespace BoardApp
                     gr[j] = text[i];
                     j++;                
                 }
-                grades = Convert.ToDouble(new string(gr));
-
+                grades = Convert.ToDouble(new string(gr)) * 2;
+                if (grades > 720)
+                    grades = 720;
+                if (grades < -720)
+                    grades = -720;
 
                 if(!text.Contains("l"))
                      wpfwindow.RotateRight(grades);
@@ -1536,6 +1547,10 @@ namespace BoardApp
                     k = Keys.Escape;
                     Key_Up(k);
                     break;
+                case "ok":
+
+                    break;
+
 
             }
         }
