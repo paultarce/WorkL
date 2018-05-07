@@ -203,19 +203,19 @@ namespace FullScreenWPF
             image.RenderTransform = mtf;
         }
 
-        public void RotateRight()
+        public void RotateRight(double grades)
         {
             Matrix mat = image.RenderTransform.Value;
-            mat.RotateAtPrepend(0.5, image.Width/2, image.Height/2); // 0.5 pentru ca event-ul e apelat de 2 ori la o apasare !!!
+            mat.RotateAtPrepend(grades/2, image.Width/2, image.Height/2); // 0.5 pentru ca event-ul e apelat de 2 ori la o apasare !!!
 
             MatrixTransform mtf = new MatrixTransform(mat);
             image.RenderTransform = mtf;
         }
 
-        public void RotateLeft()
+        public void RotateLeft(double grades)
         {
             Matrix mat = image.RenderTransform.Value;
-            mat.RotateAtPrepend(-0.5, image.Width / 2, image.Height / 2);
+            mat.RotateAtPrepend( -grades/2, image.Width / 2, image.Height / 2);
 
             MatrixTransform mtf = new MatrixTransform(mat);
             image.RenderTransform = mtf;

@@ -81,6 +81,8 @@
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.label11 = new System.Windows.Forms.Label();
+            this.cbGrade = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -340,6 +342,8 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tabPage2.Controls.Add(this.cbGrade);
+            this.tabPage2.Controls.Add(this.label11);
             this.tabPage2.Controls.Add(this.lblConexiuneTelefon);
             this.tabPage2.Controls.Add(this.pbCrop);
             this.tabPage2.Controls.Add(this.label9);
@@ -646,6 +650,23 @@
             this.flowLayoutPanel2.Size = new System.Drawing.Size(285, 141);
             this.flowLayoutPanel2.TabIndex = 18;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(209, 85);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(77, 13);
+            this.label11.TabIndex = 25;
+            this.label11.Text = "Rotation Angle";
+            // 
+            // cbGrade
+            // 
+            this.cbGrade.FormattingEnabled = true;
+            this.cbGrade.Location = new System.Drawing.Point(212, 101);
+            this.cbGrade.Name = "cbGrade";
+            this.cbGrade.Size = new System.Drawing.Size(55, 21);
+            this.cbGrade.TabIndex = 26;
+            // 
             // BoardAppMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -745,5 +766,7 @@
         private System.Windows.Forms.TextBox txtSerialPort;
         private System.IO.Ports.SerialPort serialPort1;
         private System.Windows.Forms.Label lblConexiuneTelefon;
+        private System.Windows.Forms.ComboBox cbGrade;
+        private System.Windows.Forms.Label label11;
     }
 }

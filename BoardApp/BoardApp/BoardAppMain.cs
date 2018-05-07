@@ -112,6 +112,11 @@ namespace BoardApp
 
             prevImage = Image.FromFile(@"C:\Users\Paul\Desktop\Untitled.png");
 
+            for(int k = 1; k <360; k++)
+            {
+                cbGrade.Items.Add(k);
+            }
+            cbGrade.SelectedIndex = 0;
 
             wpfwindow = new FullScreenWPF.MainWindow();
             ElementHost.EnableModelessKeyboardInterop(wpfwindow);
@@ -446,6 +451,8 @@ namespace BoardApp
                    }
                }
                */
+            double grades = Convert.ToDouble(cbGrade.Text);
+
             if (e.KeyChar == '2')
             {
                 wpfwindow.MoveDown();
@@ -474,11 +481,11 @@ namespace BoardApp
             }
             if (e.KeyChar == '9')
             {
-                wpfwindow.RotateRight();
+                wpfwindow.RotateRight(grades);
             }
             if (e.KeyChar == '7')
             {
-                wpfwindow.RotateLeft();
+                wpfwindow.RotateLeft(grades);
             }
         }
 
@@ -541,7 +548,12 @@ namespace BoardApp
                     wpfwindow.INIT();
                 }
             }*/
-            Key_Up(e.KeyCode);
+            if (wpfwindow.IsLoaded == true && e.KeyCode == Keys.Escape)
+            {
+
+
+                Key_Up(e.KeyCode);
+            }
 
         }
 
@@ -1429,6 +1441,29 @@ namespace BoardApp
         private void SetEventsFromBluetoothData(string text)
         {
             Keys k;
+            double grades=1;
+            char [] gr= new char[3];
+            int j = 0;
+
+            if(text.Contains("/"))
+            {
+                int start = text.IndexOf('/');
+                int stop = text.IndexOf('|');
+                //grades = Convert.ToDouble(text.Substring(start,));
+                for(int i= start+1; i < stop; i++)
+                {
+                    gr[j] = text[i];
+                    j++;                
+                }
+                grades = Convert.ToDouble(new string(gr));
+
+
+                if(!text.Contains("l"))
+                     wpfwindow.RotateRight(grades);
+                else
+                     wpfwindow.RotateLeft(grades);
+            }
+
             switch (text)  /// daca vreau mai multe date , pot sa 
             {
                 case "zoomin":
@@ -1439,8 +1474,8 @@ namespace BoardApp
                 case "zoomout":
                     if (wpfwindow.btS != null)
                         wpfwindow.ZoomOut();
-                    break
-                        ;
+                    break;
+
                 case "fullscreen":
                     k = Keys.F;
                     Key_Up(k);
@@ -1478,11 +1513,13 @@ namespace BoardApp
                     break;
 
                 case "rotateright":
-                    wpfwindow.RotateRight();
+                    
+                    wpfwindow.RotateRight(grades);
                     break;
 
                 case "rotateleft":
-                    wpfwindow.RotateLeft();
+                   
+                    wpfwindow.RotateLeft(grades);
                     break;
 
                 case "next":
@@ -1490,12 +1527,14 @@ namespace BoardApp
                     Key_Up(k);
                     break;
 
-                case "previoius":
+                case "previous":
                     k = Keys.NumPad1;
                     Key_Up(k);
                     break;
 
                 case "esc":
+                    k = Keys.Escape;
+                    Key_Up(k);
                     break;
 
             }

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -23,6 +24,7 @@ public class MainActivity extends Activity {
 
     Button btnOn, btnOff,btnZoomIn,btnZoomOut,btnEsc,btnRotateLeft,btnRotateRight,btnMoveUp,btnMoveDown,btnMoveRight,btnMoveLeft;
     Button btnPrevious,btnNext,btnDelete,btnFullScreen,btnSave,btnCapture;
+    EditText txtGrades;
 
     private BluetoothAdapter btAdapter = null;
     private BluetoothSocket btSocket = null;
@@ -51,6 +53,7 @@ public class MainActivity extends Activity {
         btnNext = (Button) findViewById(R.id.btnNext);
         btnPrevious = (Button) findViewById(R.id.btnPrevious);
         btnEsc = (Button) findViewById(R.id.btnEsc);
+        txtGrades = (EditText) findViewById(R.id.txtGrades);
 
     }
 
@@ -121,13 +124,13 @@ public class MainActivity extends Activity {
         btnRotateRight.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendData("rotateright\n");
+                sendData("rotateright/"+txtGrades.getText().toString()+"|\n");
             }
         });
         btnRotateLeft.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendData("rotateleft\n");
+                sendData("rotateleft/" + txtGrades.getText().toString()+ "|\n");
             }
         });
         btnNext.setOnClickListener(new OnClickListener() {
