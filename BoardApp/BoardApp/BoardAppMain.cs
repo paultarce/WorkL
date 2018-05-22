@@ -121,7 +121,6 @@ namespace BoardApp
             wpfwindow = new FullScreenWPF.MainWindow();
             ElementHost.EnableModelessKeyboardInterop(wpfwindow);
             wpfwindow.Show();
-
         }
 
         public void StartForm()
