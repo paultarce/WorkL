@@ -57,7 +57,6 @@
             this.cbGrade = new System.Windows.Forms.ComboBox();
             this.lblRotationAngle = new System.Windows.Forms.Label();
             this.lblConexiuneTelefon = new System.Windows.Forms.Label();
-            this.pbCrop = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -83,13 +82,23 @@
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.btnSendEmail = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCrop)).BeginInit();
             this.tbImageProcess.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbContrast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbBrightness)).BeginInit();
@@ -100,11 +109,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbResizeVer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbResize1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEditPhoto)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnPlay
             // 
-            this.btnPlay.Location = new System.Drawing.Point(3, 168);
+            this.btnPlay.Location = new System.Drawing.Point(17, 194);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(75, 23);
             this.btnPlay.TabIndex = 0;
@@ -114,7 +124,7 @@
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(84, 168);
+            this.btnStop.Location = new System.Drawing.Point(105, 184);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(87, 23);
             this.btnStop.TabIndex = 1;
@@ -125,7 +135,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 85);
+            this.label1.Location = new System.Drawing.Point(17, 101);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 13);
             this.label1.TabIndex = 2;
@@ -134,7 +144,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 125);
+            this.label2.Location = new System.Drawing.Point(17, 141);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(91, 13);
             this.label2.TabIndex = 3;
@@ -143,7 +153,7 @@
             // cbAttachedCameras
             // 
             this.cbAttachedCameras.FormattingEnabled = true;
-            this.cbAttachedCameras.Location = new System.Drawing.Point(20, 101);
+            this.cbAttachedCameras.Location = new System.Drawing.Point(20, 117);
             this.cbAttachedCameras.Name = "cbAttachedCameras";
             this.cbAttachedCameras.Size = new System.Drawing.Size(172, 21);
             this.cbAttachedCameras.TabIndex = 4;
@@ -151,7 +161,7 @@
             // cbSupportedModes
             // 
             this.cbSupportedModes.FormattingEnabled = true;
-            this.cbSupportedModes.Location = new System.Drawing.Point(20, 141);
+            this.cbSupportedModes.Location = new System.Drawing.Point(20, 157);
             this.cbSupportedModes.Name = "cbSupportedModes";
             this.cbSupportedModes.Size = new System.Drawing.Size(172, 21);
             this.cbSupportedModes.TabIndex = 5;
@@ -162,6 +172,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.liveCamera.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.liveCamera.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("liveCamera.BackgroundImage")));
             this.liveCamera.Cursor = System.Windows.Forms.Cursors.Default;
             this.liveCamera.Location = new System.Drawing.Point(3, 3);
             this.liveCamera.Name = "liveCamera";
@@ -174,7 +185,8 @@
             this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pictureBox.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.pictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox.BackgroundImage")));
             this.pictureBox.Location = new System.Drawing.Point(314, 3);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(306, 350);
@@ -211,26 +223,30 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Maroon;
             this.label3.Location = new System.Drawing.Point(3, 356);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(66, 21);
+            this.label3.Size = new System.Drawing.Size(91, 21);
             this.label3.TabIndex = 8;
             this.label3.Text = "Live Camera";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Maroon;
             this.label4.Location = new System.Drawing.Point(314, 356);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 13);
+            this.label4.Size = new System.Drawing.Size(104, 17);
             this.label4.TabIndex = 9;
             this.label4.Text = "Current Picture";
             // 
             // btnSaveImage
             // 
-            this.btnSaveImage.Location = new System.Drawing.Point(84, 205);
+            this.btnSaveImage.Location = new System.Drawing.Point(105, 213);
             this.btnSaveImage.Name = "btnSaveImage";
-            this.btnSaveImage.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveImage.Size = new System.Drawing.Size(87, 23);
             this.btnSaveImage.TabIndex = 13;
             this.btnSaveImage.Text = "Save Image";
             this.btnSaveImage.UseVisualStyleBackColor = true;
@@ -245,9 +261,9 @@
             // rbCaptureMode
             // 
             this.rbCaptureMode.AutoSize = true;
-            this.rbCaptureMode.Location = new System.Drawing.Point(17, 15);
+            this.rbCaptureMode.Location = new System.Drawing.Point(16, 20);
             this.rbCaptureMode.Name = "rbCaptureMode";
-            this.rbCaptureMode.Size = new System.Drawing.Size(92, 17);
+            this.rbCaptureMode.Size = new System.Drawing.Size(115, 21);
             this.rbCaptureMode.TabIndex = 14;
             this.rbCaptureMode.TabStop = true;
             this.rbCaptureMode.Text = "Capture Mode";
@@ -259,9 +275,10 @@
             this.groupBox1.Controls.Add(this.rbCropMode);
             this.groupBox1.Controls.Add(this.rbDisplayMode);
             this.groupBox1.Controls.Add(this.rbCaptureMode);
-            this.groupBox1.Location = new System.Drawing.Point(3, 6);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(17, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(183, 72);
+            this.groupBox1.Size = new System.Drawing.Size(175, 92);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Select Desired Mode";
@@ -269,9 +286,9 @@
             // rbCropMode
             // 
             this.rbCropMode.AutoSize = true;
-            this.rbCropMode.Location = new System.Drawing.Point(17, 55);
+            this.rbCropMode.Location = new System.Drawing.Point(16, 65);
             this.rbCropMode.Name = "rbCropMode";
-            this.rbCropMode.Size = new System.Drawing.Size(77, 17);
+            this.rbCropMode.Size = new System.Drawing.Size(95, 21);
             this.rbCropMode.TabIndex = 23;
             this.rbCropMode.TabStop = true;
             this.rbCropMode.Text = "Crop Mode";
@@ -281,9 +298,9 @@
             // rbDisplayMode
             // 
             this.rbDisplayMode.AutoSize = true;
-            this.rbDisplayMode.Location = new System.Drawing.Point(16, 32);
+            this.rbDisplayMode.Location = new System.Drawing.Point(16, 42);
             this.rbDisplayMode.Name = "rbDisplayMode";
-            this.rbDisplayMode.Size = new System.Drawing.Size(89, 17);
+            this.rbDisplayMode.Size = new System.Drawing.Size(111, 21);
             this.rbDisplayMode.TabIndex = 15;
             this.rbDisplayMode.TabStop = true;
             this.rbDisplayMode.Text = "Display Mode";
@@ -292,11 +309,11 @@
             // 
             // btnOpenImages
             // 
-            this.btnOpenImages.Location = new System.Drawing.Point(3, 197);
+            this.btnOpenImages.Location = new System.Drawing.Point(19, 223);
             this.btnOpenImages.Name = "btnOpenImages";
-            this.btnOpenImages.Size = new System.Drawing.Size(75, 39);
+            this.btnOpenImages.Size = new System.Drawing.Size(73, 27);
             this.btnOpenImages.TabIndex = 16;
-            this.btnOpenImages.Text = "Open Images";
+            this.btnOpenImages.Text = "Import";
             this.btnOpenImages.UseVisualStyleBackColor = true;
             this.btnOpenImages.Click += new System.EventHandler(this.btnOpenImages_Click);
             // 
@@ -342,14 +359,11 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tabPage2.Controls.Add(this.btnSendEmail);
+            this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Controls.Add(this.cbGrade);
             this.tabPage2.Controls.Add(this.lblRotationAngle);
             this.tabPage2.Controls.Add(this.lblConexiuneTelefon);
-            this.tabPage2.Controls.Add(this.pbCrop);
-            this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.label8);
-            this.tabPage2.Controls.Add(this.label7);
-            this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Controls.Add(this.btnDeletePict);
             this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.btnPlay);
@@ -368,12 +382,14 @@
             this.tabPage2.Size = new System.Drawing.Size(989, 434);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Main Tab";
+            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
             // cbGrade
             // 
+            this.cbGrade.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.cbGrade.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbGrade.FormattingEnabled = true;
-            this.cbGrade.Location = new System.Drawing.Point(212, 101);
+            this.cbGrade.Location = new System.Drawing.Point(692, 400);
             this.cbGrade.Name = "cbGrade";
             this.cbGrade.Size = new System.Drawing.Size(55, 21);
             this.cbGrade.TabIndex = 26;
@@ -381,8 +397,9 @@
             // 
             // lblRotationAngle
             // 
+            this.lblRotationAngle.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblRotationAngle.AutoSize = true;
-            this.lblRotationAngle.Location = new System.Drawing.Point(209, 85);
+            this.lblRotationAngle.Location = new System.Drawing.Point(609, 404);
             this.lblRotationAngle.Name = "lblRotationAngle";
             this.lblRotationAngle.Size = new System.Drawing.Size(77, 13);
             this.lblRotationAngle.TabIndex = 25;
@@ -392,61 +409,53 @@
             // 
             this.lblConexiuneTelefon.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblConexiuneTelefon.AutoSize = true;
-            this.lblConexiuneTelefon.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConexiuneTelefon.Font = new System.Drawing.Font("Century Gothic", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblConexiuneTelefon.ForeColor = System.Drawing.Color.DarkRed;
             this.lblConexiuneTelefon.Location = new System.Drawing.Point(353, 399);
             this.lblConexiuneTelefon.Name = "lblConexiuneTelefon";
-            this.lblConexiuneTelefon.Size = new System.Drawing.Size(228, 17);
+            this.lblConexiuneTelefon.Size = new System.Drawing.Size(227, 18);
             this.lblConexiuneTelefon.TabIndex = 24;
             this.lblConexiuneTelefon.Text = "Conexiune Telefon - NU exista";
-            // 
-            // pbCrop
-            // 
-            this.pbCrop.Location = new System.Drawing.Point(197, 182);
-            this.pbCrop.Name = "pbCrop";
-            this.pbCrop.Size = new System.Drawing.Size(129, 66);
-            this.pbCrop.TabIndex = 23;
-            this.pbCrop.TabStop = false;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(209, 56);
+            this.label9.Location = new System.Drawing.Point(6, 182);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(40, 13);
+            this.label9.Size = new System.Drawing.Size(124, 16);
             this.label9.TabIndex = 22;
-            this.label9.Text = "6 - Left";
+            this.label9.Text = "6 - Move picture right";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(209, 39);
+            this.label8.Location = new System.Drawing.Point(6, 169);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(40, 13);
+            this.label8.Size = new System.Drawing.Size(117, 16);
             this.label8.TabIndex = 21;
-            this.label8.Text = "4 - Left";
+            this.label8.Text = "4 - Move picture left";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(209, 26);
+            this.label7.Location = new System.Drawing.Point(6, 30);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(95, 13);
+            this.label7.Size = new System.Drawing.Size(114, 16);
             this.label7.TabIndex = 20;
             this.label7.Text = "C - Capture picture";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(209, 3);
+            this.label6.Location = new System.Drawing.Point(6, 17);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(132, 13);
+            this.label6.Size = new System.Drawing.Size(146, 16);
             this.label6.TabIndex = 19;
             this.label6.Text = "F - Show picture fullscreen";
             // 
             // btnDeletePict
             // 
-            this.btnDeletePict.Location = new System.Drawing.Point(84, 234);
+            this.btnDeletePict.Location = new System.Drawing.Point(105, 242);
             this.btnDeletePict.Name = "btnDeletePict";
             this.btnDeletePict.Size = new System.Drawing.Size(87, 23);
             this.btnDeletePict.TabIndex = 18;
@@ -456,6 +465,7 @@
             // 
             // tbImageProcess
             // 
+            this.tbImageProcess.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.tbImageProcess.Controls.Add(this.tbContrast);
             this.tbImageProcess.Controls.Add(this.tbBrightness);
             this.tbImageProcess.Controls.Add(this.btnSaveProcesare);
@@ -468,11 +478,11 @@
             this.tbImageProcess.Size = new System.Drawing.Size(989, 434);
             this.tbImageProcess.TabIndex = 2;
             this.tbImageProcess.Text = "Editare Poza";
-            this.tbImageProcess.UseVisualStyleBackColor = true;
             this.tbImageProcess.Enter += new System.EventHandler(this.tbImageProcess_Enter);
             // 
             // tbContrast
             // 
+            this.tbContrast.BackColor = System.Drawing.Color.DodgerBlue;
             this.tbContrast.LargeChange = 100;
             this.tbContrast.Location = new System.Drawing.Point(133, 107);
             this.tbContrast.Maximum = 100;
@@ -485,6 +495,7 @@
             // 
             // tbBrightness
             // 
+            this.tbBrightness.BackColor = System.Drawing.Color.DodgerBlue;
             this.tbBrightness.LargeChange = 100;
             this.tbBrightness.Location = new System.Drawing.Point(133, 16);
             this.tbBrightness.Maximum = 100;
@@ -538,6 +549,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.tabPage1.Controls.Add(this.txtSerialPort);
             this.tabPage1.Controls.Add(this.propertyGridPorts);
             this.tabPage1.Controls.Add(this.btnConnectPort);
@@ -554,7 +566,6 @@
             this.tabPage1.Size = new System.Drawing.Size(989, 434);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Phone Connection";
-            this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Enter += new System.EventHandler(this.tabPage1_Enter);
             // 
             // txtSerialPort
@@ -594,7 +605,7 @@
             // tbZoom
             // 
             this.tbZoom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbZoom.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tbZoom.BackColor = System.Drawing.Color.DodgerBlue;
             this.tbZoom.Location = new System.Drawing.Point(720, 383);
             this.tbZoom.Maximum = 100;
             this.tbZoom.Name = "tbZoom";
@@ -606,6 +617,7 @@
             // 
             // tbRotate
             // 
+            this.tbRotate.BackColor = System.Drawing.Color.DodgerBlue;
             this.tbRotate.Enabled = false;
             this.tbRotate.Location = new System.Drawing.Point(435, 8);
             this.tbRotate.Maximum = 180;
@@ -636,7 +648,7 @@
             // tbResize1
             // 
             this.tbResize1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbResize1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tbResize1.BackColor = System.Drawing.Color.DodgerBlue;
             this.tbResize1.Enabled = false;
             this.tbResize1.Location = new System.Drawing.Point(435, 383);
             this.tbResize1.Maximum = 1280;
@@ -669,6 +681,119 @@
             this.flowLayoutPanel2.Size = new System.Drawing.Size(285, 141);
             this.flowLayoutPanel2.TabIndex = 18;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 44);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(94, 16);
+            this.label11.TabIndex = 27;
+            this.label11.Text = "S - Save picture";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 57);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(102, 16);
+            this.label12.TabIndex = 28;
+            this.label12.Text = "D - Delete picture";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label19);
+            this.groupBox2.Controls.Add(this.label18);
+            this.groupBox2.Controls.Add(this.label17);
+            this.groupBox2.Controls.Add(this.label16);
+            this.groupBox2.Controls.Add(this.label15);
+            this.groupBox2.Controls.Add(this.label14);
+            this.groupBox2.Controls.Add(this.label13);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.label12);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(198, 9);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(146, 227);
+            this.groupBox2.TabIndex = 29;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Key Controls";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 73);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(110, 16);
+            this.label13.TabIndex = 29;
+            this.label13.Text = "1 - Previous picture";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(6, 89);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(90, 16);
+            this.label14.TabIndex = 30;
+            this.label14.Text = "3 - Next picture";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(6, 105);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(121, 16);
+            this.label15.TabIndex = 31;
+            this.label15.Text = "7 - Rotate picture left";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(6, 121);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(128, 16);
+            this.label16.TabIndex = 32;
+            this.label16.Text = "9 - Rotate picture right";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(6, 137);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(133, 16);
+            this.label17.TabIndex = 33;
+            this.label17.Text = "2 - Move picture down";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(6, 153);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(113, 16);
+            this.label18.TabIndex = 34;
+            this.label18.Text = "8- Move picture up";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(6, 198);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(105, 16);
+            this.label19.TabIndex = 35;
+            this.label19.Text = "ESC - Blank screen";
+            // 
+            // btnSendEmail
+            // 
+            this.btnSendEmail.Location = new System.Drawing.Point(200, 242);
+            this.btnSendEmail.Name = "btnSendEmail";
+            this.btnSendEmail.Size = new System.Drawing.Size(144, 23);
+            this.btnSendEmail.TabIndex = 30;
+            this.btnSendEmail.Text = "Send Pictures -Email";
+            this.btnSendEmail.UseVisualStyleBackColor = true;
+            // 
             // BoardAppMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -697,7 +822,6 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCrop)).EndInit();
             this.tbImageProcess.ResumeLayout(false);
             this.tbImageProcess.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbContrast)).EndInit();
@@ -710,6 +834,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbResizeVer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbResize1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEditPhoto)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -749,7 +875,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.RadioButton rbCropMode;
-        private System.Windows.Forms.PictureBox pbCrop;
         private System.Windows.Forms.PictureBox pbEditPhoto;
         private System.Windows.Forms.TrackBar tbResize1;
         private System.Windows.Forms.TrackBar tbResizeVer;
@@ -770,5 +895,16 @@
         private System.Windows.Forms.Label lblConexiuneTelefon;
         private System.Windows.Forms.ComboBox cbGrade;
         private System.Windows.Forms.Label lblRotationAngle;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button btnSendEmail;
     }
 }

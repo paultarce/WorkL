@@ -842,7 +842,7 @@ namespace BoardApp
             //PictureEditor.ShowPictureFullSreen2(ref f, ref pictureBox); //to update "this" controls 
             //this.BringToFront();
             BitmapSource btS = FormImageToWpfcs.BitmapFromBase64(FormImageToWpfcs.BitmapToBase64String(pictureBox.Image));
-            pbCrop.Image = BitmapFromSource(btS);
+            //pbCrop.Image = BitmapFromSource(btS);
             //wpfwindow = new FullScreenWPF.MainWindow(btS);
             //ElementHost.EnableModelessKeyboardInterop(wpfwindow);
             //wpfwindow.Show();
@@ -1198,7 +1198,7 @@ namespace BoardApp
             //System.Windows.Controls.Image image = FormImageToWpfcs.ConvertDrawingImageToWPFImage(pbEditPhoto.Image);
 
             BitmapSource btS = FormImageToWpfcs.BitmapFromBase64(FormImageToWpfcs.BitmapToBase64String(pbEditPhoto.Image));
-            pbCrop.Image = BitmapFromSource(btS);
+            //pbCrop.Image = BitmapFromSource(btS);
             wpfwindow = new FullScreenWPF.MainWindow(btS);
             ElementHost.EnableModelessKeyboardInterop(wpfwindow);
             wpfwindow.Show();
@@ -1443,6 +1443,11 @@ namespace BoardApp
         private void cbGrade_SelectionChangeCommitted(object sender, EventArgs e)
         {
             lblRotationAngle.Select();
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void SetEventsFromBluetoothData(string text)
