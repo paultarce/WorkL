@@ -23,6 +23,8 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using System.Windows.Media.Imaging;
 using System.IO.Ports;
+using BoardApp.SecondaryForms;
+using System.IO.Compression;
 
 namespace BoardApp
 {
@@ -78,8 +80,10 @@ namespace BoardApp
             f.pb.BackColor = Color.Black;
             f.BackColor = Color.Black;
 
-            PictureBox pict = new PictureBox(); pict.BackColor = Color.Black;
+            PictureBox pict = new PictureBox();
+            pict.BackColor = Color.Black;
             PictureEditor.ShowPictureFullSreen2(ref f, ref pict);
+            btnSendEmail.Enabled = false;
 
         }
 
@@ -1219,7 +1223,13 @@ namespace BoardApp
             return bitmap;
         }
 
-
+        private void btnSendEmail_Click(object sender, EventArgs e)
+        {
+            string url = @"D:\cursuri\LICENTA\WorkL\BoardApp\ZipRepo\Photos.zip";
+            EmailForm frmEmail = new EmailForm(url);
+            frmEmail.Show();
+                
+        }
 
 
         #endregion
@@ -1227,19 +1237,70 @@ namespace BoardApp
         #region SAVE 
         private void btnSaveImage_Click(object sender, EventArgs e)
         {
+            int k = 0;
+            DirectoryInfo folder = new DirectoryInfo(@"D:\cursuri\LICENTA\WorkL\BoardApp\courses");
+
+            DialogResult dialogResult = MessageBox.Show("Delete existing items?", "Delete", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+
+                foreach (FileInfo file in folder.EnumerateFiles())
+                {
+                    folder.EnumerateFiles().Count();
+                    file.Delete();
+                }
+                foreach (DirectoryInfo dir in folder.EnumerateDirectories())
+                {
+                    dir.Delete(true);
+                }
+                k = 0;
+            }
+            else
+            {
+                
+                k = folder.EnumerateFiles().Count();
+            }
+
             try
             {
                 //Bitmap b = new Bitmap("Poza");
                 /* Bitmap b = new Bitmap(pictureBox.Image);
                  Graphics gr = Graphics.FromImage(b);
                  pictureBox.Image = b;*/
-                pictureBox.Image.Save(@"D:\cursuri\LICENTA\WorkL\BoardApp\courses\Pict" + pictureNr.ToString() + ".jpeg", ImageFormat.Jpeg);
+                //pictureBox.Image.Save(@"D:\cursuri\LICENTA\WorkL\BoardApp\courses\Pict" + pictureNr.ToString() + ".jpeg", ImageFormat.Jpeg);
+                if (flowLayoutPanel1.Controls.Count > 0)
+                {
+                    
+                    foreach (var pict in flowLayoutPanel1.Controls)
+                    {
+                        ((PictureBox)pict).Image.Save(@"D:\cursuri\LICENTA\WorkL\BoardApp\courses\Pict" + k.ToString() + ".jpeg", ImageFormat.Jpeg);
+                        k++;
+                        btnSendEmail.Enabled = true;
+                    }
+
+                    
+
+                    string startPath = @"D:\cursuri\LICENTA\WorkL\BoardApp\courses";
+                    string zipPath = @"D:\cursuri\LICENTA\WorkL\BoardApp\ZipRepo\Photos.zip";
+                    ZipFile.CreateFromDirectory(startPath, zipPath, CompressionLevel.Fastest, true);
+                    //string extractPath = @"c:\example\extract";
+                    //ZipFile.ExtractToDirectory(zipPath, extractPath);
+                }
+                else
+                {
+                    MessageBox.Show("There are no saved pictures");
+                }
+
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Save error:" + ex.Message);
             }
+
+            
+
+
         }
         #endregion
 
@@ -1449,6 +1510,8 @@ namespace BoardApp
         {
 
         }
+
+       
 
         private void SetEventsFromBluetoothData(string text)
         {

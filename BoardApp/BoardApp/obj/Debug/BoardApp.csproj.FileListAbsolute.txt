@@ -46,3 +46,4 @@ D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\AForge.Math.xml
 D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\FullScreenWPF.exe
 D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\FullScreenWPF.pdb
 D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\FullScreenWPF.exe.config
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\obj\Debug\BoardApp.SecondaryForms.EmailForm.resources
