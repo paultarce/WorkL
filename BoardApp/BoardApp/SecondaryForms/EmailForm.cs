@@ -22,14 +22,14 @@ namespace BoardApp.SecondaryForms
             this.url = url;
         }
 
-       
+
 
         private void btnAddEmail_Click(object sender, EventArgs e)
         {
             int k = 0;
-            foreach(var email in listBoxEmails.Items)
+            foreach (var email in listBoxEmails.Items)
             {
-                if(txtEmail.Text.Equals(email.ToString()))
+                if (txtEmail.Text.Equals(email.ToString()))
                 {
                     k = 1;
                 }
@@ -56,35 +56,40 @@ namespace BoardApp.SecondaryForms
             }
             else
                 MessageBox.Show("Select one Email");
-        } 
+        }
 
         private void btnSendEmail_Click(object sender, EventArgs e)
         {
-            try
+            foreach (var m in listBoxEmails.Items)
             {
-                MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-                SmtpServer.UseDefaultCredentials = false;
-                mail.From = new MailAddress(txtSenderEmail.Text);
-                mail.To.Add("paul95_tarce@yahoo.com");
-                mail.Subject = "Test Mail - 1";
-                mail.Body = "mail with attachment";
+                try
+                {
+                    MailMessage mail = new MailMessage();
+                    SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                    SmtpServer.UseDefaultCredentials = false;
+                    mail.From = new MailAddress(txtSenderEmail.Text);
+                    //mail.To.Add("paul95_tarce@yahoo.com");
+                    mail.To.Add(m.ToString());
+                    mail.Subject = "Test Mail - 1";
+                    mail.Body = "mail with attachment";
 
-                System.Net.Mail.Attachment attachment;
-                attachment = new System.Net.Mail.Attachment(url);
-                mail.Attachments.Add(attachment);
+                    System.Net.Mail.Attachment attachment;
+                    attachment = new System.Net.Mail.Attachment(url);
+                    mail.Attachments.Add(attachment);
 
-                SmtpServer.Port = 587;
-                SmtpServer.Credentials = new System.Net.NetworkCredential(txtSenderEmail.Text, txtSenderPassword.Text);
-                SmtpServer.EnableSsl = true;
-                mail.IsBodyHtml = true;
+                    SmtpServer.Port = 587;
+                    SmtpServer.Credentials = new System.Net.NetworkCredential(txtSenderEmail.Text, txtSenderPassword.Text);
+                    SmtpServer.EnableSsl = true;
+                    mail.IsBodyHtml = true;
 
-                SmtpServer.Send(mail);
-                MessageBox.Show("mail Sent");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
+                    SmtpServer.Send(mail);
+                    MessageBox.Show("mail Sent");
+                }
+               
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
             }
         }
 

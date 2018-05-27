@@ -1282,6 +1282,7 @@ namespace BoardApp
 
                     string startPath = @"D:\cursuri\LICENTA\WorkL\BoardApp\courses";
                     string zipPath = @"D:\cursuri\LICENTA\WorkL\BoardApp\ZipRepo\Photos.zip";
+                    File.Delete(@"D:\cursuri\LICENTA\WorkL\BoardApp\ZipRepo\Photos.zip");
                     ZipFile.CreateFromDirectory(startPath, zipPath, CompressionLevel.Fastest, true);
                     //string extractPath = @"c:\example\extract";
                     //ZipFile.ExtractToDirectory(zipPath, extractPath);
