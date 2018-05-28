@@ -93,6 +93,8 @@
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -539,7 +541,7 @@
             this.cbGrade.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.cbGrade.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbGrade.FormattingEnabled = true;
-            this.cbGrade.Location = new System.Drawing.Point(692, 400);
+            this.cbGrade.Location = new System.Drawing.Point(763, 399);
             this.cbGrade.Name = "cbGrade";
             this.cbGrade.Size = new System.Drawing.Size(55, 21);
             this.cbGrade.TabIndex = 26;
@@ -549,7 +551,7 @@
             // 
             this.lblRotationAngle.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblRotationAngle.AutoSize = true;
-            this.lblRotationAngle.Location = new System.Drawing.Point(609, 404);
+            this.lblRotationAngle.Location = new System.Drawing.Point(680, 403);
             this.lblRotationAngle.Name = "lblRotationAngle";
             this.lblRotationAngle.Size = new System.Drawing.Size(77, 13);
             this.lblRotationAngle.TabIndex = 25;
@@ -563,9 +565,9 @@
             this.lblConexiuneTelefon.ForeColor = System.Drawing.Color.DarkRed;
             this.lblConexiuneTelefon.Location = new System.Drawing.Point(353, 399);
             this.lblConexiuneTelefon.Name = "lblConexiuneTelefon";
-            this.lblConexiuneTelefon.Size = new System.Drawing.Size(227, 18);
+            this.lblConexiuneTelefon.Size = new System.Drawing.Size(263, 18);
             this.lblConexiuneTelefon.TabIndex = 24;
-            this.lblConexiuneTelefon.Text = "Conexiune Telefon - NU exista";
+            this.lblConexiuneTelefon.Text = "Phone Connection - NOT available";
             // 
             // btnDeletePict
             // 
@@ -591,7 +593,7 @@
             this.tbImageProcess.Padding = new System.Windows.Forms.Padding(3);
             this.tbImageProcess.Size = new System.Drawing.Size(989, 434);
             this.tbImageProcess.TabIndex = 2;
-            this.tbImageProcess.Text = "Editare Poza";
+            this.tbImageProcess.Text = "Edit Picture";
             this.tbImageProcess.Enter += new System.EventHandler(this.tbImageProcess_Enter);
             // 
             // tbContrast
@@ -623,29 +625,32 @@
             // 
             // btnSaveProcesare
             // 
-            this.btnSaveProcesare.Location = new System.Drawing.Point(333, 378);
+            this.btnSaveProcesare.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveProcesare.Location = new System.Drawing.Point(246, 172);
             this.btnSaveProcesare.Name = "btnSaveProcesare";
-            this.btnSaveProcesare.Size = new System.Drawing.Size(105, 34);
+            this.btnSaveProcesare.Size = new System.Drawing.Size(129, 42);
             this.btnSaveProcesare.TabIndex = 25;
-            this.btnSaveProcesare.Text = "Salvare Modificari";
+            this.btnSaveProcesare.Text = "Save Changes";
             this.btnSaveProcesare.UseVisualStyleBackColor = true;
             this.btnSaveProcesare.Click += new System.EventHandler(this.btnSaveProcesare_Click);
             // 
             // lblContrast
             // 
             this.lblContrast.AutoSize = true;
+            this.lblContrast.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblContrast.Location = new System.Drawing.Point(42, 122);
             this.lblContrast.Name = "lblContrast";
-            this.lblContrast.Size = new System.Drawing.Size(46, 13);
+            this.lblContrast.Size = new System.Drawing.Size(62, 16);
             this.lblContrast.TabIndex = 23;
             this.lblContrast.Text = "Contrast";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(42, 34);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(56, 13);
+            this.label10.Size = new System.Drawing.Size(74, 16);
             this.label10.TabIndex = 22;
             this.label10.Text = "Brightness";
             // 
@@ -664,6 +669,8 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tabPage1.Controls.Add(this.label21);
+            this.tabPage1.Controls.Add(this.label20);
             this.tabPage1.Controls.Add(this.txtSerialPort);
             this.tabPage1.Controls.Add(this.propertyGridPorts);
             this.tabPage1.Controls.Add(this.btnConnectPort);
@@ -684,14 +691,18 @@
             // 
             // txtSerialPort
             // 
-            this.txtSerialPort.Location = new System.Drawing.Point(302, 171);
+            this.txtSerialPort.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtSerialPort.Location = new System.Drawing.Point(289, 219);
             this.txtSerialPort.Multiline = true;
             this.txtSerialPort.Name = "txtSerialPort";
-            this.txtSerialPort.Size = new System.Drawing.Size(106, 106);
+            this.txtSerialPort.Size = new System.Drawing.Size(140, 106);
             this.txtSerialPort.TabIndex = 27;
             // 
             // propertyGridPorts
             // 
+            this.propertyGridPorts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.propertyGridPorts.Location = new System.Drawing.Point(16, 219);
             this.propertyGridPorts.Name = "propertyGridPorts";
             this.propertyGridPorts.Size = new System.Drawing.Size(267, 204);
@@ -699,9 +710,9 @@
             // 
             // btnConnectPort
             // 
-            this.btnConnectPort.Location = new System.Drawing.Point(185, 180);
+            this.btnConnectPort.Location = new System.Drawing.Point(180, 172);
             this.btnConnectPort.Name = "btnConnectPort";
-            this.btnConnectPort.Size = new System.Drawing.Size(75, 23);
+            this.btnConnectPort.Size = new System.Drawing.Size(103, 34);
             this.btnConnectPort.TabIndex = 25;
             this.btnConnectPort.Text = "Connect";
             this.btnConnectPort.UseVisualStyleBackColor = true;
@@ -709,16 +720,18 @@
             // 
             // cbPorts
             // 
+            this.cbPorts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.cbPorts.FormattingEnabled = true;
             this.cbPorts.Location = new System.Drawing.Point(16, 180);
             this.cbPorts.Name = "cbPorts";
-            this.cbPorts.Size = new System.Drawing.Size(121, 21);
+            this.cbPorts.Size = new System.Drawing.Size(148, 21);
             this.cbPorts.TabIndex = 24;
             this.cbPorts.SelectedIndexChanged += new System.EventHandler(this.cbPorts_SelectedIndexChanged);
             // 
             // tbZoom
             // 
-            this.tbZoom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbZoom.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.tbZoom.BackColor = System.Drawing.Color.DodgerBlue;
             this.tbZoom.Location = new System.Drawing.Point(720, 383);
             this.tbZoom.Maximum = 100;
@@ -731,6 +744,7 @@
             // 
             // tbRotate
             // 
+            this.tbRotate.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.tbRotate.BackColor = System.Drawing.Color.DodgerBlue;
             this.tbRotate.Enabled = false;
             this.tbRotate.Location = new System.Drawing.Point(435, 8);
@@ -744,9 +758,8 @@
             // 
             // tbResizeVer
             // 
-            this.tbResizeVer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbResizeVer.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tbResizeVer.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.tbResizeVer.BackColor = System.Drawing.Color.DodgerBlue;
             this.tbResizeVer.Enabled = false;
             this.tbResizeVer.Location = new System.Drawing.Point(941, 20);
             this.tbResizeVer.Maximum = 984;
@@ -761,7 +774,7 @@
             // 
             // tbResize1
             // 
-            this.tbResize1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbResize1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.tbResize1.BackColor = System.Drawing.Color.DodgerBlue;
             this.tbResize1.Enabled = false;
             this.tbResize1.Location = new System.Drawing.Point(435, 383);
@@ -788,12 +801,33 @@
             // 
             // flowLayoutPanel2
             // 
-            this.flowLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.flowLayoutPanel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(16, 20);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(285, 141);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(267, 127);
             this.flowLayoutPanel2.TabIndex = 18;
+            // 
+            // label20
+            // 
+            this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(13, 164);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(61, 13);
+            this.label20.TabIndex = 28;
+            this.label20.Text = "Select port:";
+            // 
+            // label21
+            // 
+            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(289, 203);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(77, 13);
+            this.label21.TabIndex = 29;
+            this.label21.Text = "Text Received";
             // 
             // BoardAppMain
             // 
@@ -907,5 +941,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button btnSendEmail;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label20;
     }
 }

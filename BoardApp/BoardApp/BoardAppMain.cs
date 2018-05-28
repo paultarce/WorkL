@@ -218,7 +218,7 @@ namespace BoardApp
             //flowLayou
             using (var fbd = new FolderBrowserDialog())
             {
-                fbd.SelectedPath = @"D:\cursuri\LICENTA\WorkL\BoardApp\PhotoRepo";
+                fbd.SelectedPath = @"D:\cursuri\LICENTA\WorkL\BoardApp\PhotoRepo2";
                 DialogResult result = fbd.ShowDialog();
                 //fbd.RootFolder = @"D:\cursuri\LICENTA\WorkL\BoardApp\PhotoRepo";
 
@@ -1031,7 +1031,7 @@ namespace BoardApp
 
         #endregion
 
-        #region CROP IMAGE
+        #region CROP IMAGE - USED ONE
 
         private bool _selecting;
         private Rectangle _selection;
@@ -1407,7 +1407,7 @@ namespace BoardApp
                 serialPort1.Close();
                 MessageBox.Show("Serial port - CLOSED");
                 btnConnectPort.Text = "Connect";
-                lblConexiuneTelefon.Text = "Conexiune Telefon - NU exista";
+                lblConexiuneTelefon.Text = "Phone Connection - NOT available";
             }
             else if (!serialPort1.IsOpen)
             {
@@ -1416,7 +1416,7 @@ namespace BoardApp
                     serialPort1.Open();
                     MessageBox.Show("Serial port - OPENED");
                     btnConnectPort.Text = "Disconnect";
-                    lblConexiuneTelefon.Text = "Telefon conectat";
+                    lblConexiuneTelefon.Text = "Phone CONNECTED";
                 }
                 catch (Exception ex)
                 {
