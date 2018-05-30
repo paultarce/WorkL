@@ -111,8 +111,8 @@ namespace BoardApp
             tbResize1.Value = pbEditPhoto.Size.Width;
             tbResizeVer.Value = pbEditPhoto.Size.Height;
 
-            pbEditPhoto.Left = (this.ClientSize.Width - pbEditPhoto.Width) / 2;
-            pbEditPhoto.Top = (this.ClientSize.Height - pbEditPhoto.Height) / 2;
+            pbEditPhoto.Left = (this.ClientSize.Width - pbEditPhoto.Width) / 1;
+            pbEditPhoto.Top = (this.ClientSize.Height - pbEditPhoto.Height) / 1;
 
             prevImage = Image.FromFile(@"C:\Users\Paul\Desktop\Untitled.png");
 
@@ -218,7 +218,7 @@ namespace BoardApp
             //flowLayou
             using (var fbd = new FolderBrowserDialog())
             {
-                fbd.SelectedPath = @"D:\cursuri\LICENTA\WorkL\BoardApp\PhotoRepo2";
+                fbd.SelectedPath = @"D:\cursuri\LICENTA\WorkL\BoardApp\PhotoRepoTest";
                 DialogResult result = fbd.ShowDialog();
                 //fbd.RootFolder = @"D:\cursuri\LICENTA\WorkL\BoardApp\PhotoRepo";
 
@@ -1095,8 +1095,8 @@ namespace BoardApp
         private void tbResize1_Scroll(object sender, EventArgs e)
         {
             pbEditPhoto.Size = new Size(tbResize1.Value, pbEditPhoto.Size.Height);
-            pbEditPhoto.Left = (this.ClientSize.Width - pbEditPhoto.Width) / 2;
-            pbEditPhoto.Top = (this.ClientSize.Height - pbEditPhoto.Height) / 2;
+            pbEditPhoto.Left = (this.ClientSize.Width - pbEditPhoto.Width) / 1;
+            pbEditPhoto.Top = (this.ClientSize.Height - pbEditPhoto.Height) / 1;
 
             f.pb.Size = new Size(tbResize1.Value, f.pb.Size.Height);
             f.pb.Left = (f.ClientSize.Width - f.pb.Width) / 2;
@@ -1106,12 +1106,12 @@ namespace BoardApp
         private void tbResizeVer_Scroll(object sender, EventArgs e)
         {
             pbEditPhoto.Size = new Size(pbEditPhoto.Size.Width, tbResizeVer.Value);
-            pbEditPhoto.Left = (this.ClientSize.Width - pbEditPhoto.Width) / 2;
-            pbEditPhoto.Top = (this.ClientSize.Height - pbEditPhoto.Height) / 2;
+            pbEditPhoto.Left = (this.ClientSize.Width - pbEditPhoto.Width) / 1;
+            pbEditPhoto.Top = (this.ClientSize.Height - pbEditPhoto.Height) / 1;
 
             f.pb.Size = new Size(f.pb.Size.Width, tbResizeVer.Value);
-            f.pb.Left = (f.ClientSize.Width - f.pb.Width) / 2;
-            f.pb.Top = (f.ClientSize.Height - f.pb.Height) / 2;
+            f.pb.Left = (f.ClientSize.Width - f.pb.Width) / 1;
+            f.pb.Top = (f.ClientSize.Height - f.pb.Height) / 1;
         }
 
         private void tbRotate_Scroll(object sender, EventArgs e)
@@ -1278,7 +1278,7 @@ namespace BoardApp
                         btnSendEmail.Enabled = true;
                     }
 
-                    
+                   
 
                     string startPath = @"D:\cursuri\LICENTA\WorkL\BoardApp\courses";
                     string zipPath = @"D:\cursuri\LICENTA\WorkL\BoardApp\ZipRepo\Photos.zip";
@@ -1507,12 +1507,7 @@ namespace BoardApp
             lblRotationAngle.Select();
         }
 
-        private void tabPage2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-       
+        
 
         private void SetEventsFromBluetoothData(string text)
         {
@@ -1623,6 +1618,44 @@ namespace BoardApp
             }
         }
         #endregion
+
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRotateRight_Click(object sender, EventArgs e)
+        {
+            if(pictureBox.Image != null)
+            {
+                Bitmap bitmap = (Bitmap)pictureBox.Image;
+                bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                pictureBox.Image = bitmap;
+                this.ShowWpfLogic();
+            }
+            else
+            {
+                MessageBox.Show("No picture to rotate!");
+
+            }
+        }
+
+        private void btnRotateLeft_Click(object sender, EventArgs e)
+        {
+            if (pictureBox.Image != null)
+            {
+                Bitmap bitmap = (Bitmap)pictureBox.Image;
+                bitmap.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                pictureBox.Image = bitmap;
+                this.ShowWpfLogic();
+            }
+            else
+            {
+                MessageBox.Show("No picture to rotate!");
+
+            }
+        }
 
     }
 }

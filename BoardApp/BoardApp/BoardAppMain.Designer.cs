@@ -81,6 +81,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.pbProcessImage = new System.Windows.Forms.PictureBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
             this.txtSerialPort = new System.Windows.Forms.TextBox();
             this.propertyGridPorts = new System.Windows.Forms.PropertyGrid();
             this.btnConnectPort = new System.Windows.Forms.Button();
@@ -93,8 +95,9 @@
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
+            this.btnRotateLeft = new System.Windows.Forms.Button();
+            this.btnRotateRight = new System.Windows.Forms.Button();
+            this.label22 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -361,6 +364,9 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tabPage2.Controls.Add(this.label22);
+            this.tabPage2.Controls.Add(this.btnRotateRight);
+            this.tabPage2.Controls.Add(this.btnRotateLeft);
             this.tabPage2.Controls.Add(this.btnSendEmail);
             this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Controls.Add(this.cbGrade);
@@ -689,6 +695,28 @@
             this.tabPage1.Text = "Phone Connection";
             this.tabPage1.Enter += new System.EventHandler(this.tabPage1_Enter);
             // 
+            // label21
+            // 
+            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(289, 203);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(77, 13);
+            this.label21.TabIndex = 29;
+            this.label21.Text = "Text Received";
+            // 
+            // label20
+            // 
+            this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(13, 164);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(61, 13);
+            this.label20.TabIndex = 28;
+            this.label20.Text = "Select port:";
+            // 
             // txtSerialPort
             // 
             this.txtSerialPort.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -789,8 +817,7 @@
             // 
             // pbEditPhoto
             // 
-            this.pbEditPhoto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbEditPhoto.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.pbEditPhoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbEditPhoto.Location = new System.Drawing.Point(435, 59);
             this.pbEditPhoto.Name = "pbEditPhoto";
@@ -807,27 +834,37 @@
             this.flowLayoutPanel2.Size = new System.Drawing.Size(267, 127);
             this.flowLayoutPanel2.TabIndex = 18;
             // 
-            // label20
+            // btnRotateLeft
             // 
-            this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(13, 164);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(61, 13);
-            this.label20.TabIndex = 28;
-            this.label20.Text = "Select port:";
+            this.btnRotateLeft.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnRotateLeft.Location = new System.Drawing.Point(824, 399);
+            this.btnRotateLeft.Name = "btnRotateLeft";
+            this.btnRotateLeft.Size = new System.Drawing.Size(71, 21);
+            this.btnRotateLeft.TabIndex = 31;
+            this.btnRotateLeft.Text = "<-";
+            this.btnRotateLeft.UseVisualStyleBackColor = true;
+            this.btnRotateLeft.Click += new System.EventHandler(this.btnRotateLeft_Click);
             // 
-            // label21
+            // btnRotateRight
             // 
-            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(289, 203);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(77, 13);
-            this.label21.TabIndex = 29;
-            this.label21.Text = "Text Received";
+            this.btnRotateRight.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnRotateRight.Location = new System.Drawing.Point(902, 399);
+            this.btnRotateRight.Name = "btnRotateRight";
+            this.btnRotateRight.Size = new System.Drawing.Size(71, 21);
+            this.btnRotateRight.TabIndex = 32;
+            this.btnRotateRight.Text = "->";
+            this.btnRotateRight.UseVisualStyleBackColor = true;
+            this.btnRotateRight.Click += new System.EventHandler(this.btnRotateRight_Click);
+            // 
+            // label22
+            // 
+            this.label22.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(849, 386);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(100, 13);
+            this.label22.TabIndex = 33;
+            this.label22.Text = "Rotate Left or Right";
             // 
             // BoardAppMain
             // 
@@ -943,5 +980,8 @@
         private System.Windows.Forms.Button btnSendEmail;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Button btnRotateRight;
+        private System.Windows.Forms.Button btnRotateLeft;
+        private System.Windows.Forms.Label label22;
     }
 }
