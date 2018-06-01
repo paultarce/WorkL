@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace BoardApp.Exceptions_Algorithms
 
              BitmapImage ix = new BitmapImage();
              ix.BeginInit();
-             ix.CacheOption = BitmapCacheOption.OnLoad;
+             ix.CacheOption = BitmapCacheOption.OnLoad; 
              ix.StreamSource = ms;
              ix.EndInit();
              return ix;
