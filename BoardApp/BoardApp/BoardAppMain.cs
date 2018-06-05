@@ -218,7 +218,7 @@ namespace BoardApp
             //flowLayou
             using (var fbd = new FolderBrowserDialog())
             {
-                fbd.SelectedPath = @"D:\cursuri\LICENTA\WorkL\BoardApp\PhotoRepoTest";
+                fbd.SelectedPath = @"D:\cursuri\LICENTA\WorkL\BoardApp\PhotoRepo2";
                 DialogResult result = fbd.ShowDialog();
                 //fbd.RootFolder = @"D:\cursuri\LICENTA\WorkL\BoardApp\PhotoRepo";
 
