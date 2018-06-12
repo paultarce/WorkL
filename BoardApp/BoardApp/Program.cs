@@ -16,7 +16,16 @@ namespace BoardApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new BoardAppMain());
+            try
+            {
+                Application.Run(new BoardAppMain());
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Sistem is overloaded.Close apps and make sure you have enough RAM free");
+                MessageBox.Show("\n", ex.Message.ToString());
+            
+            }
         }
     }
 }

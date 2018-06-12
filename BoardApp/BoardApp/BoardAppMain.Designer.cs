@@ -54,6 +54,9 @@
             this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label22 = new System.Windows.Forms.Label();
+            this.btnRotateRight = new System.Windows.Forms.Button();
+            this.btnRotateLeft = new System.Windows.Forms.Button();
             this.btnSendEmail = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label19 = new System.Windows.Forms.Label();
@@ -95,9 +98,6 @@
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
-            this.btnRotateLeft = new System.Windows.Forms.Button();
-            this.btnRotateRight = new System.Windows.Forms.Button();
-            this.label22 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.liveCamera)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -177,7 +177,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.liveCamera.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.liveCamera.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("liveCamera.BackgroundImage")));
             this.liveCamera.Cursor = System.Windows.Forms.Cursors.Default;
             this.liveCamera.Location = new System.Drawing.Point(3, 3);
             this.liveCamera.Name = "liveCamera";
@@ -191,7 +190,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.pictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox.BackgroundImage")));
             this.pictureBox.Location = new System.Drawing.Point(314, 3);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(306, 350);
@@ -253,7 +251,7 @@
             this.btnSaveImage.Name = "btnSaveImage";
             this.btnSaveImage.Size = new System.Drawing.Size(87, 23);
             this.btnSaveImage.TabIndex = 13;
-            this.btnSaveImage.Text = "Save Image";
+            this.btnSaveImage.Text = "Save Images";
             this.btnSaveImage.UseVisualStyleBackColor = true;
             this.btnSaveImage.Click += new System.EventHandler(this.btnSaveImage_Click);
             // 
@@ -391,6 +389,38 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Main Tab";
             this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
+            // 
+            // label22
+            // 
+            this.label22.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(849, 386);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(100, 13);
+            this.label22.TabIndex = 33;
+            this.label22.Text = "Rotate Left or Right";
+            // 
+            // btnRotateRight
+            // 
+            this.btnRotateRight.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnRotateRight.Location = new System.Drawing.Point(902, 399);
+            this.btnRotateRight.Name = "btnRotateRight";
+            this.btnRotateRight.Size = new System.Drawing.Size(71, 21);
+            this.btnRotateRight.TabIndex = 32;
+            this.btnRotateRight.Text = "->";
+            this.btnRotateRight.UseVisualStyleBackColor = true;
+            this.btnRotateRight.Click += new System.EventHandler(this.btnRotateRight_Click);
+            // 
+            // btnRotateLeft
+            // 
+            this.btnRotateLeft.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnRotateLeft.Location = new System.Drawing.Point(824, 399);
+            this.btnRotateLeft.Name = "btnRotateLeft";
+            this.btnRotateLeft.Size = new System.Drawing.Size(71, 21);
+            this.btnRotateLeft.TabIndex = 31;
+            this.btnRotateLeft.Text = "<-";
+            this.btnRotateLeft.UseVisualStyleBackColor = true;
+            this.btnRotateLeft.Click += new System.EventHandler(this.btnRotateLeft_Click);
             // 
             // btnSendEmail
             // 
@@ -833,38 +863,6 @@
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(267, 127);
             this.flowLayoutPanel2.TabIndex = 18;
-            // 
-            // btnRotateLeft
-            // 
-            this.btnRotateLeft.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnRotateLeft.Location = new System.Drawing.Point(824, 399);
-            this.btnRotateLeft.Name = "btnRotateLeft";
-            this.btnRotateLeft.Size = new System.Drawing.Size(71, 21);
-            this.btnRotateLeft.TabIndex = 31;
-            this.btnRotateLeft.Text = "<-";
-            this.btnRotateLeft.UseVisualStyleBackColor = true;
-            this.btnRotateLeft.Click += new System.EventHandler(this.btnRotateLeft_Click);
-            // 
-            // btnRotateRight
-            // 
-            this.btnRotateRight.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnRotateRight.Location = new System.Drawing.Point(902, 399);
-            this.btnRotateRight.Name = "btnRotateRight";
-            this.btnRotateRight.Size = new System.Drawing.Size(71, 21);
-            this.btnRotateRight.TabIndex = 32;
-            this.btnRotateRight.Text = "->";
-            this.btnRotateRight.UseVisualStyleBackColor = true;
-            this.btnRotateRight.Click += new System.EventHandler(this.btnRotateRight_Click);
-            // 
-            // label22
-            // 
-            this.label22.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(849, 386);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(100, 13);
-            this.label22.TabIndex = 33;
-            this.label22.Text = "Rotate Left or Right";
             // 
             // BoardAppMain
             // 

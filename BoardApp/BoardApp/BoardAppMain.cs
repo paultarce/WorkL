@@ -106,7 +106,7 @@ namespace BoardApp
             btnPlay.Enabled = false;
             btnStop.Enabled = false;
             btnSaveImage.Enabled = false;
-            btnDeletePict.Enabled = true;
+            btnDeletePict.Enabled = false;
 
             tbResize1.Value = pbEditPhoto.Size.Width;
             tbResizeVer.Value = pbEditPhoto.Size.Height;
@@ -135,11 +135,10 @@ namespace BoardApp
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
+            
             FinalVideo.Stop();
             FinalVideo.VideoResolution = FinalVideo.VideoCapabilities[cbSupportedModes.SelectedIndex];
 
-            //this.Width = FinalVideo.VideoResolution.FrameSize.Width + 140;
-            //this.Height = FinalVideo.VideoResolution.FrameSize.Height + 100;
             this.WindowState = FormWindowState.Maximized;
             this.MinimumSize = this.Size;
             this.MaximumSize = this.Size;
@@ -153,11 +152,7 @@ namespace BoardApp
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            //pictureBox.Image.Dispose();
-            //this.ClearPictureBox();
-
-            //pictureBox.Image = liveCamera.Image;
-            //FinalVideo.Stop();
+            
             try
             {
                 Bitmap b = new Bitmap(liveCamera.Image);
@@ -170,32 +165,17 @@ namespace BoardApp
                 MessageBox.Show("Va rugam asteptati pornirea camerei foto", "Asteptati", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
 
-
-
-            /* PictureBox myPict = new PictureBox(); //dinamicly created control
-                                                   //pictureBox.Image = Bitmap.FromFile(file);
-             myPict = PictureEditor.PictBoxTOflowLayout(myPict);
-
-             myPict.Image = pictureBox.Image;
-
-             flowLayoutPanel1.AutoScroll = true;
-             flowLayoutPanel1.Controls.Add(myPict);
-             myPict.Click += MyPict_Click;
-             */
         }
 
 
 
         private void rbDisplayMode_CheckedChanged(object sender, EventArgs e)
         {
-            // rbCaptureMode.Enabled = false;
-
             btnPlay.Enabled = false;
             btnStop.Enabled = false;
             btnOpenImages.Enabled = true;
             btnSaveImage.Enabled = false;
-            // open DialogBox to enter the name of the lecture
-
+            
         }
 
         private void rbCaptureMode_CheckedChanged(object sender, EventArgs e)
@@ -203,17 +183,12 @@ namespace BoardApp
             btnPlay.Enabled = true;
             //btnStop.Enabled = true;
             btnOpenImages.Enabled = false;
-            btnSaveImage.Enabled = true;
+            //btnSaveImage.Enabled = true;
         }
 
         private void btnOpenImages_Click(object sender, EventArgs e)
         {
-            /* foreach (Control control in flowLayoutPanel1.Controls)
-             {
-                 flowLayoutPanel1.Controls.Remove(control);
-                 control.Dispose();
-
-             }*/
+           
             flowLayoutPanel1.Controls.Clear();
             //flowLayou
             using (var fbd = new FolderBrowserDialog())
@@ -253,11 +228,6 @@ namespace BoardApp
         //"sender" -> PictureBox 
         private void MyPict_Click(object sender, EventArgs e)
         {
-            //  flowLayoutPanel1.BorderStyle = BorderStyle.Fixed3D;
-            //pictureBox.SizeMode = PictureBox.Au
-            //  pictureBox = (PictureBox)sender;
-            ///  foreach (var picture in flowLayoutPanel1.Controls)
-            // {
             var myPicture = (PictureBox)sender;
             //myPicture.BorderStyle = BorderStyle.Fixed3D;
             pictureBox.SetBounds(0, 0, 300, 300);
@@ -272,11 +242,9 @@ namespace BoardApp
 
         private void ClearPictureBox()
         {
-            //pict.Image = null;
             if (pictureBox.Image != null)
             {
                 pictureBox.Image.Dispose();
-                //pict.Image = null;
                 pictureBox = new PictureBox();
             }
         }
@@ -301,25 +269,7 @@ namespace BoardApp
 
             flowLayoutPanel2.AutoScroll = true;
             flowLayoutPanel2.Controls.Clear();
-            /* foreach (Control ctrl in flowLayoutPanel1.Controls)
-             {
-                 flowLayoutPanel2.Controls.Add(Clone);
-                 Control c2 =
-             }*/
-            /*foreach (Control pict in flowLayoutPanel1.Controls)
-             {
-                 Control p = new Control();
-                 p = CopyControl.Clone<Control>(pict);
-                 flowLayoutPanel3.Controls.Add(p);
-             }
-             */
-            /*  foreach (PictureBox pict in flowLayoutPanel1.Controls)
-              {
-                  PictureBox p = new PictureBox();
-                  p = CopyControl.Clone<PictureBox>(pict);
-                  flowLayoutPanel3.Controls.Add(p);
-              }
-              */
+           
             foreach (PictureBox pict in flowLayoutPanel1.Controls)
             {
                 PictureBox p = pict.CreateNewWithAttribute();
@@ -335,12 +285,7 @@ namespace BoardApp
                 tbResizeVer.Enabled = true;
             }
 
-            //tbResize1.Value = pbEditPhoto.Size.Width;
-            //img = Image.FromFile(@"D:\POZE\torturi\P2150615.jpg");
-            //imageOriginal = pbEditPhoto.Image;
-            //imageOriginal = pbEdi
-            //tbResize1.Value = tbResize1.Maximum;
-            //tbResizeVer.Value = tbResizeVer.Maximum;
+         
             tbResize1.Value = pbEditPhoto.Width;
             tbResizeVer.Value = pbEditPhoto.Height;
             tbZoom.Value = 0;
@@ -383,77 +328,7 @@ namespace BoardApp
         #region KEYS PRESSED
         private void BoardAppMain_KeyPress(object sender, KeyPressEventArgs e)
         {
-
-            /*    if (e.KeyChar >= 48 && e.KeyChar <= 57) // numeric
-                {
-
-                }
-                if (e.KeyChar == (char)Keys.F || e.KeyChar == char.ToLower((char)Keys.F))
-                {
-                    /*if (pictureBox.Image != null)
-                    {
-                        PictureEditor.ShowPictureFullSreen2(ref f, ref pictureBox); //to update "this" controls 
-                        this.BringToFront();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No picture to display", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    }
-
-                  if (pbEditPhoto.Image != null || pictureBox.Image != null)
-                   {
-                       tabControl1.SelectedIndex = 1;
-
-                       PictureEditor.ShowPictureFullSreen2(ref f, ref pbEditPhoto);
-                       imageOriginal = f.pb.Image;
-                       imageOriginal2 = pbEditPhoto.Image;
-                   }
-               }
-
-               if (flowLayoutPanel1.Controls.Count > 0)
-               {
-
-                   if (e.KeyChar == '6')
-                   {
-                       if (pictureNr >= 0 && pictureNr <= flowLayoutPanel1.Controls.Count - 1)
-                       {
-                           //flowLayoutPanel1.Controls[pictureNr].Click += MyPict_Click;
-                           //MyPict_Click((PictureBox)flowLayoutPanel1.Controls[pictureNr], e);
-                           FullScreenDisplay();
-
-
-                           PictureEditor.ShowPictureFullSreen2(ref f, ref pictureBox);
-                           this.BringToFront();
-                           pictureNr++;
-                       }
-
-
-                   }
-                   if (e.KeyChar == '4')
-                   {
-                       if (pictureNr > 0 && pictureNr <= flowLayoutPanel1.Controls.Count)
-                       {
-                           //flowLayoutPanel1.Controls[pictureNr].Click += MyPict_Click;
-                           //MyPict_Click((PictureBox)flowLayoutPanel1.Controls[pictureNr], e);
-                           pictureNr--;
-                           FullScreenDisplay();
-
-
-                           PictureEditor.ShowPictureFullSreen2(ref f, ref pictureBox);
-                           this.BringToFront();
-
-                       }
-                   }
-
-               }
-               if (liveCamera.Image != null)
-               {
-                   if (e.KeyChar == (char)Keys.C || e.KeyChar == char.ToLower((char)Keys.C))
-                   {
-                       btnStop_Click(sender, e);
-                   }
-               }
-               */
+            
             double grades = 1;
             try {  grades = Convert.ToDouble(cbGrade.SelectedItem.ToString()); }
             catch(Exception ex) {  grades = 1; }
@@ -546,18 +421,9 @@ namespace BoardApp
 
         private void BoardAppMain_KeyDown(object sender, KeyEventArgs e)
         {
-            /*if (wpfwindow.IsLoaded == true)
-            {
-                if (e.KeyCode == Keys.Escape)
-                {
-                    wpfwindow.btS = null;
-                    wpfwindow.INIT();
-                }
-            }*/
+           
             if (wpfwindow.IsLoaded == true && e.KeyCode == Keys.Escape)
             {
-
-
                 Key_Up(e.KeyCode);
             }
 
@@ -588,14 +454,6 @@ namespace BoardApp
                     MessageBox.Show("No picture to display", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
 
-                /*if (pbEditPhoto.Image != null || pictureBox.Image != null)
-                {
-                    tabControl1.SelectedIndex = 1;
-
-                    PictureEditor.ShowPictureFullSreen2(ref f, ref pbEditPhoto);
-                    imageOriginal = f.pb.Image;
-                    imageOriginal2 = pbEditPhoto.Image;
-                }*/
             }
 
             if (k == Keys.S)
@@ -617,6 +475,12 @@ namespace BoardApp
                 else
                 {
                     MessageBox.Show("No picture to save or picture already saved", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+
+                if(flowLayoutPanel1.Controls.Count > 0)
+                {
+                    btnSaveImage.Enabled = true;
+                    btnDeletePict.Enabled = true;
                 }
             }
 
@@ -645,6 +509,12 @@ namespace BoardApp
                             wpfwindow.btS = null;
                             wpfwindow.INIT();
                             pictureBox.Image = null;
+                        }
+
+                        if (flowLayoutPanel1.Controls.Count <= 0)
+                        {
+                            btnSendEmail.Enabled = false;
+                            btnSaveImage.Enabled = false;
                         }
                     }
 
@@ -701,144 +571,7 @@ namespace BoardApp
             // C - TAKE PICTURE 
 
             Key_Up(e.KeyCode);
-            /* if (k == Keys.C)
-             {
-                 if (liveCamera.Image != null)
-                 {
-                     btnStop_Click(null, null);
-                 }
-                 else
-                 {
-                     MessageBox.Show("Camera foto nu a fost pornita!", "Atentie");
-                 }
-             }*/
-
-            /*if (e.KeyCode == Keys.F)
-            {
-                if (pictureBox.Image != null)
-                {
-                    this.ShowWpfLogic();
-                }
-                else
-                {
-                    MessageBox.Show("No picture to display", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
-
-                /*if (pbEditPhoto.Image != null || pictureBox.Image != null)
-                {
-                    tabControl1.SelectedIndex = 1;
-
-                    PictureEditor.ShowPictureFullSreen2(ref f, ref pbEditPhoto);
-                    imageOriginal = f.pb.Image;
-                    imageOriginal2 = pbEditPhoto.Image;
-                }
-            }*/
-
-           /* if (e.KeyCode == Keys.S)
-            {
-
-                if (pictureBox.Image != null && !(prevImage == pictureBox.Image))
-                {
-                    PictureBox myPict = new PictureBox(); //dinamicly created control
-                                                          //pictureBox.Image = Bitmap.FromFile(file);
-                    myPict = PictureEditor.PictBoxTOflowLayout(myPict);
-
-                    myPict.Image = pictureBox.Image;
-
-                    flowLayoutPanel1.AutoScroll = true;
-                    flowLayoutPanel1.Controls.Add(myPict);
-                    myPict.Click += MyPict_Click;
-
-                    prevImage = pictureBox.Image;
-                }
-                else
-                {
-                    MessageBox.Show("No picture to save or picture already saved", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
-            }*/
-
-            /*if (e.KeyCode == Keys.D)
-            {
-                if (flowLayoutPanel1.Controls.Count > 0)
-                {
-
-                    int indexDelete = pictureNr;
-                    DialogResult dialogResult = MessageBox.Show("Stergeti Poza?", "Stergere", MessageBoxButtons.YesNo);
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        flowLayoutPanel1.Controls.Remove(flowLayoutPanel1.Controls[pictureNr]);
-                        //flowLayoutPanel1.Controls[pictureNr].Dispose();
-                        if (pictureNr > 0)
-                        {
-                            pictureNr--;
-                        }
-                        if (flowLayoutPanel1.Controls.Count > 0)
-                        {
-                            pictureBox.Image = ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).Image;
-                            this.ShowWpfLogic();
-                        }
-                        if (flowLayoutPanel1.Controls.Count == 0)
-                        {
-                            wpfwindow.btS = null;
-                            wpfwindow.INIT();
-                            pictureBox.Image = null;
-                        }
-                    }
-
-                }
-                else
-                {
-                    MessageBox.Show("Nu exista poze in colectie", "Atentie", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                }
-
-
-            }*/
-            /*if (e.KeyCode == Keys.NumPad1) /// sa il fac ca in timp ce e apasat sa se faca zoom out
-            {
-                if (pictureNr > 0 && pictureNr <= flowLayoutPanel1.Controls.Count)
-                {                 
-                    pictureBox.Image = ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).Image;
-                    this.ShowWpfLogic();
-                    if(flowLayoutPanel1.Controls.Count > 0)
-                        pictureNr--;                                      
-                }
-            }
-
-            if (e.KeyCode == Keys.NumPad3)
-            {
-                if (pictureNr >= 0 && pictureNr <= flowLayoutPanel1.Controls.Count - 1)
-                {                   
-                    pictureBox.Image = ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).Image;
-                    this.ShowWpfLogic();
-                    if(flowLayoutPanel1.Controls.Count > 0 && pictureNr < flowLayoutPanel1.Controls.Count-1  )
-                        pictureNr++;
-                }
-            }*/
-            /*if (e.KeyCode == Keys.NumPad1) /// sa il fac ca in timp ce e apasat sa se faca zoom out
-            {
-                if (flowLayoutPanel1.Controls.Count > 1)
-                {
-                    if (pictureNr >= 1)
-                    {
-                        pictureNr--;
-                        pictureBox.Image = ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).Image;
-                        this.ShowWpfLogic();
-
-                    }
-                }
-            }
-            if (e.KeyCode == Keys.NumPad3)
-            {
-                if (flowLayoutPanel1.Controls.Count > 1)
-                {
-                    if (pictureNr < flowLayoutPanel1.Controls.Count - 1)
-                    {
-                        pictureNr++;
-                        pictureBox.Image = ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).Image;
-                        this.ShowWpfLogic();
-                    }
-                }
-            }*/
+           
         }
 
         public void ShowWpfLogic()
@@ -859,8 +592,9 @@ namespace BoardApp
                 wpfwindow.Close();
                 wpfwindow = new FullScreenWPF.MainWindow();
                 ElementHost.EnableModelessKeyboardInterop(wpfwindow);
-                wpfwindow.Show();
                 wpfwindow.btS = btS;
+                wpfwindow.Show();
+                
                 wpfwindow.INIT();
                 this.BringToFront();
             }
@@ -868,8 +602,9 @@ namespace BoardApp
             {
                 wpfwindow = new FullScreenWPF.MainWindow();
                 ElementHost.EnableModelessKeyboardInterop(wpfwindow);
-                wpfwindow.Show();
                 wpfwindow.btS = btS;
+                wpfwindow.Show();
+                
                 wpfwindow.INIT();
                 this.BringToFront();
             }
@@ -1079,7 +814,8 @@ namespace BoardApp
                 // Fit image to the picturebox:
                 //pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
                 // pictureBox.Image = img.Fit2PictureBox(pictureBox);
-                pictureBox.Image = img;
+                pictureBox.Image = new Bitmap(img);
+                //pictureBox.Image = img;
                 _selecting = false;
             }
             else
@@ -1197,15 +933,22 @@ namespace BoardApp
         #region TO WPF
         private void btnDeletePict_Click(object sender, EventArgs e)
         {
+            Keys k;
+
+            k = Keys.D;
+            Key_Up(k);
+            if (flowLayoutPanel1.Controls.Count <= 0)
+                btnDeletePict.Enabled = false;
             //BitmapTOImgSource.BitmapToImageSource(pbEditPhoto.Image);
             // BitmapImage bitImage = FormImageToWpfcs.ToWpfImage(pbEditPhoto.Image);
             //System.Windows.Controls.Image image = FormImageToWpfcs.ConvertDrawingImageToWPFImage(pbEditPhoto.Image);
 
-            BitmapSource btS = FormImageToWpfcs.BitmapFromBase64(FormImageToWpfcs.BitmapToBase64String(pbEditPhoto.Image));
-            //pbCrop.Image = BitmapFromSource(btS);
-            wpfwindow = new FullScreenWPF.MainWindow(btS);
-            ElementHost.EnableModelessKeyboardInterop(wpfwindow);
-            wpfwindow.Show();
+            /*  BitmapSource btS = FormImageToWpfcs.BitmapFromBase64(FormImageToWpfcs.BitmapToBase64String(pbEditPhoto.Image));
+              //pbCrop.Image = BitmapFromSource(btS);
+              wpfwindow = new FullScreenWPF.MainWindow(btS);
+              ElementHost.EnableModelessKeyboardInterop(wpfwindow);
+              wpfwindow.Show();
+              */
 
         }
 
@@ -1277,8 +1020,6 @@ namespace BoardApp
                         k++;
                         btnSendEmail.Enabled = true;
                     }
-
-                   
 
                     string startPath = @"D:\cursuri\LICENTA\WorkL\BoardApp\courses";
                     string zipPath = @"D:\cursuri\LICENTA\WorkL\BoardApp\ZipRepo\Photos.zip";
