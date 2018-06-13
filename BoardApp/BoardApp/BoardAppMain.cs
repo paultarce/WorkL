@@ -111,8 +111,8 @@ namespace BoardApp
             tbResize1.Value = pbEditPhoto.Size.Width;
             tbResizeVer.Value = pbEditPhoto.Size.Height;
 
-            pbEditPhoto.Left = (this.ClientSize.Width - pbEditPhoto.Width) / 1;
-            pbEditPhoto.Top = (this.ClientSize.Height - pbEditPhoto.Height) / 1;
+            //pbEditPhoto.Left = (this.ClientSize.Width - pbEditPhoto.Width) / 1;
+            //pbEditPhoto.Top = (this.ClientSize.Height - pbEditPhoto.Height) / 1;
 
             prevImage = Image.FromFile(@"C:\Users\Paul\Desktop\Untitled.png");
 
@@ -741,20 +741,9 @@ namespace BoardApp
         {
             if (pictureBox.Image != null)
             {
-                /* Bitmap b = new Bitmap(pictureBox.Image);
-                 imgInput = new Image<Bgr, byte>(b);
-                 pictureBox.Image = imgInput.Bitmap;
-                 //if(rbCaptureMode)
-
-                 /*  OpenFileDialog ofd = new OpenFileDialog();
-                   {
-                       if(ofd.ShowDialog() == DialogResult.OK)
-                       {
-                           imgInput = new Image<Bgr, byte>(ofd.FileName);
-                           pictureBox.Image = imgInput.Bitmap;
-                       }
-                   }
-                   */
+                
+                pict = new PictureBox();
+                pict = CopyControl.Clone(pictureBox);
             }
             else
             {
@@ -770,13 +759,24 @@ namespace BoardApp
 
         private bool _selecting;
         private Rectangle _selection;
+        PictureBox pict;
         private void pictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            // Starting point of the selection:
-            if (e.Button == MouseButtons.Left)
+
+            if (rbCropMode.Enabled == true)
             {
-                _selecting = true;
-                _selection = new Rectangle(new Point(e.X, e.Y), new Size());
+
+                // Starting point of the selection:
+                if (e.Button == MouseButtons.Left)
+                {
+                    _selecting = true;
+                    _selection = new Rectangle(new Point(e.X, e.Y), new Size());
+                }
+            }
+            else
+            {
+                MessageBox.Show("Pleas enter CROP MODE!", "Attention");
+
             }
         }
 

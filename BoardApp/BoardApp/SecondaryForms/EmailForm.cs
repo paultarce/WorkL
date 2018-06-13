@@ -42,6 +42,9 @@ namespace BoardApp.SecondaryForms
             {
                 MessageBox.Show("The email already exists");
             }
+
+            if (txtEmail.Text == "")
+                MessageBox.Show("Introduceti un Email mai intai!");
         }
 
         private void btnRemoveEmail_Click(object sender, EventArgs e)
@@ -60,35 +63,52 @@ namespace BoardApp.SecondaryForms
 
         private void btnSendEmail_Click(object sender, EventArgs e)
         {
-            foreach (var m in listBoxEmails.Items)
+            if (txtSenderPassword.Text == "" || txtSenderEmail.Text == "" || listBoxEmails.Items.Count == 0)
             {
-                try
+                MessageBox.Show("Competați toate câmpurile");
+            }
+            else
+            {
+
+                foreach (var m in listBoxEmails.Items)
                 {
-                    MailMessage mail = new MailMessage();
-                    SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-                    SmtpServer.UseDefaultCredentials = false;
-                    mail.From = new MailAddress(txtSenderEmail.Text);
-                    //mail.To.Add("paul95_tarce@yahoo.com");
-                    mail.To.Add(m.ToString());
-                    mail.Subject = "Test Mail - 1";
-                    mail.Body = "mail with attachment";
+                    var adresa = m;
+                    try
+                    {
+                        MailMessage mail = new MailMessage();
+                        SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                        SmtpServer.UseDefaultCredentials = false;
+                        mail.From = new MailAddress(txtSenderEmail.Text);
+                        //mail.To.Add("paul95_tarce@yahoo.com");
+                        mail.To.Add(m.ToString());
+                        mail.Subject = "Test Mail - 1";
+                        mail.Body = "mail with attachment";
 
-                    System.Net.Mail.Attachment attachment;
-                    attachment = new System.Net.Mail.Attachment(url);
-                    mail.Attachments.Add(attachment);
+                        System.Net.Mail.Attachment attachment;
+                        attachment = new System.Net.Mail.Attachment(url);
+                        mail.Attachments.Add(attachment);
 
-                    SmtpServer.Port = 587;
-                    SmtpServer.Credentials = new System.Net.NetworkCredential(txtSenderEmail.Text, txtSenderPassword.Text);
-                    SmtpServer.EnableSsl = true;
-                    mail.IsBodyHtml = true;
+                        SmtpServer.Port = 587;
+                        SmtpServer.Credentials = new System.Net.NetworkCredential(txtSenderEmail.Text, txtSenderPassword.Text);
+                        SmtpServer.EnableSsl = true;
+                        mail.IsBodyHtml = true;
 
-                    SmtpServer.Send(mail);
-                    MessageBox.Show("mail Sent");
-                }
-               
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
+                        SmtpServer.Send(mail);
+                        MessageBox.Show("mail Sent");
+                    }
+
+                    catch (FormatException)
+                    {
+                        MessageBox.Show("Emailul: '" + m.ToString() + "' este gresit ", "Atenție!", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    }
+                    catch (System.Net.Mail.SmtpException)
+                    {
+                        MessageBox.Show("Emailul sau parola EXPEDITORULUI este gresite ", "Atenție!", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
                 }
             }
         }

@@ -847,7 +847,8 @@
             // 
             // pbEditPhoto
             // 
-            this.pbEditPhoto.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.pbEditPhoto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pbEditPhoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbEditPhoto.Location = new System.Drawing.Point(435, 59);
             this.pbEditPhoto.Name = "pbEditPhoto";
