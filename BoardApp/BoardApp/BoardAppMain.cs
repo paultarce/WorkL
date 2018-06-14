@@ -129,8 +129,17 @@ namespace BoardApp
 
         public void StartForm()
         {
-            Application.Run(new SpashScreen());
+            try
+            {
 
+
+                Application.Run(new SpashScreen());
+            }
+            catch(System.Threading.ThreadAbortException)
+            {
+                MessageBox.Show("Starting app threads failed.\n Please free your RAM and CPU usage");
+
+            }
         }
 
         private void btnPlay_Click(object sender, EventArgs e)
@@ -226,6 +235,7 @@ namespace BoardApp
 
         }
         //"sender" -> PictureBox 
+        Image imageClone;
         private void MyPict_Click(object sender, EventArgs e)
         {
             var myPicture = (PictureBox)sender;
@@ -236,6 +246,9 @@ namespace BoardApp
             label5.Text = myPicture.Name;
             pictureBox.Image = myPicture.Image;
             pictureNr = flowLayoutPanel1.Controls.GetChildIndex((PictureBox)sender);
+
+            pict = CopyControl.Clone(pictureBox);
+            imageClone = new Bitmap((Image)myPicture.Image.Clone());
 
             //  }
         }
@@ -763,7 +776,9 @@ namespace BoardApp
         private void pictureBox_MouseDown(object sender, MouseEventArgs e)
         {
 
-            if (rbCropMode.Enabled == true)
+            
+
+            if (rbCropMode.Checked == true)
             {
 
                 // Starting point of the selection:
@@ -814,9 +829,19 @@ namespace BoardApp
                 // Fit image to the picturebox:
                 //pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
                 // pictureBox.Image = img.Fit2PictureBox(pictureBox);
+                pictureBox.Image.Dispose();
                 pictureBox.Image = new Bitmap(img);
                 //pictureBox.Image = img;
                 _selecting = false;
+
+               
+                
+
+                ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).SetBounds(0, 0, 80, 80);
+                ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).BackColor = Color.Black;
+                ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).SizeMode = PictureBoxSizeMode.Zoom;
+                ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).Image = null;
+                ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).Image = new Bitmap(imageClone);
             }
             else
                 _selecting = false;

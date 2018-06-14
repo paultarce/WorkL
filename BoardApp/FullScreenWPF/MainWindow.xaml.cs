@@ -187,7 +187,14 @@ namespace FullScreenWPF
         }
         public void ZoomOut()
         {
+            Canvas cv = new Canvas();
+            cv = cavRoot;
+
+            Vector offsett = VisualTreeHelper.GetOffset(image);
+            Rect r = VisualTreeHelper.GetContentBounds(image);
+            
             Matrix mat = image.RenderTransform.Value;
+            
             mat.ScaleAtPrepend(1 / 1.005, 1 / 1.005, 1024 / 2, 768 / 2);
 
             MatrixTransform mtf = new MatrixTransform(mat);
