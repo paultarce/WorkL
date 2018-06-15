@@ -174,10 +174,50 @@
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/btnEsc"
             android:ems="10"
-            android:textSize="10dp"
+            android:inputType="numberDecimal"
             android:text="1"
             android:textAlignment="center"
-            android:inputType="numberDecimal" />
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnZoomIn"
+            android:layout_marginEnd="0dp"
+            android:layout_toStartOf="@+id/btnNext"
+            android:fontFamily="serif"
+            android:text="Rotation Degrees"
+            android:textColor="@color/colorPrimaryDark"
+             />
+
+        <EditText
+            android:id="@+id/txtFactor"
+            android:layout_width="67dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/btnSave"
+            android:layout_marginBottom="13dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="1"
+            android:textSize="11dp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="164dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/txtFactor"
+            android:layout_toStartOf="@+id/btnSave"
+            android:text="Zoom/Movement Factor"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            />
+
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

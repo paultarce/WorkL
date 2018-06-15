@@ -129,17 +129,7 @@ namespace BoardApp
 
         public void StartForm()
         {
-            try
-            {
-
-
                 Application.Run(new SpashScreen());
-            }
-            catch(System.Threading.ThreadAbortException)
-            {
-                MessageBox.Show("Starting app threads failed.\n Please free your RAM and CPU usage");
-
-            }
         }
 
         private void btnPlay_Click(object sender, EventArgs e)

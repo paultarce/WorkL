@@ -27,6 +27,7 @@ namespace FullScreenWPF
         public BitmapImage bitImage { get; set; }
         public BitmapSource btS { get; set; }
         public System.Drawing.Rectangle screenBounds;
+        private Point center;
 
         /*  public MainWindow(BitmapImage im)
           {
@@ -78,8 +79,10 @@ namespace FullScreenWPF
 
             image.Height = Math.Abs(screenBounds.Height);
             image.Width = Math.Abs(screenBounds.Width);
+          
             image.Source = btS;
 
+            center = GetCenter();
             //image.MouseLeftButtonDown += Image_MouseLeftButtonDown;
             //image.MouseMove += Image_MouseMove;
             //image.MouseWheel += Image_MouseWheel;
@@ -170,59 +173,58 @@ namespace FullScreenWPF
         {
             Canvas.SetRight(image, Canvas.GetRight(image) - 1);
             Canvas.SetTop(image, Canvas.GetTop(image) + 1);
+            center = GetCenter();
         }
         public void MoveUp()
         {         
             Canvas.SetRight(image, Canvas.GetRight(image) - 1);
             Canvas.SetTop(image, Canvas.GetTop(image) - 1);
+            center = GetCenter();
 
         }
         public void MoveRight()
         {
             Canvas.SetLeft(image, Canvas.GetLeft(image) + 1);
+            center = GetCenter();
         }
         public void MoveLeft()
         {
             Canvas.SetLeft(image, Canvas.GetLeft(image) - 1);
+            center = GetCenter();
         }
         public void ZoomOut()
         {
-            Canvas cv = new Canvas();
-            cv = cavRoot;
-
-            Vector offsett = VisualTreeHelper.GetOffset(image);
-            Rect r = VisualTreeHelper.GetContentBounds(image);
-            
             Matrix mat = image.RenderTransform.Value;
-            
-            mat.ScaleAtPrepend(1 / 1.005, 1 / 1.005, 1024 / 2, 768 / 2);
-
+            mat.ScaleAtPrepend(1 / 1.005, 1 / 1.005, center.X, center.Y);
             MatrixTransform mtf = new MatrixTransform(mat);
             image.RenderTransform = mtf;
-
         }
         public void ZoomIn()
         {
+            
             Matrix mat = image.RenderTransform.Value;
-            mat.ScaleAtPrepend(1.005, 1.005, 1024/2, 768 / 2);
-
+            mat.ScaleAtPrepend(1.005, 1.005, center.X, center.Y);
             MatrixTransform mtf = new MatrixTransform(mat);
             image.RenderTransform = mtf;
         }
 
         public void RotateRight(double grades)
         {
+            
             Matrix mat = image.RenderTransform.Value;
-            mat.RotateAtPrepend(grades/2, image.Width/2, image.Height/2); // 0.5 pentru ca event-ul e apelat de 2 ori la o apasare !!!
-
+            mat.RotateAt(grades/2, center.X, center.Y); // 0.5 pentru ca event-ul e apelat de 2 ori la o apasare !!!
+           // mat.RotatePrepend(grades / 2);
             MatrixTransform mtf = new MatrixTransform(mat);
             image.RenderTransform = mtf;
         }
 
         public void RotateLeft(double grades)
         {
+            
             Matrix mat = image.RenderTransform.Value;
-            mat.RotateAtPrepend( -grades/2, image.Width / 2, image.Height / 2);
+            mat.RotateAt( -grades/2, center.X, center.Y);
+
+            //mat.RotatePrepend(- grades / 2);
 
             MatrixTransform mtf = new MatrixTransform(mat);
             image.RenderTransform = mtf;
@@ -250,7 +252,18 @@ namespace FullScreenWPF
             image.CaptureMouse();
         }
         */
+        private Point GetCenter()
+        {         
+            Vector offsett = VisualTreeHelper.GetOffset(image);
+            Rect r = VisualTreeHelper.GetContentBounds(image);
+            Point topLeft = image.TransformToAncestor(this.image).Transform(new Point(0, 0));
+            Point bottomRight = new Point(topLeft.X + r.Width, topLeft.Y + r.Height);
 
+            Point center = new Point((double)(topLeft.X + bottomRight.X)/2, (double)(topLeft.Y + bottomRight.Y)/2 );
+
+            return center;
+
+        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {

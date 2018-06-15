@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     // MAC-address of Bluetooth module (you must edit this line)
-    private static String address = "00:21:13:04:1F:F7";
+    private static String address = "00:21:13:04:1F:F7"; // taken from mobile when trying to connect with module
 
     private void findButtonsByID()
     {
@@ -62,14 +62,14 @@ public class MainActivity extends Activity {
         btnOn.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 sendData("zoomin\n");
-                Toast.makeText(getBaseContext(), "Turn on LED", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Zoom In", Toast.LENGTH_SHORT).show(); // SHORT -> it is the duration
             }
         });
 
         btnOff.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 sendData("zoomout\n");
-                Toast.makeText(getBaseContext(), "Turn off LED", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Zoom Out", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -77,78 +77,105 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                     sendData("capture\n");
+                    Toast.makeText(getBaseContext(),"Capture",Toast.LENGTH_SHORT).show();
             }
         });
         btnSave.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendData("save\n");
+                Toast.makeText(getBaseContext(),"Save",Toast.LENGTH_SHORT).show();
             }
         });
         btnFullScreen.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendData("fullscreen\n");
+                Toast.makeText(getBaseContext(),"Full Screen",Toast.LENGTH_SHORT).show();
             }
         });
         btnDelete.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendData("delete\n");
+                Toast.makeText(getBaseContext(),"Delete",Toast.LENGTH_SHORT).show();
             }
         });
         btnMoveRight.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendData("moveright\n");
+                Toast.makeText(getBaseContext(),"Move Right",Toast.LENGTH_SHORT).show();
             }
         });
         btnMoveLeft.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendData("moveleft\n");
+                Toast.makeText(getBaseContext(),"Move Left",Toast.LENGTH_SHORT).show();
             }
         });
         btnMoveUp.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendData("moveup\n");
+                Toast.makeText(getBaseContext(),"Move Up",Toast.LENGTH_SHORT).show();
             }
         });
         btnMoveDown.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendData("movedown\n");
+                Toast.makeText(getBaseContext(),"Move Down",Toast.LENGTH_SHORT).show();
             }
         });
+
         btnRotateRight.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendData("rotateright/"+txtGrades.getText().toString()+"|\n");
+                int gr = Integer.parseInt(txtGrades.getText().toString());
+                if(gr <= 360) {
+                    sendData("rotateright/" + txtGrades.getText().toString() + "|\n");
+                    Toast.makeText(getBaseContext(), "Rotate Right", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(getBaseContext(),"Angle should be MAXIMUM 360!",Toast.LENGTH_SHORT).show();
+                }
             }
         });
         btnRotateLeft.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendData("rotateleft/" + txtGrades.getText().toString()+ "|\n");
+                int gr = Integer.parseInt(txtGrades.getText().toString());
+                if(gr <= 360) {
+                    sendData("rotateleft/" + txtGrades.getText().toString() + "|\n");
+                    Toast.makeText(getBaseContext(), "Rotate Left", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getBaseContext(),"Angle should be MAXIMUM 360!",Toast.LENGTH_SHORT).show();
+                }
             }
         });
         btnNext.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendData("next\n");
+                Toast.makeText(getBaseContext(),"Next",Toast.LENGTH_SHORT).show();
             }
         });
         btnPrevious.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendData("previous\n");
+                Toast.makeText(getBaseContext(),"Previous",Toast.LENGTH_SHORT).show();
             }
         });
         btnEsc.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendData("esc\n");
+                Toast.makeText(getBaseContext(),"Escape",Toast.LENGTH_SHORT).show();
             }
         });
 
