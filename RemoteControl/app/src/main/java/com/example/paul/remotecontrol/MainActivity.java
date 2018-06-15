@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
 
     Button btnOn, btnOff,btnZoomIn,btnZoomOut,btnEsc,btnRotateLeft,btnRotateRight,btnMoveUp,btnMoveDown,btnMoveRight,btnMoveLeft;
     Button btnPrevious,btnNext,btnDelete,btnFullScreen,btnSave,btnCapture;
-    EditText txtGrades;
+    EditText txtGrades, txtFactor;
 
     private BluetoothAdapter btAdapter = null;
     private BluetoothSocket btSocket = null;
@@ -54,6 +54,7 @@ public class MainActivity extends Activity {
         btnPrevious = (Button) findViewById(R.id.btnPrevious);
         btnEsc = (Button) findViewById(R.id.btnEsc);
         txtGrades = (EditText) findViewById(R.id.txtGrades);
+        txtFactor = (EditText) findViewById(R.id.txtFactor);
 
     }
 
@@ -61,14 +62,15 @@ public class MainActivity extends Activity {
     {
         btnOn.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                sendData("zoomin\n");
+
+                sendData("zoomin[" + txtFactor.getText()+ "]\n");
                 Toast.makeText(getBaseContext(), "Zoom In", Toast.LENGTH_SHORT).show(); // SHORT -> it is the duration
             }
         });
 
         btnOff.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                sendData("zoomout\n");
+                sendData("zoomout[" + txtFactor.getText()+ "]\n");
                 Toast.makeText(getBaseContext(), "Zoom Out", Toast.LENGTH_SHORT).show();
             }
         });
@@ -104,28 +106,28 @@ public class MainActivity extends Activity {
         btnMoveRight.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendData("moveright\n");
+                sendData("moveright[" + txtFactor.getText()+ "]\n");
                 Toast.makeText(getBaseContext(),"Move Right",Toast.LENGTH_SHORT).show();
             }
         });
         btnMoveLeft.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendData("moveleft\n");
+                sendData("moveleft[" + txtFactor.getText()+ "]\n");
                 Toast.makeText(getBaseContext(),"Move Left",Toast.LENGTH_SHORT).show();
             }
         });
         btnMoveUp.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendData("moveup\n");
+                sendData("moveup[" + txtFactor.getText()+ "]\n");
                 Toast.makeText(getBaseContext(),"Move Up",Toast.LENGTH_SHORT).show();
             }
         });
         btnMoveDown.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendData("movedown\n");
+                sendData("movedown[" + txtFactor.getText()+ "]\n");
                 Toast.makeText(getBaseContext(),"Move Down",Toast.LENGTH_SHORT).show();
             }
         });

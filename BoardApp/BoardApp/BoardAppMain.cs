@@ -116,7 +116,7 @@ namespace BoardApp
 
             prevImage = Image.FromFile(@"C:\Users\Paul\Desktop\Untitled.png");
 
-            for(int k = 1; k <360; k++)
+            for (int k = 1; k < 360; k++)
             {
                 cbGrade.Items.Add(k);
             }
@@ -129,12 +129,12 @@ namespace BoardApp
 
         public void StartForm()
         {
-                Application.Run(new SpashScreen());
+            Application.Run(new SpashScreen());
         }
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            
+
             FinalVideo.Stop();
             FinalVideo.VideoResolution = FinalVideo.VideoCapabilities[cbSupportedModes.SelectedIndex];
 
@@ -151,7 +151,7 @@ namespace BoardApp
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            
+
             try
             {
                 Bitmap b = new Bitmap(liveCamera.Image);
@@ -174,7 +174,7 @@ namespace BoardApp
             btnStop.Enabled = false;
             btnOpenImages.Enabled = true;
             btnSaveImage.Enabled = false;
-            
+
         }
 
         private void rbCaptureMode_CheckedChanged(object sender, EventArgs e)
@@ -187,7 +187,7 @@ namespace BoardApp
 
         private void btnOpenImages_Click(object sender, EventArgs e)
         {
-           
+
             flowLayoutPanel1.Controls.Clear();
             //flowLayou
             using (var fbd = new FolderBrowserDialog())
@@ -272,7 +272,7 @@ namespace BoardApp
 
             flowLayoutPanel2.AutoScroll = true;
             flowLayoutPanel2.Controls.Clear();
-           
+
             foreach (PictureBox pict in flowLayoutPanel1.Controls)
             {
                 PictureBox p = pict.CreateNewWithAttribute();
@@ -288,7 +288,7 @@ namespace BoardApp
                 tbResizeVer.Enabled = true;
             }
 
-         
+
             tbResize1.Value = pbEditPhoto.Width;
             tbResizeVer.Value = pbEditPhoto.Height;
             tbZoom.Value = 0;
@@ -331,37 +331,37 @@ namespace BoardApp
         #region KEYS PRESSED
         private void BoardAppMain_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
-            double grades = 1;
-            try {  grades = Convert.ToDouble(cbGrade.SelectedItem.ToString()); }
-            catch(Exception ex) {  grades = 1; }
 
-       
+            double grades = 1;
+            try { grades = Convert.ToDouble(cbGrade.SelectedItem.ToString()); }
+            catch (Exception ex) { grades = 1; }
+
+
             if (e.KeyChar == '2')
             {
-                wpfwindow.MoveDown();
+                wpfwindow.MoveDown(1);
             }
             if (e.KeyChar == '8')
             {
-                wpfwindow.MoveUp();
+                wpfwindow.MoveUp(1);
             }
             if (e.KeyChar == '4')
             {
-                wpfwindow.MoveLeft();
+                wpfwindow.MoveLeft(1);
             }
             if (e.KeyChar == '6')
             {
-                wpfwindow.MoveRight();
+                wpfwindow.MoveRight(1);
             }
             if (e.KeyChar == '+')
             {
                 if (wpfwindow.btS != null)
-                    wpfwindow.ZoomIn();
+                    wpfwindow.ZoomIn(1);
             }
             if (e.KeyChar == '-')
             {
                 if (wpfwindow.btS != null)
-                    wpfwindow.ZoomOut();
+                    wpfwindow.ZoomOut(1);
             }
             if (e.KeyChar == '9')
             {
@@ -424,7 +424,7 @@ namespace BoardApp
 
         private void BoardAppMain_KeyDown(object sender, KeyEventArgs e)
         {
-           
+
             if (wpfwindow.IsLoaded == true && e.KeyCode == Keys.Escape)
             {
                 Key_Up(e.KeyCode);
@@ -480,14 +480,14 @@ namespace BoardApp
                     MessageBox.Show("No picture to save or picture already saved", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
 
-                if(flowLayoutPanel1.Controls.Count > 0)
+                if (flowLayoutPanel1.Controls.Count > 0)
                 {
                     btnSaveImage.Enabled = true;
                     btnDeletePict.Enabled = true;
                 }
             }
 
-            if(k == Keys.D)
+            if (k == Keys.D)
             {
                 if (flowLayoutPanel1.Controls.Count > 0)
                 {
@@ -528,7 +528,7 @@ namespace BoardApp
                 }
             }
 
-            if(k == Keys.NumPad1)
+            if (k == Keys.NumPad1)
             {
                 if (flowLayoutPanel1.Controls.Count > 1)
                 {
@@ -555,7 +555,7 @@ namespace BoardApp
                 }
             }
 
-            if(k == Keys.Escape)
+            if (k == Keys.Escape)
             {
                 if (wpfwindow.IsLoaded == true)
                 {
@@ -574,7 +574,7 @@ namespace BoardApp
             // C - TAKE PICTURE 
 
             Key_Up(e.KeyCode);
-           
+
         }
 
         public void ShowWpfLogic()
@@ -597,7 +597,7 @@ namespace BoardApp
                 ElementHost.EnableModelessKeyboardInterop(wpfwindow);
                 wpfwindow.btS = btS;
                 wpfwindow.Show();
-                
+
                 wpfwindow.INIT();
                 this.BringToFront();
             }
@@ -607,7 +607,7 @@ namespace BoardApp
                 ElementHost.EnableModelessKeyboardInterop(wpfwindow);
                 wpfwindow.btS = btS;
                 wpfwindow.Show();
-                
+
                 wpfwindow.INIT();
                 this.BringToFront();
             }
@@ -744,7 +744,7 @@ namespace BoardApp
         {
             if (pictureBox.Image != null)
             {
-                
+
                 pict = new PictureBox();
                 pict = CopyControl.Clone(pictureBox);
             }
@@ -766,7 +766,7 @@ namespace BoardApp
         private void pictureBox_MouseDown(object sender, MouseEventArgs e)
         {
 
-            
+
 
             if (rbCropMode.Checked == true)
             {
@@ -824,8 +824,8 @@ namespace BoardApp
                 //pictureBox.Image = img;
                 _selecting = false;
 
-               
-                
+
+
 
                 ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).SetBounds(0, 0, 80, 80);
                 ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).BackColor = Color.Black;
@@ -986,7 +986,7 @@ namespace BoardApp
             string url = @"D:\cursuri\LICENTA\WorkL\BoardApp\ZipRepo\Photos.zip";
             EmailForm frmEmail = new EmailForm(url);
             frmEmail.Show();
-                
+
         }
 
 
@@ -1015,7 +1015,7 @@ namespace BoardApp
             }
             else
             {
-                
+
                 k = folder.EnumerateFiles().Count();
             }
 
@@ -1028,7 +1028,7 @@ namespace BoardApp
                 //pictureBox.Image.Save(@"D:\cursuri\LICENTA\WorkL\BoardApp\courses\Pict" + pictureNr.ToString() + ".jpeg", ImageFormat.Jpeg);
                 if (flowLayoutPanel1.Controls.Count > 0)
                 {
-                    
+
                     foreach (var pict in flowLayoutPanel1.Controls)
                     {
                         ((PictureBox)pict).Image.Save(@"D:\cursuri\LICENTA\WorkL\BoardApp\courses\Pict" + k.ToString() + ".jpeg", ImageFormat.Jpeg);
@@ -1055,7 +1055,7 @@ namespace BoardApp
                 MessageBox.Show("Save error:" + ex.Message);
             }
 
-            
+
 
 
         }
@@ -1263,24 +1263,25 @@ namespace BoardApp
             lblRotationAngle.Select();
         }
 
-        
+
 
         private void SetEventsFromBluetoothData(string text)
         {
             Keys k;
-            double grades=1;
-            char [] gr= new char[3];
-            int j = 0;
+            double grades = 1;
+            char[] gr = new char[3];
+            char[] fact = new char[4];
+            int j = 0, l = 0;
 
-            if(text.Contains("/"))
+            if (text.Contains("/"))
             {
                 int start = text.IndexOf('/');
                 int stop = text.IndexOf('|');
                 //grades = Convert.ToDouble(text.Substring(start,));
-                for(int i= start+1; i < stop; i++)
+                for (int i = start + 1; i < stop; i++)
                 {
                     gr[j] = text[i];
-                    j++;                
+                    j++;
                 }
                 grades = Convert.ToDouble(new string(gr)) * 2;
                 if (grades > 720)
@@ -1288,23 +1289,54 @@ namespace BoardApp
                 if (grades < -720)
                     grades = -720;
 
-                if(!text.Contains("l"))
-                     wpfwindow.RotateRight(grades);
+                if (!text.Contains("l"))
+                    wpfwindow.RotateRight(grades);
                 else
-                     wpfwindow.RotateLeft(grades);
+                    wpfwindow.RotateLeft(grades);
+            }
+            if (text.Contains("["))
+            {
+                int start = text.IndexOf('[');
+                int stop = text.IndexOf(']');
+                //grades = Convert.ToDouble(text.Substring(start,));
+                for (int i = start + 1; i < stop; i++)
+                {
+                    fact[l] = text[i];
+                    l++;
+                }
+                string command = text.Substring(0, start);
+                switch (command)
+                {
+                    case "zoomin":
+                        if (wpfwindow.btS != null)
+                            wpfwindow.ZoomIn(Convert.ToDouble(new string(fact)));
+                        break;
+
+                    case "zoomout":
+                        if (wpfwindow.btS != null)
+                            wpfwindow.ZoomOut(Convert.ToDouble(new string(fact)));
+                        break;
+                    case "moveright":
+                        wpfwindow.MoveRight(Convert.ToDouble(new string(fact)));
+                        break;
+
+                    case "moveleft":
+                        wpfwindow.MoveLeft(Convert.ToDouble(new string(fact)));
+                        break;
+
+                    case "moveup":
+                        wpfwindow.MoveUp(Convert.ToDouble(new string(fact)));
+                        break;
+
+                    case "movedown":
+                        wpfwindow.MoveDown(Convert.ToDouble(new string(fact)));
+                        break;
+                }
             }
 
             switch (text)  /// daca vreau mai multe date , pot sa 
             {
-                case "zoomin":
-                    if (wpfwindow.btS != null)
-                        wpfwindow.ZoomIn();
-                    break;
 
-                case "zoomout":
-                    if (wpfwindow.btS != null)
-                        wpfwindow.ZoomOut();
-                    break;
 
                 case "fullscreen":
                     k = Keys.F;
@@ -1326,29 +1358,15 @@ namespace BoardApp
                     Key_Up(k);
                     break;
 
-                case "moveright":
-                    wpfwindow.MoveRight();
-                    break;
 
-                case "moveleft":
-                    wpfwindow.MoveLeft();
-                    break;
-
-                case "moveup":
-                    wpfwindow.MoveUp();
-                    break;
-
-                case "movedown":
-                    wpfwindow.MoveDown();
-                    break;
 
                 case "rotateright":
-                    
+
                     wpfwindow.RotateRight(grades);
                     break;
 
                 case "rotateleft":
-                   
+
                     wpfwindow.RotateLeft(grades);
                     break;
 
@@ -1383,7 +1401,7 @@ namespace BoardApp
 
         private void btnRotateRight_Click(object sender, EventArgs e)
         {
-            if(pictureBox.Image != null)
+            if (pictureBox.Image != null)
             {
                 Bitmap bitmap = (Bitmap)pictureBox.Image;
                 bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);

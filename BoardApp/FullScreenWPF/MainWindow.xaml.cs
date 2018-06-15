@@ -169,41 +169,41 @@ namespace FullScreenWPF
             image.RenderTransform = mtf;
             */
         }
-        public void MoveDown()
+        public void MoveDown(double fact)
         {
-            Canvas.SetRight(image, Canvas.GetRight(image) - 1);
-            Canvas.SetTop(image, Canvas.GetTop(image) + 1);
+            Canvas.SetRight(image, Canvas.GetRight(image) - fact);
+            Canvas.SetTop(image, Canvas.GetTop(image) + fact);
             center = GetCenter();
         }
-        public void MoveUp()
+        public void MoveUp(double fact)
         {         
-            Canvas.SetRight(image, Canvas.GetRight(image) - 1);
-            Canvas.SetTop(image, Canvas.GetTop(image) - 1);
+            Canvas.SetRight(image, Canvas.GetRight(image) - fact);
+            Canvas.SetTop(image, Canvas.GetTop(image) - fact);
             center = GetCenter();
 
         }
-        public void MoveRight()
+        public void MoveRight(double fact)
         {
-            Canvas.SetLeft(image, Canvas.GetLeft(image) + 1);
+            Canvas.SetLeft(image, Canvas.GetLeft(image) + fact);
             center = GetCenter();
         }
-        public void MoveLeft()
+        public void MoveLeft(double fact)
         {
-            Canvas.SetLeft(image, Canvas.GetLeft(image) - 1);
+            Canvas.SetLeft(image, Canvas.GetLeft(image) - fact);
             center = GetCenter();
         }
-        public void ZoomOut()
+        public void ZoomOut(double fact)
         {
             Matrix mat = image.RenderTransform.Value;
-            mat.ScaleAtPrepend(1 / 1.005, 1 / 1.005, center.X, center.Y);
+            mat.ScaleAtPrepend(1 / (1.005 * fact), 1 / (1.005 * fact), center.X, center.Y);
             MatrixTransform mtf = new MatrixTransform(mat);
             image.RenderTransform = mtf;
         }
-        public void ZoomIn()
+        public void ZoomIn(double fact)
         {
             
             Matrix mat = image.RenderTransform.Value;
-            mat.ScaleAtPrepend(1.005, 1.005, center.X, center.Y);
+            mat.ScaleAtPrepend(1.005 * fact, 1.005 * fact, center.X, center.Y);
             MatrixTransform mtf = new MatrixTransform(mat);
             image.RenderTransform = mtf;
         }
