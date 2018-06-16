@@ -879,6 +879,7 @@
             this.Name = "BoardAppMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
             this.Text = "BoardAppMain";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BoardAppMain_FormClosing);
             this.Load += new System.EventHandler(this.BoardAppMain_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BoardAppMain_KeyDown);

@@ -84,3 +84,4 @@ D:\cursuri\LICENTA\WorkLicentaGIT\WorkL-master\BoardApp\BoardApp\obj\Debug\Board
 D:\cursuri\LICENTA\WorkLicentaGIT\WorkL-master\BoardApp\BoardApp\obj\Debug\BoardApp.pdb
 D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\bin\Debug\FullScreenWPF.exe.config
 D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\obj\Debug\BoardApp.csproj.CoreCompileInputs.cache
+D:\cursuri\LICENTA\WorkL\BoardApp\BoardApp\obj\Debug\BoardApp.SecondaryForms.CustomMessageBox.resources

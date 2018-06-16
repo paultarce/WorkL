@@ -6,7 +6,7 @@
         
         Title="MainWindow"  Loaded="Window_Loaded">
     <Grid>
-        <Canvas Name="cavRoot" Background="YellowGreen">
+        <Canvas Name="cavRoot" Background="Black">
             <Image Name="image"  Canvas.Left="0"
                     Height="154" Width="148" Canvas.Top="0"
                    >

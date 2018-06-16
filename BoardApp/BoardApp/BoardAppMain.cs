@@ -38,6 +38,7 @@ namespace BoardApp
         public List<PictureBox> flpPictureList; // to dispaly a flowLayoutPanel in tab2
         private int pictPosition = 0;
         FullScreenWPF.MainWindow wpfwindow;
+        CustomMessageBox messageBox;
         Image prevImage;
         //public var wpfwindow;
         //private Crop c;
@@ -51,6 +52,8 @@ namespace BoardApp
 
             InitializeComponent();
             t.Abort();
+
+            this.BringToFront();
 
             #region  Get attached cameras
             VideoCaptureDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
@@ -84,6 +87,8 @@ namespace BoardApp
             pict.BackColor = Color.Black;
             PictureEditor.ShowPictureFullSreen2(ref f, ref pict);
             btnSendEmail.Enabled = false;
+
+            messageBox = new CustomMessageBox();
 
         }
 
@@ -442,7 +447,9 @@ namespace BoardApp
                 }
                 else
                 {
-                    MessageBox.Show("Camera foto nu a fost pornita!", "Atentie");
+                    //MessageBox.Show("Camera foto nu a fost pornita!", "Atentie");
+                    ShowMessageBox("The photo Camera was not started!");
+                    
                 }
             }
 
@@ -454,7 +461,8 @@ namespace BoardApp
                 }
                 else
                 {
-                    MessageBox.Show("No picture to display", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    //MessageBox.Show("No picture to display", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    ShowMessageBox("No picture to display!");
                 }
 
             }
@@ -477,7 +485,8 @@ namespace BoardApp
                 }
                 else
                 {
-                    MessageBox.Show("No picture to save or picture already saved", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    //MessageBox.Show("No picture to save or picture already saved", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    ShowMessageBox("No picture to save or picture already saved");
                 }
 
                 if (flowLayoutPanel1.Controls.Count > 0)
@@ -780,7 +789,7 @@ namespace BoardApp
             }
             else
             {
-                MessageBox.Show("Pleas enter CROP MODE!", "Attention");
+                MessageBox.Show("Please enter CROP MODE!", "Attention");
 
             }
         }
@@ -1429,6 +1438,51 @@ namespace BoardApp
                 MessageBox.Show("No picture to rotate!");
 
             }
+        }
+
+
+
+        private void ShowMessageBox(string text)
+        {
+            messageBox = new CustomMessageBox();
+            
+
+             if (Screen.AllScreens.Length > 1)
+             {
+
+                messageBox.Show();
+                messageBox.BringToFront();
+                messageBox.Message = text;
+
+                // Important !
+                messageBox.StartPosition = FormStartPosition.Manual;
+
+                // Get the second monitor screen
+                Screen screen = GetSecondaryScreen();
+
+                // set the location to the top left of the second screen
+                messageBox.Location = new Point(((screen.WorkingArea.Left + screen.WorkingArea.Right) / 2) - messageBox.Width/2 , ((screen.WorkingArea.Bottom + screen.WorkingArea.Top)/2) - messageBox.Height/2);//(new Point(screen.Bounds.Height/2 , screen.Bounds.Height/2));
+               
+
+            }
+        }
+
+        public Screen GetSecondaryScreen()
+        {
+            if (Screen.AllScreens.Length == 1)
+            {
+                return null;
+            }
+
+            foreach (Screen screen in Screen.AllScreens)
+            {
+                if (screen.Primary == false)
+                {
+                    return screen;
+                }
+            }
+
+            return null;
         }
 
     }
