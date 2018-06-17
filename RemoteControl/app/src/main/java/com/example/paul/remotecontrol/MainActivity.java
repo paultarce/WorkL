@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
     private static final String TAG = "bluetooth1";
 
     Button btnOn, btnOff,btnZoomIn,btnZoomOut,btnEsc,btnRotateLeft,btnRotateRight,btnMoveUp,btnMoveDown,btnMoveRight,btnMoveLeft;
-    Button btnPrevious,btnNext,btnDelete,btnFullScreen,btnSave,btnCapture;
+    Button btnPrevious,btnNext,btnDelete,btnFullScreen,btnSave,btnCapture, btnOk;
     EditText txtGrades, txtFactor;
 
     private BluetoothAdapter btAdapter = null;
@@ -53,8 +53,10 @@ public class MainActivity extends Activity {
         btnNext = (Button) findViewById(R.id.btnNext);
         btnPrevious = (Button) findViewById(R.id.btnPrevious);
         btnEsc = (Button) findViewById(R.id.btnEsc);
+        btnOk = (Button) findViewById(R.id.btnConnections);
         txtGrades = (EditText) findViewById(R.id.txtGrades);
         txtFactor = (EditText) findViewById(R.id.txtFactor);
+
 
     }
 
@@ -181,6 +183,13 @@ public class MainActivity extends Activity {
             }
         });
 
+        btnOk.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendData("ok\n");
+                Toast.makeText(getBaseContext(), "Ok", Toast.LENGTH_LONG).show();
+            }
+        });
 
 
     }

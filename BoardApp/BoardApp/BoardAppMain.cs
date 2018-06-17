@@ -502,7 +502,7 @@ namespace BoardApp
                 {
 
                     int indexDelete = pictureNr;
-                    DialogResult dialogResult = MessageBox.Show("Stergeti Poza?", "Stergere", MessageBoxButtons.YesNo);
+                    DialogResult dialogResult = MessageBox.Show("Delete picture?", "Delete", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
                         flowLayoutPanel1.Controls.Remove(flowLayoutPanel1.Controls[pictureNr]);
@@ -533,7 +533,8 @@ namespace BoardApp
                 }
                 else
                 {
-                    MessageBox.Show("Nu exista poze in colectie", "Atentie", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    //MessageBox.Show("Nu exista poze in colectie", "Atentie", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    ShowMessageBox("Nu exista poze in colectie");
                 }
             }
 
@@ -1367,15 +1368,11 @@ namespace BoardApp
                     Key_Up(k);
                     break;
 
-
-
                 case "rotateright":
-
                     wpfwindow.RotateRight(grades);
                     break;
 
                 case "rotateleft":
-
                     wpfwindow.RotateLeft(grades);
                     break;
 
@@ -1394,10 +1391,10 @@ namespace BoardApp
                     Key_Up(k);
                     break;
                 case "ok":
-
+                    messageBox.Close();
                     break;
 
-
+                
             }
         }
         #endregion
@@ -1447,9 +1444,8 @@ namespace BoardApp
             messageBox = new CustomMessageBox();
             
 
-             if (Screen.AllScreens.Length > 1)
+             if (Screen.AllScreens.Length > 1 )
              {
-
                 messageBox.Show();
                 messageBox.BringToFront();
                 messageBox.Message = text;
