@@ -66,7 +66,7 @@ namespace FullScreenWPF
         private Point firsPoint = new Point();
 
 
-       
+
         public void INIT()
         {
 
@@ -75,6 +75,7 @@ namespace FullScreenWPF
             //cavRoot.Children.Add(image);
             /// imgSource = image;
             //image = new Image();
+           
             screenBounds = System.Windows.Forms.Screen.AllScreens[1].Bounds;
 
             image.Height = Math.Abs(screenBounds.Height);

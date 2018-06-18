@@ -24,7 +24,6 @@ namespace BoardApp
             {
                 MessageBox.Show("Sistem is overloaded.Close apps and make sure you have enough RAM free");
                 MessageBox.Show("\n", ex.Message.ToString());
-            
             }
         }
     }

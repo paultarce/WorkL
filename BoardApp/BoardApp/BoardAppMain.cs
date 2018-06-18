@@ -444,6 +444,7 @@ namespace BoardApp
                 if (liveCamera.Image != null)
                 {
                     btnStop_Click(null, null);
+                    //MyPict_Click(null,null)
                 }
                 else
                 {
@@ -482,6 +483,8 @@ namespace BoardApp
                     myPict.Click += MyPict_Click;
 
                     prevImage = pictureBox.Image;
+
+                    MyPict_Click(myPict, null);
                 }
                 else
                 {
@@ -836,12 +839,14 @@ namespace BoardApp
 
 
 
-
-                ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).SetBounds(0, 0, 80, 80);
-                ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).BackColor = Color.Black;
-                ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).SizeMode = PictureBoxSizeMode.Zoom;
-                ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).Image = null;
-                ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).Image = new Bitmap(imageClone);
+                if (flowLayoutPanel1.Controls.Count > 0)
+                {
+                    ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).SetBounds(0, 0, 80, 80);
+                    ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).BackColor = Color.Black;
+                    ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).SizeMode = PictureBoxSizeMode.Zoom;
+                    ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).Image = null;
+                    ((PictureBox)flowLayoutPanel1.Controls[pictureNr]).Image = new Bitmap(imageClone);
+                }
             }
             else
                 _selecting = false;
