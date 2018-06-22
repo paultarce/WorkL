@@ -166,7 +166,9 @@ namespace BoardApp
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Va rugam asteptati pornirea camerei foto", "Asteptati", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                //MessageBox.Show("Va rugam asteptati pornirea camerei foto", "Asteptati", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+               // ShowMessageBox("System is Busy. Try again!");
+                
             }
 
         }
