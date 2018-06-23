@@ -162,6 +162,7 @@
             this.cbAttachedCameras.Name = "cbAttachedCameras";
             this.cbAttachedCameras.Size = new System.Drawing.Size(172, 21);
             this.cbAttachedCameras.TabIndex = 4;
+            this.cbAttachedCameras.SelectionChangeCommitted += new System.EventHandler(this.cbAttachedCameras_SelectionChangeCommitted);
             // 
             // cbSupportedModes
             // 

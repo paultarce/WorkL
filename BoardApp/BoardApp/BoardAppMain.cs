@@ -154,6 +154,28 @@ namespace BoardApp
             FinalVideo.Start();
         }
 
+        private void cbAttachedCameras_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            //cbAttachedCameras.Items.Clear();
+            cbSupportedModes.Items.Clear();
+            FinalVideo.Stop();
+            
+            //FinalVideo.
+
+            #region Get supported modes
+            FinalVideo = new VideoCaptureDevice(VideoCaptureDevices[cbAttachedCameras.SelectedIndex].MonikerString);
+            foreach (var capability in FinalVideo.VideoCapabilities)
+            {
+                cbSupportedModes.Items.Add(capability.FrameSize.ToString() + ":" + capability.MaximumFrameRate.ToString() + ":" + capability.BitCount.ToString());
+
+            }
+
+            cbSupportedModes.SelectedIndex = 0;
+            #endregion
+            FinalVideo.NewFrame += new NewFrameEventHandler(FinalVideo_NewFrame);
+        }
+
+
         private void btnStop_Click(object sender, EventArgs e)
         {
 
@@ -1470,6 +1492,7 @@ namespace BoardApp
             }
         }
 
+        
         public Screen GetSecondaryScreen()
         {
             if (Screen.AllScreens.Length == 1)
